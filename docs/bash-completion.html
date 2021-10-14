@@ -1,0 +1,328 @@
+<!doctype html>
+<html lang="en">
+    <head>
+    
+
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-166292985-1"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-166292985-1');
+    </script>
+    
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" 
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+          rel="stylesheet" crossorigin="anonymous">
+    
+    <link rel="stylesheet" href="/theme/pygment-github.css">
+    <link rel="stylesheet" href="/theme/article.css"> 
+
+    <title>Faster workflow with bash completion scripts</title>
+    
+    <!-- Favicon -->
+    <link rel="apple-touch-icon" sizes="120x120" href="/images/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon/favicon-16x16.png">
+    <link rel="manifest" href="/images/favicon/site.webmanifest">
+    <link rel="mask-icon" href="/images/favicon/safari-pinned-tab.svg" color="#5bbad5">
+    <link rel="shortcut icon" href="favicon.ico">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="msapplication-config" content="/images/favicon/browserconfig.xml">
+    <meta name="theme-color" content="#ffffff">
+    
+<!-- Mathjax -->
+<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS_SVG">
+  MathJax.Hub.Config({
+    tex2jax: {
+    	inlineMath: [ ['$','$'] ],
+    	processEscapes: true
+    },
+	"HTML-CSS": {
+		fonts: ["TeX"] 
+	}
+  });
+</script>
+
+    </head>
+
+    <body>
+    
+    <nav class="navbar navbar-expand-lg navbar-light ">
+        <a class="navbar-brand" href="//julienharbulot.com/index.html"><img src="//julienharbulot.com/images/logo.png" width="30" alt=""></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+            
+            <li class="nav-item">
+                    <a class="nav-link" href="//julienharbulot.com/technical-blog.html">Technical blog</a>
+            </li>
+            
+            <li class="nav-item">
+                    <a class="nav-link" href="//julienharbulot.com/maths.html">Maths</a>
+            </li>
+            
+            <li class="nav-item">
+                    <a class="nav-link" href="//julienharbulot.com/projects.html">Projects</a>
+            </li>
+            
+            <li class="nav-item">
+                    <a class="nav-link" href="//julienharbulot.com/research.html">Research</a>
+            </li>
+            
+            <!--<li class="nav-item">
+                <a class="nav-link" href="//julienharbulot.com/about-me.html">About me</a>
+            </li>-->
+            
+
+<li class="nav-item dropdown">
+    <a class="nav-link active dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Table of content
+    </a>
+    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+        <div class="toc"><ul>
+<li class="toc-entry-1">
+<a class='toc-href dropdown-item' href='#bash-completion-overview' title='Bash completion overview'>Bash completion overview</a>
+    <ul>
+<li class="toc-entry-2">
+    <a class='toc-href dropdown-item' href='#using-python-or-any-language' title='Using python (or any language)'>Using python (or any language)</a>
+    </li>
+    </ul>
+</li>
+<div class="dropdown-divider"></div>
+<li class="toc-entry-1">
+<a class='toc-href dropdown-item' href='#installing-a-completion-script' title='Installing a completion script'>Installing a completion script</a>
+</li>
+<div class="dropdown-divider"></div>
+<li class="toc-entry-1">
+<a class='toc-href dropdown-item' href='#using-bash-completion-in-zsh' title='Using bash completion in zsh'>Using bash completion in zsh</a>
+</li>
+<div class="dropdown-divider"></div>
+<li class="toc-entry-1">
+<a class='toc-href dropdown-item' href='#step-by-step-tutorials' title='Step by step tutorials'>Step by step tutorials</a>
+</li>
+</ul><div>
+    </div>
+</li>
+
+
+            </ul>
+        </div>
+    </nav>
+    
+    
+    
+    <div class="container">
+    <div class="row mt-5">
+      <div class="col-lg-8 mx-auto"> 
+        <h1 class="display-5">Faster workflow with bash completion scripts </h1>
+        <div class="text-right">07 Dec 2018</div>
+      </div>
+    </div>
+    <div class="row mt-5">
+    <article class="col-lg-8 mx-auto">
+    <p>Open a bash terminal, type <code>cd</code> then press the tab-key twice. A list of directories
+appears. Type the first letter of one of them then hit tab. The name gets completed.</p>
+<p>This is called auto-completion and it is the most important feature of your shell.
+It can be used for discovery (discover the folders you can go to) and for speed (auto-complete
+the folder's name). It saves keystrokes.</p>
+<p>Auto-completion is not limited to bash's builtin functions. You can define rules 
+to complete your own scripts. And you can also redefine rules for builtin functions.</p>
+<p>This article gives an overview of how to do so, either in bash
+or <em>in the scripting language of your choice</em>. We end with links to step-by-step tutorials.</p>
+<h2 id="bash-completion-overview">Bash completion overview</h2>
+<p>The <code>complete</code> command defines the completion candidates for a command. </p>
+<p>Dynamic completion is done through a bash function provided to <code>complete -F</code>: when you hit tab, bash will call
+a given function responsible to generate completion candidates, then print those
+candidates. When there's only one candidate, bash completes what you typed.</p>
+<p>Here's a minimal working example that always returns two candidates. Write the following snippet 
+inside a new file named <code>cd_completions.sh</code>:</p>
+<div class="hll-title"><span class="filename">cd_completions.sh </span> <div class="hll"><pre><span></span><span class="c1">#/usr/bin/env bash</span>
+_cd_completions<span class="o">()</span>
+<span class="o">{</span>
+  <span class="nv">COMPREPLY</span><span class="o">=(</span>candidate_1 candidate_2<span class="o">)</span>
+<span class="o">}</span>
+
+<span class="c1"># Register this function</span>
+<span class="nb">complete</span> -F _cd_completions <span class="nb">cd</span>
+</pre></div>
+ </div>
+
+<p>And tell bash to parse the file with the following command:</p>
+<div class="hll"><pre><span></span><span class="nb">source</span> cd_completions.sh
+</pre></div>
+
+
+<p>Then type <code>cd</code> followed with a space and hit tab twice. You should see 
+<code>candidate1</code> and <code>candidate2</code> instead of the usual directory listing. 
+Don't worry everything will be back to normal if you restart your terminal.</p>
+<p>To know which candidates it should generate, the function can access the following variables:</p>
+<ul>
+<li><code>COMP_WORDS</code>: an array of all the words typed after the name of the program the <code>compspec</code> belongs to;</li>
+<li><code>COMP_CWORD</code>: the index of the word the cursor was when the tab key was pressed;</li>
+<li><code>COMP_LINE</code>: the current command line.</li>
+</ul>
+<h3 id="using-python-or-any-language">Using python (or any language)</h3>
+<p>You can write rules as complex as you want inside the <code>_cd_completions()</code> function. You
+can also write those rules in the scripting language of your choice and use the bash function
+as a proxy. For instance, in the snippet below I forward everything to the <code>cd_completions.py</code>
+script:</p>
+<div class="hll-title"><span class="filename">cd_completions.sh </span> <div class="hll"><pre><span></span><span class="c1">#/usr/bin/env bash</span>
+_cd_completions<span class="o">()</span>
+<span class="o">{</span>
+  <span class="nv">COMPREPLY</span><span class="o">=(</span><span class="k">$(</span>  <span class="nv">COMP_WORDS</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">COMP_WORDS</span><span class="p">[*]</span><span class="si">}</span><span class="s2">&quot;</span> <span class="se">\</span>
+                 <span class="nv">COMP_CWORD</span><span class="o">=</span><span class="nv">$COMP_CWORD</span> <span class="se">\</span>
+                 <span class="nv">COMP_LINE</span><span class="o">=</span><span class="nv">$COMP_LINE</span>   <span class="se">\</span>
+                 python3 cd_completions.py
+            <span class="k">)</span> <span class="o">)</span>
+<span class="o">}</span>   
+
+<span class="c1"># Register this function with:</span>
+<span class="nb">complete</span> -F _cd_completions <span class="nb">cd</span>
+</pre></div>
+ </div>
+
+<p>Inside <code>cd_completions.py</code>, I can access the variables like this:</p>
+<div class="hll-title"><span class="filename">cd_completions.py </span> <div class="hll"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="n">cwords</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s1">&#39;COMP_WORDS&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+<span class="n">cword</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s1">&#39;COMP_CWORD&#39;</span><span class="p">])</span>
+<span class="n">cline</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s1">&#39;COMP_LINE&#39;</span><span class="p">]</span>
+<span class="c1"># Do stuff</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;candidate1 candidate2&quot;</span><span class="p">)</span>
+</pre></div>
+ </div>
+
+<h2 id="installing-a-completion-script">Installing a completion script</h2>
+<p>Write a bash script with the completion function and the <code>complete -F</code> command as
+we did above.</p>
+<p>If you want to enable the completion just for you on your machine, 
+all you have to do is add a line in your <code>~/.bashrc</code> file sourcing the script:</p>
+<div class="hll"><pre><span></span>source &lt;path-to-your-script&gt;
+</pre></div>
+
+
+<p>If you want to enable the completion for all users, copy the script
+under <code>/etc/bash_completion.d/</code> and it will automatically be loaded by Bash.</p>
+<h2 id="using-bash-completion-in-zsh">Using bash completion in zsh</h2>
+<p>I'm a big fan of zsh, an alternative shell. To use bash completion scripts in zsh,
+write the following line at the end of your <code>~/.zshrc</code> file:</p>
+<div class="hll-title"><span class="filename">~/.zshrc </span> <div class="hll"><pre><span></span><span class="c1"># Enable bash completion scripts</span>
+autoload bashcompinit<span class="p">;</span> bashcompinit
+</pre></div>
+ </div>
+
+<p>Then load any script using the following command:</p>
+<div class="hll"><pre><span></span><span class="n">source</span> <span class="o">&lt;</span><span class="n">path</span><span class="o">-</span><span class="n">to</span><span class="o">-</span><span class="n">your</span><span class="o">-</span><span class="n">script</span><span class="o">&gt;</span>
+</pre></div>
+
+
+<p>To install a script permanently, source it at the end of your <code>~/.zshrc</code>.</p>
+<h2 id="step-by-step-tutorials">Step by step tutorials</h2>
+<ul>
+<li><a href="bash-completion-tutorial.html">Tutorial on bash completion scripts</a> (in pure bash)</li>
+</ul>
+    </article>
+    </div><!-- row -->
+    
+    <div class="row mt-1">
+      <article class="col-lg-8 mx-auto recommendations">
+        <p class='title'>Other articles you might like:</p>
+        <ul>
+          
+            <li class="en"><img class="flag-icon" src="//julienharbulot.com/images/languages/en.png"> <a href="//julienharbulot.com/python-expert.html">So you want to be a python expert?</a></li>
+          
+            <li class="en"><img class="flag-icon" src="//julienharbulot.com/images/languages/en.png"> <a href="//julienharbulot.com/bash-completion-tutorial.html">Tutorial on bash completion scripts</a></li>
+          
+            <li class="en"><img class="flag-icon" src="//julienharbulot.com/images/languages/en.png"> <a href="//julienharbulot.com/text-window-extractor.html">Tool to find how a given word is used in a corpus</a></li>
+          
+            <li class="en"><img class="flag-icon" src="//julienharbulot.com/images/languages/en.png"> <a href="//julienharbulot.com/win-extend-screen.html">Keyboard shortcut and command line utility to switch display (Windows)</a></li>
+          
+        </ul>
+      </article>
+    </div>
+    
+    
+    <div class="row mb=5 mt-5">
+      <article class="col-lg-8 mx-auto">
+        <div id="hyvor-talk-view"></div>
+        <script type="text/javascript">
+            var HYVOR_TALK_WEBSITE = '625';
+            var HYVOR_TALK_CONFIG = {
+                url: 'bash-completion.html',
+                id: 'bash-completion.html'
+            };
+        </script>
+      </article>
+    </div><!-- row -->
+    
+    <footer class="row">
+        <div class="col-lg-8 mx-auto text-center">
+          <p><small>
+          
+            Last updated: 01/14/21 <br/>
+          
+          
+          Copyright &copy; 2021 Julien Harbulot
+          </small></p>
+        </div>
+    </footer>
+    </div>
+
+  <script>
+  // bootstrap table
+  tables = document.getElementsByTagName('table');
+  for (i = 0; i < tables.length; i++) {
+    tables[i].classList.add('table');
+    tables[i].classList.add('table-bordered');
+  }
+
+  // Paragraphs that contain only images are marked with custom class for styling
+  ps = document.getElementsByTagName('p');
+  Array.from(ps).forEach(function(p){
+    if (p.getElementsByTagName('img').length > 0 && p.textContent.trim().length == 0) {
+        p.classList.add('img-container');
+    }
+  });
+  </script>
+
+
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script>
+        prev_onload_a = window.onload;
+        window.onload = function() {
+            if (prev_onload_a) {
+                prev_onload_a();
+            }
+            var navlinks = document.getElementsByClassName("nav-link");
+            var i;
+            for (i = 0; i < navlinks.length; i++) {
+                const target = new URL(navlinks[i].href)
+                if (location.pathname == target.pathname) {
+                    navlinks[i].classList.add('active')
+                }
+            }
+        }
+    </script>    
+
+    
+
+<script async type="text/javascript" src="//talk.hyvor.com/web-api/embed"></script>
+
+
+    </body>
+</html>

@@ -1,0 +1,620 @@
+<!doctype html>
+<html lang="en">
+    <head>
+    
+
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-166292985-1"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-166292985-1');
+    </script>
+    
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" 
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+          rel="stylesheet" crossorigin="anonymous">
+    
+    <link rel="stylesheet" href="/theme/pygment-github.css">
+    <link rel="stylesheet" href="/theme/article.css"> 
+
+    <title>Introduction to PAC Learning</title>
+    
+    <!-- Favicon -->
+    <link rel="apple-touch-icon" sizes="120x120" href="/images/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon/favicon-16x16.png">
+    <link rel="manifest" href="/images/favicon/site.webmanifest">
+    <link rel="mask-icon" href="/images/favicon/safari-pinned-tab.svg" color="#5bbad5">
+    <link rel="shortcut icon" href="favicon.ico">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="msapplication-config" content="/images/favicon/browserconfig.xml">
+    <meta name="theme-color" content="#ffffff">
+    
+<!-- Mathjax -->
+<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS_SVG">
+  MathJax.Hub.Config({
+    tex2jax: {
+    	inlineMath: [ ['$','$'] ],
+    	processEscapes: true
+    },
+	"HTML-CSS": {
+		fonts: ["TeX"] 
+	}
+  });
+</script>
+
+    </head>
+
+    <body>
+    
+    <nav class="navbar navbar-expand-lg navbar-light ">
+        <a class="navbar-brand" href="//julienharbulot.com/index.html"><img src="//julienharbulot.com/images/logo.png" width="30" alt=""></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+            
+            <li class="nav-item">
+                    <a class="nav-link" href="//julienharbulot.com/technical-blog.html">Technical blog</a>
+            </li>
+            
+            <li class="nav-item">
+                    <a class="nav-link" href="//julienharbulot.com/maths.html">Maths</a>
+            </li>
+            
+            <li class="nav-item">
+                    <a class="nav-link" href="//julienharbulot.com/projects.html">Projects</a>
+            </li>
+            
+            <li class="nav-item">
+                    <a class="nav-link" href="//julienharbulot.com/research.html">Research</a>
+            </li>
+            
+            <!--<li class="nav-item">
+                <a class="nav-link" href="//julienharbulot.com/about-me.html">About me</a>
+            </li>-->
+            
+
+<li class="nav-item dropdown">
+    <a class="nav-link active dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Table of content
+    </a>
+    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+        <div class="toc"><ul>
+<li class="toc-entry-1">
+<a class='toc-href dropdown-item' href='#notations' title='Notations'>Notations</a>
+</li>
+<div class="dropdown-divider"></div>
+<li class="toc-entry-1">
+<a class='toc-href dropdown-item' href='#agnostic-pac-learning' title='(Agnostic) PAC Learning'>(Agnostic) PAC Learning</a>
+</li>
+<div class="dropdown-divider"></div>
+<li class="toc-entry-1">
+<a class='toc-href dropdown-item' href='#empirical-risk-minimizer' title='Empirical risk minimizer'>Empirical risk minimizer</a>
+</li>
+<div class="dropdown-divider"></div>
+<li class="toc-entry-1">
+<a class='toc-href dropdown-item' href='#constraints-on-the-training-set' title='Constraints on the training set'>Constraints on the training set</a>
+</li>
+<div class="dropdown-divider"></div>
+<li class="toc-entry-1">
+<a class='toc-href dropdown-item' href='#constraints-on-the-hypothesis-class' title='Constraints on the hypothesis class'>Constraints on the hypothesis class</a>
+</li>
+</ul><div>
+    </div>
+</li>
+
+
+            </ul>
+        </div>
+    </nav>
+    
+    
+    
+    <div class="container">
+    <div class="row mt-5">
+      <div class="col-lg-8 mx-auto"> 
+        <h1 class="display-5">Introduction to PAC Learning </h1>
+        <div class="text-right">18 Feb 2019</div>
+      </div>
+    </div>
+    <div class="row mt-5">
+    <article class="col-lg-8 mx-auto">
+    <p>
+<script type="math/tex; mode=display">
+\def\sa{a}
+\def\sb{b}
+\def\sc{c}
+\def\sd{d}
+\def\se{e}
+\def\sf{f}
+\def\sg{g}
+\def\sh{h}
+\def\si{i}
+\def\sj{j}
+\def\sk{k}
+\def\sl{l}
+\def\sm{m}
+\def\sn{n}
+\def\so{o}
+\def\sp{p}
+\def\sq{q}
+\def\sr{r}
+\def\ss{s}
+\def\st{t}
+\def\su{u}
+\def\sv{v}
+\def\sw{w}
+\def\sx{x}
+\def\sy{y}
+\def\sz{z}
+\def\va{\vec{a}}
+\def\vb{\vec{b}}
+\def\vc{\vec{c}}
+\def\vd{\vec{d}}
+\def\ve{\vec{e}}
+\def\vf{\vec{f}}
+\def\vg{\vec{g}}
+\def\vh{\vec{h}}
+\def\vi{\vec{i}}
+\def\vj{\vec{j}}
+\def\vk{\vec{k}}
+\def\vl{\vec{l}}
+\def\vm{\vec{m}}
+\def\vn{\vec{n}}
+\def\vo{\vec{o}}
+\def\vp{\vec{p}}
+\def\vq{\vec{q}}
+\def\vr{\vec{r}}
+\def\vs{\vec{s}}
+\def\vt{\vec{t}}
+\def\vu{\vec{u}}
+\def\vv{\vec{v}}
+\def\vw{\vec{w}}
+\def\vx{\vec{x}}
+\def\vy{\vec{y}}
+\def\vz{\vec{z}}
+\def\ga{\mathfrak{A}}
+\def\gb{\mathfrak{B}}
+\def\gc{\mathfrak{C}}
+\def\gd{\mathfrak{D}}
+\def\ge{\mathfrak{E}}
+\def\gf{\mathfrak{F}}
+\def\gg{\mathfrak{G}}
+\def\gh{\mathfrak{H}}
+\def\gi{\mathfrak{I}}
+\def\gj{\mathfrak{J}}
+\def\gk{\mathfrak{K}}
+\def\gl{\mathfrak{L}}
+\def\gm{\mathfrak{M}}
+\def\gn{\mathfrak{N}}
+\def\go{\mathfrak{O}}
+\def\gp{\mathfrak{P}}
+\def\gq{\mathfrak{Q}}
+\def\gr{\mathfrak{R}}
+\def\gs{\mathfrak{S}}
+\def\gt{\mathfrak{T}}
+\def\gu{\mathfrak{U}}
+\def\gv{\mathfrak{V}}
+\def\gw{\mathfrak{W}}
+\def\gx{\mathfrak{X}}
+\def\gy{\mathfrak{Y}}
+\def\gz{\mathfrak{Z}}
+\def\ra{A}
+\def\rb{B}
+\def\rc{C}
+\def\rd{D}
+\def\re{E}
+\def\rf{F}
+\def\rg{G}
+\def\rh{H}
+\def\ri{I}
+\def\rj{J}
+\def\rk{K}
+\def\rl{L}
+\def\rm{M}
+\def\rn{N}
+\def\ro{O}
+\def\rp{P}
+\def\rq{Q}
+\def\rr{R}
+\def\rs{S}
+\def\rt{T}
+\def\ru{U}
+\def\rv{V}
+\def\rw{W}
+\def\rx{X}
+\def\ry{Y}
+\def\rz{Z}
+\def\rva{\vec{A}}
+\def\rvb{\vec{B}}
+\def\rvc{\vec{C}}
+\def\rvd{\vec{D}}
+\def\rve{\vec{E}}
+\def\rvf{\vec{F}}
+\def\rvg{\vec{G}}
+\def\rvh{\vec{H}}
+\def\rvi{\vec{I}}
+\def\rvj{\vec{J}}
+\def\rvk{\vec{K}}
+\def\rvl{\vec{L}}
+\def\rvm{\vec{M}}
+\def\rvn{\vec{N}}
+\def\rvo{\vec{O}}
+\def\rvp{\vec{P}}
+\def\rvq{\vec{Q}}
+\def\rvr{\vec{R}}
+\def\rvs{\vec{S}}
+\def\rvt{\vec{T}}
+\def\rvu{\vec{U}}
+\def\rvv{\vec{V}}
+\def\rvw{\vec{W}}
+\def\rvx{\vec{X}}
+\def\rvy{\vec{Y}}
+\def\rvz{\vec{Z}}
+\def\seta{A}
+\def\setb{B}
+\def\setc{C}
+\def\setd{D}
+\def\sete{E}
+\def\setf{F}
+\def\setg{G}
+\def\seth{H}
+\def\seti{I}
+\def\setj{J}
+\def\setk{K}
+\def\setl{L}
+\def\setm{M}
+\def\setn{N}
+\def\seto{O}
+\def\setp{P}
+\def\setq{Q}
+\def\setr{R}
+\def\sets{S}
+\def\sett{T}
+\def\setu{U}
+\def\setv{V}
+\def\setw{W}
+\def\setx{X}
+\def\sety{Y}
+\def\setz{Z}
+\def\fa{a}
+\def\fb{b}
+\def\fc{c}
+\def\fd{d}
+\def\fe{e}
+\def\ff{f}
+\def\fg{g}
+\def\fh{h}
+\def\fi{i}
+\def\fj{j}
+\def\fk{k}
+\def\fl{l}
+\def\fm{m}
+\def\fn{n}
+\def\fo{o}
+\def\fp{p}
+\def\fq{q}
+\def\fr{r}
+\def\fs{s}
+\def\ft{t}
+\def\fu{u}
+\def\fv{v}
+\def\fw{w}
+\def\fx{x}
+\def\fy{y}
+\def\fz{z}
+\def\fA{A}
+\def\fB{B}
+\def\fC{C}
+\def\fD{D}
+\def\fE{E}
+\def\fF{F}
+\def\fG{G}
+\def\fH{H}
+\def\fI{I}
+\def\fJ{J}
+\def\fK{K}
+\def\fL{L}
+\def\fM{M}
+\def\fN{N}
+\def\fO{O}
+\def\fP{P}
+\def\fQ{Q}
+\def\fR{R}
+\def\fS{S}
+\def\fT{T}
+\def\fU{U}
+\def\fV{V}
+\def\fW{W}
+\def\fX{X}
+\def\fY{Y}
+\def\fZ{Z}
+\def\ma{A}
+\def\mb{B}
+\def\mc{C}
+\def\md{D}
+\def\me{E}
+\def\mf{F}
+\def\mg{G}
+\def\mh{H}
+\def\mi{I}
+\def\mj{J}
+\def\mk{K}
+\def\ml{L}
+\def\mm{M}
+\def\mn{N}
+\def\mo{O}
+\def\mp{P}
+\def\mq{Q}
+\def\mr{R}
+\def\ms{S}
+\def\mt{T}
+\def\matu{U}
+\def\mv{V}
+\def\mw{W}
+\def\mx{X}
+\def\my{Y}
+\def\mz{Z}
+\def\loss{\mathcal{L}}
+\newcommand{\dkl}[2]{D_{\text{KL}}\mathopen{}\paren{#1\,||\,#2}}
+\newcommand{\dataset}{S}
+\newcommand{\ndataset}{N}
+\newcommand{\idataset}{n}
+\newcommand{\inputRV}{\mathcal{X}}
+\newcommand{\inputvec}{\vec{x}}
+\newcommand{\ninputvec}[1]{\vec{x}_{#1}}
+\newcommand{\iinputvec}[1]{x_{#1}}
+\newcommand{\niinputvec}[2]{x_{#1, #2}}
+\newcommand{\icpnt}{i}
+\newcommand{\inputmatrix}{X}
+\newcommand{\inputdim}{D}
+\newcommand{\outputval}{y}
+\newcommand{\ioutputval}[1]{y_{#1}}
+\newcommand{\outputvec}{\vec{y}}
+\newcommand{\trainset}{S_{\text{train}}}
+\newcommand{\testset}{S_{\text{test}}}
+\newcommand{\truemodel}{f_{\text{true}}}
+\newcommand{\trainedmodel}{f_{\trainset}}
+\newcommand{\linmodel}[1]{f_{#1}}
+\newcommand{\bestmodel}{f^{*}}
+\newcommand{\model}{f}
+\newcommand{\hyperparam}{\lambda}
+\newcommand{\linparamv}{\vec{w}}
+\newcommand{\ilinparam}[1]{w_{#1}}
+\newcommand{\indivloss}{l}
+\newcommand{\modelclass}{\mathcal{F}}
+\newcommand{\linclass}{\modelclass_{\text{lin}}}
+\newcommand{\g}{\mathcal{G}}
+\newcommand{\gmse}{\g_{\text{MSE}}}
+\newcommand{\glasso}{\g_{\text{lasso}}}
+\newcommand{\gridge}{\g_{\text{ridge}}}
+\newcommand{\glogit}{\g_{\logit}}
+\newcommand{\l}{\mathcal{L}}
+\newcommand{\lmse}{\l_{\text{MSE}}}
+\newcommand{\lmae}{\l_{\text{MAE}}}
+\newcommand{\llasso}{\l_{\text{lasso}}}
+\newcommand{\lridge}{\l_{\text{ridge}}}
+\newcommand{\llogit}{\l_{\logit}}
+\newcommand{\logit}{\sigma}
+\newcommand{\reg}{\mathcal{R}}
+\DeclareMathOperator*{\argmin}{argmin}
+\DeclareMathOperator*{\argmax}{argmax}
+\DeclareMathOperator*{\mean}{mean}
+\DeclareMathOperator*{\avg}{avg}
+\DeclareMathOperator*{\span}{span}
+\DeclareMathOperator*{\var}{var}
+\DeclareMathOperator*{\bias}{bias}
+\newcommand{\expectation}{\mathbb{E}}
+\newcommand{\brak}[1]{\left[#1\right]}
+\newcommand{\paren}[1]{\left(#1\right)}
+\newcommand{\realset}{\mathbb{R}}
+\newcommand{\realvset}[1]{\realset^{#1}}
+\newcommand{\prob}{\mathbb{P}}
+\newcommand{\gaussian}{\mathcal{N}}
+\newcommand{\iid}{\stackrel{\text{i.i.d.}}{\sim}}
+\newcommand{\abs}[1]{\left\lvert#1\right\rvert}
+\newcommand{\norm}[1]{\left\lVert#1\right\rVert}
+\newcommand{\normtwo}[1]{\norm{#1}_{2}}
+\newcommand{\normone}[1]{\norm{#1}_{1}}
+\newcommand{\card}[1]{\left\lvert#1\right\rvert}
+\newcommand{\grad}{\nabla}
+\newcommand{\dconv}{\stackrel{d}{\to}}
+\newcommand{\pconv}{\stackrel{p}{\to}}
+\newcommand{\rva}[1]{#1}
+\newcommand{\rve}[1]{\vec{#1}}
+\newcommand{\obs}[1]{#1}
+\newcommand{\vobs}[1]{\vec{#1}}
+\newcommand{\distrib}[1]{#1}
+\newcommand{\distribof}[2]{#1_{#2}}
+\newcommand{\density}[1]{#1}
+\newcommand{\densityof}[2]{#1_{#2}}
+\newcommand{\distributed}{\sim}
+\newcommand{\const}[1]{#1}
+\newcommand{\fun}[1]{#1}
+</script>
+</p>
+<div class="typography">
+
+<p>What is “learning” and do we have a formal model for it? I’ve decided to dive into the theoretical underpinnings of machine-learning, so here’s a quick introduction to the theory of Probably Approximately Correct (PAC) learning.</p>
+<p>If you want to read more on the topic, there is a very accessible book on the topic, <a href="http://www.cs.huji.ac.il/~shais/understandingmachinelearning/">Understanding Machine Learning: From Theory to to Algorithms</a> which we use in the first part of the <em>learning theory</em> class at EPFL.</p>
+<h2 id="notations">Notations</h2>
+<p>Let’s start by defining a bunch of very standard notations.</p>
+<p>We have a <em>domain set</em> <script type="math/tex">X</script> of objects (say, some measurements on apples) and a <em><a class="def" href="target-variable.html">label</a> set</em> <script type="math/tex">Y</script> of <a class="def" href="target-variable.html">labels</a> (say, “good”, “not good”). Let’s note <script type="math/tex">Z = X \times Y</script> and take <script type="math/tex">m</script> labeled samples <script type="math/tex">S = (z_1, ..., z_m)</script>.</p>
+<p>We assume that the objects in <script type="math/tex">X</script> are of the same nature (say, all apples and no t-shirt). This is modeled by assuming that they are all drawn independently (i.i.d.) from a probability distribution <script type="math/tex">\newcommand{\pD}{\mathcal{D}} \pD</script> on <script type="math/tex">Z</script>. The distribution <script type="math/tex">\pD</script> is unknown to the learner and must be infered from the data.</p>
+<p>Since the distribution <script type="math/tex">\pD</script> is on <script type="math/tex">Z</script>, we can have two identically looking objects in <script type="math/tex">X</script> with different <a class="def" href="target-variable.html">labels</a>. For instance, two apples with same size and color (same <script type="math/tex">x</script>) might taste differently (different <script type="math/tex">y</script>).</p>
+<p>The goal of a learner is to use the training samples <script type="math/tex">S</script> to learn how to <a class="def" href="target-variable.html">label</a> an object in <script type="math/tex">X</script> with the correct <a class="def" href="target-variable.html">label</a> <script type="math/tex">y \in Y</script>.</p>
+<p>More precisely, we want to use <script type="math/tex">S</script> to induce a <em>prediction rule</em> <script type="math/tex">h: X \to Y</script> which assigns a <a class="def" href="target-variable.html">label</a> <script type="math/tex">y = h(x)</script> to an object <script type="math/tex">x</script>. A <em>learning algorithm</em> <script type="math/tex">A:S\to H</script> is an algorithm that chooses the best prediction rule <script type="math/tex">h</script> among a class <script type="math/tex">H</script> of available rules. <script type="math/tex">H</script> is also called the hypothesis class.</p>
+<p>So, how do we define which prediction rule is the <em>best</em>? If we measure the cost of an error made by <script type="math/tex">h</script> on <script type="math/tex">z</script> through a loss function <script type="math/tex">l(h, z)</script>, it would be a good idea to minimize the expected risk over all possible samples drawn from <script type="math/tex">\pD</script>:</p>
+<script type="math/tex; mode=display">\l_{\pD}(h) = \expectation_{z\sim\pD}\brak{l(h, z)}</script>
+<p>Since <script type="math/tex">\pD</script> is unknown, we can’t always achieve its minimum in practice. Enters the PAC framework.</p>
+<h2 id="agnostic-pac-learning">(Agnostic) PAC Learning</h2>
+<p>In the framework of PAC Learning, we are interested in learning a good enough model <script type="math/tex">h_{PAC}</script> with <script type="math/tex">\epsilon</script> accuracy such that:</p>
+<script type="math/tex; mode=display">\l_{\pD}(h_{PAC}) \leq \min_{h \in H} \l_{\pD}(h) + \epsilon</script>
+<p>And further, we’re okay if the result is only probably correct with less than <script type="math/tex">\delta</script> probability to make a mistake. We say that <script type="math/tex">\delta</script> is the confidence level. In other words, we want:</p>
+<script type="math/tex; mode=display">\prob\brak{\l_{\pD}(h_{PAC}) \leq \min_{h \in H} \l_{\pD}(h) + \epsilon} \geq 1 - \delta</script>
+<p>We say that an hypothesis class <script type="math/tex">H</script> is PAC-Learnable if given the accuracy <script type="math/tex">\epsilon</script> and the confidence level <script type="math/tex">\delta</script>, we can always find a lower bound <script type="math/tex">m_{H}</script> on the size of the sample set <script type="math/tex">S</script> that makes them achievable.</p>
+<dl>
+<dt>Definition: (A)PAC Learnable</dt>
+<dd>We say that the hypothesis class <script type="math/tex">H</script> is PAC-Learnable with respect to <script type="math/tex">Z</script> and <script type="math/tex">l</script> when there exists a function (called <em>sample complexity</em>):</dd>
+</dl>
+<script type="math/tex; mode=display">m_{H}(\epsilon, \delta):\quad ]0;1[^2 \to \mathbb{N}</script>
+<p>and a learning algorithm <script type="math/tex">A</script> such that: <script type="math/tex">\forall \epsilon, \delta, \pD</script>:</p>
+<script type="math/tex; mode=display">\card{S}\geq m_{H}(\epsilon, \delta) \implies \prob\brak{\l_{\pD}(h_{PAC}) \leq \min_{h \in H} \l_{\pD}(h) + \epsilon} \geq 1 - \delta</script>
+<p>Now, let’s see what result we can get on the following simple learning criterion.</p>
+<h2 id="empirical-risk-minimizer">Empirical risk minimizer</h2>
+<p>Since <script type="math/tex">\pD</script> is unknown, we can try to find an <a class="def" href="estimator.html">estimator</a> for <script type="math/tex">\l_{\pD}(h)</script>. The most common <a class="def" href="estimator.html">estimator</a> for an expectation is the sample mean. By the (strong) law of large numbers and the central limit theorem, this is a very reasonable <a class="def" href="estimator.html">estimator</a>:</p>
+<script type="math/tex; mode=display">\l_{S}(h) = \frac{1}{m}\sum_{i = 1}^{m}l(h, z_i)</script>
+<p>The decision rule <script type="math/tex">h</script> that minimizes this <a class="def" href="estimator.html">estimator</a> is the ERM:</p>
+<script type="math/tex; mode=display">ERM(S) = \argmin_{h \in H} \l_{S}(h)</script>
+<p>But how does minimizing the empirical risk relate to minizing the expected risk? Without any restriction, the ERM is prone to <a class="def" href="overfitting.html">overfitting</a> and yields poor results. This is seen easily using a kNN classifier with <script type="math/tex">k=1</script>, for which the empirical loss is always <script type="math/tex">0</script> but the expected loss can be arbitrarily large.</p>
+<p>So what can constraint can we impose on the ERM to try and fix the <a class="def" href="overfitting.html">overfitting</a> problem?</p>
+<p>There are two kinds of problems that can occur with ERM:</p>
+<ol>
+<li>the sample set <script type="math/tex">S</script> is not representative for <script type="math/tex">\pD</script>;</li>
+<li>even with well behaved sample set, the class <script type="math/tex">H</script> might be so flexible that we <a class="def" href="overfitting.html">overfit</a>.</li>
+</ol>
+<h2 id="constraints-on-the-training-set">Constraints on the training set</h2>
+<p>Since the ERM is defined through <script type="math/tex">S</script>, it makes sense that restricting the kind of sample set we consider would allow us to control the performance of ERM. For instance, when <script type="math/tex">S</script> is <script type="math/tex">\frac{\epsilon}{2}</script>-representative, we get good results.</p>
+<dl>
+<dt>Definition: <script type="math/tex">\epsilon</script>-representative</dt>
+<dd><script type="math/tex">S</script> is <script type="math/tex">\epsilon</script>-representative when:</dd>
+</dl>
+<script type="math/tex; mode=display">\forall h \in H, \quad \abs{\l_{\pD}-\l_{S}}\leq\epsilon</script>
+<dl>
+<dt>Lemma: ERM on <script type="math/tex">\epsilon</script>-representative <script type="math/tex">S</script></dt>
+<dd>If <script type="math/tex">S</script> is <script type="math/tex">\frac{\epsilon}{2}</script>-representative, then:</dd>
+</dl>
+<script type="math/tex; mode=display">\l_{\pD}\circ ERM(S) \leq \min_{h \in H} \l_{\pD}(h) + \epsilon</script>
+<p>Proof: we chain inequalities using the definition of <script type="math/tex">\epsilon</script>-representative or of the ERM at each step.</p>
+<script type="math/tex; mode=display">\forall h', \quad \l_{\pD}(h) \underbrace{\leq}_{\epsilon} \l_{S}(h) \underbrace{\leq}_{ERM} L_{S}(h') + \frac{\epsilon}{2} \underbrace{\leq}_{\epsilon} \l_{\pD}(h') + \epsilon</script>
+<h2 id="constraints-on-the-hypothesis-class">Constraints on the hypothesis class</h2>
+<p>Another way to ensure the performance of the ERM is to introduce <em>inductive bias</em> by restricting the class <script type="math/tex">H</script> of allowed hypotheses. Limiting the class of rules <script type="math/tex">h</script> we consider is a way to introduce prior knowledge into the learning process.</p>
+<blockquote>
+<p>Roughly speaking, the stronger the prior knowledge that one starts the learning process with, the easier it is to learn from further examples. However, the stronger these prior assumptions are, the less flexible the learning is – it is bound, a priori, by the commitment to these assumptions. (Shalev-Shwartz S., Ben-David S.)</p>
+</blockquote>
+<p>Intuitively, the smaller the class, the less opportunity for <a class="def" href="overfitting.html">overfitting</a>, but the higher the risk of introducing bias. This is related to the famous <a class="def" href="bias-variance-decomposition.html">bias-variance</a> tradeoff.</p>
+<p><a class="def" href="overfitting.html">Overfitting</a> happens when the class of models is too flexible to be constrained appropriately by the number of samples available. It can always be solved by using a bigger training set. Thus, it makes sense that when the hypothesis class is finite, we can get a lower bound of the number of training samples required.</p>
+<dl>
+<dt>Lemma</dt>
+<dd>Let <script type="math/tex">H</script> be a <em>finite</em> hypothesis class and <script type="math/tex">l</script> the <script type="math/tex">0/1</script>-loss (actually it is enough that <script type="math/tex">l</script> is bounded). Then <script type="math/tex">H</script> is PAC-Learnable with sample complexity:</dd>
+</dl>
+<script type="math/tex; mode=display">m_{H}(\epsilon, \delta) = \frac{1}{2\epsilon^2}\log\paren{\frac{2\card{H}}{\delta}}</script>
+<dl>
+<dt>Proof.</dt>
+<dd>The proof uses Hoeffding’s bound. Let’s note <script type="math/tex">m = \card{S}</script>. The confidence level to have <script type="math/tex">S</script> <script type="math/tex">\epsilon</script>-representative is:</dd>
+</dl>
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{align*}
+\delta 
+&= \prob\brak{\exists h\in H : \abs{\l_{\pD}(h) - \l_{S}(h)}\geq \epsilon} \\
+&\leq \sum_{h \in H} \prob\brak{\abs{\l_{\pD}(h) - \l_{S}(h)}\geq \epsilon}\\
+&\leq \card{H} \times 2e^{-2m\epsilon^2}
+\end{align*} %]]></script>
+<p>To conclude, inverse the bound and use the previous result on <script type="math/tex">\epsilon</script>-representative sample set.</p>
+</div>
+    </article>
+    </div><!-- row -->
+    
+    <div class="row mt-1">
+      <article class="col-lg-8 mx-auto recommendations">
+        <p class='title'>Other articles you might like:</p>
+        <ul>
+          
+            <li class="en"><img class="flag-icon" src="//julienharbulot.com/images/languages/en.png"> <a href="//julienharbulot.com/chrome-extension-gutenberg.html">Plugin to rename downloads in Google Chrome</a></li>
+          
+            <li class="en"><img class="flag-icon" src="//julienharbulot.com/images/languages/en.png"> <a href="//julienharbulot.com/python-cli.html">Complete guide to writing command-line tools</a></li>
+          
+            <li class="en"><img class="flag-icon" src="//julienharbulot.com/images/languages/en.png"> <a href="//julienharbulot.com/bash-completion-tutorial.html">Tutorial on bash completion scripts</a></li>
+          
+            <li class="en"><img class="flag-icon" src="//julienharbulot.com/images/languages/en.png"> <a href="//julienharbulot.com/win-extend-screen.html">Keyboard shortcut and command line utility to switch display (Windows)</a></li>
+          
+        </ul>
+      </article>
+    </div>
+    
+    
+    <div class="row mb=5 mt-5">
+      <article class="col-lg-8 mx-auto">
+        <div id="hyvor-talk-view"></div>
+        <script type="text/javascript">
+            var HYVOR_TALK_WEBSITE = '625';
+            var HYVOR_TALK_CONFIG = {
+                url: 'pac-learning-1.html',
+                id: 'pac-learning-1.html'
+            };
+        </script>
+      </article>
+    </div><!-- row -->
+    
+    <footer class="row">
+        <div class="col-lg-8 mx-auto text-center">
+          <p><small>
+          
+            Last updated: 01/14/21 <br/>
+          
+          
+          Copyright &copy; 2021 Julien Harbulot
+          </small></p>
+        </div>
+    </footer>
+    </div>
+
+  <script>
+  // bootstrap table
+  tables = document.getElementsByTagName('table');
+  for (i = 0; i < tables.length; i++) {
+    tables[i].classList.add('table');
+    tables[i].classList.add('table-bordered');
+  }
+
+  // Paragraphs that contain only images are marked with custom class for styling
+  ps = document.getElementsByTagName('p');
+  Array.from(ps).forEach(function(p){
+    if (p.getElementsByTagName('img').length > 0 && p.textContent.trim().length == 0) {
+        p.classList.add('img-container');
+    }
+  });
+  </script>
+
+
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script>
+        prev_onload_a = window.onload;
+        window.onload = function() {
+            if (prev_onload_a) {
+                prev_onload_a();
+            }
+            var navlinks = document.getElementsByClassName("nav-link");
+            var i;
+            for (i = 0; i < navlinks.length; i++) {
+                const target = new URL(navlinks[i].href)
+                if (location.pathname == target.pathname) {
+                    navlinks[i].classList.add('active')
+                }
+            }
+        }
+    </script>    
+
+    
+
+<script async type="text/javascript" src="//talk.hyvor.com/web-api/embed"></script>
+
+
+    </body>
+</html>

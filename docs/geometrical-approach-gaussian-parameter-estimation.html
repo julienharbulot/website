@@ -1,0 +1,629 @@
+<!doctype html>
+<html lang="en">
+    <head>
+    
+
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-166292985-1"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-166292985-1');
+    </script>
+    
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" 
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+          rel="stylesheet" crossorigin="anonymous">
+    
+    <link rel="stylesheet" href="/theme/pygment-github.css">
+    <link rel="stylesheet" href="/theme/article.css"> 
+
+    <title>The geometry of (normal) parameter estimation</title>
+    
+    <!-- Favicon -->
+    <link rel="apple-touch-icon" sizes="120x120" href="/images/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon/favicon-16x16.png">
+    <link rel="manifest" href="/images/favicon/site.webmanifest">
+    <link rel="mask-icon" href="/images/favicon/safari-pinned-tab.svg" color="#5bbad5">
+    <link rel="shortcut icon" href="favicon.ico">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="msapplication-config" content="/images/favicon/browserconfig.xml">
+    <meta name="theme-color" content="#ffffff">
+    
+<!-- Mathjax -->
+<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS_SVG">
+  MathJax.Hub.Config({
+    tex2jax: {
+    	inlineMath: [ ['$','$'] ],
+    	processEscapes: true
+    },
+	"HTML-CSS": {
+		fonts: ["TeX"] 
+	}
+  });
+</script>
+
+    </head>
+
+    <body>
+    
+    <nav class="navbar navbar-expand-lg navbar-light ">
+        <a class="navbar-brand" href="//julienharbulot.com/index.html"><img src="//julienharbulot.com/images/logo.png" width="30" alt=""></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+            
+            <li class="nav-item">
+                    <a class="nav-link" href="//julienharbulot.com/technical-blog.html">Technical blog</a>
+            </li>
+            
+            <li class="nav-item">
+                    <a class="nav-link" href="//julienharbulot.com/maths.html">Maths</a>
+            </li>
+            
+            <li class="nav-item">
+                    <a class="nav-link" href="//julienharbulot.com/projects.html">Projects</a>
+            </li>
+            
+            <li class="nav-item">
+                    <a class="nav-link" href="//julienharbulot.com/research.html">Research</a>
+            </li>
+            
+            <!--<li class="nav-item">
+                <a class="nav-link" href="//julienharbulot.com/about-me.html">About me</a>
+            </li>-->
+            
+
+<li class="nav-item dropdown">
+    <a class="nav-link active dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Table of content
+    </a>
+    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+        <div class="toc"><ul>
+<li class="toc-entry-1">
+<a class='toc-href dropdown-item' href='#goal' title='Goal'>Goal</a>
+</li>
+<div class="dropdown-divider"></div>
+<li class="toc-entry-1">
+<a class='toc-href dropdown-item' href='#introduction' title='Introduction'>Introduction</a>
+</li>
+<div class="dropdown-divider"></div>
+<li class="toc-entry-1">
+<a class='toc-href dropdown-item' href='#finding-the-cloud' title='Finding the cloud'>Finding the cloud</a>
+</li>
+<div class="dropdown-divider"></div>
+<li class="toc-entry-1">
+<a class='toc-href dropdown-item' href='#geometry' title='Geometry'>Geometry</a>
+</li>
+</ul><div>
+    </div>
+</li>
+
+
+            </ul>
+        </div>
+    </nav>
+    
+    
+    
+    <div class="container">
+    <div class="row mt-5">
+      <div class="col-lg-8 mx-auto"> 
+        <h1 class="display-5">The geometry of (normal) parameter estimation </h1>
+        <div class="text-right">29 Mar 2018</div>
+      </div>
+    </div>
+    <div class="row mt-5">
+    <article class="col-lg-8 mx-auto">
+    <p>
+<script type="math/tex; mode=display">
+\def\sa{a}
+\def\sb{b}
+\def\sc{c}
+\def\sd{d}
+\def\se{e}
+\def\sf{f}
+\def\sg{g}
+\def\sh{h}
+\def\si{i}
+\def\sj{j}
+\def\sk{k}
+\def\sl{l}
+\def\sm{m}
+\def\sn{n}
+\def\so{o}
+\def\sp{p}
+\def\sq{q}
+\def\sr{r}
+\def\ss{s}
+\def\st{t}
+\def\su{u}
+\def\sv{v}
+\def\sw{w}
+\def\sx{x}
+\def\sy{y}
+\def\sz{z}
+\def\va{\vec{a}}
+\def\vb{\vec{b}}
+\def\vc{\vec{c}}
+\def\vd{\vec{d}}
+\def\ve{\vec{e}}
+\def\vf{\vec{f}}
+\def\vg{\vec{g}}
+\def\vh{\vec{h}}
+\def\vi{\vec{i}}
+\def\vj{\vec{j}}
+\def\vk{\vec{k}}
+\def\vl{\vec{l}}
+\def\vm{\vec{m}}
+\def\vn{\vec{n}}
+\def\vo{\vec{o}}
+\def\vp{\vec{p}}
+\def\vq{\vec{q}}
+\def\vr{\vec{r}}
+\def\vs{\vec{s}}
+\def\vt{\vec{t}}
+\def\vu{\vec{u}}
+\def\vv{\vec{v}}
+\def\vw{\vec{w}}
+\def\vx{\vec{x}}
+\def\vy{\vec{y}}
+\def\vz{\vec{z}}
+\def\ga{\mathfrak{A}}
+\def\gb{\mathfrak{B}}
+\def\gc{\mathfrak{C}}
+\def\gd{\mathfrak{D}}
+\def\ge{\mathfrak{E}}
+\def\gf{\mathfrak{F}}
+\def\gg{\mathfrak{G}}
+\def\gh{\mathfrak{H}}
+\def\gi{\mathfrak{I}}
+\def\gj{\mathfrak{J}}
+\def\gk{\mathfrak{K}}
+\def\gl{\mathfrak{L}}
+\def\gm{\mathfrak{M}}
+\def\gn{\mathfrak{N}}
+\def\go{\mathfrak{O}}
+\def\gp{\mathfrak{P}}
+\def\gq{\mathfrak{Q}}
+\def\gr{\mathfrak{R}}
+\def\gs{\mathfrak{S}}
+\def\gt{\mathfrak{T}}
+\def\gu{\mathfrak{U}}
+\def\gv{\mathfrak{V}}
+\def\gw{\mathfrak{W}}
+\def\gx{\mathfrak{X}}
+\def\gy{\mathfrak{Y}}
+\def\gz{\mathfrak{Z}}
+\def\ra{A}
+\def\rb{B}
+\def\rc{C}
+\def\rd{D}
+\def\re{E}
+\def\rf{F}
+\def\rg{G}
+\def\rh{H}
+\def\ri{I}
+\def\rj{J}
+\def\rk{K}
+\def\rl{L}
+\def\rm{M}
+\def\rn{N}
+\def\ro{O}
+\def\rp{P}
+\def\rq{Q}
+\def\rr{R}
+\def\rs{S}
+\def\rt{T}
+\def\ru{U}
+\def\rv{V}
+\def\rw{W}
+\def\rx{X}
+\def\ry{Y}
+\def\rz{Z}
+\def\rva{\vec{A}}
+\def\rvb{\vec{B}}
+\def\rvc{\vec{C}}
+\def\rvd{\vec{D}}
+\def\rve{\vec{E}}
+\def\rvf{\vec{F}}
+\def\rvg{\vec{G}}
+\def\rvh{\vec{H}}
+\def\rvi{\vec{I}}
+\def\rvj{\vec{J}}
+\def\rvk{\vec{K}}
+\def\rvl{\vec{L}}
+\def\rvm{\vec{M}}
+\def\rvn{\vec{N}}
+\def\rvo{\vec{O}}
+\def\rvp{\vec{P}}
+\def\rvq{\vec{Q}}
+\def\rvr{\vec{R}}
+\def\rvs{\vec{S}}
+\def\rvt{\vec{T}}
+\def\rvu{\vec{U}}
+\def\rvv{\vec{V}}
+\def\rvw{\vec{W}}
+\def\rvx{\vec{X}}
+\def\rvy{\vec{Y}}
+\def\rvz{\vec{Z}}
+\def\seta{A}
+\def\setb{B}
+\def\setc{C}
+\def\setd{D}
+\def\sete{E}
+\def\setf{F}
+\def\setg{G}
+\def\seth{H}
+\def\seti{I}
+\def\setj{J}
+\def\setk{K}
+\def\setl{L}
+\def\setm{M}
+\def\setn{N}
+\def\seto{O}
+\def\setp{P}
+\def\setq{Q}
+\def\setr{R}
+\def\sets{S}
+\def\sett{T}
+\def\setu{U}
+\def\setv{V}
+\def\setw{W}
+\def\setx{X}
+\def\sety{Y}
+\def\setz{Z}
+\def\fa{a}
+\def\fb{b}
+\def\fc{c}
+\def\fd{d}
+\def\fe{e}
+\def\ff{f}
+\def\fg{g}
+\def\fh{h}
+\def\fi{i}
+\def\fj{j}
+\def\fk{k}
+\def\fl{l}
+\def\fm{m}
+\def\fn{n}
+\def\fo{o}
+\def\fp{p}
+\def\fq{q}
+\def\fr{r}
+\def\fs{s}
+\def\ft{t}
+\def\fu{u}
+\def\fv{v}
+\def\fw{w}
+\def\fx{x}
+\def\fy{y}
+\def\fz{z}
+\def\fA{A}
+\def\fB{B}
+\def\fC{C}
+\def\fD{D}
+\def\fE{E}
+\def\fF{F}
+\def\fG{G}
+\def\fH{H}
+\def\fI{I}
+\def\fJ{J}
+\def\fK{K}
+\def\fL{L}
+\def\fM{M}
+\def\fN{N}
+\def\fO{O}
+\def\fP{P}
+\def\fQ{Q}
+\def\fR{R}
+\def\fS{S}
+\def\fT{T}
+\def\fU{U}
+\def\fV{V}
+\def\fW{W}
+\def\fX{X}
+\def\fY{Y}
+\def\fZ{Z}
+\def\ma{A}
+\def\mb{B}
+\def\mc{C}
+\def\md{D}
+\def\me{E}
+\def\mf{F}
+\def\mg{G}
+\def\mh{H}
+\def\mi{I}
+\def\mj{J}
+\def\mk{K}
+\def\ml{L}
+\def\mm{M}
+\def\mn{N}
+\def\mo{O}
+\def\mp{P}
+\def\mq{Q}
+\def\mr{R}
+\def\ms{S}
+\def\mt{T}
+\def\matu{U}
+\def\mv{V}
+\def\mw{W}
+\def\mx{X}
+\def\my{Y}
+\def\mz{Z}
+\def\loss{\mathcal{L}}
+\newcommand{\dkl}[2]{D_{\text{KL}}\mathopen{}\paren{#1\,||\,#2}}
+\newcommand{\dataset}{S}
+\newcommand{\ndataset}{N}
+\newcommand{\idataset}{n}
+\newcommand{\inputRV}{\mathcal{X}}
+\newcommand{\inputvec}{\vec{x}}
+\newcommand{\ninputvec}[1]{\vec{x}_{#1}}
+\newcommand{\iinputvec}[1]{x_{#1}}
+\newcommand{\niinputvec}[2]{x_{#1, #2}}
+\newcommand{\icpnt}{i}
+\newcommand{\inputmatrix}{X}
+\newcommand{\inputdim}{D}
+\newcommand{\outputval}{y}
+\newcommand{\ioutputval}[1]{y_{#1}}
+\newcommand{\outputvec}{\vec{y}}
+\newcommand{\trainset}{S_{\text{train}}}
+\newcommand{\testset}{S_{\text{test}}}
+\newcommand{\truemodel}{f_{\text{true}}}
+\newcommand{\trainedmodel}{f_{\trainset}}
+\newcommand{\linmodel}[1]{f_{#1}}
+\newcommand{\bestmodel}{f^{*}}
+\newcommand{\model}{f}
+\newcommand{\hyperparam}{\lambda}
+\newcommand{\linparamv}{\vec{w}}
+\newcommand{\ilinparam}[1]{w_{#1}}
+\newcommand{\indivloss}{l}
+\newcommand{\modelclass}{\mathcal{F}}
+\newcommand{\linclass}{\modelclass_{\text{lin}}}
+\newcommand{\g}{\mathcal{G}}
+\newcommand{\gmse}{\g_{\text{MSE}}}
+\newcommand{\glasso}{\g_{\text{lasso}}}
+\newcommand{\gridge}{\g_{\text{ridge}}}
+\newcommand{\glogit}{\g_{\logit}}
+\newcommand{\l}{\mathcal{L}}
+\newcommand{\lmse}{\l_{\text{MSE}}}
+\newcommand{\lmae}{\l_{\text{MAE}}}
+\newcommand{\llasso}{\l_{\text{lasso}}}
+\newcommand{\lridge}{\l_{\text{ridge}}}
+\newcommand{\llogit}{\l_{\logit}}
+\newcommand{\logit}{\sigma}
+\newcommand{\reg}{\mathcal{R}}
+\DeclareMathOperator*{\argmin}{argmin}
+\DeclareMathOperator*{\argmax}{argmax}
+\DeclareMathOperator*{\mean}{mean}
+\DeclareMathOperator*{\avg}{avg}
+\DeclareMathOperator*{\span}{span}
+\DeclareMathOperator*{\var}{var}
+\DeclareMathOperator*{\bias}{bias}
+\newcommand{\expectation}{\mathbb{E}}
+\newcommand{\brak}[1]{\left[#1\right]}
+\newcommand{\paren}[1]{\left(#1\right)}
+\newcommand{\realset}{\mathbb{R}}
+\newcommand{\realvset}[1]{\realset^{#1}}
+\newcommand{\prob}{\mathbb{P}}
+\newcommand{\gaussian}{\mathcal{N}}
+\newcommand{\iid}{\stackrel{\text{i.i.d.}}{\sim}}
+\newcommand{\abs}[1]{\left\lvert#1\right\rvert}
+\newcommand{\norm}[1]{\left\lVert#1\right\rVert}
+\newcommand{\normtwo}[1]{\norm{#1}_{2}}
+\newcommand{\normone}[1]{\norm{#1}_{1}}
+\newcommand{\card}[1]{\left\lvert#1\right\rvert}
+\newcommand{\grad}{\nabla}
+\newcommand{\dconv}{\stackrel{d}{\to}}
+\newcommand{\pconv}{\stackrel{p}{\to}}
+\newcommand{\rva}[1]{#1}
+\newcommand{\rve}[1]{\vec{#1}}
+\newcommand{\obs}[1]{#1}
+\newcommand{\vobs}[1]{\vec{#1}}
+\newcommand{\distrib}[1]{#1}
+\newcommand{\distribof}[2]{#1_{#2}}
+\newcommand{\density}[1]{#1}
+\newcommand{\densityof}[2]{#1_{#2}}
+\newcommand{\distributed}{\sim}
+\newcommand{\const}[1]{#1}
+\newcommand{\fun}[1]{#1}
+</script>
+</p>
+<div class="typography">
+
+<p>This article shows geometrically where the best estimates for the mean and variance of a normally distributed random vector can be found. We start with a simple question and derive both the geometrical meaning and parameter estimation method from scratch.</p>
+<h2 id="goal">Goal</h2>
+<p>If you’re impatient to know where we’re headed, here are the geometrical insights we will develop in this article:</p>
+<p>1) Given <script type="math/tex">2</script> observations <script type="math/tex">y_1</script> and <script type="math/tex">y_2</script> independently generated at random by the distribution <script type="math/tex">\mathcal{N}(\mu, \sigma)</script>, our best <a class="def" href="estimator.html">estimators</a> for <script type="math/tex">\mu</script> and <script type="math/tex">\sigma</script> are <script type="math/tex">\hat{\mu}</script> and <script type="math/tex">\hat{\sigma}</script> such that:</p>
+<script type="math/tex; mode=display">\begin{pmatrix}y_1 \\ y_2\end{pmatrix} = \hat{\mu}\,\begin{pmatrix}1\\1\end{pmatrix} + \frac{\hat{\sigma}}{\sqrt{2}}\,\begin{pmatrix}-1 \\ 1 \end{pmatrix}</script>
+<p><img src="images/geometrical-approach-gaussian-parameter-estimation/estimation2d.svg"/></p>
+<p>2) More generally, given <script type="math/tex">n</script> observations <script type="math/tex">\vec{y}_n = (y_1, ..., y_n)</script> independently generated at random by the same distribution <script type="math/tex">\mathcal{N}(\mu, \sigma^2)</script>, our best <a class="def" href="estimator.html">estimators</a> are:</p>
+<script type="math/tex; mode=display">\vec{y}_n = \hat{\mu}\,(\sqrt{n}\,\mathbb{U}_n) + \hat{\sigma}\,(\sqrt{n-1}\,\mathbb{U}_n^{\perp})</script>
+<p>where <script type="math/tex">\sqrt{n}</script> and <script type="math/tex">\sqrt{n-1}</script> are correction factors because as dimension increases, distances increases. The meaning of <script type="math/tex">\mathbb{U}_n</script> and <script type="math/tex">\mathbb{U}_n^{\perp}</script> are illustrated on the picture below:</p>
+<p><img src="images/geometrical-approach-gaussian-parameter-estimation/estimatorMultiDim.svg"/></p>
+<h2 id="introduction">Introduction</h2>
+<p>We can think of a probability distribution as an engine able to generate values at random. A random vector is a vector whose components have been generated by such engine.</p>
+<p>Conceptually, it is useful to see the density function for a random vector as a cloud in <script type="math/tex">R^n</script> that indicates the plausible end points for the random vector: the vector is more likely to end in a region where the cloud is dense than one where it is not dense.</p>
+<p><img alt="Vector density" src="images/geometrical-approach-gaussian-parameter-estimation/gaussian_distribution_vector_density.png"/>
+<strong>Figure.</strong> Density cloud for a vector with <script type="math/tex">\mathcal{N}(\vec{0}, \sigma^2)</script> distribution on the left and <script type="math/tex">\mathcal{N}(\vec{\mu_Y}, \sigma^2)</script> distribution on the right.</p>
+<p>For instance, the following image shows the “density cloud” of a normally distributed random vector. The components of the vector are generated by a normal distribution, and the visualization shows how this translate to 2D geometry.</p>
+<p><img src="images/geometrical-approach-gaussian-parameter-estimation/Multivariate_normal_sample.png"/></p>
+<p>Here, the shape of the “density cloud” for the random vector is determined by the parameters of each component: the shape of a normal distribution is controlled by the mean <script type="math/tex">\mu</script> (= location of the center) and it’s variance <script type="math/tex">\sigma^2</script> (= size of the cloud). When the variance for every component is the same, the cloud is a circle.</p>
+<p>The shape of the normal distribution (or gaussian distribution) is particularly interesting because it models measurement errors. We can think of it as a cloud that generates a <a class="def" href="target-variable.html">target value</a> <script type="math/tex">\mu</script> with some measurement noise. The variance parameter <script type="math/tex">\sigma^2</script> controls the amount of noise that is added. Among all its desirable <a class="def" href="feature.html">features</a>, the distribution is symetric: accross a very large number of measurement, we expect the errors to cancel each others, so that the mean of the sample approximates the real value <script type="math/tex">\mu</script>. We will see later that it has a nice geometrical <a class="def" href="feature.html">feature</a> too.</p>
+<p>To learn more about the <em>normal distribution</em>, check out this article: <a href="quantifying-measurement-errors.html">A probability distribution to model measurement errors</a>.</p>
+<p><a class="def" href="what-is-statistic.html">Statistics</a> is all about finding the location of the cloud when we have a few observations but we don’t know the parameters <script type="math/tex">\mu</script> and <script type="math/tex">\sigma</script>. As we will see, the normal distribution has a nice property that allows us to visualize geometrically the process of estimating those parameters.</p>
+<h2 id="finding-the-cloud">Finding the cloud</h2>
+<p>Suppose for instance that we have two observations <script type="math/tex">y_1</script> and <script type="math/tex">y_2</script> independently generated at random by the same normal distribution <script type="math/tex">\mathcal{N}(\mu, \sigma^2)</script>.</p>
+<p>We would like to estimate the most likely values for the parameters of the cloud: its center <script type="math/tex">\mu</script> and it’s standard deviation <script type="math/tex">\sigma</script>. Basically, this means that we will try to find the “best guess” for those values based on the location of our observations.</p>
+<p>Our best guess for the center is to place it where it has the highest probability to generate our observations. In statistical terms, we are looking for the <em><a class="def" href="maximum-likelihood-estimator.html">maximum likelihood</a></em> value of <script type="math/tex">\mu</script>.</p>
+<p>To find this <em><a class="def" href="maximum-likelihood-estimator.html">maximum likelihood</a></em> location, we need to study the formula for the could’s density more closely.</p>
+<script type="math/tex; mode=display">f(Y = y \mid \mu, \sigma) = \frac{1}{\sqrt{2\pi\sigma^2}}\mathrm{exp}(-\frac{\left|y-\mu\right|^2}{2\sigma^2})</script>
+<p>Since both observations are generated independently, the <em>joint density</em> (= the density for both) is the product <script type="math/tex">f(Y_1 = y_1 \mid \mu, \sigma)\,f(Y_2 = y_2 \mid \mu, \sigma)</script> which is maximal when <script type="math/tex">\mu</script> minimizes this sum:</p>
+<script type="math/tex; mode=display">\hat{\mu} = \mathrm{argmin}_{\mu} (y_1 - \mu)^2 + (y_2 - \mu)^2</script>
+<p>You might recognize the <em>Ordinary Least Square</em> equation. This sum has a nice geometrical interpretation because it is exactly the expanded formula for the norm (= length) of the vector <script type="math/tex">\vec{y} - (\mu, \mu)</script>:</p>
+<script type="math/tex; mode=display">\hat{\mu} = \mathrm{argmin}_{\mu} \left\lVert\begin{pmatrix}y_1 \\ y_2\end{pmatrix} - \mu\,\begin{pmatrix}1\\1\end{pmatrix}\right\rVert^2</script>
+<h2 id="geometry">Geometry</h2>
+<p>So we are looking for the point on the line of direction <script type="math/tex">(1, 1)</script> that is the closest to <script type="math/tex">\vec{y} = (y_1, y_2)</script>.</p>
+<p>This point is the <em><a class="def" href="orthogonal-projection.html">orthogonal projection</a></em> of <script type="math/tex">\vec{y}</script> onto the <em>unit</em> vector <script type="math/tex">\vec{u}</script> directed along the line. We can use the <em>dot product <script type="math/tex">\cdot</script></em> to find the projection coefficient, and multiply by the unit vector to get the projection:</p>
+<script type="math/tex; mode=display">\hat{\mu}\begin{pmatrix}1\\1\end{pmatrix} = (\vec{y}\cdot\vec{u})\,\vec{u} \quad \text{(equation 1)}</script>
+<p><em>Yeay! We found our best estimate for the center of the cloud!</em></p>
+<p><img src="images/geometrical-approach-gaussian-parameter-estimation/estimation2d.svg"/></p>
+<p>To ease the transition with higher dimensions, let’s shorten our notation for the vector <script type="math/tex">(1,1)</script> as <script type="math/tex">\mathbb{I}_2</script> where the number <script type="math/tex">2</script> stands for the number of components in the vector. So that for instance, <script type="math/tex">\mathbb{I}_4 = (1,1,1,1)</script>. Geometrically, we can see this vector as the diagonal of the <script type="math/tex">n</script>-dimensional (hyper)cube of side <script type="math/tex">1</script>. The norm of this vector is simply the length of that diagonal: <script type="math/tex">\lVert\mathbb{I}_2\rVert = \sqrt{2}</script> or more generally, <script type="math/tex">\lVert\mathbb{I}_n\rVert = \sqrt{n}</script>. This will prove useful later.</p>
+<p>Likewise, let’s adopt a more flexible notation for our unit vector <script type="math/tex">\vec{u}</script> and use <script type="math/tex">\mathbb{U}_2</script> for the <em>unit vector</em> directed along <script type="math/tex">\mathbb{I}_2</script>. In math notations, this means that: <script type="math/tex">\mathbb{I}_n = \sqrt{n}\,\mathbb{U}_n</script> for all values of <script type="math/tex">n</script>. Since <script type="math/tex">\mathbb{U}_n</script> is a <em>unit vector</em>, we can use it to express the <a class="def" href="orthogonal-projection.html">orthogonal projection</a> of <script type="math/tex">\vec{y}</script>. With these notations <em>equation 1</em> becomes:</p>
+<script type="math/tex; mode=display">\hat{\mu}\,\mathbb{I}_2 = (\vec{y}\cdot\mathbb{U}_2)\,\mathbb{U}_2</script>
+<p><img src="images/geometrical-approach-gaussian-parameter-estimation/estimatorMultiDim.svg"/></p>
+<p>This is a vector equation. Let’s find the exact value of our estimate:</p>
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{eqnarray*}
+& \hat{\mu}\,\mathbb{I}_2 & = (\vec{y}\cdot\mathbb{U}_2)\,\mathbb{U}_2 \\
+\iff & \hat{\mu}\,\sqrt{2}\,\mathbb{U}_2 & = (\vec{y}\cdot\mathbb{U}_2)\,\mathbb{U}_2 \\
+\iff & \hat{\mu}\,\sqrt{2} &= (\vec{y}\cdot\mathbb{U}_2)\\
+\iff & \hat{\mu} & = (\vec{y}\cdot\mathbb{U}_2)\,\frac{1}{\sqrt{2}}\\
+\end{eqnarray*} %]]></script>
+<p>We can rewrite this slightly to get the <em>ordinary least square</em> solution <script type="math/tex">\hat{\mu} = \bar{y}</script>:</p>
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{eqnarray*}
+&& \hat{\mu} & = (\vec{y}\cdot\mathbb{U}_2)\,\frac{1}{\sqrt{2}}\\
+&\iff & \hat{\mu} & = (\vec{y}\cdot\frac{\mathbb{I}_2}{\sqrt{2}})\,\frac{1}{\sqrt{2}}\\
+&\iff & \hat{\mu} & = (\vec{y}\cdot\mathbb{I}_2)\,\frac{1}{2}\\
+&\iff & \hat{\mu} & =  \frac{y_1 + y_2}{2}
+\end{eqnarray*} %]]></script>
+<p>This result generalizes easily for a higher number of observations. Suppose for instance that <script type="math/tex">n</script> stands for a positive integer and that we have <script type="math/tex">n</script> observations <script type="math/tex">y_1</script>, …, <script type="math/tex">y_n</script> independently generated at random by a normal distribution <script type="math/tex">\mathcal{N}(\mu, \sigma^2)</script>. If we write <script type="math/tex">\vec{y}_n = (y_1, ..., y_n)</script> the random vector associated with our observations, we can find our best guess for the center of the cloud by projecting <script type="math/tex">\vec{y}_n</script> onto <script type="math/tex">\mathbb{U}_n</script>. This yields the following best guess for <script type="math/tex">\mu</script>:</p>
+<script type="math/tex; mode=display">\hat{\mu} = (\vec{y}_n\cdot\mathbb{U}_n)\,\frac{1}{\sqrt{n}}= \frac{y_1 + ... + y_n}{n}</script>
+<p>From now on, I will use the general notation with <script type="math/tex">n</script> to make clear that our results hold in higher dimensions. While reading, feel free to consider that <script type="math/tex">n = 2</script> or <script type="math/tex">n = 3</script> to visualize the geometry.</p>
+<p>Before we estimate the second parameter <script type="math/tex">\sigma</script>, let’s write <script type="math/tex">\vec{y}_n</script> as the sum of the cloud’s center and a deviation vector <script type="math/tex">\vec{\epsilon}_n</script> from the center. It that can be considered as if its components where independently generated at random by a <script type="math/tex">\mathcal{N}(0, \sigma^2)</script> distribution.</p>
+<script type="math/tex; mode=display">\vec{y}_n = \hat{\mu}\,(\sqrt{n}\,\mathbb{U}_n) + \vec{\epsilon}_n</script>
+<p>Now, I will do a few tricks to show that <script type="math/tex">\vec{\epsilon}_n</script> can be used to estimate the standard deviation parameter <script type="math/tex">\sigma</script>. Once done, we will revert back to the geometrical interpretation.</p>
+<p>Take <script type="math/tex">n - 1</script> unit vectors to form a basis (<script type="math/tex">\mathbb{U}_n</script>, <script type="math/tex">u_1</script>, …, <script type="math/tex">u_{n-1}</script>) of space. This means we take a set of <script type="math/tex">n</script> axis for space where <script type="math/tex">\mathbb{U}_n</script> is the first of them. Note <script type="math/tex">Y_n</script> the general random vector which has been realized as <script type="math/tex">\vec{y}_n</script>. Along each of those new unit vectors, the projection <script type="math/tex">Y_N\cdot u_i</script> has <script type="math/tex">0</script> mean and is distributed according to a normal distribution <script type="math/tex">\mathcal{N}(0, \sigma^2)</script>. We will show that the projection of <script type="math/tex">\vec{y}_n</script> onto each of those directions yield an <em><a class="def" href="estimator.html">unbiased estimator</a></em> for the variance <script type="math/tex">\sigma^2</script>. Indeed:</p>
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{align*}
+\sigma^2 &= \mathrm{var}(Y_n\cdot u_i )\\
+         &= \mathbb{E}[\,(Y_n\cdot u_i )^2\,] - \mathbb{E}[\,Y_n\cdot u_i \,]^2 \\
+         &= \mathbb{E}[\,(Y_n\cdot u_i )^2\,] - 0 \\
+         &= \mathbb{E}[\,(Y_n\cdot u_i )^2\,]
+\end{align*} %]]></script>
+<p>We can pool these to get the best estimate for <script type="math/tex">\sigma^2</script>:</p>
+<script type="math/tex; mode=display">\hat{\sigma}^2 = \frac{\sum_{i = 1}^{n-1} (\vec{y}_n\cdot u_i)^2}{n-1} = \frac{\lVert\vec{\epsilon}_n\rVert^2}{n-1}</script>
+<p>If take a unit vector <script type="math/tex">\mathbb{U}_n^{\perp}</script> directed along <script type="math/tex">\vec{\epsilon}_n</script>, we know that it is orthogonal to <script type="math/tex">\mathbb{U}_n</script> (hence the notation). And we have <script type="math/tex">\lVert\vec{\epsilon}_n\rVert\ = (\vec{y}_n\cdot\mathbb{U}_n^{\perp})</script>.
+Hence, our best estimate for the <em>standard deviation</em> <script type="math/tex">\sigma</script> is:</p>
+<script type="math/tex; mode=display">\begin{align*}
+\hat{\sigma} = \frac{\lVert\vec{\epsilon}_n\rVert}{\sqrt{n-1}} = \frac{\vec{y}_n \cdot \mathbb{U}_n^{\perp}}{\sqrt{n-1}} \\
+\end{align*}</script>
+<p>In words, the <em>standard deviation</em> is the length of the <em>deviation vector</em> <script type="math/tex">\epsilon_n</script> corrected for the dimension <script type="math/tex">n</script>. As I will explain later, this is because lengths are dilated in higher dimensions.</p>
+<p><img src="images/geometrical-approach-gaussian-parameter-estimation/estimation2d.svg" style="max-width:50%;"/></p>
+<p>We can replace <script type="math/tex">\vec{\epsilon}</script> by the above expression in the formula for the observation vector <script type="math/tex">\vec{y}_n</script>:</p>
+<script type="math/tex; mode=display">\vec{y}_n = \hat{\mu}\,(\sqrt{n}\,\mathbb{U}_n) + \hat{\sigma}\,(\sqrt{n-1}\,\mathbb{U}_n^{\perp})</script>
+<p>The values <script type="math/tex">\sqrt{n}</script> and <script type="math/tex">\sqrt{n-1}</script> are scale factors due to the dimension of space. Indeed, the length of the diagonal of a square with size <script type="math/tex">s</script> is: <script type="math/tex">\sqrt{2}\,s</script>, for a cube it is <script type="math/tex">\sqrt{3}\,s</script> and more generally for a <script type="math/tex">n</script>-dimensional hypercube it is <script type="math/tex">\sqrt{n}\,s</script>. This explains the <script type="math/tex">\sqrt{n}</script> factor associated with <script type="math/tex">\mathbb{U}_n</script> which is precisely the direction of that diagonal.</p>
+<p>Another way to say this is simply that <script type="math/tex">\sqrt{n}</script> is the norm of <script type="math/tex">\mathbb{I}_n</script> in the <script type="math/tex">n</script>-dimensional space.</p>
+<p>Likewise, <script type="math/tex">\sqrt{n-1}</script> is the norm of <script type="math/tex">\mathbb{I}_n^{\perp}</script> in the <script type="math/tex">(n-1)</script>-dimensional subspace orthogonal to <script type="math/tex">\mathrm{span}(\mathbb{I}_n)</script>. We loose one dimension because <script type="math/tex">\epsilon</script> can’t have any component colinear to <script type="math/tex">\mathbb{I}_n</script> by definition.</p>
+<p>In the special case when the components of <script type="math/tex">\epsilon</script> are perfect <a class="def" href="estimator.html">estimators</a> (i.e. when <script type="math/tex">\epsilon = (\sigma, ..., \sigma)</script>), the picture reduce to a true <script type="math/tex">(n-1)</script>-dimensional hypercube and <script type="math/tex">\sqrt{n-1}\,\sigma</script> is its diagonal.</p>
+<p>When <script type="math/tex">n=1</script>, we have only one observation (<script type="math/tex">y_1</script>) and the formula says that our best estimate for the parameter <script type="math/tex">\mu</script> is:</p>
+<script type="math/tex; mode=display">y_1 = \hat{\mu} \sqrt{1} + \hat{\sigma} \sqrt{0} = \hat{\mu}</script>
+<p>Which means that with only one value, our best guess is to center the distribution on that value. We don’t have enough observations to estimate <script type="math/tex">\sigma,</script> so it is automatically ruled out of the formula.</p>
+</div>
+    </article>
+    </div><!-- row -->
+    
+    <div class="row mt-1">
+      <article class="col-lg-8 mx-auto recommendations">
+        <p class='title'>Other articles you might like:</p>
+        <ul>
+          
+            <li class="en"><img class="flag-icon" src="//julienharbulot.com/images/languages/en.png"> <a href="//julienharbulot.com/quantifying-measurement-errors.html">A probability distribution to quantify measurement errors</a></li>
+          
+            <li class="en"><img class="flag-icon" src="//julienharbulot.com/images/languages/en.png"> <a href="//julienharbulot.com/bayesian-inference-primer.html">Why bayesian inference is more powerful than logic</a></li>
+          
+            <li class="en"><img class="flag-icon" src="//julienharbulot.com/images/languages/en.png"> <a href="//julienharbulot.com/research.html">Research</a></li>
+          
+            <li class="en"><img class="flag-icon" src="//julienharbulot.com/images/languages/en.png"> <a href="//julienharbulot.com/win-extend-screen.html">Keyboard shortcut and command line utility to switch display (Windows)</a></li>
+          
+        </ul>
+      </article>
+    </div>
+    
+    
+    <div class="row mb=5 mt-5">
+      <article class="col-lg-8 mx-auto">
+        <div id="hyvor-talk-view"></div>
+        <script type="text/javascript">
+            var HYVOR_TALK_WEBSITE = '625';
+            var HYVOR_TALK_CONFIG = {
+                url: 'geometrical-approach-gaussian-parameter-estimation.html',
+                id: 'geometrical-approach-gaussian-parameter-estimation.html'
+            };
+        </script>
+      </article>
+    </div><!-- row -->
+    
+    <footer class="row">
+        <div class="col-lg-8 mx-auto text-center">
+          <p><small>
+          
+            Last updated: 01/14/21 <br/>
+          
+          
+          Copyright &copy; 2021 Julien Harbulot
+          </small></p>
+        </div>
+    </footer>
+    </div>
+
+  <script>
+  // bootstrap table
+  tables = document.getElementsByTagName('table');
+  for (i = 0; i < tables.length; i++) {
+    tables[i].classList.add('table');
+    tables[i].classList.add('table-bordered');
+  }
+
+  // Paragraphs that contain only images are marked with custom class for styling
+  ps = document.getElementsByTagName('p');
+  Array.from(ps).forEach(function(p){
+    if (p.getElementsByTagName('img').length > 0 && p.textContent.trim().length == 0) {
+        p.classList.add('img-container');
+    }
+  });
+  </script>
+
+
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script>
+        prev_onload_a = window.onload;
+        window.onload = function() {
+            if (prev_onload_a) {
+                prev_onload_a();
+            }
+            var navlinks = document.getElementsByClassName("nav-link");
+            var i;
+            for (i = 0; i < navlinks.length; i++) {
+                const target = new URL(navlinks[i].href)
+                if (location.pathname == target.pathname) {
+                    navlinks[i].classList.add('active')
+                }
+            }
+        }
+    </script>    
+
+    
+
+<script async type="text/javascript" src="//talk.hyvor.com/web-api/embed"></script>
+
+
+    </body>
+</html>

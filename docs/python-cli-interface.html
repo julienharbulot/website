@@ -1,0 +1,388 @@
+<!doctype html>
+<html lang="en">
+    <head>
+    
+
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-166292985-1"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-166292985-1');
+    </script>
+    
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" 
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+          rel="stylesheet" crossorigin="anonymous">
+    
+    <link rel="stylesheet" href="/theme/pygment-github.css">
+    <link rel="stylesheet" href="/theme/article.css"> 
+
+    <title>How to write a command-line interface</title>
+    
+    <!-- Favicon -->
+    <link rel="apple-touch-icon" sizes="120x120" href="/images/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon/favicon-16x16.png">
+    <link rel="manifest" href="/images/favicon/site.webmanifest">
+    <link rel="mask-icon" href="/images/favicon/safari-pinned-tab.svg" color="#5bbad5">
+    <link rel="shortcut icon" href="favicon.ico">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="msapplication-config" content="/images/favicon/browserconfig.xml">
+    <meta name="theme-color" content="#ffffff">
+    
+<!-- Mathjax -->
+<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS_SVG">
+  MathJax.Hub.Config({
+    tex2jax: {
+    	inlineMath: [ ['$','$'] ],
+    	processEscapes: true
+    },
+	"HTML-CSS": {
+		fonts: ["TeX"] 
+	}
+  });
+</script>
+
+    </head>
+
+    <body>
+    
+    <nav class="navbar navbar-expand-lg navbar-light ">
+        <a class="navbar-brand" href="//julienharbulot.com/index.html"><img src="//julienharbulot.com/images/logo.png" width="30" alt=""></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+            
+            <li class="nav-item">
+                    <a class="nav-link" href="//julienharbulot.com/technical-blog.html">Technical blog</a>
+            </li>
+            
+            <li class="nav-item">
+                    <a class="nav-link" href="//julienharbulot.com/maths.html">Maths</a>
+            </li>
+            
+            <li class="nav-item">
+                    <a class="nav-link" href="//julienharbulot.com/projects.html">Projects</a>
+            </li>
+            
+            <li class="nav-item">
+                    <a class="nav-link" href="//julienharbulot.com/research.html">Research</a>
+            </li>
+            
+            <!--<li class="nav-item">
+                <a class="nav-link" href="//julienharbulot.com/about-me.html">About me</a>
+            </li>-->
+            
+
+<li class="nav-item dropdown">
+    <a class="nav-link active dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Table of content
+    </a>
+    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+        <div class="toc"><ul>
+<li class="toc-entry-1">
+<a class='toc-href dropdown-item' href='#the-argument-vector' title='The argument vector'>The argument vector</a>
+</li>
+<div class="dropdown-divider"></div>
+<li class="toc-entry-1">
+<a class='toc-href dropdown-item' href='#how-to-write-a-cli-in-python' title='How to write a CLI in python?'>How to write a CLI in python?</a>
+</li>
+<div class="dropdown-divider"></div>
+<li class="toc-entry-1">
+<a class='toc-href dropdown-item' href='#good-practices-and-conventions' title='Good practices and conventions'>Good practices and conventions</a>
+</li>
+<div class="dropdown-divider"></div>
+<li class="toc-entry-1">
+<a class='toc-href dropdown-item' href='#design-a-great-help-text' title='Design a great help text'>Design a great help text</a>
+</li>
+<div class="dropdown-divider"></div>
+<li class="toc-entry-1">
+<a class='toc-href dropdown-item' href='#enable-auto-completion-to-improve-user-experience' title='Enable auto-completion to improve user-experience'>Enable auto-completion to improve user-experience</a>
+</li>
+<div class="dropdown-divider"></div>
+<li class="toc-entry-1">
+<a class='toc-href dropdown-item' href='#how-to-structure-your-code' title='How to structure your code?'>How to structure your code?</a>
+</li>
+<div class="dropdown-divider"></div>
+<li class="toc-entry-1">
+<a class='toc-href dropdown-item' href='#read-next' title='Read next'>Read next</a>
+</li>
+</ul><div>
+    </div>
+</li>
+
+
+            </ul>
+        </div>
+    </nav>
+    
+    
+    
+    <div class="container">
+    <div class="row mt-5">
+      <div class="col-lg-8 mx-auto"> 
+        <h1 class="display-5">How to write a command-line interface </h1>
+        <div class="text-right">27 Dec 2018</div>
+      </div>
+    </div>
+    <div class="row mt-5">
+    <article class="col-lg-8 mx-auto">
+    <p>A command-line call is usually composed of the program name followed by a list of arguments.</p>
+<p>For instance, on linux the command <code>find .</code> will display a listing of all the files and folders in the current directory and its subdirectories. But if your pass the argument <code>-type f</code>, it will only display files and if you pass the argument <code>-type d</code> it will only display directories. This is illustrated on the screenshot below:</p>
+<p><img class="img-fluid rounded" src="images/python-cli/cli-demo.png"></p>
+<p>The set of arguments that you can pass to a program constitutes its Command-Line Interface (CLI). In this article, I will explain how to create a command-line interface for your python scripts.</p>
+<h2 id="the-argument-vector">The argument vector</h2>
+<p>Before writing a command-line program, it's important to understand how the operating system calls your program. On Linux systems, all command-line programs are given an <strong>argument vector</strong> at launch time that contains the name of the program (first element or the vector), and the arguments of the program (the remaining elements of the vector). This argument vector is typically denoted <code>argv</code> and is readable from the command-line program. In python, the argument vector is accessible through the <code>sys.argv</code> array.</p>
+<p>So, when you run a python script with command-line arguments:</p>
+<div class="hll"><pre><span></span>$ python3 myscript.py -i inputfile -o outputfile
+</pre></div>
+
+
+<p>Each word in the command string is put inside the <code>sys.argv</code> array:</p>
+<div class="hll"><pre><span></span><span class="c1"># myscript.py</span>
+
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;Name of the script:&quot;</span><span class="p">,</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;Number of arguments:&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;The arguments are:&quot;</span> <span class="p">,</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">)</span>
+</pre></div>
+
+
+<p>Which prints:</p>
+<div class="hll"><pre><span></span>$ python3 myscript.py -i inputfile -o outputfile
+Name of the script: myscript.py
+Number of arguments: <span class="m">5</span>
+The arguments are: <span class="o">[</span><span class="s1">&#39;myscript.py&#39;</span>, <span class="s1">&#39;-i&#39;</span>, <span class="s1">&#39;inputfile&#39;</span>, <span class="s1">&#39;-o&#39;</span>, <span class="s1">&#39;outputfile&#39;</span><span class="o">]</span>
+</pre></div>
+
+
+<p>Python has great libraries to design advanced command-line interfaces with very little custom code needed, so we won't need to access this array directly.</p>
+<h2 id="how-to-write-a-cli-in-python">How to write a CLI in python?</h2>
+<p>The <a href="https://click.palletsprojects.com">click library</a> (Comand Line Interface Creation Kit) offers a very convenient syntax to parse and dispatch the command-line arguments.</p>
+<p>It is a beautiful python library with excellent documentation. When I read the doc, I felt like the author really cared about crafting a high quality tool. You can install it with:</p>
+<div class="hll"><pre><span></span>pip install click
+</pre></div>
+
+
+<p>You might have heard about other libraries such as <code>argparse</code> or <code>docopt</code>. My favorite is <code>click</code> and if you want to see how they compare, check out: <a href="https://click.palletsprojects.com/en/7.x/why/">why click?</a></p>
+<p>Suppose that our script can be called with the following syntax:</p>
+<div class="hll"><pre><span></span>$ python3 myscript.py -i inputfile -o outputfile
+</pre></div>
+
+
+<p>The corresponding python code is:</p>
+<div class="hll"><pre><span></span><span class="kn">import</span> <span class="nn">click</span>
+
+<span class="nd">@click.command</span><span class="p">()</span>
+<span class="nd">@click.option</span><span class="p">(</span><span class="s1">&#39;-i&#39;</span><span class="p">,</span> <span class="s1">&#39;--input&#39;</span><span class="p">)</span>
+<span class="nd">@click.option</span><span class="p">(</span><span class="s1">&#39;-o&#39;</span><span class="p">,</span> <span class="s1">&#39;--output&#39;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">cli</span><span class="p">(</span><span class="nb">input</span><span class="p">,</span> <span class="n">output</span><span class="p">):</span>
+    <span class="k">print</span><span class="p">(</span><span class="nb">input</span><span class="p">,</span> <span class="n">output</span><span class="p">)</span>
+
+<span class="n">cli</span><span class="p">()</span>
+</pre></div>
+
+
+<p>Click will automatically generate the code needed to parse the command-line arguments, add error-handling, and call the <code>cli</code> function with their values.</p>
+<p>Since I used the <code>option</code> decorator, we can call the script without the arguments, in which case <code>click</code> will call our <code>cli(..)</code> function with <code>None</code>.</p>
+<p>Here's a non-exhaustive list of all the things <code>click</code> can do for us:</p>
+<ul>
+<li>Validate the <a href="https://click.palletsprojects.com/en/7.x/parameters/#parameter-types">parameters type</a> (e.g. ensure a filename is valid)</li>
+<li>Add <a href="https://click.palletsprojects.com/en/7.x/options/#basic-value-options">default values</a> for optional parameters</li>
+<li><a href="https://click.palletsprojects.com/en/7.x/options/#counting">Count</a> the number of times a given option is used (e.g. <code>-v</code>, <code>-vv</code>)</li>
+<li>Add <a href="https://click.palletsprojects.com/en/7.x/options/#boolean-flags">boolean flag options</a></li>
+<li>Fetch values from <a href="https://click.palletsprojects.com/en/7.x/options/#values-from-environment-variables">environment variables</a></li>
+<li>Automatically generate a help text (see next section)</li>
+</ul>
+<p>I advise to read <a href="https://click.palletsprojects.com">the documentation</a> which is very well-writen. To see how you can use <code>click</code> with a complex application, check out the <a href="https://click.palletsprojects.com/en/7.x/complex/#complex-applications">complex application</a> chapter.</p>
+<h2 id="good-practices-and-conventions">Good practices and conventions</h2>
+<p>Experienced users of the command-line will expect your script to use the common conventions. Here are the most important ones:</p>
+<ol>
+<li>Arguments that start with a dash (<code>-</code>) are optional.</li>
+<li>Required arguments may be positional (see click's <a href="https://click.palletsprojects.com/en/7.x/arguments/">argument</a>).</li>
+<li>Options have full names prefixed with double-dashes (<code>--input</code>) and common options have shortcuts (<code>-i</code>) with only one dash.</li>
+<li>All programs should support two standard options: <code>--version</code> and <code>--help</code>: version simply prints the version to <code>stdout</code> and help displays a help text to explain which arguments are understood by the script.</li>
+<li>Use the <code>--verbose</code> or <code>-v</code> flags to give users the option to have more runtime information. You can trigger several levels through <code>-v</code>, <code>-vv</code>, <code>-vvv</code>, etc. (see click's <a href="https://click.palletsprojects.com/en/7.x/options/#counting">counting</a>).</li>
+</ol>
+<p>We will see in the next section how to design a great help text. Meanwhile, here is what a version looks like:</p>
+<div class="hll"><pre><span></span>$ python --version
+python 3.6.7
+</pre></div>
+
+
+<p>For more info, see these links: <a href="https://www.gnu.org/prep/standards/html_node/Command_002dLine-Interfaces.html">gnu1</a>, <a href="https://www.gnu.org/software/libc/manual/html_node/Argument-Syntax.html">gnu2</a>.</p>
+<h2 id="design-a-great-help-text">Design a great help text</h2>
+<p>A great command-line tool should explain how it can be used, and what arguments are understood.</p>
+<p>Click automatically generates the help text for us. Without any additional information, here is what the help text for our previous script looks like:</p>
+<div class="hll"><pre><span></span>$ python3 test.py --help
+Usage: test.py [OPTIONS]
+
+Options:
+  -i, --input TEXT
+  -o, --output TEXT
+  --help             Show this message and exit.
+</pre></div>
+
+
+<p>We can make it more informative by adding documentation to our code:</p>
+<div class="hll"><pre><span></span>import click
+
+@click.command()
+@click.option(&#39;-i&#39;, &#39;--input&#39;,  help=&quot;Any string.&quot;)
+@click.option(&#39;-o&#39;, &#39;--output&#39;, help=&quot;Any string.&quot;)
+def cli(input, output):
+    &quot;&quot;&quot;Prints the content of [INPUT] and [OUTPUT] to stdout&quot;&quot;&quot;
+    print(input, output)
+
+cli()
+</pre></div>
+
+
+<p>And here's the corresponding help text:</p>
+<div class="hll"><pre><span></span>$ python3 test.py --help
+Usage: test.py [OPTIONS]
+
+  prints the content of [INPUT] and [OUTPUT] to stdout
+
+Options:
+  -i, --input TEXT   Any string.
+  -o, --output TEXT  Any string.
+  --help             Show this message and exit.
+</pre></div>
+
+
+<h2 id="enable-auto-completion-to-improve-user-experience">Enable auto-completion to improve user-experience</h2>
+<p>A great feature of the terminal is the ability to autocomplete partially-typed filenames and commands.</p>
+<p>You can instruct click to auto-complete the arguments of your script. Here is the <a href="http://click.palletsprojects.com/en/7.x/bashcomplete/">relevant documentation</a>.</p>
+<p>And if you want to learn more about the completion mechanism outside of click, head to my article about <a href="bash-completion.html">bash completion</a>.</p>
+<h2 id="how-to-structure-your-code">How to structure your code?</h2>
+<p>When crafting a command-line interface, it is important to separate the core functionality of your application, and the code for the interface itself. A good practice is to write all your logic as a python module, for instance <code>myscraper_lib</code>, that can be imported.</p>
+<p>Once you have your custom module, you can import it into an iPython shell for debugging, into your unit tests, or into the command-line interface script. That way, you can always access your code through raw python, and you are not forced to use the command-line interface.</p>
+<p>Here's how a click interface would look like with such approach:</p>
+<div class="hll-title"><span class="filename">myscraper_cli </span> <div class="hll"><pre><span></span>import myscraper_lib as core
+import click
+
+@click.command()
+# ...
+def command1(arg1, arg2):
+    core.do_stuff_1(arg1, arg2)
+
+@click.command()
+# ...
+def command2(arg1):
+    core.do_other_stuff(arg1)
+
+# etc.
+</pre></div>
+ </div>
+
+<p>If you're not sure why it is important to separate the <em>core</em> code from the <em>interface</em> code, you can peak into the latest talk of James Powell at PyData L.A. 2018: <a href="https://www.youtube.com/watch?v=mr2SE_drU5o&amp;feature=youtu.be&amp;t=2817">Help! I Just Inherited 50,000 Lines of Code!</a></p>
+<h2 id="read-next">Read next</h2>
+<p>This article is the first chapter of my <a href="python-cli.html">complete guide to command-line tools in python</a>.</p>
+<p>Next chapter: <a href="python-cli-streams.html">How and when to use <code>stdout</code> and <code>stderr</code> in python</a>.</p>
+    </article>
+    </div><!-- row -->
+    
+    <div class="row mt-1">
+      <article class="col-lg-8 mx-auto recommendations">
+        <p class='title'>Other articles you might like:</p>
+        <ul>
+          
+            <li class="en"><img class="flag-icon" src="//julienharbulot.com/images/languages/en.png"> <a href="//julienharbulot.com/python-signals.html">How to hangle signals in python?</a></li>
+          
+            <li class="en"><img class="flag-icon" src="//julienharbulot.com/images/languages/en.png"> <a href="//julienharbulot.com/selenium.html">Web scraping with selenium</a></li>
+          
+            <li class="en"><img class="flag-icon" src="//julienharbulot.com/images/languages/en.png"> <a href="//julienharbulot.com/win-extend-screen.html">Keyboard shortcut and command line utility to switch display (Windows)</a></li>
+          
+            <li class="en"><img class="flag-icon" src="//julienharbulot.com/images/languages/en.png"> <a href="//julienharbulot.com/gradient-descent.html">What is gradient descent (GD)?</a></li>
+          
+        </ul>
+      </article>
+    </div>
+    
+    
+    <div class="row mb=5 mt-5">
+      <article class="col-lg-8 mx-auto">
+        <div id="hyvor-talk-view"></div>
+        <script type="text/javascript">
+            var HYVOR_TALK_WEBSITE = '625';
+            var HYVOR_TALK_CONFIG = {
+                url: 'python-cli-interface.html',
+                id: 'python-cli-interface.html'
+            };
+        </script>
+      </article>
+    </div><!-- row -->
+    
+    <footer class="row">
+        <div class="col-lg-8 mx-auto text-center">
+          <p><small>
+          
+            Last updated: 01/14/21 <br/>
+          
+          
+          Copyright &copy; 2021 Julien Harbulot
+          </small></p>
+        </div>
+    </footer>
+    </div>
+
+  <script>
+  // bootstrap table
+  tables = document.getElementsByTagName('table');
+  for (i = 0; i < tables.length; i++) {
+    tables[i].classList.add('table');
+    tables[i].classList.add('table-bordered');
+  }
+
+  // Paragraphs that contain only images are marked with custom class for styling
+  ps = document.getElementsByTagName('p');
+  Array.from(ps).forEach(function(p){
+    if (p.getElementsByTagName('img').length > 0 && p.textContent.trim().length == 0) {
+        p.classList.add('img-container');
+    }
+  });
+  </script>
+
+
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script>
+        prev_onload_a = window.onload;
+        window.onload = function() {
+            if (prev_onload_a) {
+                prev_onload_a();
+            }
+            var navlinks = document.getElementsByClassName("nav-link");
+            var i;
+            for (i = 0; i < navlinks.length; i++) {
+                const target = new URL(navlinks[i].href)
+                if (location.pathname == target.pathname) {
+                    navlinks[i].classList.add('active')
+                }
+            }
+        }
+    </script>    
+
+    
+
+<script async type="text/javascript" src="//talk.hyvor.com/web-api/embed"></script>
+
+
+    </body>
+</html>

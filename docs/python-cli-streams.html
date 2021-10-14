@@ -1,0 +1,441 @@
+<!doctype html>
+<html lang="en">
+    <head>
+    
+
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-166292985-1"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-166292985-1');
+    </script>
+    
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" 
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+          rel="stylesheet" crossorigin="anonymous">
+    
+    <link rel="stylesheet" href="/theme/pygment-github.css">
+    <link rel="stylesheet" href="/theme/article.css"> 
+
+    <title>How and when to use stdout and stderr?</title>
+    
+    <!-- Favicon -->
+    <link rel="apple-touch-icon" sizes="120x120" href="/images/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon/favicon-16x16.png">
+    <link rel="manifest" href="/images/favicon/site.webmanifest">
+    <link rel="mask-icon" href="/images/favicon/safari-pinned-tab.svg" color="#5bbad5">
+    <link rel="shortcut icon" href="favicon.ico">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="msapplication-config" content="/images/favicon/browserconfig.xml">
+    <meta name="theme-color" content="#ffffff">
+    
+<!-- Mathjax -->
+<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS_SVG">
+  MathJax.Hub.Config({
+    tex2jax: {
+    	inlineMath: [ ['$','$'] ],
+    	processEscapes: true
+    },
+	"HTML-CSS": {
+		fonts: ["TeX"] 
+	}
+  });
+</script>
+
+    </head>
+
+    <body>
+    
+    <nav class="navbar navbar-expand-lg navbar-light ">
+        <a class="navbar-brand" href="//julienharbulot.com/index.html"><img src="//julienharbulot.com/images/logo.png" width="30" alt=""></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+            
+            <li class="nav-item">
+                    <a class="nav-link" href="//julienharbulot.com/technical-blog.html">Technical blog</a>
+            </li>
+            
+            <li class="nav-item">
+                    <a class="nav-link" href="//julienharbulot.com/maths.html">Maths</a>
+            </li>
+            
+            <li class="nav-item">
+                    <a class="nav-link" href="//julienharbulot.com/projects.html">Projects</a>
+            </li>
+            
+            <li class="nav-item">
+                    <a class="nav-link" href="//julienharbulot.com/research.html">Research</a>
+            </li>
+            
+            <!--<li class="nav-item">
+                <a class="nav-link" href="//julienharbulot.com/about-me.html">About me</a>
+            </li>-->
+            
+
+<li class="nav-item dropdown">
+    <a class="nav-link active dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Table of content
+    </a>
+    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+        <div class="toc"><ul>
+<li class="toc-entry-1">
+<a class='toc-href dropdown-item' href='#standard-output-vs-error' title='Standard output vs error'>Standard output vs error</a>
+    <ul>
+<li class="toc-entry-2">
+    <a class='toc-href dropdown-item' href='#pipelines-and-the-unix-philosopy' title='Pipelines and the unix philosopy'>Pipelines and the unix philosopy</a>
+    </li>
+<li class="toc-entry-2">
+    <a class='toc-href dropdown-item' href='#inspecting-finds-output-streams' title='Inspecting find's output streams'>Inspecting find's output streams</a>
+    </li>
+    </ul>
+</li>
+<div class="dropdown-divider"></div>
+<li class="toc-entry-1">
+<a class='toc-href dropdown-item' href='#how-to-use-stderr-in-python' title='How to use <code>stderr</code> in python?'>How to use <code>stderr</code> in python?</a>
+    <ul>
+<li class="toc-entry-2">
+    <a class='toc-href dropdown-item' href='#beyond-simple-usage' title='Beyond simple usage'>Beyond simple usage</a>
+    </li>
+    </ul>
+</li>
+<div class="dropdown-divider"></div>
+<li class="toc-entry-1">
+<a class='toc-href dropdown-item' href='#only-use-print-for-the-main-output' title='Only use <code>print</code> for the main output'>Only use <code>print</code> for the main output</a>
+</li>
+<div class="dropdown-divider"></div>
+<li class="toc-entry-1">
+<a class='toc-href dropdown-item' href='#improve-terminal-experience' title='Improve terminal experience'>Improve terminal experience</a>
+    <ul>
+<li class="toc-entry-2">
+    <a class='toc-href dropdown-item' href='#securely-prompt-for-passwords' title='Securely prompt for passwords'>Securely prompt for passwords</a>
+    </li>
+<li class="toc-entry-2">
+    <a class='toc-href dropdown-item' href='#output-colored-text' title='Output colored text'>Output colored text</a>
+    </li>
+<li class="toc-entry-2">
+    <a class='toc-href dropdown-item' href='#display-dynamic-progress-bars' title='Display dynamic progress bars'>Display dynamic progress bars</a>
+    </li>
+    </ul>
+</li>
+<div class="dropdown-divider"></div>
+<li class="toc-entry-1">
+<a class='toc-href dropdown-item' href='#read-next' title='Read next'>Read next</a>
+</li>
+</ul><div>
+    </div>
+</li>
+
+
+            </ul>
+        </div>
+    </nav>
+    
+    
+    
+    <div class="container">
+    <div class="row mt-5">
+      <div class="col-lg-8 mx-auto"> 
+        <h1 class="display-5">How and when to use stdout and stderr? </h1>
+        <div class="text-right">27 Dec 2018</div>
+      </div>
+    </div>
+    <div class="row mt-5">
+    <article class="col-lg-8 mx-auto">
+    <p>Every program can output text to two standard streams: standard output (<code>stdout</code>) and standard error (<code>stderr</code>).</p>
+<p>In this article, I will explain what these streams are designed for, and how to use them properly in python.</p>
+<h2 id="standard-output-vs-error">Standard output vs error</h2>
+<p><em>Standard output</em> is where your script main's output should go. For instance, the command <code>ls</code> is responsible for listing the content of a directory. This listing goes to <code>stdout</code>.</p>
+<p><em>Standard error</em> is where debugging information and errors should go. The name is a bit misleading because you can use it to display runtime informations and not only errors.</p>
+<p>By default both streams are printed to the terminal and it doesn't seem like using one or the other makes a difference. This difference becomes apparent when using pipelines.</p>
+<h3 id="pipelines-and-the-unix-philosopy">Pipelines and the unix philosopy</h3>
+<p>To understand the importance of pipelines, we must go back to the original unix philosophy:</p>
+<blockquote>
+<p>Write programs that do one thing and do it well.</p>
+<p>Write programs to work together.</p>
+<p>Write programs to handle text streams, because that is a universal interface.</p>
+<p>-- Peter H. Salus, A Quarter-Century of Unix (1994)</p>
+</blockquote>
+<p>The unix philosophy is to craft small scripts that do one thing well, and chain them with other scripts to do bigger things. The main tool to this end is to use pipes, which allow to send the output of one program as input to another.</p>
+<p>For instance, if you want to display a listing of the current directory, you can use the <code>ls</code> command:</p>
+<div class="hll"><pre><span></span>$ ls
+http-scripting.tips
+script.py
+index.html
+</pre></div>
+
+
+<p>If you further want to filter this listing and keep only the python files, you can pipe its output into <code>grep</code>:</p>
+<div class="hll"><pre><span></span>$ ls | grep .py
+script.py
+</pre></div>
+
+
+<p>And this is where the distinction between <code>stderr</code> and <code>stdout</code> matters: the pipe will forward <code>stdout</code> of <code>ls</code> to the input of <code>grep</code>. Meanwhile, <code>stderr</code> is not piped and still displayed to the terminal screen.</p>
+<p>Another common usage is to pipe <code>stdout</code> or <code>stderr</code> to files. Piping <code>stdout</code> can be achieved with the <code>&gt;</code> operator, and piping <code>stderr</code> can be achieved with the <code>2&gt;</code> operator:</p>
+<div class="hll"><pre><span></span>$ ls  &gt; stdout.txt
+$ ls 2&gt; stderr.txt
+</pre></div>
+
+
+<p>We can use these pipes to make sure that an executable prints to the correct stream.</p>
+<h3 id="inspecting-finds-output-streams">Inspecting find's output streams</h3>
+<p>The command <code>find</code> prints a listing of the current directory and its subdirectories. Let's verify that is uses <code>stdout</code> and <code>stderr</code> like it should.</p>
+<p>In the screenshot below, <code>find</code> is unable to read the content of the folder <code>secret/</code>. Using pipes, I show that the listing is printed to <code>stdout</code> and the error to <code>stderr</code>:</p>
+<p><img class="img-fluid rounded" src="images/python-cli/pipe-demo.png"></p>
+<p>On the screenshot, I ran three commands. The first command is:</p>
+<div class="hll"><pre><span></span>find . -type f
+</pre></div>
+
+
+<p>which prints both the listing and the error to the terminal screen.</p>
+<p>The second command is:</p>
+<div class="hll"><pre><span></span>find . -type f &gt; piped-stdout.txt
+</pre></div>
+
+
+<p>And we can see that now, only the error is displayed to the screen. That is because the content of <code>stdout</code> is sent to the file <code>piped-stdout.txt</code>. The third command is:</p>
+<div class="hll"><pre><span></span>find . -type f 2&gt; piped-stderr.txt
+</pre></div>
+
+
+<p>And this time we can see the listing but not the error. This is because <code>stderr</code> was sent to the file <code>piped-stderr.txt</code>.</p>
+<h2 id="how-to-use-stderr-in-python">How to use <code>stderr</code> in python?</h2>
+<p>Displaying runtime information, debug, warnings and errors is done in python through the standard <a href="https://docs.python.org/3/library/logging.html">logging</a> module. This module will output to <code>stderr</code> by default, as it should.</p>
+<p><code>logging</code> can do a lot, so I advise to go through the documentation. But if you just want a quick way to output stuff on <code>stderr</code>, use the <code>logging.xxx</code> approach. For instance:</p>
+<div class="hll"><pre><span></span>import logging as log
+
+def download(url):
+    log.debug(f&#39;downloading {url}&#39;)
+    needed_space = space_for(url)
+    if disk_space &lt; needed_space:
+        log.error(&#39;Unable to download {url}: not enough memory&#39;)
+    elif disk_space - needed_space &lt; threshold:
+        log.warning(&#39;Low disk space after download&#39;)
+    #...
+</pre></div>
+
+
+<p>You can output information at different levels:</p>
+<div class="hll"><pre><span></span>import logging
+logging.debug(f&#39;starting iteration {i}/{n}, value is {value}&#39;)
+logging.info(f&#39;download finished&#39;)
+logging.warning(f&#39;low disk space&#39;)
+logging.error(f&#39;program cannot do this&#39;)
+logging.critical(f&#39;program cannot recover and stops now&#39;)
+</pre></div>
+
+
+<p>And then choose which level to display:</p>
+<div class="hll"><pre><span></span><span class="kn">import</span> <span class="nn">logging</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="c1"># display DEBUG and everything above:</span>
+    <span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">DEBUG</span><span class="p">)</span>
+
+    <span class="c1"># only display WARNING and above (ERROR, CRITICAL):</span>
+    <span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">WARNING</span><span class="p">)</span>
+</pre></div>
+
+
+<p>Thanks to the <a href="https://click-log.readthedocs.io/en/stable/">click-log library</a>, the boiler-plate for this configuration can be automated — assuming you use the <code>click</code> library to craft your command-line interface.</p>
+<p>See also: <a href="python-cli-interface.html">how to craft beautiful command-line interfaces</a>.</p>
+<h4 id="beyond-simple-usage">Beyond simple usage</h4>
+<ul>
+<li><a href="https://docs.python.org/3/library/logging.html#logger-objects">loggers</a>: create several loggers with different output levels</li>
+<li><a href="https://docs.python.org/3/howto/logging.html#formatters">formatters</a>: automatically format your messages</li>
+<li><a href="https://docs.python.org/3/howto/logging.html#handler-basic">handlers</a>: redirect logging output to console/file/email/other</li>
+</ul>
+<h2 id="only-use-print-for-the-main-output">Only use <code>print</code> for the main output</h2>
+<p>If your script communicates its output through text, you should use <code>stdout</code> to print this output. Users can use pipes to save this output to a file, or you can accept an optional <code>-o</code> argument.</p>
+<p>Everything else should be written to <code>stderr</code> using the <code>logging</code> module.</p>
+<h2 id="improve-terminal-experience">Improve terminal experience</h2>
+<p>When <code>stderr</code> and <code>stdout</code> are printed to the terminal, it is a good idea to embelish your text for human readability.</p>
+<p>Always remember that both <code>stdout</code> and <code>stderr</code> could be piped to files. In this case, colors and other visual artefacts should be stripped so that ANSI escape codes do not pollute the files.</p>
+<p>Luckily, we won't have to worry about this when using the proper libraries.</p>
+<h3 id="securely-prompt-for-passwords">Securely prompt for passwords</h3>
+<p>A password prompt should not display the password that is being entered. And the prompt should be displayed neither on <code>stdout</code>, nor on <code>stderr</code>, so that the user can enter his/her password even when the output streams are piped.</p>
+<p>To do so, there is a module named <a href="https://docs.python.org/3/library/getpass.html">getpass</a> in the standard library:</p>
+<div class="hll-title"><span class="filename">test.py </span> <div class="hll"><pre><span></span>from getpass import getpass
+
+password = getpass()
+</pre></div>
+ </div>
+
+<p>We can make sure that the prompt is not printed on <code>stdout</code> and <code>stderr</code> by piping both to file:</p>
+<div class="hll"><pre><span></span>$ python3 test.py &gt; out.txt 2&gt; err.txt
+Password:
+</pre></div>
+
+
+<p>Note: the <code>click</code> library also has functions to prompt for passwords, however you should <em>not</em> use it. <code>click</code> prints the prompt to <code>stdout</code>, which is bad practice. There is an <a href="https://github.com/pallets/click/issues/300">open issue</a> about this on their bug tracker.</p>
+<h3 id="output-colored-text">Output colored text</h3>
+<p>To color text in a Windows terminal, we can use ANSI escape codes. However, these escape codes should be stripped when the output stream is piped into an other program or a file, and they are not recognized natively on Windows.</p>
+<p>Luckily, the <a href="https://github.com/tartley/colorama">colorama library</a> handles these caveats and can color terminal output in a cross-platform way. Install it with:</p>
+<div class="hll"><pre><span></span>pip install colorama
+</pre></div>
+
+
+<p>And here's how to use it (for instance, using <code>print</code>, but it works with <code>logging</code> too!):</p>
+<div class="hll"><pre><span></span>import colorama
+from colorama import Fore, Back, Style
+
+# Init once at startup to detect the platform (Windows, osx, etc.)
+colorama.init()
+
+print(Fore.RED + &#39;some red text&#39;)
+print(Back.GREEN + &#39;and with a green background&#39;)
+print(Style.DIM + &#39;and in dim text&#39;)
+print(Style.RESET_ALL)
+print(&#39;back to normal now&#39;)
+</pre></div>
+
+
+<p>By default, colorama adopts the same behavior as escape codes, so each color must be explicitely reset.</p>
+<p>The <a href="https://pypi.org/project/termcolor/">termcolor library</a> provides an interface that is easier to use, and integrates perfectly with colorama. Here is an example using <code>logging</code> this time:</p>
+<div class="hll"><pre><span></span>from colorama import init
+from termcolor import colored
+import logging as log
+log.basicConfig(level=log.INFO)
+
+# use Colorama to make Termcolor work on Windows too
+init()
+
+# then use Termcolor for all colored text output
+log.info(colored(&#39;Hello, World!&#39;, &#39;green&#39;))
+</pre></div>
+
+
+<p>Remember that by changing the default formatter for your logs, you can add colors automatically.</p>
+<h3 id="display-dynamic-progress-bars">Display dynamic progress bars</h3>
+<p>An application should be quiet by default and only print important warning and errors. This is the zen of unix.</p>
+<p>But when your application spends a large amount of time performing a task, it is a good idea to accept an input parameter such as <code>-v</code> or <code>--verbose</code> and update the user regularly with the status of your script.</p>
+<p>To display progress bars, which are useful when downloading large files for instance, I advise to use <a href="https://pypi.org/project/tqdm/">Tqdm</a> which is <em>the</em> python library to display dynamic progress bars.</p>
+<p>And as you can expect from a well-designed tool: it prints to <code>stderr</code> by default.</p>
+<p>Here is what the doc says:</p>
+<blockquote>
+<p>Overhead is low – about 60ns per iteration (80ns with tqdm_gui), and is unit tested against performance regression. By comparison, the well-established ProgressBar has an 800ns/iter overhead.</p>
+<p>In addition to its low overhead, tqdm uses smart algorithms to predict the remaining time and to skip unnecessary iteration displays, which allows for a negligible overhead in most cases.</p>
+<p>tqdm works on any platform (Linux, Windows, Mac, FreeBSD, NetBSD, Solaris/SunOS), in any console or in a GUI, and is also friendly with IPython/Jupyter notebooks.</p>
+</blockquote>
+<p>Here's how to use it:</p>
+<div class="hll"><pre><span></span><span class="kn">from</span> <span class="nn">tqdm</span> <span class="kn">import</span> <span class="n">tqdm</span>  <span class="c1"># pip install tqdm</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">tqdm</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">10000</span><span class="p">)):</span>
+    <span class="k">pass</span>
+</pre></div>
+
+
+<p>And here's the output:</p>
+<p><img class="img-fluid rounded" src="images/python-cli/tqdm.gif"></p>
+<p>Another option is Click, which has a function to display <a href="http://click.palletsprojects.com/en/7.x/api/#click.progressbar">progress bars</a>. It prints to stdout by default, so remember to pass the argument <code>file=sys.stderr</code> to fix it.</p>
+<h2 id="read-next">Read next</h2>
+<p>This article is the second chapter of my <a href="python-cli.html">complete guide to command-line tools in python</a>.</p>
+<p>Previous chapter: <a href="python-cli-interface.html">The command-line interface</a>.</p>
+<p>Next chapter: <a href="python-signals.html">Catch and handle signals in python</a>.</p>
+    </article>
+    </div><!-- row -->
+    
+    <div class="row mt-1">
+      <article class="col-lg-8 mx-auto recommendations">
+        <p class='title'>Other articles you might like:</p>
+        <ul>
+          
+            <li class="en"><img class="flag-icon" src="//julienharbulot.com/images/languages/en.png"> <a href="//julienharbulot.com/python-signals.html">How to hangle signals in python?</a></li>
+          
+            <li class="en"><img class="flag-icon" src="//julienharbulot.com/images/languages/en.png"> <a href="//julienharbulot.com/python-cli.html">Complete guide to writing command-line tools</a></li>
+          
+            <li class="en"><img class="flag-icon" src="//julienharbulot.com/images/languages/en.png"> <a href="//julienharbulot.com/win-extend-screen.html">Keyboard shortcut and command line utility to switch display (Windows)</a></li>
+          
+            <li class="en"><img class="flag-icon" src="//julienharbulot.com/images/languages/en.png"> <a href="//julienharbulot.com/target-variable.html">What is a target value?</a></li>
+          
+        </ul>
+      </article>
+    </div>
+    
+    
+    <div class="row mb=5 mt-5">
+      <article class="col-lg-8 mx-auto">
+        <div id="hyvor-talk-view"></div>
+        <script type="text/javascript">
+            var HYVOR_TALK_WEBSITE = '625';
+            var HYVOR_TALK_CONFIG = {
+                url: 'python-cli-streams.html',
+                id: 'python-cli-streams.html'
+            };
+        </script>
+      </article>
+    </div><!-- row -->
+    
+    <footer class="row">
+        <div class="col-lg-8 mx-auto text-center">
+          <p><small>
+          
+            Last updated: 01/14/21 <br/>
+          
+          
+          Copyright &copy; 2021 Julien Harbulot
+          </small></p>
+        </div>
+    </footer>
+    </div>
+
+  <script>
+  // bootstrap table
+  tables = document.getElementsByTagName('table');
+  for (i = 0; i < tables.length; i++) {
+    tables[i].classList.add('table');
+    tables[i].classList.add('table-bordered');
+  }
+
+  // Paragraphs that contain only images are marked with custom class for styling
+  ps = document.getElementsByTagName('p');
+  Array.from(ps).forEach(function(p){
+    if (p.getElementsByTagName('img').length > 0 && p.textContent.trim().length == 0) {
+        p.classList.add('img-container');
+    }
+  });
+  </script>
+
+
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script>
+        prev_onload_a = window.onload;
+        window.onload = function() {
+            if (prev_onload_a) {
+                prev_onload_a();
+            }
+            var navlinks = document.getElementsByClassName("nav-link");
+            var i;
+            for (i = 0; i < navlinks.length; i++) {
+                const target = new URL(navlinks[i].href)
+                if (location.pathname == target.pathname) {
+                    navlinks[i].classList.add('active')
+                }
+            }
+        }
+    </script>    
+
+    
+
+<script async type="text/javascript" src="//talk.hyvor.com/web-api/embed"></script>
+
+
+    </body>
+</html>

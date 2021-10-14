@@ -1,0 +1,364 @@
+<!doctype html>
+<html lang="en">
+    <head>
+    
+
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-166292985-1"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-166292985-1');
+    </script>
+    
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" 
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+          rel="stylesheet" crossorigin="anonymous">
+    
+    <link rel="stylesheet" href="/theme/pygment-github.css">
+    <link rel="stylesheet" href="/theme/article.css"> 
+
+    <title>Web scraping with selenium</title>
+    
+    <!-- Favicon -->
+    <link rel="apple-touch-icon" sizes="120x120" href="/images/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon/favicon-16x16.png">
+    <link rel="manifest" href="/images/favicon/site.webmanifest">
+    <link rel="mask-icon" href="/images/favicon/safari-pinned-tab.svg" color="#5bbad5">
+    <link rel="shortcut icon" href="favicon.ico">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="msapplication-config" content="/images/favicon/browserconfig.xml">
+    <meta name="theme-color" content="#ffffff">
+    
+<!-- Mathjax -->
+<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS_SVG">
+  MathJax.Hub.Config({
+    tex2jax: {
+    	inlineMath: [ ['$','$'] ],
+    	processEscapes: true
+    },
+	"HTML-CSS": {
+		fonts: ["TeX"] 
+	}
+  });
+</script>
+
+    </head>
+
+    <body>
+    
+    <nav class="navbar navbar-expand-lg navbar-light ">
+        <a class="navbar-brand" href="//julienharbulot.com/index.html"><img src="//julienharbulot.com/images/logo.png" width="30" alt=""></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+            
+            <li class="nav-item">
+                    <a class="nav-link" href="//julienharbulot.com/technical-blog.html">Technical blog</a>
+            </li>
+            
+            <li class="nav-item">
+                    <a class="nav-link" href="//julienharbulot.com/maths.html">Maths</a>
+            </li>
+            
+            <li class="nav-item">
+                    <a class="nav-link" href="//julienharbulot.com/projects.html">Projects</a>
+            </li>
+            
+            <li class="nav-item">
+                    <a class="nav-link" href="//julienharbulot.com/research.html">Research</a>
+            </li>
+            
+            <!--<li class="nav-item">
+                <a class="nav-link" href="//julienharbulot.com/about-me.html">About me</a>
+            </li>-->
+            
+
+<li class="nav-item dropdown">
+    <a class="nav-link active dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Table of content
+    </a>
+    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+        <div class="toc"><ul>
+<li class="toc-entry-1">
+<a class='toc-href dropdown-item' href='#quick-introduction-to-selenium' title='Quick introduction to Selenium'>Quick introduction to Selenium</a>
+</li>
+<div class="dropdown-divider"></div>
+<li class="toc-entry-1">
+<a class='toc-href dropdown-item' href='#scraping-an-online-app' title='Scraping an online app'>Scraping an online app</a>
+    <ul>
+<li class="toc-entry-2">
+    <a class='toc-href dropdown-item' href='#handling-user-login' title='Handling user login'>Handling user login</a>
+    </li>
+<li class="toc-entry-2">
+    <a class='toc-href dropdown-item' href='#downloading-files' title='Downloading files'>Downloading files</a>
+    </li>
+<li class="toc-entry-2">
+    <a class='toc-href dropdown-item' href='#tips-for-handling-failure' title='Tips for handling failure'>Tips for handling failure</a>
+    </li>
+    </ul>
+</li>
+</ul><div>
+    </div>
+</li>
+
+
+            </ul>
+        </div>
+    </nav>
+    
+    
+    
+    <div class="container">
+    <div class="row mt-5">
+      <div class="col-lg-8 mx-auto"> 
+        <h1 class="display-5">Web scraping with selenium </h1>
+        <div class="text-right">24 Dec 2018</div>
+      </div>
+    </div>
+    <div class="row mt-5">
+    <article class="col-lg-8 mx-auto">
+    <p>My paid membership on an online video platform (a mooc, if you know the word) ends in a few days and I haven't watched all the 1k+ videos, yet. So I decided to write a python script to download them.</p>
+<p>The task is complex because the website checks for user credentials and generates temporary links for each videos on demand. So I need to be able to simulate user activity on the website and then retrieve these unique links somehow to download the videos.</p>
+<p>A simple approach with <code>wget</code> and regexes won't cut it because we need to execute javascript and store cookies. But luckily, we have advanced python libraries such as <code>selenium</code> that allows us to control and automate a real web-browser.</p>
+<p>In this article, I'll share with you the lessons learned while crafting my scraper.</p>
+<div class="toc"><span class="toctitle">Table of contents</span><ul>
+<li><a href="#quick-introduction-to-selenium">Quick introduction to Selenium</a></li>
+<li><a href="#scraping-an-online-app">Scraping an online app</a><ul>
+<li><a href="#handling-user-login">Handling user login</a></li>
+<li><a href="#downloading-files">Downloading files</a></li>
+<li><a href="#tips-for-handling-failure">Tips for handling failure</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<h2 id="quick-introduction-to-selenium">Quick introduction to Selenium</h2>
+<p>Selenium is a library to automate a web-browser. Through drivers, it can be used with any browser. The documentation for the python version of selenium can be found <a href="https://selenium-python.readthedocs.io/">here</a>.</p>
+<p>To use it, you'll first need to download the proper driver and add the binary to your path. I use Google Chrome as browser and the corresponding <a href="https://sites.google.com/a/chromium.org/chromedriver/downloads">chrome driver</a>. </p>
+<p>Then, install selenium using pip:</p>
+<div class="hll"><pre><span></span>pip install selenium
+</pre></div>
+
+
+<p>In your script, create an instance of the browser like this:</p>
+<div class="hll"><pre><span></span><span class="kn">from</span> <span class="nn">selenium</span> <span class="kn">import</span> <span class="n">webdriver</span>
+
+<span class="n">browser</span> <span class="o">=</span> <span class="n">webdriver</span><span class="o">.</span><span class="n">Chrome</span><span class="p">()</span>
+</pre></div>
+
+
+<p>If you want to be able to save state and cookies between successive runs of your script, you need to specify a directory where to store them:</p>
+<div class="hll"><pre><span></span><span class="kn">from</span> <span class="nn">selenium</span> <span class="kn">import</span> <span class="n">webdriver</span>
+
+<span class="n">DIR</span> <span class="o">=</span> <span class="s1">&#39;selenium-data&#39;</span>
+
+<span class="n">options</span> <span class="o">=</span> <span class="n">webdriver</span><span class="o">.</span><span class="n">ChromeOptions</span><span class="p">()</span>
+<span class="n">options</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;user-data-dir=&quot;</span><span class="o">+</span><span class="n">DIR</span><span class="p">)</span>
+<span class="n">browser</span> <span class="o">=</span> <span class="n">webdriver</span><span class="o">.</span><span class="n">Chrome</span><span class="p">(</span><span class="n">options</span><span class="o">=</span><span class="n">options</span><span class="p">)</span>
+</pre></div>
+
+
+<p>There are many more <a href="https://sites.google.com/a/chromium.org/chromedriver/capabilities">available options</a>. For instance, if you don't want the browser's window to show up, use the headless mode:</p>
+<div class="hll"><pre><span></span><span class="c1"># ...</span>
+<span class="n">options</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;headless&#39;</span><span class="p">)</span>
+<span class="n">browser</span> <span class="o">=</span> <span class="n">webdriver</span><span class="o">.</span><span class="n">Chrome</span><span class="p">(</span><span class="n">options</span><span class="o">=</span><span class="n">options</span><span class="p">)</span>
+</pre></div>
+
+
+<p>Then, you can access a webpage using the <code>get</code> method:</p>
+<div class="hll"><pre><span></span><span class="n">browser</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;https://scripting.tips/&#39;</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">browser</span><span class="o">.</span><span class="n">current_url</span><span class="p">)</span>
+</pre></div>
+
+
+<p>Selenium has a nice <a href="https://selenium-python.readthedocs.io/locating-elements.html">API to locate elements</a> on a webpage. For instance, here's how you find all links:</p>
+<div class="hll"><pre><span></span><span class="n">links</span> <span class="o">=</span> <span class="n">browser</span><span class="o">.</span><span class="n">find_elements_by_tag_name</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">link</span> <span class="ow">in</span> <span class="n">links</span><span class="p">:</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="n">link</span><span class="o">.</span><span class="n">text</span>
+    <span class="n">url</span> <span class="o">=</span> <span class="n">link</span><span class="o">.</span><span class="n">get_attribute</span><span class="p">(</span><span class="s1">&#39;href&#39;</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;&quot;{text}&quot;: {url}&#39;</span><span class="p">)</span>
+</pre></div>
+
+
+<p>You can even find elements by the text they contain:</p>
+<div class="hll"><pre><span></span><span class="n">continue_link</span> <span class="o">=</span> <span class="n">browser</span><span class="o">.</span><span class="n">find_element_by_link_text</span><span class="p">(</span><span class="s1">&#39;Continue&#39;</span><span class="p">)</span>
+<span class="n">continue_link</span> <span class="o">=</span> <span class="n">browser</span><span class="o">.</span><span class="n">find_element_by_partial_link_text</span><span class="p">(</span><span class="s1">&#39;Conti&#39;</span><span class="p">)</span>
+</pre></div>
+
+
+<h2 id="scraping-an-online-app">Scraping an online app</h2>
+<p>Thinking in terms of a state-machines can greatly simplify the design process.</p>
+<p>An online app is a finite automaton with multiple states (logged-in, not-logged-in, etc.). As a rule of thumb, the scraper needs to have one state for each of the app's states: when it isn't logged-in, it will behave differently than when it is.</p>
+<h3 id="handling-user-login">Handling user login</h3>
+<p>When a script runs for several hours, logging-in once at startup won't cut it: the session might expire after one hour or so and we need to be able to redo the login steps on demand.</p>
+<p>In these cases, I wrap the <code>browser</code> instance to make it so that everytime the website doesn't serve me a member content, I redo the login steps. Here's the gist of it:</p>
+<div class="hll"><pre><span></span><span class="c1"># Instead of browser.get(url), use this:</span>
+
+<span class="k">def</span> <span class="nf">safe_get</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">browser</span><span class="p">):</span>
+    <span class="n">browser</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">must_login</span><span class="p">(</span><span class="n">browser</span><span class="o">.</span><span class="n">current_url</span><span class="p">):</span>
+        <span class="n">login</span><span class="p">(</span><span class="n">browser</span><span class="p">)</span>
+    <span class="n">browser</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">must_login</span><span class="p">(</span><span class="n">browser</span><span class="o">.</span><span class="n">current_url</span><span class="p">):</span>
+        <span class="n">notify</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;Unable to access {url}&#39;</span><span class="p">)</span>
+</pre></div>
+
+
+<p>I have implemented a toy server that randomly logs you out, and a resilient scraper with the behavior described above in <a class="github" href='https://github.com/julien-h/selenium-scraper/tree/c5a8e46283f4b316096f5813e8fd3081554f7cfb'>this repo</a>.</p>
+<h3 id="downloading-files">Downloading files</h3>
+<p>There is no easy and safe way to download files through selenium. You could configure you browser's driver to automatically download files, but this poses security concerns because you can't allow/disallow download on file-per-file basis.</p>
+<p>If you don't need advanced session handling, you can just use <a href="https://docs.python.org/3.7/library/urllib.request.html#urllib.request.urlretrieve">urlretrieve</a> from the standard library:</p>
+<div class="hll"><pre><span></span><span class="kn">from</span> <span class="nn">urllib.request</span> <span class="kn">import</span> <span class="n">urlretrieve</span>
+
+<span class="c1"># Download `url` and save it as `local_filename`</span>
+<span class="n">urlretrieve</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">local_filename</span><span class="p">)</span>
+</pre></div>
+
+
+<p>If you want to use the standard library for more advanced scenarios, you can use <code>urlopen</code> to set custom HTTP headers (as shown in <a href="https://docs.python.org/3.7/library/urllib.request.html#examples">the examples</a>). However, I advise to use the <a href="http://docs.python-requests.org/en/master/">requests library</a> instead. </p>
+<p>For instance, here's how you can reuse selenium's cookies using <code>requests</code>:</p>
+<div class="hll"><pre><span></span><span class="n">form</span> <span class="n">requests</span> <span class="kn">import</span> <span class="nn">get</span>  <span class="c1"># pip install requests</span>
+
+<span class="n">cookies</span> <span class="o">=</span> <span class="n">browser</span><span class="o">.</span><span class="n">get_cookies</span><span class="p">()</span>
+<span class="n">cookies_dict</span> <span class="o">=</span> <span class="p">{</span><span class="n">c</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]:</span> <span class="n">c</span><span class="p">[</span><span class="s1">&#39;value&#39;</span><span class="p">]</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">cookies</span><span class="p">}</span>  
+
+<span class="k">with</span> <span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">stream</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">cookies</span><span class="o">=</span><span class="n">cookies_dict</span><span class="p">)</span> <span class="k">as</span> <span class="n">r</span><span class="p">:</span>
+    <span class="k">assert</span> <span class="n">r</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">200</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">local_filename</span><span class="p">,</span> <span class="s1">&#39;wb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">f</span><span class="o">.</span><span class="n">writelines</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
+</pre></div>
+
+
+<p>(Relevant external links for this snippet: <a href="https://selenium-python.readthedocs.io/api.html?highlight=get_cookies#selenium.webdriver.remote.webdriver.WebDriver.get_cookies">get_cookies</a>, <a href="http://docs.python-requests.org/en/master/user/quickstart/#cookies">requests.cookies</a>, <a href="http://docs.python-requests.org/en/master/user/advanced/#body-content-workflow">stream=True</a>, <a href="https://gist.github.com/ratchetwrench/27786944ddd1036f9cf5b95828221909">other approaches</a>)</p>
+<p>Many variables should be transfered between selenium and requests:</p>
+<ul>
+<li>cookies;</li>
+<li>user-agent;</li>
+<li>referer;</li>
+<li>new cookies after the download.</li>
+</ul>
+<p>I wrote a <code>download(browser, url, filename)</code> function that handles all this. You can find it here: <a class="github" href='https://github.com/julien-h/scripts/blob/master/selenium_tools.py'>My Selenium Tools</a>.</p>
+<h3 id="tips-for-handling-failure">Tips for handling failure</h3>
+<p>To ensure that you detect when a file is not completely downloaded, I suggest to write a small text file after each download. Use this as an occasion to save metadata such as the date, name rating and description of the resource:</p>
+<div class="hll"><pre><span></span><span class="kn">from</span> <span class="nn">os.path</span> <span class="kn">import</span> <span class="n">isfile</span>
+<span class="kn">import</span> <span class="nn">json</span>
+
+<span class="n">data_url</span><span class="p">,</span> <span class="n">data_info</span> <span class="o">=</span> <span class="n">scrape_website</span><span class="p">()</span>
+<span class="n">video_file</span> <span class="o">=</span> <span class="n">data_info</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39;.mp4&#39;</span>
+<span class="n">txt_file</span> <span class="o">=</span> <span class="n">data_info</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39;.txt&#39;</span>
+
+<span class="k">if</span> <span class="ow">not</span> <span class="n">isfile</span><span class="p">(</span><span class="n">txt_file</span><span class="p">):</span>
+    <span class="n">download</span><span class="p">(</span><span class="n">data_url</span><span class="p">,</span> <span class="n">video_file</span><span class="p">)</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">txt_file</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">data_info</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span>
+</pre></div>
+
+
+<p>When the text file does not exist but the video file exists, it means that a previous download was interrupted mid-way.</p>
+<p>See also: <a href="https://stackoverflow.com/questions/4776924/how-to-safely-get-the-file-extension-from-a-url">How to safely get file extension from an url</a>.</p>
+    </article>
+    </div><!-- row -->
+    
+    <div class="row mt-1">
+      <article class="col-lg-8 mx-auto recommendations">
+        <p class='title'>Other articles you might like:</p>
+        <ul>
+          
+            <li class="en"><img class="flag-icon" src="//julienharbulot.com/images/languages/en.png"> <a href="//julienharbulot.com/python-cli-interface.html">How to write a command-line interface</a></li>
+          
+            <li class="en"><img class="flag-icon" src="//julienharbulot.com/images/languages/en.png"> <a href="//julienharbulot.com/mouse-tracker-win32.html">Scripting a mouse tracker on Windows</a></li>
+          
+            <li class="en"><img class="flag-icon" src="//julienharbulot.com/images/languages/en.png"> <a href="//julienharbulot.com/win-extend-screen.html">Keyboard shortcut and command line utility to switch display (Windows)</a></li>
+          
+            <li class="en"><img class="flag-icon" src="//julienharbulot.com/images/languages/en.png"> <a href="//julienharbulot.com/scraping-python-beautifulsoup.html">Scraping with BeautifulSoup</a></li>
+          
+        </ul>
+      </article>
+    </div>
+    
+    
+    <div class="row mb=5 mt-5">
+      <article class="col-lg-8 mx-auto">
+        <div id="hyvor-talk-view"></div>
+        <script type="text/javascript">
+            var HYVOR_TALK_WEBSITE = '625';
+            var HYVOR_TALK_CONFIG = {
+                url: 'selenium.html',
+                id: 'selenium.html'
+            };
+        </script>
+      </article>
+    </div><!-- row -->
+    
+    <footer class="row">
+        <div class="col-lg-8 mx-auto text-center">
+          <p><small>
+          
+            Last updated: 01/14/21 <br/>
+          
+          
+          Copyright &copy; 2021 Julien Harbulot
+          </small></p>
+        </div>
+    </footer>
+    </div>
+
+  <script>
+  // bootstrap table
+  tables = document.getElementsByTagName('table');
+  for (i = 0; i < tables.length; i++) {
+    tables[i].classList.add('table');
+    tables[i].classList.add('table-bordered');
+  }
+
+  // Paragraphs that contain only images are marked with custom class for styling
+  ps = document.getElementsByTagName('p');
+  Array.from(ps).forEach(function(p){
+    if (p.getElementsByTagName('img').length > 0 && p.textContent.trim().length == 0) {
+        p.classList.add('img-container');
+    }
+  });
+  </script>
+
+
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script>
+        prev_onload_a = window.onload;
+        window.onload = function() {
+            if (prev_onload_a) {
+                prev_onload_a();
+            }
+            var navlinks = document.getElementsByClassName("nav-link");
+            var i;
+            for (i = 0; i < navlinks.length; i++) {
+                const target = new URL(navlinks[i].href)
+                if (location.pathname == target.pathname) {
+                    navlinks[i].classList.add('active')
+                }
+            }
+        }
+    </script>    
+
+    
+
+<script async type="text/javascript" src="//talk.hyvor.com/web-api/embed"></script>
+
+
+    </body>
+</html>

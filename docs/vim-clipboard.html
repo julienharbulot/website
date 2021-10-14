@@ -1,0 +1,354 @@
+<!doctype html>
+<html lang="en">
+    <head>
+    
+
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-166292985-1"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-166292985-1');
+    </script>
+    
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" 
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+          rel="stylesheet" crossorigin="anonymous">
+    
+    <link rel="stylesheet" href="/theme/pygment-github.css">
+    <link rel="stylesheet" href="/theme/article.css"> 
+
+    <title>Using Vim as secondary editor</title>
+    
+    <!-- Favicon -->
+    <link rel="apple-touch-icon" sizes="120x120" href="/images/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon/favicon-16x16.png">
+    <link rel="manifest" href="/images/favicon/site.webmanifest">
+    <link rel="mask-icon" href="/images/favicon/safari-pinned-tab.svg" color="#5bbad5">
+    <link rel="shortcut icon" href="favicon.ico">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="msapplication-config" content="/images/favicon/browserconfig.xml">
+    <meta name="theme-color" content="#ffffff">
+    
+<!-- Mathjax -->
+<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS_SVG">
+  MathJax.Hub.Config({
+    tex2jax: {
+    	inlineMath: [ ['$','$'] ],
+    	processEscapes: true
+    },
+	"HTML-CSS": {
+		fonts: ["TeX"] 
+	}
+  });
+</script>
+
+    </head>
+
+    <body>
+    
+    <nav class="navbar navbar-expand-lg navbar-light ">
+        <a class="navbar-brand" href="//julienharbulot.com/index.html"><img src="//julienharbulot.com/images/logo.png" width="30" alt=""></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+            
+            <li class="nav-item">
+                    <a class="nav-link" href="//julienharbulot.com/technical-blog.html">Technical blog</a>
+            </li>
+            
+            <li class="nav-item">
+                    <a class="nav-link" href="//julienharbulot.com/maths.html">Maths</a>
+            </li>
+            
+            <li class="nav-item">
+                    <a class="nav-link" href="//julienharbulot.com/projects.html">Projects</a>
+            </li>
+            
+            <li class="nav-item">
+                    <a class="nav-link" href="//julienharbulot.com/research.html">Research</a>
+            </li>
+            
+            <!--<li class="nav-item">
+                <a class="nav-link" href="//julienharbulot.com/about-me.html">About me</a>
+            </li>-->
+            
+
+<li class="nav-item dropdown">
+    <a class="nav-link active dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Table of content
+    </a>
+    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+        <div class="toc"><ul>
+<li class="toc-entry-1">
+<a class='toc-href dropdown-item' href='#a-keyboard-shortcut' title='A Keyboard shortcut'>A Keyboard shortcut</a>
+</li>
+<div class="dropdown-divider"></div>
+<li class="toc-entry-1">
+<a class='toc-href dropdown-item' href='#example-of-powerful-edits' title='Example of powerful edits'>Example of powerful edits</a>
+    <ul>
+<li class="toc-entry-2">
+    <a class='toc-href dropdown-item' href='#how-many-lines-per-method' title='How many lines per method?'>How many lines per method?</a>
+    </li>
+<li class="toc-entry-2">
+    <a class='toc-href dropdown-item' href='#sorting-a-bunch-of-lines' title='Sorting a bunch of lines'>Sorting a bunch of lines</a>
+    </li>
+    </ul>
+</li>
+</ul><div>
+    </div>
+</li>
+
+
+            </ul>
+        </div>
+    </nav>
+    
+    
+    
+    <div class="container">
+    <div class="row mt-5">
+      <div class="col-lg-8 mx-auto"> 
+        <h1 class="display-5">Using Vim as secondary editor </h1>
+        <div class="text-right">10 Dec 2019</div>
+      </div>
+    </div>
+    <div class="row mt-5">
+    <article class="col-lg-8 mx-auto">
+    <p>When working with source code, I often need some advanced editing capabilities, such as sorting a bunch of lines by alphabetical order or repeating a tedious edit multiple times throughout a file. Vim is a text-editor with powerful keyboard shortcuts that usually enable me to do exactly what I want in only a few keystrokes. I don't use Vim as my primary text editor, but when I need to go full power, I usually copy the text in Vim and do my edits there. </p>
+<p>To make this process seamless, I created a simple keyboard shortcut (<code>win+c</code>) that takes the currently selected text and opens a new Vim window with it. When I close the window, the edited text is automatically put in my clipboard so that I can use <code>ctrl+v</code> to paste it where I need. Editing any text in Vim is now only two keyboard shortcuts away.</p>
+<p>In this article, I'll first introduce how I built this keyboard shortcut, and then showcase some recent edits that Vim made possible and easy.</p>
+<h2 id="a-keyboard-shortcut">A Keyboard shortcut</h2>
+<p>To define the new keyboard shortcut, I created a bash script and mapped the keys <code>win+c</code> to trigger this script.</p>
+<p>Since I use <a href="http://i3wm.org/">i3wm</a> as my window manager, it was enough to add this line to my i3config file:</p>
+<div class="hll-title"><span class="filename">i3config </span> <div class="hll"><pre><span></span>bindsym <span class="nv">$mod</span>+c <span class="nb">exec</span> --no-startup-id ~/scripts/edit-selection-in-vim.sh
+</pre></div>
+ </div>
+
+<p>This will trigger the bash script <code>edit-selection-in-vim.sh</code>, reproduced below:</p>
+<div class="hll-title"><span class="filename">scripts/edit-selection-in-vim.sh </span> <div class="hll"><pre><span></span><span class="ch">#!/bin/bash</span>
+
+<span class="c1"># Take the currently selected text and write it to a temporary file</span>
+xclip -o &gt; /tmp/clipboard
+
+<span class="c1"># Edit this temporary file in a new Vim window</span>
+gvim -f /tmp/clipboard
+
+<span class="c1"># Put the content of the edited file into the clipboard</span>
+cat /tmp/clipboard <span class="p">|</span> xclip -sel clip
+
+<span class="c1"># And remove the temporary file</span>
+rm -f /tmp/clipboard
+</pre></div>
+ </div>
+
+<h2 id="example-of-powerful-edits">Example of powerful edits</h2>
+<p>In this section, I'll quickly showcase two examples where Vim and this shortcut served me well. The first one is from yesterday and the second one from this afternoon.</p>
+<h3 id="how-many-lines-per-method">How many lines per method?</h3>
+<p>I recently worked on refactoring a graphical application written in Python. While writing a report summarizing my work, I wanted to give an overview of a class by showing which methods it contained, and how many lines each method was. </p>
+<p>To be clear, let's take a dummy code example. From a typical class definition in python, like this one: </p>
+<div class="hll-title"><span class="filename">example_class.py </span> <div class="hll"><pre><span></span><span class="k">class</span> <span class="nc">A</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">method1</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">arg</span><span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span><span class="s1">&#39;Some code here&#39;</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="s1">&#39;Some more code there&#39;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">method2</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">arg1</span><span class="p">,</span> <span class="n">arg2</span><span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span><span class="s1">&#39;And even more code&#39;</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="s1">&#39;Python is great&#39;</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="s1">&#39;So is Vim&#39;</span><span class="p">)</span>
+</pre></div>
+ </div>
+
+<p>I wanted to produce this output:</p>
+<div class="hll-title"><span class="filename">example_class.py </span> <div class="hll"><pre><span></span><span class="k">class</span> <span class="nc">A</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">method1</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">arg</span><span class="p">):</span> <span class="c1"># 2 lines</span>
+    <span class="k">def</span> <span class="nf">method2</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">arg1</span><span class="p">,</span> <span class="n">arg2</span><span class="p">):</span> <span class="c1"># 3 lines</span>
+</pre></div>
+ </div>
+
+<p>It's an easy thing to do when there's only two methods but my class contained over 25 methods and was a few hundreds of lines long. Here's the real output that I put in my report:</p>
+<div class="hll"><pre><span></span><span class="k">class</span> <span class="nc">DeepflyGUI</span><span class="p">(</span><span class="n">QWidget</span><span class="p">):</span>
+
+    <span class="c1"># methods to initiate and setup the GUI</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>  <span class="c1"># 3 lines</span>
+
+    <span class="c1"># methods called when the user sends input</span>
+    <span class="k">def</span> <span class="nf">onclick_camera_order</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>       <span class="c1"># 9 lines</span>
+    <span class="k">def</span> <span class="nf">onclick_pose2d_estimation</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>  <span class="c1"># 2 lines</span>
+    <span class="k">def</span> <span class="nf">onclick_first_image</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>        <span class="c1"># 1 lines</span>
+    <span class="k">def</span> <span class="nf">onclick_last_image</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>         <span class="c1"># 1 lines</span>
+    <span class="k">def</span> <span class="nf">onclick_prev_image</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>         <span class="c1"># 1 lines</span>
+    <span class="k">def</span> <span class="nf">onclick_next_image</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>         <span class="c1"># 1 lines</span>
+    <span class="k">def</span> <span class="nf">onclick_prev_error</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>         <span class="c1"># 6 lines</span>
+    <span class="k">def</span> <span class="nf">onclick_next_error</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>         <span class="c1"># 6 lines</span>
+    <span class="k">def</span> <span class="nf">onclick_calibrate</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>          <span class="c1"># 3 lines</span>
+    <span class="k">def</span> <span class="nf">onclick_save_pose</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>          <span class="c1"># 2 lines</span>
+    <span class="k">def</span> <span class="nf">onclick_goto_img</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>           <span class="c1"># 8 lines</span>
+    <span class="k">def</span> <span class="nf">onclick_image_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>         <span class="c1"># 7 lines</span>
+    <span class="k">def</span> <span class="nf">onclick_pose_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>          <span class="c1"># 9 lines</span>
+    <span class="k">def</span> <span class="nf">onclick_correction_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>    <span class="c1"># 14 lines</span>
+    <span class="k">def</span> <span class="nf">onclick_heatmap_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>       <span class="c1"># 12 lines</span>
+    <span class="k">def</span> <span class="nf">keyPressEvent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key_ev</span><span class="p">):</span>      <span class="c1"># 12 lines </span>
+    <span class="k">def</span> <span class="nf">eventFilter</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">iv</span><span class="p">,</span> <span class="n">mouse_ev</span><span class="p">):</span>  <span class="c1"># 26 lines</span>
+
+    <span class="c1"># methods to communicate messages to the user</span>
+    <span class="k">def</span> <span class="nf">prompt_for_directory</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>           <span class="c1"># 6 lines</span>
+    <span class="k">def</span> <span class="nf">prompt_for_camera_ordering</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>     <span class="c1"># 9 lines</span>
+    <span class="k">def</span> <span class="nf">prompt_for_calibration_range</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>   <span class="c1"># 1 lines</span>
+    <span class="k">def</span> <span class="nf">display_error_message</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">message</span><span class="p">):</span> <span class="c1"># 2 lines</span>
+
+    <span class="c1"># helper methods</span>
+    <span class="k">def</span> <span class="nf">setup_layout</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>  <span class="c1"># 111 lines</span>
+    <span class="k">def</span> <span class="nf">uncheck_mode_buttons</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>  <span class="c1"># 4 lines</span>
+    <span class="k">def</span> <span class="nf">enable_correction_controls</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">enabled</span><span class="p">):</span>  <span class="c1"># 3 lines</span>
+    <span class="k">def</span> <span class="nf">display_img</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">img_id</span><span class="p">):</span>  <span class="c1"># 3 lines</span>
+    <span class="k">def</span> <span class="nf">update_frame</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>  <span class="c1"># 5 lines</span>
+</pre></div>
+
+
+<p>In vim, this task requires only 50 keystrokes. Here they are (using <code>⏎</code> for return and <code>⎋</code> for escape):</p>
+<div class="hll"><pre><span></span>qq/def ⏎jVnkk:!wc -lA lines⎋I # ⎋kJq25@q
+</pre></div>
+
+
+<p>This means that from any text editor, I can now perform these edits by selecting the text and typing (using <code>❖</code> for <code>win</code> key and <code>^</code> for <code>ctrl</code> key):</p>
+<div class="hll"><pre><span></span>❖cqq/def ⏎jVnkk:!wc -lA lines⎋I # ⎋kJq25@q:wq^c
+</pre></div>
+
+
+<p>Yes, it's unreadable. Vim shortcuts are meant to be typed, not read. The point here is that I can batch edit several hundreds of lines and do exactly what I want in <em>only</em> ~50 keystrokes! And a Vim expert might use even less keystrokes. </p>
+<p>For the Vim amateurs out there, here's a quick description of what this incantation does: record new macro; search for "def"; go down one line to put cursor on the first line of method's body; start a selection in visual-mode; go to next method then up two lines to put cursor on last line of method's body (which gives me a selection of the whole body); enter command mode and pipe the lines to <code>wc -l</code>, get the line-count back; write "lines" after the count and "#" before then join the two lines. Save the macro and repeat it 25 times.</p>
+<p>And you, what's your editor and how would you have done it?</p>
+<h3 id="sorting-a-bunch-of-lines">Sorting a bunch of lines</h3>
+<p>This afternoon, I was working on <code>calepin</code>, my static blog generator, and decided to sort the following lines by alphabetical order:</p>
+<div class="hll"><pre><span></span><span class="n">global_context</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span>
+    <span class="n">author</span> <span class="o">=</span> <span class="n">config_data</span><span class="p">[</span><span class="s1">&#39;author&#39;</span><span class="p">],</span>
+    <span class="n">cache_dir</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">config_data</span><span class="p">[</span><span class="s1">&#39;cache&#39;</span><span class="p">]),</span>
+    <span class="n">config_path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">config_path</span><span class="p">),</span>
+    <span class="n">index_title</span> <span class="o">=</span> <span class="n">config_data</span><span class="p">[</span><span class="s1">&#39;index_title&#39;</span><span class="p">],</span>
+    <span class="n">input_dir</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">config_data</span><span class="p">[</span><span class="s1">&#39;input&#39;</span><span class="p">]),</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="n">config_data</span><span class="p">[</span><span class="s1">&#39;site_name&#39;</span><span class="p">],</span>
+    <span class="n">output_dir</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">config_data</span><span class="p">[</span><span class="s1">&#39;output&#39;</span><span class="p">]),</span>
+    <span class="n">template_dir</span> <span class="o">=</span> <span class="n">_theme_dir</span> <span class="o">/</span> <span class="s1">&#39;templates/&#39;</span><span class="p">,</span>
+    <span class="n">theme_dir</span> <span class="o">=</span> <span class="n">_theme_dir</span><span class="p">,</span>
+    <span class="n">theme_static_dir</span> <span class="o">=</span> <span class="n">_theme_static_dir</span><span class="p">,</span>
+    <span class="n">url</span> <span class="o">=</span> <span class="n">config_data</span><span class="p">[</span><span class="s1">&#39;url&#39;</span><span class="p">],</span>
+    <span class="n">written_files</span> <span class="o">=</span> <span class="p">[],</span>
+<span class="p">)</span>
+</pre></div>
+
+
+<p>Here again, Vim made it dead easy. I selected the lines to sort, fired Vim with <code>win+c</code> and typed:</p>
+<div class="hll"><pre><span></span>ggVG:!sort
+</pre></div>
+
+
+<p>And voilà!</p>
+<p>If you want to know more about Vim, I recommend the video  <em>Mastering the Vim language</em> by Chris Toomey:</p>
+<p><span class="videobox"><iframe width="640" height="390" src='https://www.youtube.com/embed/wlR5gYd6um0' frameborder='0' webkitAllowFullScreen mozallowfullscreen allowFullScreen> </iframe></span></p>
+    </article>
+    </div><!-- row -->
+    
+    <div class="row mt-1">
+      <article class="col-lg-8 mx-auto recommendations">
+        <p class='title'>Other articles you might like:</p>
+        <ul>
+          
+            <li class="en"><img class="flag-icon" src="//julienharbulot.com/images/languages/en.png"> <a href="//julienharbulot.com/case-study-blog-duplication.html">Case study: removing not-so-obvious duplication</a></li>
+          
+            <li class="en"><img class="flag-icon" src="//julienharbulot.com/images/languages/en.png"> <a href="//julienharbulot.com/internet.html">How does internet work?</a></li>
+          
+            <li class="en"><img class="flag-icon" src="//julienharbulot.com/images/languages/en.png"> <a href="//julienharbulot.com/win-extend-screen.html">Keyboard shortcut and command line utility to switch display (Windows)</a></li>
+          
+            <li class="en"><img class="flag-icon" src="//julienharbulot.com/images/languages/en.png"> <a href="//julienharbulot.com/what-is-statistic.html">What is a statistic and why do we care?</a></li>
+          
+        </ul>
+      </article>
+    </div>
+    
+    
+    <div class="row mb=5 mt-5">
+      <article class="col-lg-8 mx-auto">
+        <div id="hyvor-talk-view"></div>
+        <script type="text/javascript">
+            var HYVOR_TALK_WEBSITE = '625';
+            var HYVOR_TALK_CONFIG = {
+                url: 'vim-clipboard.html',
+                id: 'vim-clipboard.html'
+            };
+        </script>
+      </article>
+    </div><!-- row -->
+    
+    <footer class="row">
+        <div class="col-lg-8 mx-auto text-center">
+          <p><small>
+          
+            Last updated: 01/14/21 <br/>
+          
+          
+          Copyright &copy; 2021 Julien Harbulot
+          </small></p>
+        </div>
+    </footer>
+    </div>
+
+  <script>
+  // bootstrap table
+  tables = document.getElementsByTagName('table');
+  for (i = 0; i < tables.length; i++) {
+    tables[i].classList.add('table');
+    tables[i].classList.add('table-bordered');
+  }
+
+  // Paragraphs that contain only images are marked with custom class for styling
+  ps = document.getElementsByTagName('p');
+  Array.from(ps).forEach(function(p){
+    if (p.getElementsByTagName('img').length > 0 && p.textContent.trim().length == 0) {
+        p.classList.add('img-container');
+    }
+  });
+  </script>
+
+
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script>
+        prev_onload_a = window.onload;
+        window.onload = function() {
+            if (prev_onload_a) {
+                prev_onload_a();
+            }
+            var navlinks = document.getElementsByClassName("nav-link");
+            var i;
+            for (i = 0; i < navlinks.length; i++) {
+                const target = new URL(navlinks[i].href)
+                if (location.pathname == target.pathname) {
+                    navlinks[i].classList.add('active')
+                }
+            }
+        }
+    </script>    
+
+    
+
+<script async type="text/javascript" src="//talk.hyvor.com/web-api/embed"></script>
+
+
+    </body>
+</html>

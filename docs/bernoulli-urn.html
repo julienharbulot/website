@@ -1,0 +1,820 @@
+<!doctype html>
+<html lang="en">
+    <head>
+    
+
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-166292985-1"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-166292985-1');
+    </script>
+    
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" 
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+          rel="stylesheet" crossorigin="anonymous">
+    
+    <link rel="stylesheet" href="/theme/pygment-github.css">
+    <link rel="stylesheet" href="/theme/article.css"> 
+
+    <title>Key ideas in probability and statistics illustrated on a simple problem</title>
+    
+    <!-- Favicon -->
+    <link rel="apple-touch-icon" sizes="120x120" href="/images/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon/favicon-16x16.png">
+    <link rel="manifest" href="/images/favicon/site.webmanifest">
+    <link rel="mask-icon" href="/images/favicon/safari-pinned-tab.svg" color="#5bbad5">
+    <link rel="shortcut icon" href="favicon.ico">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="msapplication-config" content="/images/favicon/browserconfig.xml">
+    <meta name="theme-color" content="#ffffff">
+    
+<!-- Mathjax -->
+<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS_SVG">
+  MathJax.Hub.Config({
+    tex2jax: {
+    	inlineMath: [ ['$','$'] ],
+    	processEscapes: true
+    },
+	"HTML-CSS": {
+		fonts: ["TeX"] 
+	}
+  });
+</script>
+
+    </head>
+
+    <body>
+    
+    <nav class="navbar navbar-expand-lg navbar-light ">
+        <a class="navbar-brand" href="//julienharbulot.com/index.html"><img src="//julienharbulot.com/images/logo.png" width="30" alt=""></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+            
+            <li class="nav-item">
+                    <a class="nav-link" href="//julienharbulot.com/technical-blog.html">Technical blog</a>
+            </li>
+            
+            <li class="nav-item">
+                    <a class="nav-link" href="//julienharbulot.com/maths.html">Maths</a>
+            </li>
+            
+            <li class="nav-item">
+                    <a class="nav-link" href="//julienharbulot.com/projects.html">Projects</a>
+            </li>
+            
+            <li class="nav-item">
+                    <a class="nav-link" href="//julienharbulot.com/research.html">Research</a>
+            </li>
+            
+            <!--<li class="nav-item">
+                <a class="nav-link" href="//julienharbulot.com/about-me.html">About me</a>
+            </li>-->
+            
+
+<li class="nav-item dropdown">
+    <a class="nav-link active dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Table of content
+    </a>
+    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+        <div class="toc"><ul>
+<li class="toc-entry-1">
+<a class='toc-href dropdown-item' href='#probability-theory-quantifying-knowledge' title='Probability theory: quantifying knowledge'>Probability theory: quantifying knowledge</a>
+</li>
+<div class="dropdown-divider"></div>
+<li class="toc-entry-1">
+<a class='toc-href dropdown-item' href='#application-to-our-urn-problem' title='Application to our urn problem'>Application to our urn problem</a>
+    <ul>
+<li class="toc-entry-2">
+    <a class='toc-href dropdown-item' href='#equiprobability-from-symmetry-argument' title='Equiprobability from symmetry argument'>Equiprobability from symmetry argument</a>
+    </li>
+<li class="toc-entry-2">
+    <a class='toc-href dropdown-item' href='#using-the-proportion-of-red-balls' title='Using the proportion of red balls'>Using the proportion of red balls</a>
+    </li>
+<li class="toc-entry-2">
+    <a class='toc-href dropdown-item' href='#computing-the-most-expected-fraction' title='Computing the most expected fraction'>Computing the most expected fraction</a>
+    </li>
+    </ul>
+</li>
+<div class="dropdown-divider"></div>
+<li class="toc-entry-1">
+<a class='toc-href dropdown-item' href='#statistical-inference' title='Statistical inference'>Statistical inference</a>
+    <ul>
+<li class="toc-entry-2">
+    <a class='toc-href dropdown-item' href='#from-discrete-to-continuous' title='From discrete to continuous'>From discrete to continuous</a>
+    </li>
+<li class="toc-entry-2">
+    <a class='toc-href dropdown-item' href='#digression' title='Digression'>Digression</a>
+    </li>
+    </ul>
+</li>
+<div class="dropdown-divider"></div>
+<li class="toc-entry-1">
+<a class='toc-href dropdown-item' href='#interval-estimate' title='Interval estimate'>Interval estimate</a>
+</li>
+<div class="dropdown-divider"></div>
+<li class="toc-entry-1">
+<a class='toc-href dropdown-item' href='#read-next' title='Read next'>Read next</a>
+</li>
+</ul><div>
+    </div>
+</li>
+
+
+            </ul>
+        </div>
+    </nav>
+    
+    
+    
+    <div class="container">
+    <div class="row mt-5">
+      <div class="col-lg-8 mx-auto"> 
+        <h1 class="display-5">Key ideas in probability and statistics illustrated on a simple problem </h1>
+        <div class="text-right">16 Mar 2018</div>
+      </div>
+    </div>
+    <div class="row mt-5">
+    <article class="col-lg-8 mx-auto">
+    <p>
+<script type="math/tex; mode=display">
+\def\sa{a}
+\def\sb{b}
+\def\sc{c}
+\def\sd{d}
+\def\se{e}
+\def\sf{f}
+\def\sg{g}
+\def\sh{h}
+\def\si{i}
+\def\sj{j}
+\def\sk{k}
+\def\sl{l}
+\def\sm{m}
+\def\sn{n}
+\def\so{o}
+\def\sp{p}
+\def\sq{q}
+\def\sr{r}
+\def\ss{s}
+\def\st{t}
+\def\su{u}
+\def\sv{v}
+\def\sw{w}
+\def\sx{x}
+\def\sy{y}
+\def\sz{z}
+\def\va{\vec{a}}
+\def\vb{\vec{b}}
+\def\vc{\vec{c}}
+\def\vd{\vec{d}}
+\def\ve{\vec{e}}
+\def\vf{\vec{f}}
+\def\vg{\vec{g}}
+\def\vh{\vec{h}}
+\def\vi{\vec{i}}
+\def\vj{\vec{j}}
+\def\vk{\vec{k}}
+\def\vl{\vec{l}}
+\def\vm{\vec{m}}
+\def\vn{\vec{n}}
+\def\vo{\vec{o}}
+\def\vp{\vec{p}}
+\def\vq{\vec{q}}
+\def\vr{\vec{r}}
+\def\vs{\vec{s}}
+\def\vt{\vec{t}}
+\def\vu{\vec{u}}
+\def\vv{\vec{v}}
+\def\vw{\vec{w}}
+\def\vx{\vec{x}}
+\def\vy{\vec{y}}
+\def\vz{\vec{z}}
+\def\ga{\mathfrak{A}}
+\def\gb{\mathfrak{B}}
+\def\gc{\mathfrak{C}}
+\def\gd{\mathfrak{D}}
+\def\ge{\mathfrak{E}}
+\def\gf{\mathfrak{F}}
+\def\gg{\mathfrak{G}}
+\def\gh{\mathfrak{H}}
+\def\gi{\mathfrak{I}}
+\def\gj{\mathfrak{J}}
+\def\gk{\mathfrak{K}}
+\def\gl{\mathfrak{L}}
+\def\gm{\mathfrak{M}}
+\def\gn{\mathfrak{N}}
+\def\go{\mathfrak{O}}
+\def\gp{\mathfrak{P}}
+\def\gq{\mathfrak{Q}}
+\def\gr{\mathfrak{R}}
+\def\gs{\mathfrak{S}}
+\def\gt{\mathfrak{T}}
+\def\gu{\mathfrak{U}}
+\def\gv{\mathfrak{V}}
+\def\gw{\mathfrak{W}}
+\def\gx{\mathfrak{X}}
+\def\gy{\mathfrak{Y}}
+\def\gz{\mathfrak{Z}}
+\def\ra{A}
+\def\rb{B}
+\def\rc{C}
+\def\rd{D}
+\def\re{E}
+\def\rf{F}
+\def\rg{G}
+\def\rh{H}
+\def\ri{I}
+\def\rj{J}
+\def\rk{K}
+\def\rl{L}
+\def\rm{M}
+\def\rn{N}
+\def\ro{O}
+\def\rp{P}
+\def\rq{Q}
+\def\rr{R}
+\def\rs{S}
+\def\rt{T}
+\def\ru{U}
+\def\rv{V}
+\def\rw{W}
+\def\rx{X}
+\def\ry{Y}
+\def\rz{Z}
+\def\rva{\vec{A}}
+\def\rvb{\vec{B}}
+\def\rvc{\vec{C}}
+\def\rvd{\vec{D}}
+\def\rve{\vec{E}}
+\def\rvf{\vec{F}}
+\def\rvg{\vec{G}}
+\def\rvh{\vec{H}}
+\def\rvi{\vec{I}}
+\def\rvj{\vec{J}}
+\def\rvk{\vec{K}}
+\def\rvl{\vec{L}}
+\def\rvm{\vec{M}}
+\def\rvn{\vec{N}}
+\def\rvo{\vec{O}}
+\def\rvp{\vec{P}}
+\def\rvq{\vec{Q}}
+\def\rvr{\vec{R}}
+\def\rvs{\vec{S}}
+\def\rvt{\vec{T}}
+\def\rvu{\vec{U}}
+\def\rvv{\vec{V}}
+\def\rvw{\vec{W}}
+\def\rvx{\vec{X}}
+\def\rvy{\vec{Y}}
+\def\rvz{\vec{Z}}
+\def\seta{A}
+\def\setb{B}
+\def\setc{C}
+\def\setd{D}
+\def\sete{E}
+\def\setf{F}
+\def\setg{G}
+\def\seth{H}
+\def\seti{I}
+\def\setj{J}
+\def\setk{K}
+\def\setl{L}
+\def\setm{M}
+\def\setn{N}
+\def\seto{O}
+\def\setp{P}
+\def\setq{Q}
+\def\setr{R}
+\def\sets{S}
+\def\sett{T}
+\def\setu{U}
+\def\setv{V}
+\def\setw{W}
+\def\setx{X}
+\def\sety{Y}
+\def\setz{Z}
+\def\fa{a}
+\def\fb{b}
+\def\fc{c}
+\def\fd{d}
+\def\fe{e}
+\def\ff{f}
+\def\fg{g}
+\def\fh{h}
+\def\fi{i}
+\def\fj{j}
+\def\fk{k}
+\def\fl{l}
+\def\fm{m}
+\def\fn{n}
+\def\fo{o}
+\def\fp{p}
+\def\fq{q}
+\def\fr{r}
+\def\fs{s}
+\def\ft{t}
+\def\fu{u}
+\def\fv{v}
+\def\fw{w}
+\def\fx{x}
+\def\fy{y}
+\def\fz{z}
+\def\fA{A}
+\def\fB{B}
+\def\fC{C}
+\def\fD{D}
+\def\fE{E}
+\def\fF{F}
+\def\fG{G}
+\def\fH{H}
+\def\fI{I}
+\def\fJ{J}
+\def\fK{K}
+\def\fL{L}
+\def\fM{M}
+\def\fN{N}
+\def\fO{O}
+\def\fP{P}
+\def\fQ{Q}
+\def\fR{R}
+\def\fS{S}
+\def\fT{T}
+\def\fU{U}
+\def\fV{V}
+\def\fW{W}
+\def\fX{X}
+\def\fY{Y}
+\def\fZ{Z}
+\def\ma{A}
+\def\mb{B}
+\def\mc{C}
+\def\md{D}
+\def\me{E}
+\def\mf{F}
+\def\mg{G}
+\def\mh{H}
+\def\mi{I}
+\def\mj{J}
+\def\mk{K}
+\def\ml{L}
+\def\mm{M}
+\def\mn{N}
+\def\mo{O}
+\def\mp{P}
+\def\mq{Q}
+\def\mr{R}
+\def\ms{S}
+\def\mt{T}
+\def\matu{U}
+\def\mv{V}
+\def\mw{W}
+\def\mx{X}
+\def\my{Y}
+\def\mz{Z}
+\def\loss{\mathcal{L}}
+\newcommand{\dkl}[2]{D_{\text{KL}}\mathopen{}\paren{#1\,||\,#2}}
+\newcommand{\dataset}{S}
+\newcommand{\ndataset}{N}
+\newcommand{\idataset}{n}
+\newcommand{\inputRV}{\mathcal{X}}
+\newcommand{\inputvec}{\vec{x}}
+\newcommand{\ninputvec}[1]{\vec{x}_{#1}}
+\newcommand{\iinputvec}[1]{x_{#1}}
+\newcommand{\niinputvec}[2]{x_{#1, #2}}
+\newcommand{\icpnt}{i}
+\newcommand{\inputmatrix}{X}
+\newcommand{\inputdim}{D}
+\newcommand{\outputval}{y}
+\newcommand{\ioutputval}[1]{y_{#1}}
+\newcommand{\outputvec}{\vec{y}}
+\newcommand{\trainset}{S_{\text{train}}}
+\newcommand{\testset}{S_{\text{test}}}
+\newcommand{\truemodel}{f_{\text{true}}}
+\newcommand{\trainedmodel}{f_{\trainset}}
+\newcommand{\linmodel}[1]{f_{#1}}
+\newcommand{\bestmodel}{f^{*}}
+\newcommand{\model}{f}
+\newcommand{\hyperparam}{\lambda}
+\newcommand{\linparamv}{\vec{w}}
+\newcommand{\ilinparam}[1]{w_{#1}}
+\newcommand{\indivloss}{l}
+\newcommand{\modelclass}{\mathcal{F}}
+\newcommand{\linclass}{\modelclass_{\text{lin}}}
+\newcommand{\g}{\mathcal{G}}
+\newcommand{\gmse}{\g_{\text{MSE}}}
+\newcommand{\glasso}{\g_{\text{lasso}}}
+\newcommand{\gridge}{\g_{\text{ridge}}}
+\newcommand{\glogit}{\g_{\logit}}
+\newcommand{\l}{\mathcal{L}}
+\newcommand{\lmse}{\l_{\text{MSE}}}
+\newcommand{\lmae}{\l_{\text{MAE}}}
+\newcommand{\llasso}{\l_{\text{lasso}}}
+\newcommand{\lridge}{\l_{\text{ridge}}}
+\newcommand{\llogit}{\l_{\logit}}
+\newcommand{\logit}{\sigma}
+\newcommand{\reg}{\mathcal{R}}
+\DeclareMathOperator*{\argmin}{argmin}
+\DeclareMathOperator*{\argmax}{argmax}
+\DeclareMathOperator*{\mean}{mean}
+\DeclareMathOperator*{\avg}{avg}
+\DeclareMathOperator*{\span}{span}
+\DeclareMathOperator*{\var}{var}
+\DeclareMathOperator*{\bias}{bias}
+\newcommand{\expectation}{\mathbb{E}}
+\newcommand{\brak}[1]{\left[#1\right]}
+\newcommand{\paren}[1]{\left(#1\right)}
+\newcommand{\realset}{\mathbb{R}}
+\newcommand{\realvset}[1]{\realset^{#1}}
+\newcommand{\prob}{\mathbb{P}}
+\newcommand{\gaussian}{\mathcal{N}}
+\newcommand{\iid}{\stackrel{\text{i.i.d.}}{\sim}}
+\newcommand{\abs}[1]{\left\lvert#1\right\rvert}
+\newcommand{\norm}[1]{\left\lVert#1\right\rVert}
+\newcommand{\normtwo}[1]{\norm{#1}_{2}}
+\newcommand{\normone}[1]{\norm{#1}_{1}}
+\newcommand{\card}[1]{\left\lvert#1\right\rvert}
+\newcommand{\grad}{\nabla}
+\newcommand{\dconv}{\stackrel{d}{\to}}
+\newcommand{\pconv}{\stackrel{p}{\to}}
+\newcommand{\rva}[1]{#1}
+\newcommand{\rve}[1]{\vec{#1}}
+\newcommand{\obs}[1]{#1}
+\newcommand{\vobs}[1]{\vec{#1}}
+\newcommand{\distrib}[1]{#1}
+\newcommand{\distribof}[2]{#1_{#2}}
+\newcommand{\density}[1]{#1}
+\newcommand{\densityof}[2]{#1_{#2}}
+\newcommand{\distributed}{\sim}
+\newcommand{\const}[1]{#1}
+\newcommand{\fun}[1]{#1}
+</script>
+</p>
+<div class="typography">
+
+<!-- cover: /assets/images/bernoulli_urn.png -->
+<p>This article aims to illustrate what are probability theory and statistical inference in simple terms using a simple to understand problem: drawing colored balls from an urn.</p>
+<p>Suppose that you have an urn containing red and green balls that you can’t distinguish otherwise than by their color. You can’t see inside the urn and you draw a ball without looking. Will you get a red or a green ball?</p>
+<p>We don’t know if you will get a red ball or a green ball. But if there are a thousand green balls and only one red ball, then it’s very likely that you will get a green ball. But how likely exactly?</p>
+<p>Probability theory aims to give a quantitative answer to that question. Given a problem as stated above, probability theory gives you the probability for a given outcome. The probability that you can compute for the outcome may or may not be useful for predicting the actual outcome. It’s usefulness primarily depends on how much you know about the problem.</p>
+<p>For instance, if you don’t know anything about the urn except that it contains undistinguishable green and red balls, then there is no reason to expect a green ball more than a red ball. On the other hand, if there are more green balls than red balls, there’s good intuitive reason than the probability for drawing a green ball is greater than that of drawing a red ball.</p>
+<p>So that’s the goal of probability theory. Probability theory <em>starts with knowledge</em> and gives you a probability measure for potential <em>outcomes</em>. We shall see later in this article how exactly the probabilities are computed and how we can use them to gauge our expectations.</p>
+<p>Statistical inference is concerned with the reverse problem: you have an urn containing red and green balls and you want to know the proportion of red balls. Of course, if the urn is small you can take every ball out and count the number of reds. But if the urn is very large, and if your time is limited, you won’t be able to count every balls. So what can you do?</p>
+<p>The method in statistics is to draw a few balls from the urn. For instance, you take out 50 balls. This is called a <em>sample</em> of 50 balls. Then, you study the proportion of red balls in the sample and use it to draw estimates about the real proportion in the urn. You do so by estimating a probability measure that could have yielded the sample. So in a way, statistical inference is the reverse of probability theory: it <em>starts with outcomes</em> and ends with <em>knowledge</em>.</p>
+<p>In the following exposion, we will survey the whole mathematical machinery required to solve both problems. For this purpose, we need first to define the rules of probability theory, and apply them to our urn problem. Then, we will take our second problem and go the other way around using statistical methods.</p>
+<h2 id="probability-theory-quantifying-knowledge">Probability theory: quantifying knowledge</h2>
+<p>My goal here is not to give a complete and rigorous construction of probability theory. Instead, I will give the most important rules and explain what they correspond to and how we can use them. We will then illustrate their use on our urn problem.</p>
+<p>There are several constructions of probability theory, based on various mathematical objects (for instance, sets or <a href="probability-logic-of-uncertainty.html">propositions</a>). These constructions differ in their philosophical view, but they all yield the same rules to compute probabilities, which in practice is what really matters.</p>
+<p>Here are the rules. If you already know them, feel free to <a href="#end-proba-rules">jump to the next section</a>.</p>
+<p>We will use capital letters to denote propositions. For instance: <script type="math/tex">B</script> = “There is an urn. It contains red and green undistinguishable balls. We can’t see the color of a ball before taking it out from the urn”. Another example: <script type="math/tex">R</script> = “My next draw from the urn yields a red ball”. The proposition can be true or false. For instance, I can draw a red ball from the urn, and <script type="math/tex">R</script> was true. Or I could have drawn a green ball and <script type="math/tex">R</script> was false.</p>
+<p><img src="images/bernoulli-urn/bernoulli_urn.png" width="60%"/></p>
+<p>Before I draw a ball, I don’t know whether <script type="math/tex">R</script> is true or false. But I can measure my confidence that it will be true. We will measure our confidence in percent (<script type="math/tex">\%</script>) and use the following notation:</p>
+<script type="math/tex; mode=display">p(R\mid B) = 1.00 = 100\%</script>
+<p>To say that we are <script type="math/tex">100\%</script> confident that <script type="math/tex">R</script> is true given our prior information <script type="math/tex">B</script>. To be clear, this means that we know <script type="math/tex">B</script> is true and that we estimate our confidence in <script type="math/tex">R</script> as <script type="math/tex">100\%</script>.</p>
+<p>Or we can be only <script type="math/tex">50\%</script> confident that <script type="math/tex">R</script> is true, and in that case we note:</p>
+<script type="math/tex; mode=display">p(R\mid B) = .50 = 50\%</script>
+<p>If I have more information about the problem, this can update my confidence estimate. For instance, if I know that the proposition <script type="math/tex">O</script> = “There are only red balls left in the urn” is true, then I’m becoming <script type="math/tex">100\%</script> confident that I will get a red ball. Which we note:</p>
+<script type="math/tex; mode=display">p(R\mid O, B) = 1.00</script>
+<p>Notice how we take new information into account by inserting it after the vertical dash <script type="math/tex">\mid</script>.</p>
+<p>Given a proposition, I can write a bar on top of it to say the opposite. For instance <script type="math/tex">\bar{R}</script> = “My next draw from the urn does not yield a red ball”. I can estimate my confidence in <script type="math/tex">\bar{R}</script> from my confidence in <script type="math/tex">R</script>:</p>
+<script type="math/tex; mode=display">p(\bar{R} \mid B) = 1.00 - p(R) = 100\% - p(R)</script>
+<p>Which makes sense because if I’m <script type="math/tex">100\%</script> confident that <script type="math/tex">R</script> is true, then I’m <script type="math/tex">0\%</script> confident that it is false. In other words, I’m <script type="math/tex">0\%</script> confident that <script type="math/tex">\bar{R}</script> is true.</p>
+<p>Given a second proposition, for instance <script type="math/tex">R_2</script> = “My second next draw from the urn yield a red ball”, I can estimate my confidence that both <script type="math/tex">R</script> and <script type="math/tex">R_2</script> will be true like this:</p>
+<ul>
+<li>first I estimating my confidence in one: <script type="math/tex">p(R \mid B)</script></li>
+<li>then, I consider it true and estimate my confidence in the other: <script type="math/tex">p(R_2 \mid R, B)</script>.</li>
+</ul>
+<p>So, if we note <script type="math/tex">% <![CDATA[
+R \& R_2 %]]></script> the proposition stating that both <script type="math/tex">R</script> and <script type="math/tex">R_2</script> are true, I can estimate my confidence in it by:</p>
+<script type="math/tex; mode=display">% <![CDATA[
+p(R \& R_2 \mid B) = p(R \mid B)\cdot p(R_2 \mid R, B) %]]></script>
+<p>Or, I can do it the other way around:</p>
+<script type="math/tex; mode=display">% <![CDATA[
+p(R \& R_2 \mid B) = p(R_2 \mid B)\cdot p(R \mid R_2, B) %]]></script>
+<p>Where the dot is used to mean “multiplication”.</p>
+<p>Having established these two rules, I can compute my estimate that one of <script type="math/tex">R</script> or <script type="math/tex">R_2</script> is true using the logic formula for “or”: <script type="math/tex">% <![CDATA[
+R \lor R_2 = \neg(\bar{R} \& \bar{R_2}) %]]></script>. If you don’t know what this formula means, don’t worry. The only thing you need is the resulting rule for computing the estimate of (<script type="math/tex">R</script> or <script type="math/tex">R_2</script>) that we note <script type="math/tex">R \lor R_2</script>:</p>
+<script type="math/tex; mode=display">% <![CDATA[
+p(R \lor R_2 \mid B) = p(R \mid B) + p(R_2 \mid B) - p(R \& R_2 \mid B) %]]></script>
+<p>Let’s put this formula to test with some numerical values. Before that, let’s suppose that our estimate for <script type="math/tex">R_2</script> does not depend on <script type="math/tex">R</script>. That is, our confidence in <script type="math/tex">R_2</script> will be the same, whether we know <script type="math/tex">R</script> is true or not. We can note this in the theory simply by assigning the same value for <script type="math/tex">p(R_2 \mid B)</script> and <script type="math/tex">p(R_2 \mid R, B)</script>.</p>
+<table>
+<thead>
+<tr>
+<th>description</th>
+<th>estimate</th>
+<th>value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>estimate in <script type="math/tex">R</script></td>
+<td><script type="math/tex">p(R \mid B)</script></td>
+<td><script type="math/tex">100\%</script></td>
+</tr>
+<tr>
+<td>estimate in <script type="math/tex">R_2</script></td>
+<td><script type="math/tex">p(R_2 \mid B)</script></td>
+<td><script type="math/tex">1\%</script></td>
+</tr>
+<tr>
+<td>same when we know <script type="math/tex">R</script></td>
+<td><script type="math/tex">p(R_2 \mid R, B)</script></td>
+<td><script type="math/tex">1\%</script></td>
+</tr>
+<tr>
+<td>use formula for “and”</td>
+<td><script type="math/tex">% <![CDATA[
+p(R \& R_2 \mid B) %]]></script></td>
+<td><script type="math/tex">100\% \cdot 1\% = 1\%</script></td>
+</tr>
+<tr>
+<td>use formula for “or”</td>
+<td><script type="math/tex">p(R \lor R_2 \mid B)</script></td>
+<td><script type="math/tex">100\% + 1\% - 1\% = 100\%</script></td>
+</tr>
+</tbody>
+</table>
+<p><a id="end-proba-rules"> </a></p>
+<p>So, if I’m very confident in <script type="math/tex">R</script> but not confident in <script type="math/tex">R_2</script>, probability theory says that I should be very confident that either <script type="math/tex">R</script> or <script type="math/tex">R_2</script> is true, since <script type="math/tex">p(R \lor R_2 \mid B) = 100\%</script>. It also says that I should not be confident that both <script type="math/tex">R</script> and <script type="math/tex">R_2</script> are true since <script type="math/tex">% <![CDATA[
+P(R \& R_2 \mid B) = 100\% %]]></script>. Which make intuitive sense when you think about it.</p>
+<h2 id="application-to-our-urn-problem">Application to our urn problem</h2>
+<p>We will now use probability theory to estimate what we can expect when we draw colored balls from an urn. This looks like a toy problem but many fundamental aspects of probability theory and methodology can  be illustrated with it.</p>
+<h4 id="equiprobability-from-symmetry-argument">Equiprobability from symmetry argument</h4>
+<p>As previously, let <script type="math/tex">B</script> be the background information stating our problem: <script type="math/tex">B</script> = “There is an urn. It contains red and green undistinguishable balls. We can’t see the color of a ball before taking it out from the urn”.</p>
+<p>The question of interest is: “What is our confidence that we will draw a red ball?”</p>
+<p>With our current state of knowledge, there is no reason to expect a red ball more than a green ball. A symmetry argument can help us see why: since the information about the color “red” and the color “green” are completely symmetric in <script type="math/tex">B</script>, our estimates should be completely symmetric too.</p>
+<p>If we note <script type="math/tex">R</script> = “we draw a red ball” and <script type="math/tex">G</script> = “we draw a green ball”, according to our symmetry argument above:</p>
+<script type="math/tex; mode=display">p(R \mid B) = p(G \mid B)</script>
+<p>Suppose that we decide that we will draw a ball from the urn, and call this fact <script type="math/tex">D</script> = “We draw a ball from the urn”. There are only two possible outcomes: either the ball is red and <script type="math/tex">R</script> is true, or the ball is green and <script type="math/tex">G</script> is true. In that case, we are <script type="math/tex">100\%</script> confident that either <script type="math/tex">R</script> or <script type="math/tex">G</script> will happen:</p>
+<script type="math/tex; mode=display">p(R \lor G \mid D, B) = 1.00</script>
+<p>Using the formula to expand the probability, we get:</p>
+<script type="math/tex; mode=display">p(R \mid D, B) + p(G \mid D, B) = 1.00</script>
+<p>Of course, information <script type="math/tex">D</script> didn’t change anything to our previous symmetry argument. Using both equations, we can deduce a definite numerical value:</p>
+<script type="math/tex; mode=display">p(R \mid D, B) = p(G \mid D, B) = 1.00 / 2 = 0.50</script>
+<p>And that’s it! Using pure logic, we managed to get definite confidence estimate for the outcome of our draw. Our current state of knowledge doesn’t teach us much about the color we will get, so both color are as likely. This is already a great achievement because it shows that numerical values can be computed from logic, and doesn’t have to be guessed arbitrarily. But this is also a bit deceiving because it doesn’t help much. Let’s see what we can learn if we know a little more about the content of the urn.</p>
+<h4 id="using-the-proportion-of-red-balls">Using the proportion of red balls</h4>
+<p>Suppose that we know the content of the urn: <script type="math/tex">C</script> = “the urn contains <script type="math/tex">N_R</script> red balls and <script type="math/tex">N_G</script> green balls. The total is <script type="math/tex">N = N_R + N_G</script>”. We can use this information to update our probability estimates.</p>
+<p>How can we compute the probability <script type="math/tex">p(R \mid D, C, B)</script>? We can formulate the problem differently and reuse a symmetry argument as before. The new information tells us that there are <script type="math/tex">N</script> balls in total. In our heads, let’s arbitrarily number the balls. Call the first ball <script type="math/tex">B_1</script>, the second <script type="math/tex">B_2</script>, … and the <script type="math/tex">i</script>-th ball <script type="math/tex">B_i</script> for <script type="math/tex">i \leq N</script>.</p>
+<p>We will turn our attention to a new but highly related problem: We draw a ball from the urn, and we ask the probability that this ball is the ball <script type="math/tex">B_i</script>:</p>
+<script type="math/tex; mode=display">P(B_i \mid D, C, B) = ???</script>
+<p>The color of the ball becomes irrelevant in the new problem. So what our background information (<script type="math/tex">D, C, B</script>) tells us is this: “the urn contains <script type="math/tex">N</script> undistinguishable balls, we draw a ball”. This information is completely symmetric with regards to our index <script type="math/tex">i</script>. With the same reasoning as in the previous section we know that each <script type="math/tex">B_i</script> will be accorded the same probability and that the sum of our probability estimates for the <script type="math/tex">B_i</script> is <script type="math/tex">100\%.</script> Therefore:</p>
+<script type="math/tex; mode=display">P(B_i \mid D, C, B) = 1/N</script>
+<p>Now, let’s reorder the balls so that the first <script type="math/tex">N_R</script> are reds and the last <script type="math/tex">N_G</script> are greens. The probability that we draw a red ball is the probability that we draw any of the first <script type="math/tex">N_R</script> balls:</p>
+<script type="math/tex; mode=display">P(R \mid D, C, B) = P(B_1 \lor ... \lor B_{N_R} \mid D, C, B)</script>
+<p>And using the formula for “or” multiple times, we find:</p>
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{align}
+
+P(R \mid D, C, B) &= P(B_1 \mid D, C, B) + ... + P(B_{N_R} \mid D, C, B) \\
+
+&= 1/N + ... + 1/N \\
+
+&= N_R / N
+\end{align} %]]></script>
+<p>So here is what we have so far: our probability estimate that we will draw a red ball from an urn containing <script type="math/tex">N</script> balls, <script type="math/tex">N_R</script> of which are reds is: <script type="math/tex">N_R / N</script>.</p>
+<p>But this probability estimate is a measure of our confidence based on the partial information we have. Therefore it doesn’t make sense to try and “verify” it by drawing multiple balls from the urn. To say it differently: it is a confidence estimate, not an expected frequency.</p>
+<p>What we can do, however is draw a sample containing multiple balls from the urn, and compute the <em>most probable fractions</em> of red balls in this sample. Then, we can compare the most expected fraction with the actual fraction in the sample.</p>
+<h4 id="computing-the-most-expected-fraction">Computing the most expected fraction</h4>
+<p>In this variant of the problem, we draw a sample of <script type="math/tex">n</script> balls from the urn. And we wonder what is the most likely number <script type="math/tex">r</script> of red balls in our sample.</p>
+<p>In order to use probability theory to solve our problem, here is an updated version of our background information: <script type="math/tex">B'</script> = “An urn contains <script type="math/tex">N</script> balls, <script type="math/tex">N_R</script> of which are reds. The others are green. We draw a ball from the urn, then replace it inside and shake the urn <script type="math/tex">n</script> times.”</p>
+<p>We will first compute the probability to obtain a given ordering of red and green balls. Then, we will use a symmetry argument to show that whatever the ordering, its probability only depends on the number of red balls in it. Finally, we will use the “or” rule to compute the probability to obtain <script type="math/tex">r</script> red balls.</p>
+<p>So let’s start by computing our probability estimate for drawing the balls in a given order. We will use the following notation: <script type="math/tex">R_i</script> = “the <script type="math/tex">i</script>-th ball is red” and <script type="math/tex">G_i</script> = “the i-th ball is green” and we want to compute the probability that the first <script type="math/tex">r</script> balls are red and the last <script type="math/tex">n - r</script> are green. To save some keystrokes, let’s note this estimate <script type="math/tex">e_r</script>:</p>
+<script type="math/tex; mode=display">% <![CDATA[
+e_r = p(\color{red}{R_1 \,\&\, ... \,\&\, R_r} \,\&\, \color{green}{G_{r+1} \,\&\, ... \,\&\, G_{n}} \mid B') %]]></script>
+<p>The long list of <script type="math/tex">% <![CDATA[
+\& %]]></script> above means that: draw <script type="math/tex">1</script> is red, every draw is red until draw <script type="math/tex">r</script>, then draw <script type="math/tex">r+1</script> is green and every draw is green until <script type="math/tex">n</script>.</p>
+<p>Since we replace the ball in the urn each time, a draw is independent from the previous ones. Using the formula for “and”, taking this independence into account:</p>
+<script type="math/tex; mode=display">e_r = p(R \mid B')^r \cdot p(G \mid B')^{(n-r)}</script>
+<p>According to the previous section, <script type="math/tex">p(R \mid B') = N_R / N</script> and <script type="math/tex">p(G \mid B') = 1 - (N_R / N)</script>, so:</p>
+<script type="math/tex; mode=display">e_r = (\frac{N_R}{N})^r \cdot ( 1 - \frac{N_R}{R})^{(n-r)}</script>
+<p>Actually, drawing the balls in a different order would reorder the factors without changing their value since the draws are independent from each other. But since multiplication is commutative, this won’t change the result. Therefore, as long as the number of red balls is <script type="math/tex">r</script>, the probability to obtain a sample with <script type="math/tex">r</script> balls, whatever the order is <script type="math/tex">e_r</script>.</p>
+<p>Now, we can use the “or” rule to compute the probability to obtain a sample with <script type="math/tex">r</script> of whatever order. Indeed, if we list all the possible orderings with <script type="math/tex">r</script> red balls, we can see that obtaining <script type="math/tex">r</script> red balls in a sample means obtaining the first ordering or the second ordering or any of those we listed. Therefore, it’s a big “or” that we can split using the “or” rule.</p>
+<p>Let’s note <script type="math/tex">S_r</script>=”The number of red balls in the sample is <script type="math/tex">r</script>”. And let’s note <script type="math/tex">O_i</script>=”The sample has order <script type="math/tex">i</script>” where <script type="math/tex">i</script> ranges from <script type="math/tex">1</script> to the size (noted <script type="math/tex">l</script>) of our list. We have:</p>
+<script type="math/tex; mode=display">p(S_r \mid B') = p(O_1 \lor ... \lor O_l \mid B')</script>
+<p>Since we can not obtain two orderings at the same time, this reduces to:</p>
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{align}
+p(S_r \mid B') &= p(O_1 \mid B') + ... + p(O_l \mid B') \\
+               &= e_r + ... + e_r \\
+               &= l \cdot e_r \\
+\end{align} %]]></script>
+<p>The computation that follows is more mathematics oriented that the rest of the article, so I won’t dive into the details. If you don’t understand everything, it’s no big deal, just accept the result of the computation and keep reading. We can use a result from discrete mathematics to compute the size of our list:</p>
+<script type="math/tex; mode=display">l = \binom{n}{r}</script>
+<p>Therefore:</p>
+<script type="math/tex; mode=display">p(S_r \mid B') = \binom{n}{r} \cdot (\frac{N_R}{N})^r \cdot ( 1 - \frac{N_R}{N})^{(n-r)}</script>
+<p>The value of <script type="math/tex">r</script> for which we are the most confident is the value where the above formula has maximum value (<a href="http://mathforum.org/library/drmath/view/52222.html">details</a>). Actually the formula has 2 such values, so we have two candidates:</p>
+<script type="math/tex; mode=display">r = (n+1) \cdot \frac{N_R}{N}</script>
+<p>and</p>
+<script type="math/tex; mode=display">r = (n+1) \cdot \frac{N_R}{N} - 1</script>
+<p>Which means that the most likely fraction of red balls is either:</p>
+<script type="math/tex; mode=display">\frac{r}{n} = \frac{N_R}{N} + \frac{1}{n} \cdot \frac{N_R}{N}</script>
+<p>or</p>
+<script type="math/tex; mode=display">\frac{r}{n} = \frac{N_R}{N} + \frac{1}{n} \cdot (\frac{N_R}{N} - 1)</script>
+<p>As we can see, this is very close to the fraction <script type="math/tex">N_R / N</script> of red balls in the urn but not equal. The additional term <script type="math/tex">1 / n</script> decreases as <script type="math/tex">n</script> gets bigger and bigger. And if we drew an infinite number of balls from the urn, this term would vanish, meaning that the expected fraction is the same as that of the urn. Of course, in real life it’s impossible to draw an infinite number of balls.</p>
+<p>While it made no sense to compare our probability estimate to draw a red ball to the proportion of red balls in a sample, it now makes sense to compare the most likely fraction of red balls to the fraction in a sample. As you can see, the most likely fraction is very close to our probability estimate. But conceptually, both are different and there could very well be more complex situations where both numbers are very different.</p>
+<p>The three derivations above were meant to illustrate how probability theory is used. Let’s now turn the problem upside down: we have already estimated the most likely number of red balls in a sample given the number of red balls in the urn; we will now estimate the number of red balls in the urn from the number of red balls in the sample.</p>
+<ul>
+<li>Probability: urn <script type="math/tex">\to</script> sample</li>
+<li><a class="def" href="what-is-statistic.html">Statistics</a>: sample <script type="math/tex">\to</script> urn</li>
+</ul>
+<h2 id="statistical-inference">Statistical inference</h2>
+<p>The remaining of this article is concerned with hypothesis testing. Given an hypothesis <script type="math/tex">H</script>=”there are <script type="math/tex">N_R</script> red balls” about the urn, we will use a sample <script type="math/tex">S</script>=”we drew <script type="math/tex">n</script> balls and <script type="math/tex">r</script> and them were red” to estimate the hypothesis.</p>
+<p>The previous sections took the hypothesis for granted and computed a propability estimate that the hypothesis would yield the sample (i.e. the probability to get <script type="math/tex">r</script> red balls among <script type="math/tex">n</script> draws, given that there are <script type="math/tex">N_R</script> red balls in the urn). In equation terms, we computed:</p>
+<script type="math/tex; mode=display">p(S \mid H, B)</script>
+<p>Where, as before, <script type="math/tex">B</script> stands for some background information.</p>
+<p>We will now compute a probability estimate for the other direction:</p>
+<script type="math/tex; mode=display">p(H \mid S, B)</script>
+<p>Using the formula for the “and” rule we see that:</p>
+<script type="math/tex; mode=display">% <![CDATA[
+p(H \,\&\, S \mid B) = p(H \mid S, B)\cdot p(S \mid B) = p(S \mid H, B) \cdot p(H \mid B) %]]></script>
+<p>Therefore:</p>
+<script type="math/tex; mode=display">p(H \mid S, B) = \frac{p(S \mid H, B) \cdot p(H \mid B)}{p(S \mid B)}</script>
+<h4 id="from-discrete-to-continuous">From discrete to continuous</h4>
+<p>Note: my goal is not to provide a rigorous definition of continuous probability, so I’ll skip over the details.</p>
+<p>Recall our formula for the probability estimation for <script type="math/tex">H</script> given the sample <script type="math/tex">S</script>:</p>
+<script type="math/tex; mode=display">p(H \mid S, B) = \frac{p(S \mid H, B) \cdot p(H \mid B)}{p(S \mid B)}</script>
+<p>We will now take the following hypothesis: <script type="math/tex">H_f</script>=”The fraction of red balls in the urn is <script type="math/tex">f</script>”, so the formula becomes:</p>
+<script type="math/tex; mode=display">p(H_f \mid S, B) = \frac{p(S \mid H_f, B) \cdot p(H_f \mid B)}{p(S \mid B)}</script>
+<p>Since we are concerned with the hypothesis <script type="math/tex">H_f</script>, we would like to remove <script type="math/tex">p(S\mid B)</script> from the equation. We can do this using the following insight.</p>
+<h4 id="digression">Digression</h4>
+<p>Suppose that we have <script type="math/tex">n</script> propositions <script type="math/tex">H_1</script>, …, <script type="math/tex">H_n</script> such that at least one is true, and no two of them are true at the same time:</p>
+<table>
+<tbody>
+<tr>
+<td><script type="math/tex">p(H_1 \lor ... \lor H_n \mid B) = 1</script></td>
+<td>and</td>
+<td><script type="math/tex">% <![CDATA[
+p(H_i \,\&\, H_j) = 0 %]]></script>, <script type="math/tex">\forall i,j \leq n</script></td>
+</tr>
+</tbody>
+</table>
+<p>For instance, <script type="math/tex">H_f</script> = “the fraction of red balls in the urn is <script type="math/tex">f</script>” has this property. If <script type="math/tex">H_{0.3}</script> is true, then <script type="math/tex">H_{0.6}</script> is necessarily false. Likewise, there is at least one number <script type="math/tex">f</script> that is equal to the fraction of red balls in the urn.</p>
+<p>Then, we can write:</p>
+<script type="math/tex; mode=display">% <![CDATA[
+S = S \,\&\, (H_1 \lor ... \lor H_n) %]]></script>
+<p>and:</p>
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{align}
+p(S \mid B) &= p(S \,\&\, (H_1 \lor ... \lor H_n) \mid B) \\
+            &= p(S \,\&\ H_1 \mid B) + ... + p(S \,\&\, H_n \mid B) \\
+            &= p(S \mid H_1, B)\cdot p(H_1 \mid B) + ... + p(S \mid H_n, B)\cdot p(H_n \mid B)
+\end{align} %]]></script>
+<p>or in shorter form:</p>
+<script type="math/tex; mode=display">p(S \mid B) = \sum_1^n p(S \mid H_i, B)\cdot p(H_n \mid B)</script>
+<p>if we have an infinite set of hypotheses, the sum becomes an integral:</p>
+<script type="math/tex; mode=display">p(S \mid B) = \int_{f = 0}^{f = 1} p(S \mid H_f, B)\cdot p(H_f \mid B)</script>
+<p>Using this formula in the expression for <script type="math/tex">p(H_f \mid S, B)</script>, we find:</p>
+<script type="math/tex; mode=display">p(H_f \mid S, B) = \frac{p(S \mid H_f, B) \cdot p(H_f \mid B)}{\int_{f=0}^{f=1} p(S \mid H_f, B)\cdot p(H_f \mid B)}</script>
+<p>According to our computation of <script type="math/tex">e_r</script> above, the probability to obtain a sample of size <script type="math/tex">n</script> containing <script type="math/tex">r</script> red balls given hypothesis <script type="math/tex">H_f</script> is:</p>
+<script type="math/tex; mode=display">p(S \mid H_f, B) = f^r \cdot (1 - f)^{(n-r)}</script>
+<p>If you consider the fraction <script type="math/tex">f</script> to be <script type="math/tex">N_R / N</script> and compare with the formula given for <script type="math/tex">e_r</script> above, you will see that the formula is the same in different notations.</p>
+<p>And thus we get the complete formula:</p>
+<script type="math/tex; mode=display">p(H_f \mid S, B) = \frac{(f^r \cdot (1 - f)^{(n-r)}) \cdot p(H_f \mid B)}{\int_{f=0}^{f=1} (f^r \cdot (1 - f)^{(n-r)})\cdot p(H_f \mid B)}</script>
+<p>Where it only remains to find a numerical value for <script type="math/tex">p(H_f \mid B)</script>. But since in the absence of data nothing in the background information tells us anything that would favor one hypothesis over the other, we will follow a symmetry argument as we did before and assign the same probability estimate for every <script type="math/tex">H_f</script>. Since at least one of the <script type="math/tex">H_f</script> must be true, we know that their “sum” is <script type="math/tex">1.00</script>:</p>
+<script type="math/tex; mode=display">\int_{f=0}^{f=1} p(H_f \mid B) = 1.00</script>
+<p>And since all the <script type="math/tex">H_f</script> have the same probability estimate, we deduce:</p>
+<script type="math/tex; mode=display">p(H_f \mid B) = \mathrm{d}f</script>
+<p>Our probability estimate for hypothesis <script type="math/tex">H_f</script> is thus:</p>
+<script type="math/tex; mode=display">p(H_f \mid S, B) = \frac{(f^r \cdot (1 - f)^{(n-r)}) \cdot \mathrm{d}f}{\int_{f=0}^{f=1} (f^r \cdot (1 - f)^{(n-r)})\cdot \mathrm{d}f}</script>
+<p>After some math involving the <a href="http://mathworld.wolfram.com/eulerianintegralofthefirstkind.html">Eulerian integral of the first kind</a>, we get:</p>
+<script type="math/tex; mode=display">p(H_f \mid S, B) = \frac{(n+1)!}{r!(n-r)!} \, f^r\, (1-f)^{n-r}\cdot \mathrm{d}f</script>
+<p>which is maximal for <script type="math/tex">f = \frac{r}{n}</script>.</p>
+<p>So, the most probable fraction of red balls in the urn is <script type="math/tex">r/n</script>, which is the fraction of red balls in our sample. Compare this with our result from probability theory:</p>
+<ul>
+<li>Probability theory says that:
+    <ul>
+<li>if the fraction of red balls in the urn is <script type="math/tex">f</script></li>
+<li>then the most likely fraction in the sample is <script type="math/tex">f + \frac{1}{n} \cdot K</script></li>
+<li>for a constant <script type="math/tex">K</script></li>
+</ul>
+</li>
+<li>Statistical inference says that:
+    <ul>
+<li>if the fraction of red balls in the sample is <script type="math/tex">f</script></li>
+<li>then the most likely fraction in the urn is <script type="math/tex">f</script></li>
+</ul>
+</li>
+</ul>
+<p>But how likely is the most likely fraction?</p>
+<h2 id="interval-estimate">Interval estimate</h2>
+<p>We know the most likely value for <script type="math/tex">f</script>, which is called a point estimate. But we would like to know how likely this value is.</p>
+<p>To quantify this, we can use the de Moivre-Laplace theorem to find that <script type="math/tex">p(H_f \mid S, B)</script> is a Gaussian distribution (also called normal distribution) of mean <script type="math/tex">f = r/n</script> and variance <script type="math/tex">\sigma^2 = f(1-f)/n</script> as long as <script type="math/tex">n >> 1</script> and <script type="math/tex">n-r >> 1</script>.</p>
+<p>Here is a graph (made with <a href="https://gist.github.com/julien-h/2f1b042d7a261b4f1133ec92ffab9ede">python</a>) of both functions for <script type="math/tex">f = 0.5</script> and <script type="math/tex">n = 1, ..., 70</script>:</p>
+<p><img alt="Convergence to normal distribution" src="images/bernoulli-urn/binom_convergence.gif"/></p>
+<p>From this we can estimate intervals for our confidence level:</p>
+<ul>
+<li>50% probability that the true value of the fraction is contained in the interval <script type="math/tex">f \pm 0.68\sigma</script>;</li>
+<li>90% probability that it is contained in <script type="math/tex">f \pm 1.65 \sigma</script>;</li>
+<li>99% probability that it is contained in <script type="math/tex">f \pm 2.57 \sigma</script>.</li>
+</ul>
+<h2 id="read-next">Read next</h2>
+<p>If you want to see how the rules of probability given above can be constructed, check out this article: <a href="probability-logic-of-uncertainty.html">Probability, the logic of uncertainty</a></p>
+</div>
+    </article>
+    </div><!-- row -->
+    
+    <div class="row mt-1">
+      <article class="col-lg-8 mx-auto recommendations">
+        <p class='title'>Other articles you might like:</p>
+        <ul>
+          
+            <li class="en"><img class="flag-icon" src="//julienharbulot.com/images/languages/en.png"> <a href="//julienharbulot.com/propositional-logic-from-probability-calculus.html">Propositional logic derived as a special case of probability calculus</a></li>
+          
+            <li class="en"><img class="flag-icon" src="//julienharbulot.com/images/languages/en.png"> <a href="//julienharbulot.com/probability-logic-of-uncertainty.html">Extending logic to deal with uncertainty</a></li>
+          
+            <li class="en"><img class="flag-icon" src="//julienharbulot.com/images/languages/en.png"> <a href="//julienharbulot.com/what-is-statistic.html">What is a statistic and why do we care?</a></li>
+          
+            <li class="en"><img class="flag-icon" src="//julienharbulot.com/images/languages/en.png"> <a href="//julienharbulot.com/win-extend-screen.html">Keyboard shortcut and command line utility to switch display (Windows)</a></li>
+          
+        </ul>
+      </article>
+    </div>
+    
+    
+    <div class="row mb=5 mt-5">
+      <article class="col-lg-8 mx-auto">
+        <div id="hyvor-talk-view"></div>
+        <script type="text/javascript">
+            var HYVOR_TALK_WEBSITE = '625';
+            var HYVOR_TALK_CONFIG = {
+                url: 'bernoulli-urn.html',
+                id: 'bernoulli-urn.html'
+            };
+        </script>
+      </article>
+    </div><!-- row -->
+    
+    <footer class="row">
+        <div class="col-lg-8 mx-auto text-center">
+          <p><small>
+          
+            Last updated: 01/14/21 <br/>
+          
+          
+          Copyright &copy; 2021 Julien Harbulot
+          </small></p>
+        </div>
+    </footer>
+    </div>
+
+  <script>
+  // bootstrap table
+  tables = document.getElementsByTagName('table');
+  for (i = 0; i < tables.length; i++) {
+    tables[i].classList.add('table');
+    tables[i].classList.add('table-bordered');
+  }
+
+  // Paragraphs that contain only images are marked with custom class for styling
+  ps = document.getElementsByTagName('p');
+  Array.from(ps).forEach(function(p){
+    if (p.getElementsByTagName('img').length > 0 && p.textContent.trim().length == 0) {
+        p.classList.add('img-container');
+    }
+  });
+  </script>
+
+
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script>
+        prev_onload_a = window.onload;
+        window.onload = function() {
+            if (prev_onload_a) {
+                prev_onload_a();
+            }
+            var navlinks = document.getElementsByClassName("nav-link");
+            var i;
+            for (i = 0; i < navlinks.length; i++) {
+                const target = new URL(navlinks[i].href)
+                if (location.pathname == target.pathname) {
+                    navlinks[i].classList.add('active')
+                }
+            }
+        }
+    </script>    
+
+    
+
+<script async type="text/javascript" src="//talk.hyvor.com/web-api/embed"></script>
+
+
+    </body>
+</html>

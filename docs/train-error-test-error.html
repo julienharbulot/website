@@ -1,0 +1,575 @@
+<!doctype html>
+<html lang="en">
+    <head>
+    
+
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-166292985-1"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-166292985-1');
+    </script>
+    
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" 
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+          rel="stylesheet" crossorigin="anonymous">
+    
+    <link rel="stylesheet" href="/theme/pygment-github.css">
+    <link rel="stylesheet" href="/theme/article.css"> 
+
+    <title>Train error and test error</title>
+    
+    <!-- Favicon -->
+    <link rel="apple-touch-icon" sizes="120x120" href="/images/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon/favicon-16x16.png">
+    <link rel="manifest" href="/images/favicon/site.webmanifest">
+    <link rel="mask-icon" href="/images/favicon/safari-pinned-tab.svg" color="#5bbad5">
+    <link rel="shortcut icon" href="favicon.ico">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="msapplication-config" content="/images/favicon/browserconfig.xml">
+    <meta name="theme-color" content="#ffffff">
+    
+<!-- Mathjax -->
+<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS_SVG">
+  MathJax.Hub.Config({
+    tex2jax: {
+    	inlineMath: [ ['$','$'] ],
+    	processEscapes: true
+    },
+	"HTML-CSS": {
+		fonts: ["TeX"] 
+	}
+  });
+</script>
+
+    </head>
+
+    <body>
+    
+    <nav class="navbar navbar-expand-lg navbar-light ">
+        <a class="navbar-brand" href="//julienharbulot.com/index.html"><img src="//julienharbulot.com/images/logo.png" width="30" alt=""></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+            
+            <li class="nav-item">
+                    <a class="nav-link" href="//julienharbulot.com/technical-blog.html">Technical blog</a>
+            </li>
+            
+            <li class="nav-item">
+                    <a class="nav-link" href="//julienharbulot.com/maths.html">Maths</a>
+            </li>
+            
+            <li class="nav-item">
+                    <a class="nav-link" href="//julienharbulot.com/projects.html">Projects</a>
+            </li>
+            
+            <li class="nav-item">
+                    <a class="nav-link" href="//julienharbulot.com/research.html">Research</a>
+            </li>
+            
+            <!--<li class="nav-item">
+                <a class="nav-link" href="//julienharbulot.com/about-me.html">About me</a>
+            </li>-->
+            
+
+<li class="nav-item dropdown">
+    <a class="nav-link active dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Table of content
+    </a>
+    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+        <div class="toc"><ul>
+<li class="toc-entry-1">
+<a class='toc-href dropdown-item' href='#machine-learning-setup' title='Machine learning setup'>Machine learning setup</a>
+</li>
+<div class="dropdown-divider"></div>
+<li class="toc-entry-1">
+<a class='toc-href dropdown-item' href='#train-set-and-test-set' title='Train-set and test-set'>Train-set and test-set</a>
+</li>
+<div class="dropdown-divider"></div>
+<li class="toc-entry-1">
+<a class='toc-href dropdown-item' href='#training' title='Training'>Training</a>
+</li>
+<div class="dropdown-divider"></div>
+<li class="toc-entry-1">
+<a class='toc-href dropdown-item' href='#the-loss-function' title='The loss function'>The loss function</a>
+</li>
+<div class="dropdown-divider"></div>
+<li class="toc-entry-1">
+<a class='toc-href dropdown-item' href='#the-train-error' title='The train error'>The train error</a>
+</li>
+<div class="dropdown-divider"></div>
+<li class="toc-entry-1">
+<a class='toc-href dropdown-item' href='#the-test-error' title='The test error'>The test error</a>
+</li>
+</ul><div>
+    </div>
+</li>
+
+
+            </ul>
+        </div>
+    </nav>
+    
+    
+    
+    <div class="container">
+    <div class="row mt-5">
+      <div class="col-lg-8 mx-auto"> 
+        <h1 class="display-5">Train error and test error </h1>
+        <div class="text-right">01 Nov 2018</div>
+      </div>
+    </div>
+    <div class="row mt-5">
+    <article class="col-lg-8 mx-auto">
+    <p>
+<script type="math/tex; mode=display">
+\def\sa{a}
+\def\sb{b}
+\def\sc{c}
+\def\sd{d}
+\def\se{e}
+\def\sf{f}
+\def\sg{g}
+\def\sh{h}
+\def\si{i}
+\def\sj{j}
+\def\sk{k}
+\def\sl{l}
+\def\sm{m}
+\def\sn{n}
+\def\so{o}
+\def\sp{p}
+\def\sq{q}
+\def\sr{r}
+\def\ss{s}
+\def\st{t}
+\def\su{u}
+\def\sv{v}
+\def\sw{w}
+\def\sx{x}
+\def\sy{y}
+\def\sz{z}
+\def\va{\vec{a}}
+\def\vb{\vec{b}}
+\def\vc{\vec{c}}
+\def\vd{\vec{d}}
+\def\ve{\vec{e}}
+\def\vf{\vec{f}}
+\def\vg{\vec{g}}
+\def\vh{\vec{h}}
+\def\vi{\vec{i}}
+\def\vj{\vec{j}}
+\def\vk{\vec{k}}
+\def\vl{\vec{l}}
+\def\vm{\vec{m}}
+\def\vn{\vec{n}}
+\def\vo{\vec{o}}
+\def\vp{\vec{p}}
+\def\vq{\vec{q}}
+\def\vr{\vec{r}}
+\def\vs{\vec{s}}
+\def\vt{\vec{t}}
+\def\vu{\vec{u}}
+\def\vv{\vec{v}}
+\def\vw{\vec{w}}
+\def\vx{\vec{x}}
+\def\vy{\vec{y}}
+\def\vz{\vec{z}}
+\def\ga{\mathfrak{A}}
+\def\gb{\mathfrak{B}}
+\def\gc{\mathfrak{C}}
+\def\gd{\mathfrak{D}}
+\def\ge{\mathfrak{E}}
+\def\gf{\mathfrak{F}}
+\def\gg{\mathfrak{G}}
+\def\gh{\mathfrak{H}}
+\def\gi{\mathfrak{I}}
+\def\gj{\mathfrak{J}}
+\def\gk{\mathfrak{K}}
+\def\gl{\mathfrak{L}}
+\def\gm{\mathfrak{M}}
+\def\gn{\mathfrak{N}}
+\def\go{\mathfrak{O}}
+\def\gp{\mathfrak{P}}
+\def\gq{\mathfrak{Q}}
+\def\gr{\mathfrak{R}}
+\def\gs{\mathfrak{S}}
+\def\gt{\mathfrak{T}}
+\def\gu{\mathfrak{U}}
+\def\gv{\mathfrak{V}}
+\def\gw{\mathfrak{W}}
+\def\gx{\mathfrak{X}}
+\def\gy{\mathfrak{Y}}
+\def\gz{\mathfrak{Z}}
+\def\ra{A}
+\def\rb{B}
+\def\rc{C}
+\def\rd{D}
+\def\re{E}
+\def\rf{F}
+\def\rg{G}
+\def\rh{H}
+\def\ri{I}
+\def\rj{J}
+\def\rk{K}
+\def\rl{L}
+\def\rm{M}
+\def\rn{N}
+\def\ro{O}
+\def\rp{P}
+\def\rq{Q}
+\def\rr{R}
+\def\rs{S}
+\def\rt{T}
+\def\ru{U}
+\def\rv{V}
+\def\rw{W}
+\def\rx{X}
+\def\ry{Y}
+\def\rz{Z}
+\def\rva{\vec{A}}
+\def\rvb{\vec{B}}
+\def\rvc{\vec{C}}
+\def\rvd{\vec{D}}
+\def\rve{\vec{E}}
+\def\rvf{\vec{F}}
+\def\rvg{\vec{G}}
+\def\rvh{\vec{H}}
+\def\rvi{\vec{I}}
+\def\rvj{\vec{J}}
+\def\rvk{\vec{K}}
+\def\rvl{\vec{L}}
+\def\rvm{\vec{M}}
+\def\rvn{\vec{N}}
+\def\rvo{\vec{O}}
+\def\rvp{\vec{P}}
+\def\rvq{\vec{Q}}
+\def\rvr{\vec{R}}
+\def\rvs{\vec{S}}
+\def\rvt{\vec{T}}
+\def\rvu{\vec{U}}
+\def\rvv{\vec{V}}
+\def\rvw{\vec{W}}
+\def\rvx{\vec{X}}
+\def\rvy{\vec{Y}}
+\def\rvz{\vec{Z}}
+\def\seta{A}
+\def\setb{B}
+\def\setc{C}
+\def\setd{D}
+\def\sete{E}
+\def\setf{F}
+\def\setg{G}
+\def\seth{H}
+\def\seti{I}
+\def\setj{J}
+\def\setk{K}
+\def\setl{L}
+\def\setm{M}
+\def\setn{N}
+\def\seto{O}
+\def\setp{P}
+\def\setq{Q}
+\def\setr{R}
+\def\sets{S}
+\def\sett{T}
+\def\setu{U}
+\def\setv{V}
+\def\setw{W}
+\def\setx{X}
+\def\sety{Y}
+\def\setz{Z}
+\def\fa{a}
+\def\fb{b}
+\def\fc{c}
+\def\fd{d}
+\def\fe{e}
+\def\ff{f}
+\def\fg{g}
+\def\fh{h}
+\def\fi{i}
+\def\fj{j}
+\def\fk{k}
+\def\fl{l}
+\def\fm{m}
+\def\fn{n}
+\def\fo{o}
+\def\fp{p}
+\def\fq{q}
+\def\fr{r}
+\def\fs{s}
+\def\ft{t}
+\def\fu{u}
+\def\fv{v}
+\def\fw{w}
+\def\fx{x}
+\def\fy{y}
+\def\fz{z}
+\def\fA{A}
+\def\fB{B}
+\def\fC{C}
+\def\fD{D}
+\def\fE{E}
+\def\fF{F}
+\def\fG{G}
+\def\fH{H}
+\def\fI{I}
+\def\fJ{J}
+\def\fK{K}
+\def\fL{L}
+\def\fM{M}
+\def\fN{N}
+\def\fO{O}
+\def\fP{P}
+\def\fQ{Q}
+\def\fR{R}
+\def\fS{S}
+\def\fT{T}
+\def\fU{U}
+\def\fV{V}
+\def\fW{W}
+\def\fX{X}
+\def\fY{Y}
+\def\fZ{Z}
+\def\ma{A}
+\def\mb{B}
+\def\mc{C}
+\def\md{D}
+\def\me{E}
+\def\mf{F}
+\def\mg{G}
+\def\mh{H}
+\def\mi{I}
+\def\mj{J}
+\def\mk{K}
+\def\ml{L}
+\def\mm{M}
+\def\mn{N}
+\def\mo{O}
+\def\mp{P}
+\def\mq{Q}
+\def\mr{R}
+\def\ms{S}
+\def\mt{T}
+\def\matu{U}
+\def\mv{V}
+\def\mw{W}
+\def\mx{X}
+\def\my{Y}
+\def\mz{Z}
+\def\loss{\mathcal{L}}
+\newcommand{\dkl}[2]{D_{\text{KL}}\mathopen{}\paren{#1\,||\,#2}}
+\newcommand{\dataset}{S}
+\newcommand{\ndataset}{N}
+\newcommand{\idataset}{n}
+\newcommand{\inputRV}{\mathcal{X}}
+\newcommand{\inputvec}{\vec{x}}
+\newcommand{\ninputvec}[1]{\vec{x}_{#1}}
+\newcommand{\iinputvec}[1]{x_{#1}}
+\newcommand{\niinputvec}[2]{x_{#1, #2}}
+\newcommand{\icpnt}{i}
+\newcommand{\inputmatrix}{X}
+\newcommand{\inputdim}{D}
+\newcommand{\outputval}{y}
+\newcommand{\ioutputval}[1]{y_{#1}}
+\newcommand{\outputvec}{\vec{y}}
+\newcommand{\trainset}{S_{\text{train}}}
+\newcommand{\testset}{S_{\text{test}}}
+\newcommand{\truemodel}{f_{\text{true}}}
+\newcommand{\trainedmodel}{f_{\trainset}}
+\newcommand{\linmodel}[1]{f_{#1}}
+\newcommand{\bestmodel}{f^{*}}
+\newcommand{\model}{f}
+\newcommand{\hyperparam}{\lambda}
+\newcommand{\linparamv}{\vec{w}}
+\newcommand{\ilinparam}[1]{w_{#1}}
+\newcommand{\indivloss}{l}
+\newcommand{\modelclass}{\mathcal{F}}
+\newcommand{\linclass}{\modelclass_{\text{lin}}}
+\newcommand{\g}{\mathcal{G}}
+\newcommand{\gmse}{\g_{\text{MSE}}}
+\newcommand{\glasso}{\g_{\text{lasso}}}
+\newcommand{\gridge}{\g_{\text{ridge}}}
+\newcommand{\glogit}{\g_{\logit}}
+\newcommand{\l}{\mathcal{L}}
+\newcommand{\lmse}{\l_{\text{MSE}}}
+\newcommand{\lmae}{\l_{\text{MAE}}}
+\newcommand{\llasso}{\l_{\text{lasso}}}
+\newcommand{\lridge}{\l_{\text{ridge}}}
+\newcommand{\llogit}{\l_{\logit}}
+\newcommand{\logit}{\sigma}
+\newcommand{\reg}{\mathcal{R}}
+\DeclareMathOperator*{\argmin}{argmin}
+\DeclareMathOperator*{\argmax}{argmax}
+\DeclareMathOperator*{\mean}{mean}
+\DeclareMathOperator*{\avg}{avg}
+\DeclareMathOperator*{\span}{span}
+\DeclareMathOperator*{\var}{var}
+\DeclareMathOperator*{\bias}{bias}
+\newcommand{\expectation}{\mathbb{E}}
+\newcommand{\brak}[1]{\left[#1\right]}
+\newcommand{\paren}[1]{\left(#1\right)}
+\newcommand{\realset}{\mathbb{R}}
+\newcommand{\realvset}[1]{\realset^{#1}}
+\newcommand{\prob}{\mathbb{P}}
+\newcommand{\gaussian}{\mathcal{N}}
+\newcommand{\iid}{\stackrel{\text{i.i.d.}}{\sim}}
+\newcommand{\abs}[1]{\left\lvert#1\right\rvert}
+\newcommand{\norm}[1]{\left\lVert#1\right\rVert}
+\newcommand{\normtwo}[1]{\norm{#1}_{2}}
+\newcommand{\normone}[1]{\norm{#1}_{1}}
+\newcommand{\card}[1]{\left\lvert#1\right\rvert}
+\newcommand{\grad}{\nabla}
+\newcommand{\dconv}{\stackrel{d}{\to}}
+\newcommand{\pconv}{\stackrel{p}{\to}}
+\newcommand{\rva}[1]{#1}
+\newcommand{\rve}[1]{\vec{#1}}
+\newcommand{\obs}[1]{#1}
+\newcommand{\vobs}[1]{\vec{#1}}
+\newcommand{\distrib}[1]{#1}
+\newcommand{\distribof}[2]{#1_{#2}}
+\newcommand{\density}[1]{#1}
+\newcommand{\densityof}[2]{#1_{#2}}
+\newcommand{\distributed}{\sim}
+\newcommand{\const}[1]{#1}
+\newcommand{\fun}[1]{#1}
+</script>
+</p>
+<div class="typography">
+
+<p>The train error is the error commited by a machine-learning model on the dataset it was trained on. The test error is the error commited on another dataset called the test-set.</p>
+<p>Let’s explain this in more details.</p>
+<h2 id="machine-learning-setup">Machine learning setup</h2>
+<p>The dataset <script type="math/tex">\dataset</script> of study consists of <script type="math/tex">\ndataset</script> pairs of input vector <script type="math/tex">\inputvec_{\idataset}</script> and output value <script type="math/tex">\outputval_{\idataset}</script>:</p>
+<script type="math/tex; mode=display">\dataset = \{\paren{\inputvec_{\idataset}, \outputval_{\idataset}} \mid \idataset \leq \ndataset\}</script>
+<p>We suppose that there exists an approximate deterministic relationship <script type="math/tex">\truemodel</script> between the inputs <script type="math/tex">\inputvec_{\idataset}</script> and the outputs <script type="math/tex">\outputval_{\idataset}</script>:</p>
+<script type="math/tex; mode=display">\forall \idataset \leq \ndataset, \quad \outputval_{\idataset} \approx \truemodel\paren{\inputvec_{\idataset}}</script>
+<p>The goal of a machine-learning model is to learn this relationship using a subset <script type="math/tex">\trainset \subseteq \dataset</script> of the dataset.</p>
+<h2 id="train-set-and-test-set">Train-set and test-set</h2>
+<p>The dataset <script type="math/tex">\dataset</script> is often split into two disjoint parts <script type="math/tex">\trainset</script> and <script type="math/tex">\testset</script> respectively named the train-set and the test-set:</p>
+<script type="math/tex; mode=display">\dataset = \trainset \cup \testset</script>
+<h2 id="training">Training</h2>
+<p>To learn the relationship <script type="math/tex">\truemodel</script>, we choose a class of models <script type="math/tex">\modelclass</script> among which we select the best model. This is done by minimizing a function named the training objective, on the train-set:</p>
+<script type="math/tex; mode=display">\trainedmodel = \argmin_{\model\in\modelclass} \, \g(\model, \trainset)</script>
+<p>After training, we should have the approximate relationship (on the whole dataset <script type="math/tex">\dataset</script>):</p>
+<script type="math/tex; mode=display">\forall \idataset \leq \ndataset, \quad \ioutputval{\idataset}\approx \trainedmodel(\ninputvec{\idataset})</script>
+<h2 id="the-loss-function">The loss function</h2>
+<p>To measure progress during training, we must decide how costly each mistake is. This is the role of the loss function which measures how well some model <script type="math/tex">\model\in\modelclass</script> performs on some subset <script type="math/tex">\dataset_x</script> of the dataset <script type="math/tex">\dataset</script>:</p>
+<script type="math/tex; mode=display">\l(\model, \dataset_x) \in \realset_+</script>
+<h2 id="the-train-error">The train error</h2>
+<p>The train error is the loss of a model <script type="math/tex">\trainedmodel</script> on the same dataset <script type="math/tex">\trainset</script> it was trained on:</p>
+<script type="math/tex; mode=display">\text{train error} = \l(\trainedmodel, \trainset)</script>
+<h2 id="the-test-error">The test error</h2>
+<p>The test error is the loss of a model <script type="math/tex">\trainedmodel</script> on the other dataset <script type="math/tex">\testset</script>:</p>
+<script type="math/tex; mode=display">\text{test error} = \l(\trainedmodel, \testset)</script>
+<p>For mathematical correctness, it is important that the test-set <script type="math/tex">\testset</script> does not contain any pairs from the train-set <script type="math/tex">\trainset</script>:</p>
+<script type="math/tex; mode=display">\trainset \cap \testset = \emptyset</script>
+</div>
+    </article>
+    </div><!-- row -->
+    
+    <div class="row mt-1">
+      <article class="col-lg-8 mx-auto recommendations">
+        <p class='title'>Other articles you might like:</p>
+        <ul>
+          
+            <li class="en"><img class="flag-icon" src="//julienharbulot.com/images/languages/en.png"> <a href="//julienharbulot.com/linear-regression-explained.html">Linear regressions in simple terms</a></li>
+          
+            <li class="en"><img class="flag-icon" src="//julienharbulot.com/images/languages/en.png"> <a href="//julienharbulot.com/hyperparameters.html">What is an hyperparameter?</a></li>
+          
+            <li class="en"><img class="flag-icon" src="//julienharbulot.com/images/languages/en.png"> <a href="//julienharbulot.com/python-emails.html">How to send emails from python</a></li>
+          
+            <li class="en"><img class="flag-icon" src="//julienharbulot.com/images/languages/en.png"> <a href="//julienharbulot.com/win-extend-screen.html">Keyboard shortcut and command line utility to switch display (Windows)</a></li>
+          
+        </ul>
+      </article>
+    </div>
+    
+    
+    <div class="row mb=5 mt-5">
+      <article class="col-lg-8 mx-auto">
+        <div id="hyvor-talk-view"></div>
+        <script type="text/javascript">
+            var HYVOR_TALK_WEBSITE = '625';
+            var HYVOR_TALK_CONFIG = {
+                url: 'train-error-test-error.html',
+                id: 'train-error-test-error.html'
+            };
+        </script>
+      </article>
+    </div><!-- row -->
+    
+    <footer class="row">
+        <div class="col-lg-8 mx-auto text-center">
+          <p><small>
+          
+            Last updated: 01/14/21 <br/>
+          
+          
+          Copyright &copy; 2021 Julien Harbulot
+          </small></p>
+        </div>
+    </footer>
+    </div>
+
+  <script>
+  // bootstrap table
+  tables = document.getElementsByTagName('table');
+  for (i = 0; i < tables.length; i++) {
+    tables[i].classList.add('table');
+    tables[i].classList.add('table-bordered');
+  }
+
+  // Paragraphs that contain only images are marked with custom class for styling
+  ps = document.getElementsByTagName('p');
+  Array.from(ps).forEach(function(p){
+    if (p.getElementsByTagName('img').length > 0 && p.textContent.trim().length == 0) {
+        p.classList.add('img-container');
+    }
+  });
+  </script>
+
+
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script>
+        prev_onload_a = window.onload;
+        window.onload = function() {
+            if (prev_onload_a) {
+                prev_onload_a();
+            }
+            var navlinks = document.getElementsByClassName("nav-link");
+            var i;
+            for (i = 0; i < navlinks.length; i++) {
+                const target = new URL(navlinks[i].href)
+                if (location.pathname == target.pathname) {
+                    navlinks[i].classList.add('active')
+                }
+            }
+        }
+    </script>    
+
+    
+
+<script async type="text/javascript" src="//talk.hyvor.com/web-api/embed"></script>
+
+
+    </body>
+</html>

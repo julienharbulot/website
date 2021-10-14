@@ -1,0 +1,312 @@
+<!doctype html>
+<html lang="fr">
+    <head>
+    
+
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-166292985-1"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-166292985-1');
+    </script>
+    
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" 
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+          rel="stylesheet" crossorigin="anonymous">
+    
+    <link rel="stylesheet" href="/theme/pygment-github.css">
+    <link rel="stylesheet" href="/theme/article.css"> 
+
+    <title>Collecte de données de déplacements</title>
+    
+    <!-- Favicon -->
+    <link rel="apple-touch-icon" sizes="120x120" href="/images/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon/favicon-16x16.png">
+    <link rel="manifest" href="/images/favicon/site.webmanifest">
+    <link rel="mask-icon" href="/images/favicon/safari-pinned-tab.svg" color="#5bbad5">
+    <link rel="shortcut icon" href="favicon.ico">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="msapplication-config" content="/images/favicon/browserconfig.xml">
+    <meta name="theme-color" content="#ffffff">
+    
+<!-- Mathjax -->
+<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS_SVG">
+  MathJax.Hub.Config({
+    tex2jax: {
+    	inlineMath: [ ['$','$'] ],
+    	processEscapes: true
+    },
+	"HTML-CSS": {
+		fonts: ["TeX"] 
+	}
+  });
+</script>
+
+    </head>
+
+    <body>
+    
+    <nav class="navbar navbar-expand-lg navbar-light ">
+        <a class="navbar-brand" href="//julienharbulot.com/index.html"><img src="//julienharbulot.com/images/logo.png" width="30" alt=""></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+            
+            <li class="nav-item">
+                    <a class="nav-link" href="//julienharbulot.com/technical-blog.html">Technical blog</a>
+            </li>
+            
+            <li class="nav-item">
+                    <a class="nav-link" href="//julienharbulot.com/maths.html">Maths</a>
+            </li>
+            
+            <li class="nav-item">
+                    <a class="nav-link" href="//julienharbulot.com/projects.html">Projects</a>
+            </li>
+            
+            <li class="nav-item">
+                    <a class="nav-link" href="//julienharbulot.com/research.html">Research</a>
+            </li>
+            
+            <!--<li class="nav-item">
+                <a class="nav-link" href="//julienharbulot.com/about-me.html">About me</a>
+            </li>-->
+            
+
+<li class="nav-item dropdown">
+    <a class="nav-link active dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Table of content
+    </a>
+    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+        <div class="toc"><ul>
+<li class="toc-entry-1">
+<a class='toc-href dropdown-item' href='#le-projet-en-quelques-mots' title='Le projet en quelques mots'>Le projet en quelques mots</a>
+</li>
+<div class="dropdown-divider"></div>
+<li class="toc-entry-1">
+<a class='toc-href dropdown-item' href='#lapplication-pour-smartphone' title='L'application pour smartphone'>L'application pour smartphone</a>
+</li>
+<div class="dropdown-divider"></div>
+<li class="toc-entry-1">
+<a class='toc-href dropdown-item' href='#quelles-donnees-sont-collectees' title='Quelles données sont collectées ?'>Quelles données sont collectées ?</a>
+</li>
+<div class="dropdown-divider"></div>
+<li class="toc-entry-1">
+<a class='toc-href dropdown-item' href='#comment-installer-lapp' title='Comment installer l'app ?'>Comment installer l'app ?</a>
+    <ul>
+<li class="toc-entry-2">
+    <a class='toc-href dropdown-item' href='#ios-iphone' title='iOS (iPhone)'>iOS (iPhone)</a>
+    </li>
+<li class="toc-entry-2">
+    <a class='toc-href dropdown-item' href='#android' title='Android'>Android</a>
+    </li>
+<li class="toc-entry-2">
+    <a class='toc-href dropdown-item' href='#reglages-android' title='Réglages Android'>Réglages Android</a>
+    </li>
+    </ul>
+</li>
+<div class="dropdown-divider"></div>
+<li class="toc-entry-1">
+<a class='toc-href dropdown-item' href='#comment-utiliser-lapp' title='Comment utiliser l'app ?'>Comment utiliser l'app ?</a>
+</li>
+<div class="dropdown-divider"></div>
+<li class="toc-entry-1">
+<a class='toc-href dropdown-item' href='#ou-mettre-le-smartphone' title='Où mettre le smartphone ?'>Où mettre le smartphone ?</a>
+</li>
+<div class="dropdown-divider"></div>
+<li class="toc-entry-1">
+<a class='toc-href dropdown-item' href='#duree-de-la-collecte-de-donnees' title='Durée de la collecte de données'>Durée de la collecte de données</a>
+</li>
+<div class="dropdown-divider"></div>
+<li class="toc-entry-1">
+<a class='toc-href dropdown-item' href='#questions' title='Questions'>Questions</a>
+</li>
+</ul><div>
+    </div>
+</li>
+
+
+            </ul>
+        </div>
+    </nav>
+    
+    
+    
+    <div class="container">
+    <div class="row mt-5">
+      <div class="col-lg-8 mx-auto"> 
+        <h1 class="display-5">Collecte de données de déplacements </h1>
+        <div class="text-right">26 May 2020</div>
+      </div>
+    </div>
+    <div class="row mt-5">
+    <article class="col-lg-8 mx-auto">
+    <p>De nombreuses applications nécessitent de savoir avec quel mode de transport un utilisateur se déplace. Par exemple une application de fitness ne comptera pas la même dépense énergétique lors d'un trajet à pied ou lors d'un trajet en voiture ; un jeu basé sur la réalité augmentée pourra donner accès à certaines fonctionnalités uniquement lorsque l'utilisateur est en vélo ; et certaines communes pourraient améliorer la circulation urbaine si elles avaient de meilleures données quant à l'utilisation des transports publics et la circulation des voitures.</p>
+<p>Pour cette raison, la détection automatique du mode de transport à partir de données d'un smartphone est un thème de recherche très actif. Je pense que l'intelligence artificielle (plus précisément, le <em>deep learning</em>) peut fournir de très bons résultats dans ce domaine. <strong>Pour créer un tel système j'ai besoin de votre aide pour collecter des données de déplacement !</strong></p>
+<p>Pour participer, vous pouvez utiliser <em>Travel Data Analysis</em>, une application smartphone que j'ai créée spécialement pour collecter les données. Les informations d'installation et d'utilisation sont sur cette page.</p>
+<div class="toc"><span class="toctitle">Table of contents</span><ul>
+<li><a href="#le-projet-en-quelques-mots">Le projet en quelques mots</a></li>
+<li><a href="#lapplication-pour-smartphone">L'application pour smartphone</a></li>
+<li><a href="#quelles-donnees-sont-collectees">Quelles données sont collectées ?</a></li>
+<li><a href="#comment-installer-lapp">Comment installer l'app ?</a><ul>
+<li><a href="#ios-iphone">iOS (iPhone)</a></li>
+<li><a href="#android">Android</a></li>
+<li><a href="#reglages-android">Réglages Android</a></li>
+</ul>
+</li>
+<li><a href="#comment-utiliser-lapp">Comment utiliser l'app ?</a></li>
+<li><a href="#ou-mettre-le-smartphone">Où mettre le smartphone ?</a></li>
+<li><a href="#duree-de-la-collecte-de-donnees">Durée de la collecte de données</a></li>
+<li><a href="#questions">Questions</a></li>
+</ul>
+</div>
+<h2 id="le-projet-en-quelques-mots">Le projet en quelques mots</h2>
+<p>Pour ma thèse de fin d'étude à l'École Polytechnique Fédérale de Lausanne (EPFL), je mène un projet de recherche en intelligence artificielle (IA). L'objectif du projet est de créer une IA pour smartphones, capable d'utiliser les données de certains capteurs pour détecter automatiquement le mode de transport de l'utilisateur du smartphone (exemple: trajet à pied / en voiture / en vélo / etc.).</p>
+<p>Pour créer l'IA, je construis d'abord un réseau de neurones, un "petit cerveau" en quelque sorte. Ensuite il faut entrainer ce réseau à reconnaitre le mode de transport sous la forme d'un jeu de question / réponse. Dans la phase d'apprentissage on lui donne les questions et les réponses. Au bout d'un moment, l'IA devient capable de trouver la réponse toute seule. Dans ce projet, les "questions" contiennent les données collectées par le smartphone, et la "réponse" consiste à trouver le mode de transport utilisé lorsque les données ont été collectées.</p>
+<p>J'ai donc besoin de votre aide pour collecter un jeu de questions / réponses à partir duquel l'IA peut apprendre. En utilisant <em>Travel Data Analysis</em> vous pouvez enregistrer les données lors d'un trajet et préciser le mode de transport utilisé pour ce trajet. </p>
+<p>Pour ne pas embrouiller l'IA, il est aussi très important de ne pas mélanger les modes de transport. Par exemple, si un trajet est indiqué comme un "trajet en voiture", il faut arrêter l'enregistrement des données avant de sortir de la voiture et de commencer à marcher.</p>
+<h2 id="lapplication-pour-smartphone">L'application pour smartphone</h2>
+<p>Pour pouvoir collecter les données nécessaires, j'ai créé l'application <em>Travel Data Analysis</em>. Cette application est respectueuse de la vie privée et à été approuvée par le comité d'éthique de l'EPFL.</p>
+<p>Vous pouvez l'utiliser lors de vos déplacements pour collecter les données (les questions/réponses) dont j'ai besoin pour entrainer l'intelligence artificielle. Les données seront aussi publiées pour que d'autres chercheurs puissent travailler avec.</p>
+<h2 id="quelles-donnees-sont-collectees">Quelles données sont collectées ?</h2>
+<p>Aucune de vos données personnelles n'est utilisée dans le projet, ni publiée.</p>
+<p>Lorsque l'enregistrement des données est activé (est uniquement lorsqu'il est activé !) l'application enregistre les données suivantes :</p>
+<ul>
+<li>Les données du GPS (c'est à dire, la position géographique)</li>
+<li>Les données de accéléromètre, un capteur qui mesure la force appliquée sur le smartphone</li>
+<li>Les données du gyroscope, un capteur qui mesure les forces de rotation appliquées sur le smartphone</li>
+</ul>
+<p>Plus d'informations sont disponibles directement dans l'application : à la première ouverture de l'application, un texte contenant toutes les informations sur les données collectées est affiché, et votre consentement à utiliser cette application est demandé.</p>
+<p>Remarque : le formulaire de consentement sur l'application demande l'autorisation d'utiliser plus de capteurs que les trois ci-dessus mais pour l'instant seul ces trois sont utilisés.</p>
+<p><img src="https://raw.githubusercontent.com/julien-h/tmd-data-collection-app/master/docs/images/00-consent.png" style="max-width:30%;"></p>
+<h2 id="comment-installer-lapp">Comment installer l'app ?</h2>
+<h3 id="ios-iphone">iOS (iPhone)</h3>
+<p>L'application est disponible sur le store officiel d'Apple pour les applications en version béta. C'est un équivalent de l'App Store qui s'appelle TestFlight. Vous devrez d'abord installer TestFlight, puis installer mon application depuis TestFlight. C'est très simple, il suffit de cliquer sur le lien et de suivre les instructions. Après avoir installé TestFlight, retournez une seconde fois sur le lien pour obtenir l'invitation à installer mon application.</p>
+<ul>
+<li><a href="https://testflight.apple.com/join/8EHxN9lr">Lien Apple pour installer l'app</a></li>
+</ul>
+<h3 id="android">Android</h3>
+<p>Pour installer l'application sur un smartphone Android, cliquez sur ce lien:</p>
+<ul>
+<li><a href="https://install.appcenter.ms/orgs/elca-informatique-sa/apps/travel-mode-analysis-1/distribution_groups/android%20users">Lien Android pour installer l'app</a></li>
+</ul>
+<h3 id="reglages-android">Réglages Android</h3>
+<p>Certains fabricants installent une version customisée d'Android sur leur smartphone qui nécessite une manipulation particulière pour que mon application puisse fonctionner lorsque l'écran est verrouillé.</p>
+<p>Pour savoir si vous avez besoin d'un réglage particulier, lancer l'enregistrement d'un trajet, verrouillez votre écran. Si après 30/40mn, lorsque vous rouvrez l'app vous arrivez sur la page d'accueil "Commencer un trajet" au lieu de la page d'enregistrement, c'est que votre téléphone à quitté l'app, les données sont perdues et il faut changer un réglage.</p>
+<p>Le site <a href="https://dontkillmyapp.com/">DontKillMyApp</a> indique quels modèles nécessitent des réglages particuliers. J'ai déjà dû faire la manip pour les modèles suivants :</p>
+<ul>
+<li><a href="https://dontkillmyapp.com/oneplus">OnePlus</a></li>
+<li><a href="https://dontkillmyapp.com/huawei">Huawei P9+, P20, Mate 10, Mate 9</a> (scroll vers le bas jusqu'à voir le modèle de votre smartphone)</li>
+</ul>
+<h2 id="comment-utiliser-lapp">Comment utiliser l'app ?</h2>
+<p>Au début d'un trajet, ouvrez l'application. Une liste permet de choisir le mode de transport que vous allez utiliser lors du trajet. </p>
+<p>Il est très important de choisir le bon mode de transport et de ne pas les mélanger. Par exemple, si vous enregistrer un trajet en voiture, ne marchez pas pendant l'enregistrement ! Arrêtez l'enregistrement avant de sortir le smartphone de la voiture.</p>
+<p><img src="https://raw.githubusercontent.com/julien-h/tmd-data-collection-app/master/docs/images/01-mode.png" style="max-width:30%;"></p>
+<p>L'enregistrement démarre dès que vous avez choisi votre mode de transport. Vous verrez l'écran d'enregistrement avec une carte qui se mettra à jour automatiquement au fur et à mesure de votre trajet. Si vous avez désactivé le GPS, vous ne verrez pas de carte. C'est préférable pour la collecte de données de laisser le GPS activé.</p>
+<p><img src="https://raw.githubusercontent.com/julien-h/tmd-data-collection-app/master/docs/images/02-trip.png" style="max-width:30%;"></p>
+<p>À la fin de votre trajet, retourner sur l'app. Vous devez voir la carte, qui mettra peut-être une seconde avant de se mettre à jour et de montrer votre itinéraire. </p>
+<p><em>Note: Sur Android, si vous voyez la page d'accueil "Commencer un trajet" au lieu de la page d'enregistrement, c'est que votre téléphone a tué l'application, les données sont perdues. Voir la section <a href="#reglages-android">réglages Android</a> pour règler ce problème.</em></p>
+<p>Sur l'écran d'enregistrement, cliquez sur "Enregistrer" pour valider votre trajet et m'envoyer les données. Si vous vous êtes trompé de mode de transport, ou si vous avez oublié l'enregistrement et que vous avez mélangé les mode de transports, cliquez sur "Annuler" ou "Effacer ce trajet". <strong>Il vaut mieux privilégier la qualité des données plutôt que leur quantité</strong>.</p>
+<p><img src="https://raw.githubusercontent.com/julien-h/tmd-data-collection-app/master/docs/images/03-confirmation.png" style="max-width:30%"></p>
+<p>Ensuite vous pouvez aller dans la page de réglages (icone de boulon en haut à droite de l'écran) puis dans la page "Données locales" ou "Données envoyées" pour voir les données en attente d'envoi et en cours d'envoi.</p>
+<p>Si vous avez désactivé la synchronisation 3G, il faudra ouvrir l'application et la laisser ouverte à proximité d'un réseau Wifi pour permettre la synchronisation des données.</p>
+<h2 id="ou-mettre-le-smartphone">Où mettre le smartphone ?</h2>
+<p>L'application enregistre les forces et les vibrations subies par le smartphone lors de votre trajet. L'IA apprendra à reconnaitre des schémas dans ces vibrations.</p>
+<p>Pour cette raison il faut que le smartphone soit en contact direct on indirect avec vous ou avec le véhicule. Vous pouvez par exemple le mettre dans votre poche, votre sac ou le poser dans le véhicule. </p>
+<p>En revanche, si vous enregistrer un trajet à pied, ne mettez pas le smartphone dans un caddie ou un charriot ! Les vibrations du charriot ne sont pas celles de votre démarche.</p>
+<h2 id="duree-de-la-collecte-de-donnees">Durée de la collecte de données</h2>
+<p>Pour pouvoir m'en servir dans mon projet, j'ai besoin de recolleter le plus de données possibles jusqu'au 1er Juillet 2020. </p>
+<p>La collecte de données continue jusqu'au 17 Aout 2020 pour la constitution du jeu de données qui sera publié pour les autres chercheurs.</p>
+<h2 id="questions">Questions</h2>
+<p>Si vous avez des questions, vous pouvez me contacter par e-mail ou laisser un commentaire ci-dessous.</p>
+<p>Merci de participer à mon projet !</p>
+    </article>
+    </div><!-- row -->
+    
+    
+    <div class="row mb=5 mt-5">
+      <article class="col-lg-8 mx-auto">
+        <div id="hyvor-talk-view"></div>
+        <script type="text/javascript">
+            var HYVOR_TALK_WEBSITE = '625';
+            var HYVOR_TALK_CONFIG = {
+                url: 'transportation-mode-detection-app.html',
+                id: 'transportation-mode-detection-app.html'
+            };
+        </script>
+      </article>
+    </div><!-- row -->
+    
+    <footer class="row">
+        <div class="col-lg-8 mx-auto text-center">
+          <p><small>
+          
+            Last updated: 01/14/21 <br/>
+          
+          
+          Copyright &copy; 2021 Julien Harbulot
+          </small></p>
+        </div>
+    </footer>
+    </div>
+
+  <script>
+  // bootstrap table
+  tables = document.getElementsByTagName('table');
+  for (i = 0; i < tables.length; i++) {
+    tables[i].classList.add('table');
+    tables[i].classList.add('table-bordered');
+  }
+
+  // Paragraphs that contain only images are marked with custom class for styling
+  ps = document.getElementsByTagName('p');
+  Array.from(ps).forEach(function(p){
+    if (p.getElementsByTagName('img').length > 0 && p.textContent.trim().length == 0) {
+        p.classList.add('img-container');
+    }
+  });
+  </script>
+
+
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script>
+        prev_onload_a = window.onload;
+        window.onload = function() {
+            if (prev_onload_a) {
+                prev_onload_a();
+            }
+            var navlinks = document.getElementsByClassName("nav-link");
+            var i;
+            for (i = 0; i < navlinks.length; i++) {
+                const target = new URL(navlinks[i].href)
+                if (location.pathname == target.pathname) {
+                    navlinks[i].classList.add('active')
+                }
+            }
+        }
+    </script>    
+
+    
+
+<script async type="text/javascript" src="//talk.hyvor.com/web-api/embed"></script>
+
+
+    </body>
+</html>

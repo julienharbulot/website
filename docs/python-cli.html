@@ -1,0 +1,271 @@
+<!doctype html>
+<html lang="en">
+    <head>
+    
+
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-166292985-1"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-166292985-1');
+    </script>
+    
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" 
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+          rel="stylesheet" crossorigin="anonymous">
+    
+    <link rel="stylesheet" href="/theme/pygment-github.css">
+    <link rel="stylesheet" href="/theme/article.css"> 
+
+    <title>Complete guide to writing command-line tools</title>
+    
+    <!-- Favicon -->
+    <link rel="apple-touch-icon" sizes="120x120" href="/images/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon/favicon-16x16.png">
+    <link rel="manifest" href="/images/favicon/site.webmanifest">
+    <link rel="mask-icon" href="/images/favicon/safari-pinned-tab.svg" color="#5bbad5">
+    <link rel="shortcut icon" href="favicon.ico">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="msapplication-config" content="/images/favicon/browserconfig.xml">
+    <meta name="theme-color" content="#ffffff">
+    
+<!-- Mathjax -->
+<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS_SVG">
+  MathJax.Hub.Config({
+    tex2jax: {
+    	inlineMath: [ ['$','$'] ],
+    	processEscapes: true
+    },
+	"HTML-CSS": {
+		fonts: ["TeX"] 
+	}
+  });
+</script>
+
+    </head>
+
+    <body>
+    
+    <nav class="navbar navbar-expand-lg navbar-light ">
+        <a class="navbar-brand" href="//julienharbulot.com/index.html"><img src="//julienharbulot.com/images/logo.png" width="30" alt=""></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+            
+            <li class="nav-item">
+                    <a class="nav-link" href="//julienharbulot.com/technical-blog.html">Technical blog</a>
+            </li>
+            
+            <li class="nav-item">
+                    <a class="nav-link" href="//julienharbulot.com/maths.html">Maths</a>
+            </li>
+            
+            <li class="nav-item">
+                    <a class="nav-link" href="//julienharbulot.com/projects.html">Projects</a>
+            </li>
+            
+            <li class="nav-item">
+                    <a class="nav-link" href="//julienharbulot.com/research.html">Research</a>
+            </li>
+            
+            <!--<li class="nav-item">
+                <a class="nav-link" href="//julienharbulot.com/about-me.html">About me</a>
+            </li>-->
+            
+
+<li class="nav-item dropdown">
+    <a class="nav-link active dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Table of content
+    </a>
+    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+        <div class="toc"><ul>
+<li class="toc-entry-1">
+<a class='toc-href dropdown-item' href='#additional-tips' title='Additional tips'>Additional tips</a>
+    <ul>
+<li class="toc-entry-2">
+    <a class='toc-href dropdown-item' href='#use-stdin-instead-of-openfile' title='Use <code>stdin</code> instead of <code>open(file)</code>'>Use <code>stdin</code> instead of <code>open(file)</code></a>
+    </li>
+<li class="toc-entry-2">
+    <a class='toc-href dropdown-item' href='#choose-your-exit-codes' title='Choose your exit codes'>Choose your exit codes</a>
+    </li>
+    </ul>
+</li>
+</ul><div>
+    </div>
+</li>
+
+
+            </ul>
+        </div>
+    </nav>
+    
+    
+    
+    <div class="container">
+    <div class="row mt-5">
+      <div class="col-lg-8 mx-auto"> 
+        <h1 class="display-5">Complete guide to writing command-line tools </h1>
+        <div class="text-right">27 Dec 2018</div>
+      </div>
+    </div>
+    <div class="row mt-5">
+    <article class="col-lg-8 mx-auto">
+    <p>A command-line application is an application that you can run from your terminal (e.g. from bash).</p>
+<p>In this guide we will review what makes a good command-line application and see how to implement one easily using python 3.</p>
+<p>The first chapter focuses on inputs, and in particular, how to get inputs through the command-line interface.</p>
+<p><a href="python-cli-interface.html">Chapter 1: The command-line interface</a></p>
+<ol>
+<li>What is a command-line interface?</li>
+<li>The argument vector</li>
+<li>How to write a CLI in python? (using <code>click</code>)</li>
+<li>Good practices and conventions</li>
+<li>Design a great help text</li>
+<li>Enable auto-completion</li>
+<li>How to structure your code?</li>
+</ol>
+<p>The second chapter focuses on ouputs. There are two standard streams and it is important to choose the right one for proper interoperability with the script's environment.</p>
+<p><a href="python-cli-streams.html">Chapter 2: How and when to use <code>stdout</code> and <code>stderr</code></a></p>
+<ol>
+<li><code>stdout</code>, <code>stderr</code> and unix pipelines</li>
+<li>Use standard error through the logging module</li>
+<li>Only use <code>print</code> for the script's main output</li>
+<li>Improve terminal experience</li>
+<li>Securely prompt for passwords</li>
+<li>Colors, the cross-platform way</li>
+<li>Progress bars that work</li>
+</ol>
+<p>In chapter 3, we turn to another form of input/output: the signals.</p>
+<p><a href="python-signals.html">Chapter 3: Catch and handle signals</a></p>
+<ol>
+<li>Interrupt a process with <code>ctrl+c</code></li>
+<li>Pause and resume a process with <code>ctrl+z</code> and <code>fg</code></li>
+<li>Handle signals using the <code>signal</code> module</li>
+</ol>
+<p>The last and upcoming chapter will tackle the packaging and redistribution of your application.</p>
+<h2 id="additional-tips">Additional tips</h2>
+<p>Here are additional tips that didn't fit into the previous articles and that aren't big enough to make it into their own.</p>
+<h3 id="use-stdin-instead-of-openfile">Use <code>stdin</code> instead of <code>open(file)</code></h3>
+<p>If the goal of your script is to transform a bunch of text lines (like <code>grep</code> and <code>wc</code> do), you should read those lines from
+<code>stdin</code> instead of forcing the user to use a real file.</p>
+<p>Why? Because that way your script can be used in combination with others through pipes. When someone wants to use your script with a file on disk, <code>cat</code> can be used to pipe the file into the script's <code>stdin</code>. Here's an example:</p>
+<div class="hll"><pre><span></span>cat file.txt <span class="p">|</span> grep <span class="s2">&quot;scripting.tips&quot;</span> <span class="p">|</span> myscript
+</pre></div>
+
+
+<p>In the command above, the file <code>file.txt</code> is filtered by <code>grep</code> to keep only the lines that contain "scripting.tips" and then the result is sent to <code>myscript</code>.</p>
+<h3 id="choose-your-exit-codes">Choose your exit codes</h3>
+<p>Each process can terminate with an exit code. The convention is that <code>0</code> means success, while non-zero exit codes mean that an error occured. According to <a href="https://docs.python.org/3/library/sys.html#sys.exit">sys.exit documentation</a>, the unix convention is to use <code>2</code> for a command-line syntax error and <code>1</code> for any other error. Here's how to use it:</p>
+<div class="hll"><pre><span></span>import sys
+
+# ...
+
+if error:
+    sys.exit(1)
+</pre></div>
+    </article>
+    </div><!-- row -->
+    
+    <div class="row mt-1">
+      <article class="col-lg-8 mx-auto recommendations">
+        <p class='title'>Other articles you might like:</p>
+        <ul>
+          
+            <li class="en"><img class="flag-icon" src="//julienharbulot.com/images/languages/en.png"> <a href="//julienharbulot.com/pac-learning-1.html">Introduction to PAC Learning</a></li>
+          
+            <li class="en"><img class="flag-icon" src="//julienharbulot.com/images/languages/en.png"> <a href="//julienharbulot.com/python-cli-streams.html">How and when to use stdout and stderr?</a></li>
+          
+            <li class="en"><img class="flag-icon" src="//julienharbulot.com/images/languages/en.png"> <a href="//julienharbulot.com/rule-of-three.html">Rule of three calculator</a></li>
+          
+            <li class="en"><img class="flag-icon" src="//julienharbulot.com/images/languages/en.png"> <a href="//julienharbulot.com/win-extend-screen.html">Keyboard shortcut and command line utility to switch display (Windows)</a></li>
+          
+        </ul>
+      </article>
+    </div>
+    
+    
+    <div class="row mb=5 mt-5">
+      <article class="col-lg-8 mx-auto">
+        <div id="hyvor-talk-view"></div>
+        <script type="text/javascript">
+            var HYVOR_TALK_WEBSITE = '625';
+            var HYVOR_TALK_CONFIG = {
+                url: 'python-cli.html',
+                id: 'python-cli.html'
+            };
+        </script>
+      </article>
+    </div><!-- row -->
+    
+    <footer class="row">
+        <div class="col-lg-8 mx-auto text-center">
+          <p><small>
+          
+            Last updated: 01/14/21 <br/>
+          
+          
+          Copyright &copy; 2021 Julien Harbulot
+          </small></p>
+        </div>
+    </footer>
+    </div>
+
+  <script>
+  // bootstrap table
+  tables = document.getElementsByTagName('table');
+  for (i = 0; i < tables.length; i++) {
+    tables[i].classList.add('table');
+    tables[i].classList.add('table-bordered');
+  }
+
+  // Paragraphs that contain only images are marked with custom class for styling
+  ps = document.getElementsByTagName('p');
+  Array.from(ps).forEach(function(p){
+    if (p.getElementsByTagName('img').length > 0 && p.textContent.trim().length == 0) {
+        p.classList.add('img-container');
+    }
+  });
+  </script>
+
+
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script>
+        prev_onload_a = window.onload;
+        window.onload = function() {
+            if (prev_onload_a) {
+                prev_onload_a();
+            }
+            var navlinks = document.getElementsByClassName("nav-link");
+            var i;
+            for (i = 0; i < navlinks.length; i++) {
+                const target = new URL(navlinks[i].href)
+                if (location.pathname == target.pathname) {
+                    navlinks[i].classList.add('active')
+                }
+            }
+        }
+    </script>    
+
+    
+
+<script async type="text/javascript" src="//talk.hyvor.com/web-api/embed"></script>
+
+
+    </body>
+</html>

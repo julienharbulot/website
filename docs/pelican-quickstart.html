@@ -1,0 +1,494 @@
+<!doctype html>
+<html lang="en">
+    <head>
+    
+
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-166292985-1"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-166292985-1');
+    </script>
+    
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" 
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+          rel="stylesheet" crossorigin="anonymous">
+    
+    <link rel="stylesheet" href="/theme/pygment-github.css">
+    <link rel="stylesheet" href="/theme/article.css"> 
+
+    <title>Create a website using Pelican static generator</title>
+    
+    <!-- Favicon -->
+    <link rel="apple-touch-icon" sizes="120x120" href="/images/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon/favicon-16x16.png">
+    <link rel="manifest" href="/images/favicon/site.webmanifest">
+    <link rel="mask-icon" href="/images/favicon/safari-pinned-tab.svg" color="#5bbad5">
+    <link rel="shortcut icon" href="favicon.ico">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="msapplication-config" content="/images/favicon/browserconfig.xml">
+    <meta name="theme-color" content="#ffffff">
+    
+<!-- Mathjax -->
+<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS_SVG">
+  MathJax.Hub.Config({
+    tex2jax: {
+    	inlineMath: [ ['$','$'] ],
+    	processEscapes: true
+    },
+	"HTML-CSS": {
+		fonts: ["TeX"] 
+	}
+  });
+</script>
+
+    </head>
+
+    <body>
+    
+    <nav class="navbar navbar-expand-lg navbar-light ">
+        <a class="navbar-brand" href="//julienharbulot.com/index.html"><img src="//julienharbulot.com/images/logo.png" width="30" alt=""></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+            
+            <li class="nav-item">
+                    <a class="nav-link" href="//julienharbulot.com/technical-blog.html">Technical blog</a>
+            </li>
+            
+            <li class="nav-item">
+                    <a class="nav-link" href="//julienharbulot.com/maths.html">Maths</a>
+            </li>
+            
+            <li class="nav-item">
+                    <a class="nav-link" href="//julienharbulot.com/projects.html">Projects</a>
+            </li>
+            
+            <li class="nav-item">
+                    <a class="nav-link" href="//julienharbulot.com/research.html">Research</a>
+            </li>
+            
+            <!--<li class="nav-item">
+                <a class="nav-link" href="//julienharbulot.com/about-me.html">About me</a>
+            </li>-->
+            
+
+<li class="nav-item dropdown">
+    <a class="nav-link active dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Table of content
+    </a>
+    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+        <div class="toc"><ul>
+<li class="toc-entry-1">
+<a class='toc-href dropdown-item' href='#setting-up-a-writing-environment' title='Setting up a writing environment'>Setting up a writing environment</a>
+</li>
+<div class="dropdown-divider"></div>
+<li class="toc-entry-1">
+<a class='toc-href dropdown-item' href='#write-your-first-real-article' title='Write your first (real) article'>Write your first (real) article</a>
+</li>
+<div class="dropdown-divider"></div>
+<li class="toc-entry-1">
+<a class='toc-href dropdown-item' href='#change-the-default-template' title='Change the default template'>Change the default template</a>
+</li>
+<div class="dropdown-divider"></div>
+<li class="toc-entry-1">
+<a class='toc-href dropdown-item' href='#create-an-htmlcss-theme' title='Create an html/css theme'>Create an html/css theme</a>
+</li>
+<div class="dropdown-divider"></div>
+<li class="toc-entry-1">
+<a class='toc-href dropdown-item' href='#publish-your-website-to-github-pages' title='Publish your website to Github Pages'>Publish your website to Github Pages</a>
+</li>
+<div class="dropdown-divider"></div>
+<li class="toc-entry-1">
+<a class='toc-href dropdown-item' href='#bonus-allow-fenced-code-blocks' title='Bonus: allow fenced code blocks'>Bonus: allow fenced code blocks</a>
+</li>
+</ul><div>
+    </div>
+</li>
+
+
+            </ul>
+        </div>
+    </nav>
+    
+    
+    
+    <div class="container">
+    <div class="row mt-5">
+      <div class="col-lg-8 mx-auto"> 
+        <h1 class="display-5">Create a website using Pelican static generator </h1>
+        <div class="text-right">05 Dec 2018</div>
+      </div>
+    </div>
+    <div class="row mt-5">
+    <article class="col-lg-8 mx-auto">
+    <p>This article relates my journey to build
+<a href="https://scripting.tips">scripting.tips</a> using the static website
+generator <em>Pelican</em>. I wrote it as a quick overview of how you can build your
+own website using <em>Pelican</em>.</p>
+<p>There is another popular static website generator named 
+    <img alt="jekyll" 
+         src="images/jekyll.png"
+         style="height:2em; display:inline-block; margin-bottom:-0.5em;">. 
+I used it for my other websites, by it is 
+written in ruby and I preferred to go full python for <em>scripting.tips</em>.</p>
+<p>Since I don't know anything about <em>Pelican</em>, my first step is to type 
+<em>pelican quickstart</em> into Google. And here we need to be careful because
+older versions are listed first in the search results... Which is exactly
+why I think we should have a search engine dedicated to programming libraries
+and tools, which would only list top-notch tutorials, documentation and
+articles. Anyway, let's focus on our task.</p>
+<p><img alt="google search for pelican"
+     src="images/pelican-quickstart/google.jpg"
+     class="img-fluid border rounded"></p>
+<p>The <a href="http://docs.getpelican.com/en/stable/">documentation</a> for the latest 
+version of <em>Pelican</em> can be found on the official website, on the <em>stable</em>
+branch. I'm going to follow the quickstart and superficially read the doc to 
+spot where I can find the information when I need it. </p>
+<p>At the time of this writing, the latest version is <code>Pelican 4.0.1</code>.</p>
+<p>So, how involved is it to start a pelican project? Here's what I had to type 
+in my <em>bash</em> terminal.</p>
+<div class="hll"><pre><span></span>pip install pelican markdown
+mkdir ~/src/pelican <span class="o">&amp;&amp;</span> <span class="nb">cd</span> ~/src/pelican
+pelican-quickstart
+vim content/hello-world.md
+</pre></div>
+
+
+<p>The minimal content in an article is the following meta-data:</p>
+<div class="hll-title"><span class="filename">content/hello-world.md </span> <div class="hll"><pre><span></span>Title: My super title
+Date: 2018-12-03 10:20
+</pre></div>
+ </div>
+
+<p>Then build and run the website using:</p>
+<div class="hll"><pre><span></span>pelican content
+pelican --listen
+sensible-browser http://localhost:8000/
+</pre></div>
+
+
+<p>On my dell XPS 9570 (4k), and with only one article (this one), it takes 
+<code>2.16 seconds</code> for the first build and <code>0.3 seconds</code> for subsequent builds. 
+Here is what <code>pelican content</code> outputs:</p>
+<div class="hll"><pre><span></span>Processed <span class="m">1</span> article, <span class="m">0</span> drafts, <span class="m">0</span> pages, 
+<span class="m">0</span> hidden pages and <span class="m">0</span> draft pages in <span class="m">2</span>.16 seconds.
+</pre></div>
+
+
+<p>The default layout is not sexy but decent and functional. Here is what the page 
+looks like (I've added some text to the page content).</p>
+<p><img alt="default pelican theme"
+     src="images/pelican-quickstart/default.png"
+     class="img-fluid border rounded"></p>
+<h2 id="setting-up-a-writing-environment">Setting up a writing environment</h2>
+<p>To setup an environment where we can write an article and watch the output
+in the browser, we can use the following command:</p>
+<div class="hll"><pre><span></span>pelican -lr
+</pre></div>
+
+
+<p>Or use the <code>Makefile</code> generated by <code>pelican-quickstart</code>:</p>
+<div class="hll"><pre><span></span>make devserver
+</pre></div>
+
+
+<p>By the way, on linux you can open your browser with this command:</p>
+<div class="hll"><pre><span></span>sensible-browser http://localhost:8000/
+</pre></div>
+
+
+<p>One of the major drawbacks of static generation is the build time. It's daunting
+to wait more than 10 seconds to see what you've just typed in your browser.</p>
+<p>Here's the good news: you can watch and regenerate a single page using the
+<a href="http://docs.getpelican.com/en/stable/publish.html#site-generation">--write-selected</a>
+option! Which is great to minimize build time. You can also instruct pelican 
+to only <a href="http://docs.getpelican.com/en/latest/settings.html#reading-only-modified-content">read modified content</a>.</p>
+<h2 id="write-your-first-real-article">Write your first (real) article</h2>
+<p>To write a new article, create a file in the folder <code>./content</code>. Mardown files
+should be structured as follow:</p>
+<div class="hll-title"><span class="filename">content/hello-world.md </span> <div class="hll"><pre><span></span>Title: My super title
+Date: 2018-12-03 10:20
+Modified: 2018-12-05 19:30
+Category: Python
+Tags: pelican, publishing
+Slug: my-super-post
+Authors: Julien Harbulot, Someone Else
+Summary: Short version for index and feeds
+
+# Title
+This is the content of my super blog post. 
+You can use usual markdown in there.
+</pre></div>
+ </div>
+
+<p>More info on the metadata fields <a href="http://docs.getpelican.com/en/stable/content.html">here</a>.
+Only the <code>Title</code> and <code>Date</code> fields are required.</p>
+<p>So, how do we do the basic stuff that we always need to do, such as adding 
+hyperlinks? Here's the syntax to link to 
+<a href="http://docs.getpelican.com/en/stable/content.html#linking-to-internal-content">internal files</a>:</p>
+<div class="hll"><pre><span></span># Link to an article inside the `content` directory:
+[an article]({ filename }some-article.md)
+
+# Link to static files outside the `content` directory:
+[an image]({ static }/images/logo.jpg)
+</pre></div>
+
+
+<p>There also the possibility to <a href="http://docs.getpelican.com/en/stable/content.html#translations">translate articles</a>.
+And you can turn on syntax highlighting in code blocks using <a href="http://docs.getpelican.com/en/stable/content.html#syntax-highlighting">this special 
+syntax</a>.
+If you dislike the syntax and want to use backticks as in Github 
+flavored markdown, check the bonus section at the end of this article.</p>
+<p>Actually, there's a lot more that can be done, so here's the doc to tweak 
+<a href="http://docs.getpelican.com/en/stable/settings.html">advanced settings</a>.</p>
+<h2 id="change-the-default-template">Change the default template</h2>
+<p>To change themes, edit the file <code>pelicanconf.py</code> in the project's root and
+set the <code>THEME</code> variable. Here are several examples:</p>
+<div class="hll"><pre><span></span><span class="c1"># Specify name of a built-in theme</span>
+<span class="n">THEME</span> <span class="o">=</span> <span class="s2">&quot;notmyidea&quot;</span>
+
+<span class="c1"># Specify name of a theme installed via the pelican-themes tool</span>
+<span class="n">THEME</span> <span class="o">=</span> <span class="s2">&quot;chunk&quot;</span>
+
+<span class="c1"># Specify a customized theme, via path relative to the settings file</span>
+<span class="n">THEME</span> <span class="o">=</span> <span class="s2">&quot;themes/mycustomtheme&quot;</span>
+
+<span class="c1"># Specify a customized theme, via absolute path</span>
+<span class="n">THEME</span> <span class="o">=</span> <span class="s2">&quot;/home/myuser/projects/mysite/themes/mycustomtheme&quot;</span>
+</pre></div>
+
+
+<p>I will create my own custom theme.</p>
+<h2 id="create-an-htmlcss-theme">Create an html/css theme</h2>
+<p>Okay, so now we know how to write articles and display them in the browser.
+Next step is to use a better html design.</p>
+<p>To create our own theme, we need to use jinja2 template. The idea is to use a
+simple syntax that we can embed into our HTML pages.</p>
+<p>To build a theme, we must create the following files inside the <code>themes</code> folder.</p>
+<div class="hll"><pre><span></span>theme-name
+├── static
+│   ├── css
+│   └── images
+└── templates
+    ├── archives.html         // to display archives
+    ├── period_archives.html  // to display time-period archives
+    ├── article.html          // processed for each article
+    ├── author.html           // processed for each author
+    ├── authors.html          // must list all the authors
+    ├── categories.html       // must list all the categories
+    ├── category.html         // processed for each category
+    ├── index.html            // the index (list all the articles)
+    ├── page.html             // processed for each page
+    ├── tag.html              // processed for each tag
+    └── tags.html             // must list all the tags.
+</pre></div>
+
+
+<p>A quick way to get started with the template engine is to clone the
+<a href="https://github.com/getpelican/pelican/tree/master/pelican/themes/simple/templates">example theme</a>
+and edit the html/css according to your taste. </p>
+<p>Here's how I did it (recall that my project's root is named <code>pelican/</code>):</p>
+<div class="hll"><pre><span></span>mkdir themes
+<span class="nb">cd</span> ../
+git clone git@github.com:getpelican/pelican.git pelican-src
+cp -r pelican-src/pelican/themes/simple pelican/themes/v1
+<span class="nb">cd</span> pelican
+</pre></div>
+
+
+<p>We need to tell <code>pelican</code> that we want to use this theme. To do so, edit the
+file <code>pelicanconf.py</code> at the root of the project and set the variable <code>THEME</code>
+to:</p>
+<div class="hll"><pre><span></span><span class="n">THEME</span><span class="o">=</span><span class="s1">&#39;themes/v1&#39;</span>
+</pre></div>
+
+
+<p>Then print pelican's configuration using the terminal command:</p>
+<div class="hll"><pre><span></span>pelican --print-settings <span class="p">|</span> grep <span class="s2">&quot;&#39;THEME&#39;&quot;</span>
+</pre></div>
+
+
+<p>Here is how my website looks like with this new "simple" theme:</p>
+<p><img alt="simple pelican theme"
+     src="images/pelican-quickstart/simple.png"
+     class="img-fluid border rounded"></p>
+<p>Now open the files in the <code>./themes/v1/</code> folder and start hacking! Here is a
+useful link: <a href="http://docs.getpelican.com/en/stable/themes.html#templates-and-variables">variables available to the template engine</a>.</p>
+<p>If you're completely new to all this, my advice is to try and change a few
+simple things in the code to see how the website reacts. It's a continuous back
+and forth between tweaking the code and looking at the output in the browser.
+When you're not sure what a piece of code is for, comment it or remove it and
+see what happens. If nothing particularly bad happens, paste the removed snippet
+somewhere safe in case you need it later and go hack something else.</p>
+<p>To build my theme, I'm going to remove most of the code in the snippet. I don't
+need to use variables such as <code>SITENAME</code> and <code>SITETITLE</code> because I'm not
+building a theme for everyone so it doesn't need to be generic.</p>
+<p><em>... scripting and tweaking ...</em></p>
+<p>Done! Here's my first design:</p>
+<p><img alt="simple pelican theme"
+     src="images/pelican-quickstart/v1.png"
+     class="img-fluid border rounded"></p>
+<h2 id="publish-your-website-to-github-pages">Publish your website to Github Pages</h2>
+<p><a href="https://help.github.com/articles/what-is-github-pages/">Github pages</a> can 
+serve html content from the <code>docs/</code> folder in the <code>master</code> branch. To enable 
+this, create a <code>docs</code> folder at the root of your project and on github.com, go
+to the <code>settings</code> tabs.</p>
+<p>To tell Pelican to generate the output in the <code>docs/</code> folder rather than the 
+<code>output/</code> folder, add this line to your <code>pelicanconf.py</code>:</p>
+<div class="hll"><pre><span></span><span class="n">OUTPUT_PATH</span> <span class="o">=</span> <span class="s1">&#39;docs/&#39;</span>
+</pre></div>
+
+
+<p>Then build the website and publish it with:</p>
+<div class="hll"><pre><span></span>pelican content -s publishconf.py
+git add docs/
+git commit -m <span class="s2">&quot;Publish&quot;</span>
+</pre></div>
+
+
+<p>Note: currently there is <a href="https://github.com/getpelican/pelican/issues/2487">an issue</a>
+with the "simple" template and the command above will output the following error:</p>
+<div class="hll"><pre><span></span>CRITICAL: TypeError: not all arguments converted during string formatting
+</pre></div>
+
+
+<p>To avoid it, run the command without the <code>-s publishconf.py</code> option.</p>
+<h2 id="bonus-allow-fenced-code-blocks">Bonus: allow fenced code blocks</h2>
+<p>A fenced code block is a block of code surrounded by three backticks:</p>
+<div class="hll"><pre><span></span>   <span class="err">```</span><span class="n">java</span>
+   <span class="kd">class</span> <span class="nc">Hello</span> <span class="o">{</span>
+       <span class="kd">private</span> <span class="n">String</span> <span class="n">who</span> <span class="o">=</span> <span class="s">&quot;world&quot;</span><span class="o">;</span>
+   <span class="o">}</span>
+</pre></div>
+
+
+<div class="hll"><pre><span></span>To allow this syntax within your markdown articles, edit the `pelicanconf.py` 
+file and add the following snippet, which tells Pelican to activate the 
+[fenced_code](https://python-markdown.github.io/extensions/fenced_code_blocks/)
+and [codehilite](https://python-markdown.github.io/extensions/code_hilite/)
+extensions within the markdown engine. 
+
+​```python
+# file: pelicanconf.py
+ MARKDOWN = {
+    &#39;extension_configs&#39;: {
+        &#39;markdown.extensions.codehilite&#39;: {&#39;css_class&#39;: &#39;hll&#39;},
+        &#39;markdown.extensions.extra&#39;: {},
+        &#39;markdown.extensions.meta&#39;: {},
+        &#39;markdown.extensions.fenced_code&#39;: {},
+    },
+    &#39;output_format&#39;: &#39;html5&#39;,
+}
+</pre></div>
+
+
+<p>You can activate <a href="https://python-markdown.github.io/extensions/">other extensions</a>
+in the same way.</p>
+    </article>
+    </div><!-- row -->
+    
+    <div class="row mt-1">
+      <article class="col-lg-8 mx-auto recommendations">
+        <p class='title'>Other articles you might like:</p>
+        <ul>
+          
+            <li class="en"><img class="flag-icon" src="//julienharbulot.com/images/languages/en.png"> <a href="//julienharbulot.com/p-value.html">Understanding p-values</a></li>
+          
+            <li class="en"><img class="flag-icon" src="//julienharbulot.com/images/languages/en.png"> <a href="//julienharbulot.com/bash-completion-tutorial.html">Tutorial on bash completion scripts</a></li>
+          
+            <li class="en"><img class="flag-icon" src="//julienharbulot.com/images/languages/en.png"> <a href="//julienharbulot.com/polynomial-feature-augmentation.html">Polynomial basis expansion</a></li>
+          
+            <li class="en"><img class="flag-icon" src="//julienharbulot.com/images/languages/en.png"> <a href="//julienharbulot.com/win-extend-screen.html">Keyboard shortcut and command line utility to switch display (Windows)</a></li>
+          
+        </ul>
+      </article>
+    </div>
+    
+    
+    <div class="row mb=5 mt-5">
+      <article class="col-lg-8 mx-auto">
+        <div id="hyvor-talk-view"></div>
+        <script type="text/javascript">
+            var HYVOR_TALK_WEBSITE = '625';
+            var HYVOR_TALK_CONFIG = {
+                url: 'pelican-quickstart.html',
+                id: 'pelican-quickstart.html'
+            };
+        </script>
+      </article>
+    </div><!-- row -->
+    
+    <footer class="row">
+        <div class="col-lg-8 mx-auto text-center">
+          <p><small>
+          
+            Last updated: 01/14/21 <br/>
+          
+          
+          Copyright &copy; 2021 Julien Harbulot
+          </small></p>
+        </div>
+    </footer>
+    </div>
+
+  <script>
+  // bootstrap table
+  tables = document.getElementsByTagName('table');
+  for (i = 0; i < tables.length; i++) {
+    tables[i].classList.add('table');
+    tables[i].classList.add('table-bordered');
+  }
+
+  // Paragraphs that contain only images are marked with custom class for styling
+  ps = document.getElementsByTagName('p');
+  Array.from(ps).forEach(function(p){
+    if (p.getElementsByTagName('img').length > 0 && p.textContent.trim().length == 0) {
+        p.classList.add('img-container');
+    }
+  });
+  </script>
+
+
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script>
+        prev_onload_a = window.onload;
+        window.onload = function() {
+            if (prev_onload_a) {
+                prev_onload_a();
+            }
+            var navlinks = document.getElementsByClassName("nav-link");
+            var i;
+            for (i = 0; i < navlinks.length; i++) {
+                const target = new URL(navlinks[i].href)
+                if (location.pathname == target.pathname) {
+                    navlinks[i].classList.add('active')
+                }
+            }
+        }
+    </script>    
+
+    
+
+<script async type="text/javascript" src="//talk.hyvor.com/web-api/embed"></script>
+
+
+    </body>
+</html>

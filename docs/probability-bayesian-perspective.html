@@ -1,0 +1,562 @@
+<!doctype html>
+<html lang="en">
+    <head>
+    
+
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-166292985-1"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-166292985-1');
+    </script>
+    
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" 
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+          rel="stylesheet" crossorigin="anonymous">
+    
+    <link rel="stylesheet" href="/theme/pygment-github.css">
+    <link rel="stylesheet" href="/theme/article.css"> 
+
+    <title>A Bayesian Perspective</title>
+    
+    <!-- Favicon -->
+    <link rel="apple-touch-icon" sizes="120x120" href="/images/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon/favicon-16x16.png">
+    <link rel="manifest" href="/images/favicon/site.webmanifest">
+    <link rel="mask-icon" href="/images/favicon/safari-pinned-tab.svg" color="#5bbad5">
+    <link rel="shortcut icon" href="favicon.ico">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="msapplication-config" content="/images/favicon/browserconfig.xml">
+    <meta name="theme-color" content="#ffffff">
+    
+<!-- Mathjax -->
+<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS_SVG">
+  MathJax.Hub.Config({
+    tex2jax: {
+    	inlineMath: [ ['$','$'] ],
+    	processEscapes: true
+    },
+	"HTML-CSS": {
+		fonts: ["TeX"] 
+	}
+  });
+</script>
+
+    </head>
+
+    <body>
+    
+    <nav class="navbar navbar-expand-lg navbar-light ">
+        <a class="navbar-brand" href="//julienharbulot.com/index.html"><img src="//julienharbulot.com/images/logo.png" width="30" alt=""></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+            
+            <li class="nav-item">
+                    <a class="nav-link" href="//julienharbulot.com/technical-blog.html">Technical blog</a>
+            </li>
+            
+            <li class="nav-item">
+                    <a class="nav-link" href="//julienharbulot.com/maths.html">Maths</a>
+            </li>
+            
+            <li class="nav-item">
+                    <a class="nav-link" href="//julienharbulot.com/projects.html">Projects</a>
+            </li>
+            
+            <li class="nav-item">
+                    <a class="nav-link" href="//julienharbulot.com/research.html">Research</a>
+            </li>
+            
+            <!--<li class="nav-item">
+                <a class="nav-link" href="//julienharbulot.com/about-me.html">About me</a>
+            </li>-->
+            
+
+<li class="nav-item dropdown">
+    <a class="nav-link active dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Table of content
+    </a>
+    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+        <div class="toc"><ul>
+<li class="toc-entry-1">
+<a class='toc-href dropdown-item' href='#read-next' title='Read next'>Read next</a>
+</li>
+<div class="dropdown-divider"></div>
+<li class="toc-entry-1">
+<a class='toc-href dropdown-item' href='#reference' title='Reference'>Reference</a>
+</li>
+</ul><div>
+    </div>
+</li>
+
+
+            </ul>
+        </div>
+    </nav>
+    
+    
+    
+    <div class="container">
+    <div class="row mt-5">
+      <div class="col-lg-8 mx-auto"> 
+        <h1 class="display-5">A Bayesian Perspective </h1>
+        <div class="text-right">11 Mar 2018</div>
+      </div>
+    </div>
+    <div class="row mt-5">
+    <article class="col-lg-8 mx-auto">
+    <p>
+<script type="math/tex; mode=display">
+\def\sa{a}
+\def\sb{b}
+\def\sc{c}
+\def\sd{d}
+\def\se{e}
+\def\sf{f}
+\def\sg{g}
+\def\sh{h}
+\def\si{i}
+\def\sj{j}
+\def\sk{k}
+\def\sl{l}
+\def\sm{m}
+\def\sn{n}
+\def\so{o}
+\def\sp{p}
+\def\sq{q}
+\def\sr{r}
+\def\ss{s}
+\def\st{t}
+\def\su{u}
+\def\sv{v}
+\def\sw{w}
+\def\sx{x}
+\def\sy{y}
+\def\sz{z}
+\def\va{\vec{a}}
+\def\vb{\vec{b}}
+\def\vc{\vec{c}}
+\def\vd{\vec{d}}
+\def\ve{\vec{e}}
+\def\vf{\vec{f}}
+\def\vg{\vec{g}}
+\def\vh{\vec{h}}
+\def\vi{\vec{i}}
+\def\vj{\vec{j}}
+\def\vk{\vec{k}}
+\def\vl{\vec{l}}
+\def\vm{\vec{m}}
+\def\vn{\vec{n}}
+\def\vo{\vec{o}}
+\def\vp{\vec{p}}
+\def\vq{\vec{q}}
+\def\vr{\vec{r}}
+\def\vs{\vec{s}}
+\def\vt{\vec{t}}
+\def\vu{\vec{u}}
+\def\vv{\vec{v}}
+\def\vw{\vec{w}}
+\def\vx{\vec{x}}
+\def\vy{\vec{y}}
+\def\vz{\vec{z}}
+\def\ga{\mathfrak{A}}
+\def\gb{\mathfrak{B}}
+\def\gc{\mathfrak{C}}
+\def\gd{\mathfrak{D}}
+\def\ge{\mathfrak{E}}
+\def\gf{\mathfrak{F}}
+\def\gg{\mathfrak{G}}
+\def\gh{\mathfrak{H}}
+\def\gi{\mathfrak{I}}
+\def\gj{\mathfrak{J}}
+\def\gk{\mathfrak{K}}
+\def\gl{\mathfrak{L}}
+\def\gm{\mathfrak{M}}
+\def\gn{\mathfrak{N}}
+\def\go{\mathfrak{O}}
+\def\gp{\mathfrak{P}}
+\def\gq{\mathfrak{Q}}
+\def\gr{\mathfrak{R}}
+\def\gs{\mathfrak{S}}
+\def\gt{\mathfrak{T}}
+\def\gu{\mathfrak{U}}
+\def\gv{\mathfrak{V}}
+\def\gw{\mathfrak{W}}
+\def\gx{\mathfrak{X}}
+\def\gy{\mathfrak{Y}}
+\def\gz{\mathfrak{Z}}
+\def\ra{A}
+\def\rb{B}
+\def\rc{C}
+\def\rd{D}
+\def\re{E}
+\def\rf{F}
+\def\rg{G}
+\def\rh{H}
+\def\ri{I}
+\def\rj{J}
+\def\rk{K}
+\def\rl{L}
+\def\rm{M}
+\def\rn{N}
+\def\ro{O}
+\def\rp{P}
+\def\rq{Q}
+\def\rr{R}
+\def\rs{S}
+\def\rt{T}
+\def\ru{U}
+\def\rv{V}
+\def\rw{W}
+\def\rx{X}
+\def\ry{Y}
+\def\rz{Z}
+\def\rva{\vec{A}}
+\def\rvb{\vec{B}}
+\def\rvc{\vec{C}}
+\def\rvd{\vec{D}}
+\def\rve{\vec{E}}
+\def\rvf{\vec{F}}
+\def\rvg{\vec{G}}
+\def\rvh{\vec{H}}
+\def\rvi{\vec{I}}
+\def\rvj{\vec{J}}
+\def\rvk{\vec{K}}
+\def\rvl{\vec{L}}
+\def\rvm{\vec{M}}
+\def\rvn{\vec{N}}
+\def\rvo{\vec{O}}
+\def\rvp{\vec{P}}
+\def\rvq{\vec{Q}}
+\def\rvr{\vec{R}}
+\def\rvs{\vec{S}}
+\def\rvt{\vec{T}}
+\def\rvu{\vec{U}}
+\def\rvv{\vec{V}}
+\def\rvw{\vec{W}}
+\def\rvx{\vec{X}}
+\def\rvy{\vec{Y}}
+\def\rvz{\vec{Z}}
+\def\seta{A}
+\def\setb{B}
+\def\setc{C}
+\def\setd{D}
+\def\sete{E}
+\def\setf{F}
+\def\setg{G}
+\def\seth{H}
+\def\seti{I}
+\def\setj{J}
+\def\setk{K}
+\def\setl{L}
+\def\setm{M}
+\def\setn{N}
+\def\seto{O}
+\def\setp{P}
+\def\setq{Q}
+\def\setr{R}
+\def\sets{S}
+\def\sett{T}
+\def\setu{U}
+\def\setv{V}
+\def\setw{W}
+\def\setx{X}
+\def\sety{Y}
+\def\setz{Z}
+\def\fa{a}
+\def\fb{b}
+\def\fc{c}
+\def\fd{d}
+\def\fe{e}
+\def\ff{f}
+\def\fg{g}
+\def\fh{h}
+\def\fi{i}
+\def\fj{j}
+\def\fk{k}
+\def\fl{l}
+\def\fm{m}
+\def\fn{n}
+\def\fo{o}
+\def\fp{p}
+\def\fq{q}
+\def\fr{r}
+\def\fs{s}
+\def\ft{t}
+\def\fu{u}
+\def\fv{v}
+\def\fw{w}
+\def\fx{x}
+\def\fy{y}
+\def\fz{z}
+\def\fA{A}
+\def\fB{B}
+\def\fC{C}
+\def\fD{D}
+\def\fE{E}
+\def\fF{F}
+\def\fG{G}
+\def\fH{H}
+\def\fI{I}
+\def\fJ{J}
+\def\fK{K}
+\def\fL{L}
+\def\fM{M}
+\def\fN{N}
+\def\fO{O}
+\def\fP{P}
+\def\fQ{Q}
+\def\fR{R}
+\def\fS{S}
+\def\fT{T}
+\def\fU{U}
+\def\fV{V}
+\def\fW{W}
+\def\fX{X}
+\def\fY{Y}
+\def\fZ{Z}
+\def\ma{A}
+\def\mb{B}
+\def\mc{C}
+\def\md{D}
+\def\me{E}
+\def\mf{F}
+\def\mg{G}
+\def\mh{H}
+\def\mi{I}
+\def\mj{J}
+\def\mk{K}
+\def\ml{L}
+\def\mm{M}
+\def\mn{N}
+\def\mo{O}
+\def\mp{P}
+\def\mq{Q}
+\def\mr{R}
+\def\ms{S}
+\def\mt{T}
+\def\matu{U}
+\def\mv{V}
+\def\mw{W}
+\def\mx{X}
+\def\my{Y}
+\def\mz{Z}
+\def\loss{\mathcal{L}}
+\newcommand{\dkl}[2]{D_{\text{KL}}\mathopen{}\paren{#1\,||\,#2}}
+\newcommand{\dataset}{S}
+\newcommand{\ndataset}{N}
+\newcommand{\idataset}{n}
+\newcommand{\inputRV}{\mathcal{X}}
+\newcommand{\inputvec}{\vec{x}}
+\newcommand{\ninputvec}[1]{\vec{x}_{#1}}
+\newcommand{\iinputvec}[1]{x_{#1}}
+\newcommand{\niinputvec}[2]{x_{#1, #2}}
+\newcommand{\icpnt}{i}
+\newcommand{\inputmatrix}{X}
+\newcommand{\inputdim}{D}
+\newcommand{\outputval}{y}
+\newcommand{\ioutputval}[1]{y_{#1}}
+\newcommand{\outputvec}{\vec{y}}
+\newcommand{\trainset}{S_{\text{train}}}
+\newcommand{\testset}{S_{\text{test}}}
+\newcommand{\truemodel}{f_{\text{true}}}
+\newcommand{\trainedmodel}{f_{\trainset}}
+\newcommand{\linmodel}[1]{f_{#1}}
+\newcommand{\bestmodel}{f^{*}}
+\newcommand{\model}{f}
+\newcommand{\hyperparam}{\lambda}
+\newcommand{\linparamv}{\vec{w}}
+\newcommand{\ilinparam}[1]{w_{#1}}
+\newcommand{\indivloss}{l}
+\newcommand{\modelclass}{\mathcal{F}}
+\newcommand{\linclass}{\modelclass_{\text{lin}}}
+\newcommand{\g}{\mathcal{G}}
+\newcommand{\gmse}{\g_{\text{MSE}}}
+\newcommand{\glasso}{\g_{\text{lasso}}}
+\newcommand{\gridge}{\g_{\text{ridge}}}
+\newcommand{\glogit}{\g_{\logit}}
+\newcommand{\l}{\mathcal{L}}
+\newcommand{\lmse}{\l_{\text{MSE}}}
+\newcommand{\lmae}{\l_{\text{MAE}}}
+\newcommand{\llasso}{\l_{\text{lasso}}}
+\newcommand{\lridge}{\l_{\text{ridge}}}
+\newcommand{\llogit}{\l_{\logit}}
+\newcommand{\logit}{\sigma}
+\newcommand{\reg}{\mathcal{R}}
+\DeclareMathOperator*{\argmin}{argmin}
+\DeclareMathOperator*{\argmax}{argmax}
+\DeclareMathOperator*{\mean}{mean}
+\DeclareMathOperator*{\avg}{avg}
+\DeclareMathOperator*{\span}{span}
+\DeclareMathOperator*{\var}{var}
+\DeclareMathOperator*{\bias}{bias}
+\newcommand{\expectation}{\mathbb{E}}
+\newcommand{\brak}[1]{\left[#1\right]}
+\newcommand{\paren}[1]{\left(#1\right)}
+\newcommand{\realset}{\mathbb{R}}
+\newcommand{\realvset}[1]{\realset^{#1}}
+\newcommand{\prob}{\mathbb{P}}
+\newcommand{\gaussian}{\mathcal{N}}
+\newcommand{\iid}{\stackrel{\text{i.i.d.}}{\sim}}
+\newcommand{\abs}[1]{\left\lvert#1\right\rvert}
+\newcommand{\norm}[1]{\left\lVert#1\right\rVert}
+\newcommand{\normtwo}[1]{\norm{#1}_{2}}
+\newcommand{\normone}[1]{\norm{#1}_{1}}
+\newcommand{\card}[1]{\left\lvert#1\right\rvert}
+\newcommand{\grad}{\nabla}
+\newcommand{\dconv}{\stackrel{d}{\to}}
+\newcommand{\pconv}{\stackrel{p}{\to}}
+\newcommand{\rva}[1]{#1}
+\newcommand{\rve}[1]{\vec{#1}}
+\newcommand{\obs}[1]{#1}
+\newcommand{\vobs}[1]{\vec{#1}}
+\newcommand{\distrib}[1]{#1}
+\newcommand{\distribof}[2]{#1_{#2}}
+\newcommand{\density}[1]{#1}
+\newcommand{\densityof}[2]{#1_{#2}}
+\newcommand{\distributed}{\sim}
+\newcommand{\const}[1]{#1}
+\newcommand{\fun}[1]{#1}
+</script>
+</p>
+<div class="typography">
+
+<p>Probability is not a property of an event or state; there is no such thing as the probability that the coin lands showing head. Probability expresses a strength of belief that an event or state has happened or will happen. It depends on the event or state, and also on the information known to the person who expresses the probability.</p>
+<p>According to any textbook on probability, the statement “in experiment X, event E has probability p” means that if we run experiment X a large number N of times, we will see, or we expect to see event E somewhere near p×N times. Let me call this the “long-run” meaning of probability (probabilists call it “frequentist”). In contrast to that, every day all of us make probabilistic judgements about situations that cannot be repeated.</p>
+<p>Can we repeat the experiment concerning the gender of my two children? If the experiment really is about my children, it is impractical to suggest that I have 1000 pairs of children so that we can say, in those pairs having at least one girl (somewhere near 750 pairs), the other one is also a girl 1/3 of the time (somewhere near 250 pairs). Although impractical, we could say it at least makes sense conceptually. But what about the probability that a nuclear war will occur, or the probability that an earth-shattering meteor will strike? In general, events can change the world so that they cannot, even conceptually, be repeated in anything like the same circumstances.</p>
+<p>How does the long-run meaning of probability apply to such events? We could talk about rewinding and replaying, or we could talk about a thousand parallel worlds, but such talk is completely divorced from any experiment that can be run, even conceptually, and is therefore not really meaningful. We need a meaning for probability that makes sense even for one-time-only events. For experiments that can be repeated, the long-run meaning should be a consequence.</p>
+<p>Alice and Bob have a coin to flip. They decide to bet with each other on the outcome. They agree that the probability for each of the two possible outcomes, head or tail, is 1/2, and that means that they should each bet the same amount, and the winner takes the whole amount. But wait: Alice suspects that Bob may be an expert flipper who can pretty well make the coin land as he wants. And Bob is equally suspicious of Alice. Should they flip to see who will flip? Should they each ask to see the other make some sample flips? Neither of those suggestions helps. Let’s remove the psychology and chicanery from the problem, and start again.</p>
+<p>Alice and Bob see a coin-flipping machine. They decide to bet with each other on the outcome. They agree that the probability for each of the two possible outcomes is 1/2, and that means that they should each bet the same amount, and the winner takes the whole amount.</p>
+<p>But wait: is the coin constructed perfectly? They use their handy atomic laser-guided shape checker, and discover that the coin has a slightly concave head and <a class="def" href="convexity.html">convex</a> tail, making the head landing position slightly more stable than the tail landing. They do the math, and find that the probability is 4/7 for head and 3/7 for tail; that means that Alice, who bets head, and Bob, who bets tail, should lay down money in the ratio of 4 to 3, and the winner takes the whole amount.</p>
+<p>But wait: is the material the coin is made of homogeneous? They use their density analyzer and discover that the perimeter is slightly denser than the center, making the bias worse. They do the math, and find the new probabilities to be 5/7 for head and 2/7 for tail. Unlike most gamblers, they know that only the ratio of amounts they put down, not the amounts, is determined by the probability calculation; the actual amounts are determined by factors that have nothing to do with coin flipping.</p>
+<p>But wait: is the coin-flipping machine constructed perfectly? They measure the weight of the coin, the angle of flip, the strength of the spring, the distance to the floor, and several other factors. They determine that the machine has a strong bias toward an even number of rotations. They do the math, and find that if the coin is placed tail-up to start with, the bias of the machine exactly compensates the bias of the coin, and the probabilities are 1/2 and 1/2 .</p>
+<p>But wait: should they consider the wind velocity? the direction and strength of the magnetic field?</p>
+<p>Alice and Bob decide to abandon their calculations in favor of a new approach: they decide to make 1000 trial flips before betting. To their surprise, there were 753 heads and only 247 tails. What should the bet be?</p>
+<p>A typical gambler’s answer is that the next flip is much more likely to be a tail than a head. The gambler’s reason is that in the long run, there should be half heads and half tails, so tails are overdue. In other words, there should now be more tails than heads for a while to bring the proportion back near half and half.</p>
+<p>A typical probabilist has a different answer. First, a probabilist wants to be told that it is a “fair coin”, or rather that the coin plus machine plus any other influential factors make it a “fair toss”; Alice and Bob confirm that their previous investigation had that conclusion. Now the probabilist will say that all past tosses are irrelevant. Even if there were 753 heads and only 247 tails to date, the next toss has 1/2 probability of landing on either side.</p>
+<p>Alice and Bob and I have yet another answer. We take the 1000 tosses to be highly relevant; they are clearly showing a bias to heads, and we assign 0.753 probability that the next toss will be a head, and 0.247 probability that it will be a tail. When Alice and Bob examined the coin and machine, they must have missed some important factor, or maybe they miscalculated. Whatever the reason, we take the machine’s past performance to be a strong indication of its future performance. Based on the 0.753 and 0.247 probabilities, Alice and Bob make their bet, they activate the machine once more, the coin lands showing head, and Alice wins.</p>
+<p>What Alice and Bob failed to understand is that they could have bet at any stage of their investigations, even at the start before making any investigation, or after examination of just the coin, or after examination of coin and machine but before the trial flips, using the probabilities at that stage, and it would have been a fair bet. They could even have waited until after the decisive flip! If they did not witness the event, and no-one told them its outcome, they should use the same probabilities ( 0.753 and 0.247 ) they would have used just before the flip. If they did witness the event, or someone told them its outcome, the probability of the coin landing showing head is 1 (because it did), and the probability of landing showing tail is 0 (because it didn’t). For a fair (but pointless) bet, Alice would have to contribute the whole pot, Bob none, and Alice would then take the whole pot.</p>
+<p><strong>The story of Alice and Bob is intended to illustrate the view (called “Subjective Bayesian” by probabilists) that probability is not a property of an event or state; there is no such thing as the probability that the coin lands showing head. Probability expresses a strength of belief that an event or state has happened or is happening or will happen. It depends on the event or state, and also on the information known to the person who expresses the probability.</strong></p>
+<p>The very same event or state can have different probabilities for different people possessing different knowledge, or to the same person at different times. In the story, the coin and flipping machine were unchanging, but the probabilities changed as new information was learned. As a shorthand, we may say “the probability that the coin lands showing head”, but implicitly we mean “according to someone’s state of knowledge”.</p>
+<p>According to standard accounts of probability, an event does indeed have a probability, but one’s knowledge of that probability changes, or one’s estimate of that probability changes, when one learns new information. In the standard view, a probabilist can talk about a “fair coin”, which is a coin for which the events “lands showing head” and “lands showing tail” each have probability 1/2 . Whether one can actually make such a coin is irrelevant; it is still, according to the standard view, a meaningful concept. In my view, “fair coin” means nothing, but “fair bet” is meaningful; whether a bet is fair depends on the state of knowledge of the bettors. A bet is fair when each bettor contributes that fraction of
+the pot that expresses the strength of their belief that they will win.</p>
+<p>There is a difference between how much knowledge one has, and how well one can
+predict what will happen. Sometimes gaining knowledge reduces one’s ability to predict. For example, after Alice and Bob had examined the coin, they were able to predict with some confidence (probability 5/7) that the coin would land showing head. Then, after examining the coin flipping machine, they no longer had any idea (probability 1/2 ) whether it would land showing head or not. Probability is not a measure of knowledge; it is a measure of one’s belief in their ability to predict, according to their current knowledge.</p>
+<p>A wheel whose perimeter is painted red and blue is about to be spun; you and I are going to bet on whether it stops with red or blue at the indicator arrow. What is a fair bet (what proportion of the pot should we each contribute)? Do you feel unprepared to bet? What would you like to know? Do you feel the need to know what proportion of the perimeter is painted each color?</p>
+<p>If I know that proportion and you don’t, that might give me an unfair advantage over you, but if neither of us knows, we can make a fair bet: we each contribute the same amount to the pot, and by that action we are saying that the probabilities are 1/2 and 1/2 . I wish to emphasize that these probabilities do not mean that we know, expect, or assume that red and blue each occupy half of the perimeter. Nor are we making an assumption (that would need justifying) that the probabilities are 1/2 and 1/2 . Saying that the probabilities are 1/2 and 1/2 means that we do not have any idea, or any expectation, of whether the result of the spin will be red or blue. If we learn that each color does indeed occupy half of the perimeter, we still have no better idea whether the result will be red or blue, so we do not revise the probability.</p>
+<p>Suppose someone tells us that red occupies either 1/4 or 1/2 of the perimeter; perhaps they forget which of those two fractions it is, or they are unwilling to tell us which it is. With this new information, we are certainly not now going to contribute equal amounts to the pot. The fair bet that we can now make with each other corresponds to assigning the probability 3/8 that the spin will end on red, and 5/8 on blue. A bet demands, or perhaps defines, a single probability distribution.</p>
+<p>My examples have been about betting money. If we consider non-monetary bets too, probability becomes a guide for action in all of life’s situations, so it is no small matter to get it right. <em>In life, we cannot refuse to bet, and a bet is a statement of probability.</em></p>
+<h2 id="read-next">Read next</h2>
+<p>Read the follow up article: <a href="probability-information.html">Probability = Information</a></p>
+<h2 id="reference">Reference</h2>
+<p>This article is an excerpt from the 44-pages article “<em>a Probability Perspective</em>” published by <em>Eric C.R. Hehner</em>. You can find the full article <a href="http://www.cs.utoronto.ca/~hehner/proper.pdf">here</a>. In this article Hehner give the above perpective on Bayesian probabilities and Information theory, then discuss modeling real world events using a new probabilistic formalism based on programmation, that he calls the programmer’s perspective. His formalism allows to solve classical paradox in an easy and non-ambiguous way.</p>
+<p>I found the cover picture on this <a href="https://www.mlsociety.com/tech-events-calendar/mathematics-debate-bayesians-vs-frequentists/">webpage</a> announcing an event on the topic at Berkeley.</p>
+</div>
+    </article>
+    </div><!-- row -->
+    
+    <div class="row mt-1">
+      <article class="col-lg-8 mx-auto recommendations">
+        <p class='title'>Other articles you might like:</p>
+        <ul>
+          
+            <li class="en"><img class="flag-icon" src="//julienharbulot.com/images/languages/en.png"> <a href="//julienharbulot.com/probability-information.html">An information theory perspective on probability</a></li>
+          
+            <li class="en"><img class="flag-icon" src="//julienharbulot.com/images/languages/en.png"> <a href="//julienharbulot.com/change-of-basis.html">The change of basis matrix</a></li>
+          
+            <li class="en"><img class="flag-icon" src="//julienharbulot.com/images/languages/en.png"> <a href="//julienharbulot.com/polynomial-regression.html">What is a polynomial regression?</a></li>
+          
+            <li class="en"><img class="flag-icon" src="//julienharbulot.com/images/languages/en.png"> <a href="//julienharbulot.com/win-extend-screen.html">Keyboard shortcut and command line utility to switch display (Windows)</a></li>
+          
+        </ul>
+      </article>
+    </div>
+    
+    
+    <div class="row mb=5 mt-5">
+      <article class="col-lg-8 mx-auto">
+        <div id="hyvor-talk-view"></div>
+        <script type="text/javascript">
+            var HYVOR_TALK_WEBSITE = '625';
+            var HYVOR_TALK_CONFIG = {
+                url: 'probability-bayesian-perspective.html',
+                id: 'probability-bayesian-perspective.html'
+            };
+        </script>
+      </article>
+    </div><!-- row -->
+    
+    <footer class="row">
+        <div class="col-lg-8 mx-auto text-center">
+          <p><small>
+          
+            Last updated: 01/14/21 <br/>
+          
+          
+          Copyright &copy; 2021 Julien Harbulot
+          </small></p>
+        </div>
+    </footer>
+    </div>
+
+  <script>
+  // bootstrap table
+  tables = document.getElementsByTagName('table');
+  for (i = 0; i < tables.length; i++) {
+    tables[i].classList.add('table');
+    tables[i].classList.add('table-bordered');
+  }
+
+  // Paragraphs that contain only images are marked with custom class for styling
+  ps = document.getElementsByTagName('p');
+  Array.from(ps).forEach(function(p){
+    if (p.getElementsByTagName('img').length > 0 && p.textContent.trim().length == 0) {
+        p.classList.add('img-container');
+    }
+  });
+  </script>
+
+
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script>
+        prev_onload_a = window.onload;
+        window.onload = function() {
+            if (prev_onload_a) {
+                prev_onload_a();
+            }
+            var navlinks = document.getElementsByClassName("nav-link");
+            var i;
+            for (i = 0; i < navlinks.length; i++) {
+                const target = new URL(navlinks[i].href)
+                if (location.pathname == target.pathname) {
+                    navlinks[i].classList.add('active')
+                }
+            }
+        }
+    </script>    
+
+    
+
+<script async type="text/javascript" src="//talk.hyvor.com/web-api/embed"></script>
+
+
+    </body>
+</html>

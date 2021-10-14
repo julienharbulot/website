@@ -1,0 +1,805 @@
+<!doctype html>
+<html lang="en">
+    <head>
+    
+
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-166292985-1"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-166292985-1');
+    </script>
+    
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" 
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+          rel="stylesheet" crossorigin="anonymous">
+    
+    <link rel="stylesheet" href="/theme/pygment-github.css">
+    <link rel="stylesheet" href="/theme/article.css"> 
+
+    <title>Extending logic to deal with uncertainty</title>
+    
+    <!-- Favicon -->
+    <link rel="apple-touch-icon" sizes="120x120" href="/images/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon/favicon-16x16.png">
+    <link rel="manifest" href="/images/favicon/site.webmanifest">
+    <link rel="mask-icon" href="/images/favicon/safari-pinned-tab.svg" color="#5bbad5">
+    <link rel="shortcut icon" href="favicon.ico">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="msapplication-config" content="/images/favicon/browserconfig.xml">
+    <meta name="theme-color" content="#ffffff">
+    
+<!-- Mathjax -->
+<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS_SVG">
+  MathJax.Hub.Config({
+    tex2jax: {
+    	inlineMath: [ ['$','$'] ],
+    	processEscapes: true
+    },
+	"HTML-CSS": {
+		fonts: ["TeX"] 
+	}
+  });
+</script>
+
+    </head>
+
+    <body>
+    
+    <nav class="navbar navbar-expand-lg navbar-light ">
+        <a class="navbar-brand" href="//julienharbulot.com/index.html"><img src="//julienharbulot.com/images/logo.png" width="30" alt=""></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+            
+            <li class="nav-item">
+                    <a class="nav-link" href="//julienharbulot.com/technical-blog.html">Technical blog</a>
+            </li>
+            
+            <li class="nav-item">
+                    <a class="nav-link" href="//julienharbulot.com/maths.html">Maths</a>
+            </li>
+            
+            <li class="nav-item">
+                    <a class="nav-link" href="//julienharbulot.com/projects.html">Projects</a>
+            </li>
+            
+            <li class="nav-item">
+                    <a class="nav-link" href="//julienharbulot.com/research.html">Research</a>
+            </li>
+            
+            <!--<li class="nav-item">
+                <a class="nav-link" href="//julienharbulot.com/about-me.html">About me</a>
+            </li>-->
+            
+
+<li class="nav-item dropdown">
+    <a class="nav-link active dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Table of content
+    </a>
+    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+        <div class="toc"><ul>
+<li class="toc-entry-1">
+<a class='toc-href dropdown-item' href='#what-does-probability-mean' title='What does “probability” mean?'>What does “probability” mean?</a>
+</li>
+<div class="dropdown-divider"></div>
+<li class="toc-entry-1">
+<a class='toc-href dropdown-item' href='#classical-logic-is-not-enough' title='Classical logic is not enough'>Classical logic is not enough</a>
+</li>
+<div class="dropdown-divider"></div>
+<li class="toc-entry-1">
+<a class='toc-href dropdown-item' href='#an-extension-of-logic-to-deal-with-confidence-levels' title='An extension of logic to deal with confidence levels'>An extension of logic to deal with confidence levels</a>
+    <ul>
+<li class="toc-entry-2">
+    <a class='toc-href dropdown-item' href='#estimate-h_1-land-h_2-mid-e' title='Estimate <script type="math/tex">(H_1 \land H_2 \mid E)</script>'>Estimate <script type="math/tex">(H_1 \land H_2 \mid E)</script></a>
+    </li>
+<li class="toc-entry-2">
+    <a class='toc-href dropdown-item' href='#do-we-really-need-to-take-the-evidence-h_1' title='Do we really need to take the evidence <script type="math/tex">H_1</script>?'>Do we really need to take the evidence <script type="math/tex">H_1</script>?</a>
+    </li>
+<li class="toc-entry-2">
+    <a class='toc-href dropdown-item' href='#how-do-we-determine-f' title='How do we determine F?'>How do we determine F?</a>
+    </li>
+    </ul>
+</li>
+<div class="dropdown-divider"></div>
+<li class="toc-entry-1">
+<a class='toc-href dropdown-item' href='#rules-of-the-new-logic' title='Rules of the new logic'>Rules of the new logic</a>
+    <ul>
+<li class="toc-entry-2">
+    <a class='toc-href dropdown-item' href='#the-principle-of-indifference' title='The principle of indifference'>The principle of indifference</a>
+    </li>
+    </ul>
+</li>
+<div class="dropdown-divider"></div>
+<li class="toc-entry-1">
+<a class='toc-href dropdown-item' href='#inference-in-the-new-logic' title='Inference in the new logic'>Inference in the new logic</a>
+</li>
+<div class="dropdown-divider"></div>
+<li class="toc-entry-1">
+<a class='toc-href dropdown-item' href='#read-next' title='Read next'>Read next</a>
+</li>
+<div class="dropdown-divider"></div>
+<li class="toc-entry-1">
+<a class='toc-href dropdown-item' href='#references' title='References'>References</a>
+</li>
+</ul><div>
+    </div>
+</li>
+
+
+            </ul>
+        </div>
+    </nav>
+    
+    
+    
+    <div class="container">
+    <div class="row mt-5">
+      <div class="col-lg-8 mx-auto"> 
+        <h1 class="display-5">Extending logic to deal with uncertainty </h1>
+        <div class="text-right">12 Mar 2018</div>
+      </div>
+    </div>
+    <div class="row mt-5">
+    <article class="col-lg-8 mx-auto">
+    <p>
+<script type="math/tex; mode=display">
+\def\sa{a}
+\def\sb{b}
+\def\sc{c}
+\def\sd{d}
+\def\se{e}
+\def\sf{f}
+\def\sg{g}
+\def\sh{h}
+\def\si{i}
+\def\sj{j}
+\def\sk{k}
+\def\sl{l}
+\def\sm{m}
+\def\sn{n}
+\def\so{o}
+\def\sp{p}
+\def\sq{q}
+\def\sr{r}
+\def\ss{s}
+\def\st{t}
+\def\su{u}
+\def\sv{v}
+\def\sw{w}
+\def\sx{x}
+\def\sy{y}
+\def\sz{z}
+\def\va{\vec{a}}
+\def\vb{\vec{b}}
+\def\vc{\vec{c}}
+\def\vd{\vec{d}}
+\def\ve{\vec{e}}
+\def\vf{\vec{f}}
+\def\vg{\vec{g}}
+\def\vh{\vec{h}}
+\def\vi{\vec{i}}
+\def\vj{\vec{j}}
+\def\vk{\vec{k}}
+\def\vl{\vec{l}}
+\def\vm{\vec{m}}
+\def\vn{\vec{n}}
+\def\vo{\vec{o}}
+\def\vp{\vec{p}}
+\def\vq{\vec{q}}
+\def\vr{\vec{r}}
+\def\vs{\vec{s}}
+\def\vt{\vec{t}}
+\def\vu{\vec{u}}
+\def\vv{\vec{v}}
+\def\vw{\vec{w}}
+\def\vx{\vec{x}}
+\def\vy{\vec{y}}
+\def\vz{\vec{z}}
+\def\ga{\mathfrak{A}}
+\def\gb{\mathfrak{B}}
+\def\gc{\mathfrak{C}}
+\def\gd{\mathfrak{D}}
+\def\ge{\mathfrak{E}}
+\def\gf{\mathfrak{F}}
+\def\gg{\mathfrak{G}}
+\def\gh{\mathfrak{H}}
+\def\gi{\mathfrak{I}}
+\def\gj{\mathfrak{J}}
+\def\gk{\mathfrak{K}}
+\def\gl{\mathfrak{L}}
+\def\gm{\mathfrak{M}}
+\def\gn{\mathfrak{N}}
+\def\go{\mathfrak{O}}
+\def\gp{\mathfrak{P}}
+\def\gq{\mathfrak{Q}}
+\def\gr{\mathfrak{R}}
+\def\gs{\mathfrak{S}}
+\def\gt{\mathfrak{T}}
+\def\gu{\mathfrak{U}}
+\def\gv{\mathfrak{V}}
+\def\gw{\mathfrak{W}}
+\def\gx{\mathfrak{X}}
+\def\gy{\mathfrak{Y}}
+\def\gz{\mathfrak{Z}}
+\def\ra{A}
+\def\rb{B}
+\def\rc{C}
+\def\rd{D}
+\def\re{E}
+\def\rf{F}
+\def\rg{G}
+\def\rh{H}
+\def\ri{I}
+\def\rj{J}
+\def\rk{K}
+\def\rl{L}
+\def\rm{M}
+\def\rn{N}
+\def\ro{O}
+\def\rp{P}
+\def\rq{Q}
+\def\rr{R}
+\def\rs{S}
+\def\rt{T}
+\def\ru{U}
+\def\rv{V}
+\def\rw{W}
+\def\rx{X}
+\def\ry{Y}
+\def\rz{Z}
+\def\rva{\vec{A}}
+\def\rvb{\vec{B}}
+\def\rvc{\vec{C}}
+\def\rvd{\vec{D}}
+\def\rve{\vec{E}}
+\def\rvf{\vec{F}}
+\def\rvg{\vec{G}}
+\def\rvh{\vec{H}}
+\def\rvi{\vec{I}}
+\def\rvj{\vec{J}}
+\def\rvk{\vec{K}}
+\def\rvl{\vec{L}}
+\def\rvm{\vec{M}}
+\def\rvn{\vec{N}}
+\def\rvo{\vec{O}}
+\def\rvp{\vec{P}}
+\def\rvq{\vec{Q}}
+\def\rvr{\vec{R}}
+\def\rvs{\vec{S}}
+\def\rvt{\vec{T}}
+\def\rvu{\vec{U}}
+\def\rvv{\vec{V}}
+\def\rvw{\vec{W}}
+\def\rvx{\vec{X}}
+\def\rvy{\vec{Y}}
+\def\rvz{\vec{Z}}
+\def\seta{A}
+\def\setb{B}
+\def\setc{C}
+\def\setd{D}
+\def\sete{E}
+\def\setf{F}
+\def\setg{G}
+\def\seth{H}
+\def\seti{I}
+\def\setj{J}
+\def\setk{K}
+\def\setl{L}
+\def\setm{M}
+\def\setn{N}
+\def\seto{O}
+\def\setp{P}
+\def\setq{Q}
+\def\setr{R}
+\def\sets{S}
+\def\sett{T}
+\def\setu{U}
+\def\setv{V}
+\def\setw{W}
+\def\setx{X}
+\def\sety{Y}
+\def\setz{Z}
+\def\fa{a}
+\def\fb{b}
+\def\fc{c}
+\def\fd{d}
+\def\fe{e}
+\def\ff{f}
+\def\fg{g}
+\def\fh{h}
+\def\fi{i}
+\def\fj{j}
+\def\fk{k}
+\def\fl{l}
+\def\fm{m}
+\def\fn{n}
+\def\fo{o}
+\def\fp{p}
+\def\fq{q}
+\def\fr{r}
+\def\fs{s}
+\def\ft{t}
+\def\fu{u}
+\def\fv{v}
+\def\fw{w}
+\def\fx{x}
+\def\fy{y}
+\def\fz{z}
+\def\fA{A}
+\def\fB{B}
+\def\fC{C}
+\def\fD{D}
+\def\fE{E}
+\def\fF{F}
+\def\fG{G}
+\def\fH{H}
+\def\fI{I}
+\def\fJ{J}
+\def\fK{K}
+\def\fL{L}
+\def\fM{M}
+\def\fN{N}
+\def\fO{O}
+\def\fP{P}
+\def\fQ{Q}
+\def\fR{R}
+\def\fS{S}
+\def\fT{T}
+\def\fU{U}
+\def\fV{V}
+\def\fW{W}
+\def\fX{X}
+\def\fY{Y}
+\def\fZ{Z}
+\def\ma{A}
+\def\mb{B}
+\def\mc{C}
+\def\md{D}
+\def\me{E}
+\def\mf{F}
+\def\mg{G}
+\def\mh{H}
+\def\mi{I}
+\def\mj{J}
+\def\mk{K}
+\def\ml{L}
+\def\mm{M}
+\def\mn{N}
+\def\mo{O}
+\def\mp{P}
+\def\mq{Q}
+\def\mr{R}
+\def\ms{S}
+\def\mt{T}
+\def\matu{U}
+\def\mv{V}
+\def\mw{W}
+\def\mx{X}
+\def\my{Y}
+\def\mz{Z}
+\def\loss{\mathcal{L}}
+\newcommand{\dkl}[2]{D_{\text{KL}}\mathopen{}\paren{#1\,||\,#2}}
+\newcommand{\dataset}{S}
+\newcommand{\ndataset}{N}
+\newcommand{\idataset}{n}
+\newcommand{\inputRV}{\mathcal{X}}
+\newcommand{\inputvec}{\vec{x}}
+\newcommand{\ninputvec}[1]{\vec{x}_{#1}}
+\newcommand{\iinputvec}[1]{x_{#1}}
+\newcommand{\niinputvec}[2]{x_{#1, #2}}
+\newcommand{\icpnt}{i}
+\newcommand{\inputmatrix}{X}
+\newcommand{\inputdim}{D}
+\newcommand{\outputval}{y}
+\newcommand{\ioutputval}[1]{y_{#1}}
+\newcommand{\outputvec}{\vec{y}}
+\newcommand{\trainset}{S_{\text{train}}}
+\newcommand{\testset}{S_{\text{test}}}
+\newcommand{\truemodel}{f_{\text{true}}}
+\newcommand{\trainedmodel}{f_{\trainset}}
+\newcommand{\linmodel}[1]{f_{#1}}
+\newcommand{\bestmodel}{f^{*}}
+\newcommand{\model}{f}
+\newcommand{\hyperparam}{\lambda}
+\newcommand{\linparamv}{\vec{w}}
+\newcommand{\ilinparam}[1]{w_{#1}}
+\newcommand{\indivloss}{l}
+\newcommand{\modelclass}{\mathcal{F}}
+\newcommand{\linclass}{\modelclass_{\text{lin}}}
+\newcommand{\g}{\mathcal{G}}
+\newcommand{\gmse}{\g_{\text{MSE}}}
+\newcommand{\glasso}{\g_{\text{lasso}}}
+\newcommand{\gridge}{\g_{\text{ridge}}}
+\newcommand{\glogit}{\g_{\logit}}
+\newcommand{\l}{\mathcal{L}}
+\newcommand{\lmse}{\l_{\text{MSE}}}
+\newcommand{\lmae}{\l_{\text{MAE}}}
+\newcommand{\llasso}{\l_{\text{lasso}}}
+\newcommand{\lridge}{\l_{\text{ridge}}}
+\newcommand{\llogit}{\l_{\logit}}
+\newcommand{\logit}{\sigma}
+\newcommand{\reg}{\mathcal{R}}
+\DeclareMathOperator*{\argmin}{argmin}
+\DeclareMathOperator*{\argmax}{argmax}
+\DeclareMathOperator*{\mean}{mean}
+\DeclareMathOperator*{\avg}{avg}
+\DeclareMathOperator*{\span}{span}
+\DeclareMathOperator*{\var}{var}
+\DeclareMathOperator*{\bias}{bias}
+\newcommand{\expectation}{\mathbb{E}}
+\newcommand{\brak}[1]{\left[#1\right]}
+\newcommand{\paren}[1]{\left(#1\right)}
+\newcommand{\realset}{\mathbb{R}}
+\newcommand{\realvset}[1]{\realset^{#1}}
+\newcommand{\prob}{\mathbb{P}}
+\newcommand{\gaussian}{\mathcal{N}}
+\newcommand{\iid}{\stackrel{\text{i.i.d.}}{\sim}}
+\newcommand{\abs}[1]{\left\lvert#1\right\rvert}
+\newcommand{\norm}[1]{\left\lVert#1\right\rVert}
+\newcommand{\normtwo}[1]{\norm{#1}_{2}}
+\newcommand{\normone}[1]{\norm{#1}_{1}}
+\newcommand{\card}[1]{\left\lvert#1\right\rvert}
+\newcommand{\grad}{\nabla}
+\newcommand{\dconv}{\stackrel{d}{\to}}
+\newcommand{\pconv}{\stackrel{p}{\to}}
+\newcommand{\rva}[1]{#1}
+\newcommand{\rve}[1]{\vec{#1}}
+\newcommand{\obs}[1]{#1}
+\newcommand{\vobs}[1]{\vec{#1}}
+\newcommand{\distrib}[1]{#1}
+\newcommand{\distribof}[2]{#1_{#2}}
+\newcommand{\density}[1]{#1}
+\newcommand{\densityof}[2]{#1_{#2}}
+\newcommand{\distributed}{\sim}
+\newcommand{\const}[1]{#1}
+\newcommand{\fun}[1]{#1}
+</script>
+</p>
+<div class="typography">
+
+<p>This article sketches a construction of probability calculus as an extension of classical logic to account for uncertainty so that by construction, it can be used to automate or bullet-proof our everyday decisions. This has applications both in artificial intelligence and decision making theory.</p>
+<blockquote>
+<p>The true logic of this world is the calculus of probabilities, which takes account of the magnitude of the probability which is, or ought to be, in a reasonable man’s mind. – James C. Maxwell (1850) from [1]</p>
+</blockquote>
+<p>I have never been satisfied by the usual presentation of probability theory using Kolmogorov’s axioms or any other formalism that uses <em>sets</em>. I don’t care about sets or measures. What I care about is deduction and inference; I care about logic and using a mathematical theory to bullet proof my decision making, or to automate my decisions using artificial intelligence. Classical logic is not sufficient for that because it can’t deal with uncertainty like humans do. So we need an extension of it that is able to deal with various degrees of certainty.</p>
+<p>The main point of this article is to emancipate probability calculus from the usual construction of probability theory. So this article is not about events that will follow a distribution if an experience is repeated multiple times. Nor is it about sigma algebras. It is about contructing a new formal calculus from scratch that is based on classical logic and extends it to account for uncertainty. By chance, this calculus has the same rules as probability calculus and thus provides an alternative view of probability theory. We use the same notations to ease the comparison.</p>
+<p>If you want to gain an alternative view on probability, or convince yourself that probability calculus is a valid theory upon which to base your decisions, this article is for you. You will need basic understanding of formal logic (proposition, and, or, not, imply) the follow the exposition. I won’t explain here how to use the rules of the newly constructed calculus to automate or improve your decisions. Rather, I sketch how such a calculus can be constructed from classical logic. The construction is not complete because my purpose is to show that it can be done and roughly illustrate how.</p>
+<p>To be clear: the purpose of this construction is not to provide a mathematically stronger theory of probability. The goal is pedagogical: our construction explains the intuition behind the theory and explains why it can be used successfully in the real world. In a way, it’s about constructing a physical theory rather that mathematical theory, even though the construction is completely rigorous and mathematically justified (by <a href="https://en.wikipedia.org/wiki/cox%27s_theorem">Cox’s theorem</a>).</p>
+<p>The following exposition is a summary of the first few chapters of the book <em>Probability theory: the Logic of Science</em> by E. T. Jaynes. In the book, the concepts are introduced slowly and accompanied by a lot of conceptual remarks and insights that make Jaynes’ writing delightful. I strongly encourages you to read this book or at least its preface and introduction.</p>
+<p>In his book, Jaynes explains how his construction of probabilities differs from the traditional one:</p>
+<blockquote>
+<p>Our system of probability, however, differs conceptually from that of Kolmogorov in that we do not interpret propositions in terms of sets, but we do interpret probability distribution as carriers of incomplete information. Partly as a result, our system has analytical resources not present at all in the Kolmogorov system.</p>
+</blockquote>
+<h2 id="what-does-probability-mean">What does “probability” mean?</h2>
+<p>Throughout this article, I will use the term <em>probability</em>. Here is how to interpret it: the <em>probability</em> of an hypothesis is a measure of our confidence in it. It is <em>subjective</em> and depends primarily on our <em>information</em> about that hypothesis.</p>
+<p>For instance, your confidence that it will rain soon might increase if you see dark clouds in the sky. Using the formalism, the confidence in hypothesis <script type="math/tex">H_1</script> might increase if we learn evidence <script type="math/tex">E_1</script>, which we will note: <script type="math/tex">p(H_1 \mid E_1) > p(H_1)</script>.</p>
+<p>To say it again: probabilities quantify our confidence based on the amount of information we have.</p>
+<p>This view has a concrete impact on how to use the results of probability theory. Suppose for instance that you draw balls from an urn.</p>
+<p>You know that the urn contains <script type="math/tex">N</script> balls, <script type="math/tex">R</script> of which are reds. You draw a ball blindfolded without knowing its color and then look at the color. The probability that the ball you have is red is <script type="math/tex">R / N</script>.</p>
+<p>This means that your confidence that the ball will be red is <script type="math/tex">R / N</script>. But <em>this probability assignment is not an assertion of any physical property</em> of the urn or its content; it is a description of your state of knowledge prior to the drawing. Therefore, <em>it is illogical to speak of verifying this probability by performing experiments with the urn</em>. The probability is not an expected frequency.</p>
+<p>Probabilities are not properties of the real world, but we can use them to infer physical predictions. For instance, we can <em>compute the most probable fraction of red balls in a sample of <script type="math/tex">n</script> draws</em> and confront this fraction with its frequency among multiple samples. If we do the math, the most probable fraction is <em>almost equal</em> to <script type="math/tex">R/N</script> which can lead to confusion since it’s close to our probability estimate. But both are conceptually different, and in practice their values differ slightly.</p>
+<p>See also: <a href="probability-information.html">Probability from the Information theory vantage point</a></p>
+<h2 id="classical-logic-is-not-enough">Classical logic is not enough</h2>
+<p>Classical logic is concerned with certainty: a proposition <script type="math/tex">A</script> is either <em>true</em> or <em>false</em>. The rules to deduct <em>true</em> propositions from others is:</p>
+<table>
+<tbody>
+<tr>
+<td><script type="math/tex">A \Rightarrow B</script></td>
+<td><strong>if</strong> <script type="math/tex">A</script> is <em>true</em>, <strong>then</strong> <script type="math/tex">B</script> is <em>true</em></td>
+</tr>
+</tbody>
+</table>
+<p>For instance, let the two propositions:</p>
+<table>
+<tbody>
+<tr>
+<td><script type="math/tex">A</script></td>
+<td>“it will start to rain by 10a.m. at the latest”</td>
+</tr>
+<tr>
+<td><script type="math/tex">B</script></td>
+<td>“the sky will be cloudy before 10a.m.”</td>
+</tr>
+</tbody>
+</table>
+<p>Then it is true that <script type="math/tex">A \Rightarrow B</script>: <strong>if (</strong>it will start to rain by 10a.m. at the latest<strong>), then (</strong>the sky will be cloudy before 10a.m. <strong>)</strong>.</p>
+<p>So, if we know <script type="math/tex">A</script> then the rule says that we know <script type="math/tex">B</script>. But what if we know <script type="math/tex">B</script> and ask about <script type="math/tex">A</script>? Classical logic doesn’t tell us anything about <script type="math/tex">A</script>.</p>
+<p>But in our everyday lives, we constantly use knowledge about <script type="math/tex">B</script> to quantify our certainty about <script type="math/tex">A</script>. For instance, <strong>if (</strong>the sky is cloudy before 10a.m.<strong>) then (</strong>I’m more confident that it will start raining by 10a.m. at the latest<strong>)</strong>. Classical logic can’t help us with this kind of inference and that’s why we are looking to extend it with a formalism that can.</p>
+<p>In particular, here are some inferences that classical logic can’t deal with but that we constantly use:</p>
+<table>
+<tbody>
+<tr>
+<td>3) given <script type="math/tex">A \Rightarrow B</script>:</td>
+<td><strong>if</strong> <script type="math/tex">B</script> is true, <strong>then</strong> <script type="math/tex">A</script> is more plausible</td>
+</tr>
+<tr>
+<td>4) given <script type="math/tex">A \Rightarrow B</script>:</td>
+<td><strong>if</strong> <script type="math/tex">A</script> is false, <strong>then</strong> <script type="math/tex">B</script> is less plausible</td>
+</tr>
+<tr>
+<td>5) given <script type="math/tex">A \Rightarrow \text{more plausible(}B\text{)}</script>:</td>
+<td><strong>if</strong> <script type="math/tex">B</script> is true, <strong>then</strong> <script type="math/tex">A</script> is more plausible</td>
+</tr>
+</tbody>
+</table>
+<p>For instance, it’s rule 3 that we used previously: <strong>if (</strong>the sky is couldy before 10a.m.<strong>), then (</strong>I’m more confident that it will rain by 10a.m. at the latest<strong>)</strong>.</p>
+<p>We will see at the end of this article how probability theory justifies these points.</p>
+<p>The object of this article is to develop the mathematical theory which answers questions such as: What determines whether the probability for <script type="math/tex">A</script> increases by large amount, raising it almost to certainty; or only a negligibly small amount, making the data <script type="math/tex">B</script> almost irrelevant?</p>
+<p>Before we dive into the construction of the theory, recall to following about formal logic:</p>
+<table>
+<tbody>
+<tr>
+<td><script type="math/tex">A \land B</script> is true</td>
+<td><strong>if and only if</strong> both <script type="math/tex">A</script> and <script type="math/tex">B</script> are true</td>
+</tr>
+<tr>
+<td><script type="math/tex">\neg A</script> is true</td>
+<td><strong>if and only if</strong> <script type="math/tex">A</script> is false</td>
+</tr>
+<tr>
+<td><script type="math/tex">A \lor B</script> is true</td>
+<td>as soon as one of <script type="math/tex">A</script> or <script type="math/tex">B</script> is true</td>
+</tr>
+</tbody>
+</table>
+<p>And in particular:</p>
+<table>
+<tbody>
+<tr>
+<td><script type="math/tex">A \lor B</script></td>
+<td>is equivalent to <script type="math/tex">\neg (\neg A \land \neg B)</script></td>
+</tr>
+<tr>
+<td><script type="math/tex">A \Rightarrow B</script></td>
+<td>is equivalent to <script type="math/tex">\neg B \lor A</script></td>
+</tr>
+</tbody>
+</table>
+<p>Which means that we only need a suitable definition for <script type="math/tex">\neg A</script> and <script type="math/tex">A \land B</script> to construct both <script type="math/tex">A \lor B</script> and <script type="math/tex">A \Rightarrow B</script>.</p>
+<h2 id="an-extension-of-logic-to-deal-with-confidence-levels">An extension of logic to deal with confidence levels</h2>
+<p>We want to construct a formalism that will allow us to reason using uncertainty like we did in points (3, 4 and 5) in the previous section. Our approach is to establish a list of reasonable desiderata and then to obtain the formalism as a consequence of this list. This type of mathematical reasoning is called analysis-synthesis: we use our current knowledge to obtain necessary conditions on the theory being contructed and use them to find the unique construction that satisfies all the sufficient ones.</p>
+<p>The desiderata are chosen so that a rational person, on discovering that they were violating one of them, would wish to revise their thinking. They are broadly stated below:</p>
+<ol>
+<li>Degrees of probability are represented by real numbers;</li>
+<li>Qualitative correspondence with common sense;</li>
+<li>Consistency 1: if a conclusion can be reasoned out in more than one way, then every possible way must lead to the same result;</li>
+<li>Consistency 2: the theory always take into account all the evidence it has and does not arbitrarily ignore some of the information;</li>
+<li>Consistency 3: the theory always represents equivalent states of knowledge by equivalent probability assignments.</li>
+</ol>
+<p>You can think of the theory being constructed as the rules a robot will follow to take decisions and compute its own confidence in hypothesis.</p>
+<p>I will not reconstruct the whole theory here and you should refer to the book to see the completed construction. Instead, I will only give an example of how the desiderata can be used to establish the rules of the new theory.</p>
+<p>Since this theory is about computing confidence levels based on the information we have about an hypothesis, we need a notation to make explicit what information is taken into account. So we will use the notation: <script type="math/tex">(H \mid E)</script> the probability of hypothesis <script type="math/tex">H</script> given evidence that <script type="math/tex">E</script> is true. I will often use <script type="math/tex">E</script> for “evidence” or <script type="math/tex">B</script> for “background information”.</p>
+<p>Note: a consequence of the desiderata for our theory is that it can’t selectively ignore some established evidence, so we must take every established information into account when computing our probability estimations.</p>
+<h4 id="estimate-h_1-land-h_2-mid-e">Estimate <script type="math/tex">(H_1 \land H_2 \mid E)</script></h4>
+<p>If you recall from previous section, classical logic can be built using only <script type="math/tex">\land</script> and <script type="math/tex">\neg</script>. So our first objective will be to construct a probability equivalent of <script type="math/tex">\land</script>.</p>
+<p>Our goal is thus to relate the probability <script type="math/tex">(H_1 \land H_2 \mid E)</script> that both <script type="math/tex">H_1</script> and <script type="math/tex">H_2</script> are true given evidence <script type="math/tex">E</script> with the probability <script type="math/tex">(H_1 \mid E)</script> of <script type="math/tex">H_1</script> given evidence <script type="math/tex">E</script> and the probability <script type="math/tex">(H_2 \mid E)</script>.</p>
+<p>In classical logic, to establish that <script type="math/tex">H_1 \land H_2</script> is true, we must first establish that <script type="math/tex">H_1</script> is true and then establish that <script type="math/tex">H_2</script> is true. Or the other way around with <script type="math/tex">H_2</script> first and <script type="math/tex">H_1</script> second. To estimate our confidence in the fact that <script type="math/tex">H_1 \land H_2</script> is true, we can estimate our confidence in the two steps.</p>
+<table>
+<thead>
+<tr>
+<th>step</th>
+<th>confidence in that step</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>decide that <script type="math/tex">H_1 \land H_2</script> is true</td>
+<td><script type="math/tex">(H_1 \land H_2 \mid E)</script></td>
+</tr>
+<tr>
+<td>- decide that <script type="math/tex">H_1</script> is true</td>
+<td><script type="math/tex">(H_1 \mid E)</script></td>
+</tr>
+<tr>
+<td>- having accepted <script type="math/tex">H_1</script> as true, decide that <script type="math/tex">H_2</script> is true</td>
+<td><script type="math/tex">(H_2 \mid H_1, E)</script></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>In order for <script type="math/tex">H_1 \land H_2</script> to be a true proposition, it is necessary that <script type="math/tex">H_1</script> is true. So the probability <script type="math/tex">(H_1\mid E)</script> should be involved.</li>
+<li>If <script type="math/tex">H_1</script> is true then it is further necessary that <script type="math/tex">H_2</script> be true, so the probability <script type="math/tex">(H_2 \mid H_1, E)</script> is also needed.</li>
+<li>But if <script type="math/tex">H_1</script> is false, then <script type="math/tex">H_1 \land H_2</script> will be false independently of whatever one knows about <script type="math/tex">H_2</script>. So our estimate will not depend on <script type="math/tex">(H_2 \mid E)</script>.</li>
+<li>Using similar arguments, we can establish that our estimate only depends on <script type="math/tex">(H_1\mid E)</script> and <script type="math/tex">(H_2 \mid H_1, E)</script>.</li>
+</ul>
+<p>So we can state the following rule where <script type="math/tex">F</script> is a function that indicates the dependence:</p>
+<script type="math/tex; mode=display">(H_1 \land H_2 \mid E) = F[(H_1 \mid E); (H_2 \mid H_1, E)]</script>
+<h4 id="do-we-really-need-to-take-the-evidence-h_1">Do we really need to take the evidence <script type="math/tex">H_1</script>?</h4>
+<p>We could be tempted to use the dependence:</p>
+<script type="math/tex; mode=display">(H_1 \land H_2 \mid E) = F[(H_1 \mid E); (H_2 \mid E)]</script>
+<p>where the estimate for <script type="math/tex">H_2</script> does not use evidence for <script type="math/tex">H_1</script>. But this dependence is flawed as shown by taking:</p>
+<ul>
+<li><script type="math/tex">H_1</script>: the next person you meet has a blue left eye</li>
+<li><script type="math/tex">H_2</script>: the next person you meet has a green left eye</li>
+<li><script type="math/tex">E</script>: you will meet someone soon</li>
+</ul>
+<p>In which case, both <script type="math/tex">H_1 \mid E</script> and <script type="math/tex">H_2 \mid E</script> are quite plausible but <script type="math/tex">H_1 \land H_2 \mid E</script> is not.</p>
+<h4 id="how-do-we-determine-f">How do we determine F?</h4>
+<p>Using a list of desiderata for our theory that we confront with <script type="math/tex">F</script>, we can find the properties of <script type="math/tex">F</script>. For instance, using a requirement for structural consistency and given that boolean algebra is associative, we find:</p>
+<ul>
+<li>
+<script type="math/tex; mode=display">F[F[x, y], z] = F[x, F[y, z]]</script>
+</li>
+</ul>
+<p>From which we can deduce that:</p>
+<ul>
+<li>
+<script type="math/tex; mode=display">F(x, y) = w^{-1}[w(x)w(y)]</script>
+</li>
+</ul>
+<p>for some given function <script type="math/tex">w</script>. And another requirement will allow us to find the properties of <script type="math/tex">w</script>; etc. Until we establish the properties of the whole theory and set <script type="math/tex">p = w^m</script> for a fixed positive value of <script type="math/tex">m</script>.</p>
+<p>The above derivation is only intended as an illustration of the reasoning needed to construct the theory. I’m skipping details on purpose. If you want to know more about this construction, check out this wikipedia article about <a href="https://en.wikipedia.org/wiki/cox%27s_theorem">Cox’s theorem</a>).</p>
+<h2 id="rules-of-the-new-logic">Rules of the new logic</h2>
+<p>Once every requirement for the theory has been used to establish necessary conditions, we find the founding rules of the theory:</p>
+<p>The “and” rule expresses our confidence in <script type="math/tex">H_1 \land H_2</script> given evidence <script type="math/tex">E</script>.</p>
+<ul>
+<li>
+<script type="math/tex; mode=display">p(H_1 \land H_2 \mid E) = p(H_1 \mid E) p(H_2 \mid H_1, E)</script>
+</li>
+</ul>
+<p>The “not” rule expresses our confidence in <script type="math/tex">\neg H</script> given evidence <script type="math/tex">E</script>.</p>
+<ul>
+<li>
+<script type="math/tex; mode=display">p(H \mid E) + p(\neg H \mid E) = 1</script>
+</li>
+</ul>
+<p>Using these two founding rules, we can estimate our confidence in <script type="math/tex">H_1 \lor H_2</script>:</p>
+<ul>
+<li>
+<script type="math/tex; mode=display">p(H_1 \lor H_2 \mid E) = p(H_1 \mid E) + p(H_2 \mid E) - p(H_1 \land H_2 \mid E)</script>
+</li>
+</ul>
+<h3 id="the-principle-of-indifference">The principle of indifference</h3>
+<p>A nice consequence of the theory developped in the book is the proof of <em>the principle of indifference</em>. This principle states that if given background information <script type="math/tex">B</script> the hypothesis (<script type="math/tex">H_1</script>, …, <script type="math/tex">H_n</script>) are mutually exclusive and exhaustive and <script type="math/tex">B</script> does not favor any one of them over any other, then:</p>
+<table>
+<tbody>
+<tr>
+<td><script type="math/tex">p(H_i \mid B) = \frac{1}{N}</script></td>
+<td><script type="math/tex">1 \leq i \leq N</script></td>
+</tr>
+</tbody>
+</table>
+<p>In the book, the principle is derived using permutations and the requirement “consistency 3” only. In other words, we haven’t made any hypothesis about the (uniform) distribution of <script type="math/tex">H_i</script>. Actually we haven’t even talked about distributions at all.</p>
+<p>So it’s the information fed into the theory that determines the definite numerical values of <script type="math/tex">p(\cdot)</script>.</p>
+<p>I really like the way the principle was derived because it appeals to my way of thinking in everyday life. When confronted with two alternatives, if I don’t have any information indicating that I should have more confidence in one than the other, I always assume probabilities 1/2 for each.</p>
+<p>If we relate the principle with information theory, then each hypothesis <script type="math/tex">H_i</script> caries the same amount of information <script type="math/tex">I_i</script>. Using the conversion formula between information and probabilities we find that <script type="math/tex">\forall i \in [1; N]</script>, <script type="math/tex">p(H_i) = 2^{I_i}</script>. You can read more about the link between probabilities and information in <a href="probability-information.html">this article</a>.</p>
+<p>The principle can be further applied using the “or rule” to show that when we draw a ball from an urn containing 3 black balls and 7 white balls, we have confidence <script type="math/tex">p(\text{black}\mid B) = 3/10</script> that we will draw a black ball (where <script type="math/tex">B</script> is some background information). This problem is called the <em>Bernoulli urn</em> problem.</p>
+<p>See also: <a href="bernoulli-urn.html">Key ideas in probability and statistics illustrated with the Bernoulli Urn</a></p>
+<p>The beauty of this approach is that we obtain this classical result of probability theory (the Bernoulli urn) without any arbitrary assumption, and without defining a formula for <script type="math/tex">p</script>. Instead, it’s our previously established calculus rules along with a requirement for consistency that dictates the numerical value. Had we chosen any other numerical value, then we would get a contradiction with one of our previous rules.</p>
+<p>Contrast this result that we obtained as a <em>consequence</em> of our theory with the original mathematical definition of probability: “the probability for an event is the ratio of the number of cases favorable to it, to the number of all cases possible when nothing leads us to expect that any one of these cases should occur more than any other, which renders them, for us, equally possible.” (Laplace in <em>Theorie Analytique des Probabilites</em>, 1812).</p>
+<p>The definition given by Laplace seems arbitrary to me. It looks sensible, but what tells us that Laplace (or Bernoulli before him) wasn’t mistaken? Our new theory confirms Bernoulli and Laplace’s intuition in a formal setting.</p>
+<h2 id="inference-in-the-new-logic">Inference in the new logic</h2>
+<p>Our extension of propositional logic is of course compatible with the rules we already had. I extracted this section into its own article: <a href="propositional-logic-from-probability-calculus.html">Propositional logic from probability calculus</a></p>
+<p>Recall the inference rules we wished to model:</p>
+<table>
+<tbody>
+<tr>
+<td>3) given <script type="math/tex">A \Rightarrow B</script>:</td>
+<td><strong>if</strong> <script type="math/tex">B</script> is true, <strong>then</strong> <script type="math/tex">A</script> is more plausible</td>
+</tr>
+<tr>
+<td>4) given <script type="math/tex">A \Rightarrow B</script>:</td>
+<td><strong>if</strong> <script type="math/tex">A</script> is false, <strong>then</strong> <script type="math/tex">B</script> is less plausible</td>
+</tr>
+<tr>
+<td>5) given <script type="math/tex">A \Rightarrow \text{more plausible(}B\text{)}</script>:</td>
+<td><strong>if</strong> <script type="math/tex">B</script> is true, <strong>then</strong> <script type="math/tex">A</script> is more plausible</td>
+</tr>
+</tbody>
+</table>
+<p>Using probability theory as constructed above, we can prove these inference rules are valid. For instance, given the rule <script type="math/tex">A \Rightarrow B</script>, information that <script type="math/tex">B</script> is true increases the probability for <script type="math/tex">A</script>. I extracted this section into its own article: <a href="bayesian-inference-primer.html">Why bayesian inference is more powerful than logic</a></p>
+<h2 id="read-next">Read next</h2>
+<p>See how to use this construction of probability calculus in my next article: <a href="bernoulli-urn.html">Key ideas in probability and statistics illustrated on a simple problem</a></p>
+<p>Confront our extension with propositional logic: <a href="propositional-logic-from-probability-calculus.html">Propositional logic from probability calculus</a></p>
+<p>Or read more about the bayesian philosophy of probability theory: <a href="probability-bayesian-perspective.html">A Bayesian perspective</a></p>
+<h2 id="references">References</h2>
+<p>[1] Probability theory: the Logic of Science, E.T. Jaynes</p>
+</div>
+    </article>
+    </div><!-- row -->
+    
+    <div class="row mt-1">
+      <article class="col-lg-8 mx-auto recommendations">
+        <p class='title'>Other articles you might like:</p>
+        <ul>
+          
+            <li class="en"><img class="flag-icon" src="//julienharbulot.com/images/languages/en.png"> <a href="//julienharbulot.com/probability-information.html">An information theory perspective on probability</a></li>
+          
+            <li class="en"><img class="flag-icon" src="//julienharbulot.com/images/languages/en.png"> <a href="//julienharbulot.com/bernoulli-urn.html">Key ideas in probability and statistics illustrated on a simple problem</a></li>
+          
+            <li class="en"><img class="flag-icon" src="//julienharbulot.com/images/languages/en.png"> <a href="//julienharbulot.com/target-variable.html">What is a target value?</a></li>
+          
+            <li class="en"><img class="flag-icon" src="//julienharbulot.com/images/languages/en.png"> <a href="//julienharbulot.com/win-extend-screen.html">Keyboard shortcut and command line utility to switch display (Windows)</a></li>
+          
+        </ul>
+      </article>
+    </div>
+    
+    
+    <div class="row mb=5 mt-5">
+      <article class="col-lg-8 mx-auto">
+        <div id="hyvor-talk-view"></div>
+        <script type="text/javascript">
+            var HYVOR_TALK_WEBSITE = '625';
+            var HYVOR_TALK_CONFIG = {
+                url: 'probability-logic-of-uncertainty.html',
+                id: 'probability-logic-of-uncertainty.html'
+            };
+        </script>
+      </article>
+    </div><!-- row -->
+    
+    <footer class="row">
+        <div class="col-lg-8 mx-auto text-center">
+          <p><small>
+          
+            Last updated: 01/14/21 <br/>
+          
+          
+          Copyright &copy; 2021 Julien Harbulot
+          </small></p>
+        </div>
+    </footer>
+    </div>
+
+  <script>
+  // bootstrap table
+  tables = document.getElementsByTagName('table');
+  for (i = 0; i < tables.length; i++) {
+    tables[i].classList.add('table');
+    tables[i].classList.add('table-bordered');
+  }
+
+  // Paragraphs that contain only images are marked with custom class for styling
+  ps = document.getElementsByTagName('p');
+  Array.from(ps).forEach(function(p){
+    if (p.getElementsByTagName('img').length > 0 && p.textContent.trim().length == 0) {
+        p.classList.add('img-container');
+    }
+  });
+  </script>
+
+
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script>
+        prev_onload_a = window.onload;
+        window.onload = function() {
+            if (prev_onload_a) {
+                prev_onload_a();
+            }
+            var navlinks = document.getElementsByClassName("nav-link");
+            var i;
+            for (i = 0; i < navlinks.length; i++) {
+                const target = new URL(navlinks[i].href)
+                if (location.pathname == target.pathname) {
+                    navlinks[i].classList.add('active')
+                }
+            }
+        }
+    </script>    
+
+    
+
+<script async type="text/javascript" src="//talk.hyvor.com/web-api/embed"></script>
+
+
+    </body>
+</html>
