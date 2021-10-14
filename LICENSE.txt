@@ -1,0 +1,2 @@
+Copyright (c) Julien Harbulot 2021
+All rights reserved.
