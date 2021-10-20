@@ -75,11 +75,11 @@
             </li>
             
             <li class="nav-item">
-                    <a class="nav-link" href="//julienharbulot.com/projects.html">Projects</a>
+                    <a class="nav-link" href="//julienharbulot.com/research.html">Research</a>
             </li>
             
             <li class="nav-item">
-                    <a class="nav-link" href="//julienharbulot.com/research.html">Research</a>
+                    <a class="nav-link" href="//julienharbulot.com/projects.html">Projects</a>
             </li>
             
             <!--<li class="nav-item">
@@ -196,7 +196,7 @@
 
 <h2 id="a-loader-for-plugin-architectures">A loader for plugin architectures</h2>
 <p>By the way, a nice way to load all plugins in a directory is to have them extend a <code>PluginBase</code> base class, and then dynamically load its subclasses. </p>
-<p>To do so, simply use <code>issubclass(attribute, PluginBase)</code> instead of <code>isclass(attribute)</code> :</p>
+<p>To do so, simply use the python builtin <code>issubclass(attribute, PluginBase)</code> instead of <code>isclass(attribute)</code> :</p>
 <div class="hll"><pre><span></span><span class="kn">from</span> <span class="nn">inspect</span> <span class="kn">import</span> <span class="nb">issubclass</span>
 
 <span class="o">...</span>
@@ -204,7 +204,7 @@
 <span class="k">for</span> <span class="n">attribute_name</span> <span class="ow">in</span> <span class="nb">dir</span><span class="p">(</span><span class="n">module</span><span class="p">):</span>
         <span class="n">attribute</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">module</span><span class="p">,</span> <span class="n">attribute_name</span><span class="p">)</span>
 
-        <span class="k">if</span> <span class="nb">issubclass</span><span class="p">(</span><span class="n">attribute</span><span class="p">,</span> <span class="n">PluginBase</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">isclass</span><span class="p">(</span><span class="n">attribute</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">issubclass</span><span class="p">(</span><span class="n">attribute</span><span class="p">,</span> <span class="n">PluginBase</span><span class="p">):</span>
             <span class="nb">globals</span><span class="p">()[</span><span class="n">attribute_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">attribute</span>
 </pre></div>
     </article>
@@ -215,11 +215,11 @@
         <p class='title'>Other articles you might like:</p>
         <ul>
           
-            <li class="en"><img class="flag-icon" src="//julienharbulot.com/images/languages/en.png"> <a href="//julienharbulot.com/case-study-blog-duplication.html">Case study: removing not-so-obvious duplication</a></li>
-          
-            <li class="en"><img class="flag-icon" src="//julienharbulot.com/images/languages/en.png"> <a href="//julienharbulot.com/git-commit-message.html">How to write a git commit message</a></li>
-          
             <li class="en"><img class="flag-icon" src="//julienharbulot.com/images/languages/en.png"> <a href="//julienharbulot.com/win-extend-screen.html">Keyboard shortcut and command line utility to switch display (Windows)</a></li>
+          
+            <li class="en"><img class="flag-icon" src="//julienharbulot.com/images/languages/en.png"> <a href="//julienharbulot.com/wsl-dev-environment-2020.html">Using WSL-2 as a dev environment</a></li>
+          
+            <li class="en"><img class="flag-icon" src="//julienharbulot.com/images/languages/en.png"> <a href="//julienharbulot.com/python-signals.html">How to hangle signals in python?</a></li>
           
         </ul>
       </article>
@@ -243,7 +243,7 @@
         <div class="col-lg-8 mx-auto text-center">
           <p><small>
           
-            Last updated: 01/14/21 <br/>
+            Last updated: 10/01/21 <br/>
           
           
           Copyright &copy; 2021 Julien Harbulot
