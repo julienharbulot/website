@@ -27,16 +27,28 @@
     <nav class="top-navbar" role="navigation">
         <div class="container-fluid">
             <a class="small-logo"><img src="images/logo.svg" alt=""></a>
+            <div>
             <button 
               class="navbar-toggler" 
               type="button" 
+              data-bs-toggle="collapse"
+              data-bs-target="#main-sidebar" 
+              aria-expanded="false" 
+              aria-label="Toggle search settings"
+              aria-controls="main-sidebar">
+              <span class="bi bi-search navbar-bi-search"></span>
+            </button>
+            <button 
+              class="navbar-toggler"  
+              type="button" 
               data-bs-toggle="collapse" 
-              data-bs-target=".navbar-toggler-target" 
+              data-bs-target="#top-navbar-content" 
               aria-expanded="false" 
               aria-label="Toggle navigation"
               aria-controls="top-navbar-content">
               <span class="navbar-toggler-icon"></span>
             </button>
+          </div>
             <div 
               id="top-navbar-content" 
               class="top-navbar-content navbar-toggler-target navbar-collapse collapse">
@@ -74,7 +86,7 @@
         </main>
 
         <!-- ----- SIDEBAR ----- -->
-        <div class="main-sidebar navbar-toggler-target">
+        <div id="main-sidebar" class="main-sidebar navbar-search-target">
             <div class="sidebar-inner-container">
             <div class="sidebar-title-container">
                 <h2 class="sidebar-title">Technical Blog</h2>
