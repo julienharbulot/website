@@ -1,65 +1,73 @@
 <!doctype html>
-<html lang="en">
+<html lang="Language.en">
     <head>
     
-
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>A Bayesian Perspective</title>
 
     
-    <!-- Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-166292985-1"></script>
-    <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
+        
+            <!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=google_analytics_id"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
 
-    gtag('config', 'UA-166292985-1');
-    </script>
+gtag('config', 'google_analytics_id');
+</script>
+        
     
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" 
-          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
-          rel="stylesheet" crossorigin="anonymous">
+    
+    
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" crossorigin="anonymous">
     
     <link rel="stylesheet" href="/theme/pygment-github.css">
     <link rel="stylesheet" href="/theme/article.css"> 
 
-    <title>A Bayesian Perspective</title>
+
     
-    <!-- Favicon -->
-    <link rel="apple-touch-icon" sizes="120x120" href="/images/favicon/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon/favicon-16x16.png">
-    <link rel="manifest" href="/images/favicon/site.webmanifest">
-    <link rel="mask-icon" href="/images/favicon/safari-pinned-tab.svg" color="#5bbad5">
-    <link rel="shortcut icon" href="favicon.ico">
-    <meta name="msapplication-TileColor" content="#da532c">
-    <meta name="msapplication-config" content="/images/favicon/browserconfig.xml">
-    <meta name="theme-color" content="#ffffff">
+        <!-- Favicon -->
+
+<link rel="apple-touch-icon" sizes="120x120" href="/images/favicon/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon/favicon-16x16.png">
+<link rel="manifest" href="/images/favicon/site.webmanifest">
+<link rel="mask-icon" href="/images/favicon/safari-pinned-tab.svg" color="#5bbad5">
+<link rel="shortcut icon" href="favicon.ico">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="msapplication-config" content="/images/favicon/browserconfig.xml">
+<meta name="theme-color" content="#ffffff">
     
-<!-- Mathjax -->
+
+    
+        <!-- Mathjax -->
 <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS_SVG">
   MathJax.Hub.Config({
     tex2jax: {
-    	inlineMath: [ ['$','$'] ],
-    	processEscapes: true
+        inlineMath: [ ['$','$'] ],
+        processEscapes: true
     },
-	"HTML-CSS": {
-		fonts: ["TeX"] 
-	}
+    "HTML-CSS": {
+        fonts: ["TeX"]
+    }
   });
 </script>
-
+    
+    
     </head>
 
     <body>
     
     <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: rgb(78, 76, 103);">
-        <a class="navbar-brand" href="//julienharbulot.com/index.html"><img src="//julienharbulot.com/images/logo.svg" width="30" alt=""></a>
+        <a class="navbar-brand" href="https://julienharbulot.com/">
+            <img src="https://julienharbulot.com/images/logo.svg" width="30" alt="">
+        </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -67,24 +75,16 @@
             <ul class="navbar-nav mr-auto">
             
             <li class="nav-item">
-                    <a class="nav-link" href="//julienharbulot.com/technical-blog.html">Technical blog</a>
+                    <a class="nav-link" href="index.html?cats=technical-blog">Technical blog</a>
             </li>
             
             <li class="nav-item">
-                    <a class="nav-link" href="//julienharbulot.com/maths.html">Maths</a>
+                    <a class="nav-link" href="index.html?cats=maths">Maths</a>
             </li>
             
-            <li class="nav-item">
-                    <a class="nav-link" href="//julienharbulot.com/research.html">Research</a>
-            </li>
             
-            <li class="nav-item">
-                    <a class="nav-link" href="//julienharbulot.com/projects.html">Projects</a>
-            </li>
-            
-            <!--<li class="nav-item">
-                <a class="nav-link" href="//julienharbulot.com/about-me.html">About me</a>
-            </li>-->
+    
+        
             
 
 <li class="nav-item dropdown">
@@ -92,18 +92,39 @@
         Table of content
     </a>
     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-        <div class="toc"><ul>
-<li class="toc-entry-1">
-<a class='toc-href dropdown-item' href='#read-next' title='Read next'>Read next</a>
-</li>
-<div class="dropdown-divider"></div>
-<li class="toc-entry-1">
-<a class='toc-href dropdown-item' href='#reference' title='Reference'>Reference</a>
-</li>
-</ul><div>
+        <div class="toc">
+            
+    
+    <ul>
+        
+            <li class="toc-entry-{depth}">
+            <a class='toc-href dropdown-item' href='#read-next' title='Read next'>
+                Read next
+            </a>
+            
+    
+
+            
+
+        
+            <li class="toc-entry-{depth}">
+            <a class='toc-href dropdown-item' href='#reference' title='Reference'>
+                Reference
+            </a>
+            
+    
+
+            
+
+        
+    </ul>
+    
+
+        </div>
     </div>
 </li>
-
+        
+    
 
             </ul>
         </div>
@@ -115,7 +136,7 @@
     <div class="row mt-5">
       <div class="col-lg-8 mx-auto"> 
         <h1 class="display-5">A Bayesian Perspective </h1>
-        <div class="text-right">11 Mar 2018</div>
+        <div class="text-right">Mar 11, 2018</div>
       </div>
     </div>
     <div class="row mt-5">
@@ -442,7 +463,7 @@
 <p>How does the long-run meaning of probability apply to such events? We could talk about rewinding and replaying, or we could talk about a thousand parallel worlds, but such talk is completely divorced from any experiment that can be run, even conceptually, and is therefore not really meaningful. We need a meaning for probability that makes sense even for one-time-only events. For experiments that can be repeated, the long-run meaning should be a consequence.</p>
 <p>Alice and Bob have a coin to flip. They decide to bet with each other on the outcome. They agree that the probability for each of the two possible outcomes, head or tail, is 1/2, and that means that they should each bet the same amount, and the winner takes the whole amount. But wait: Alice suspects that Bob may be an expert flipper who can pretty well make the coin land as he wants. And Bob is equally suspicious of Alice. Should they flip to see who will flip? Should they each ask to see the other make some sample flips? Neither of those suggestions helps. Let’s remove the psychology and chicanery from the problem, and start again.</p>
 <p>Alice and Bob see a coin-flipping machine. They decide to bet with each other on the outcome. They agree that the probability for each of the two possible outcomes is 1/2, and that means that they should each bet the same amount, and the winner takes the whole amount.</p>
-<p>But wait: is the coin constructed perfectly? They use their handy atomic laser-guided shape checker, and discover that the coin has a slightly concave head and <a class="def" href="convexity.html">convex</a> tail, making the head landing position slightly more stable than the tail landing. They do the math, and find that the probability is 4/7 for head and 3/7 for tail; that means that Alice, who bets head, and Bob, who bets tail, should lay down money in the ratio of 4 to 3, and the winner takes the whole amount.</p>
+<p>But wait: is the coin constructed perfectly? They use their handy atomic laser-guided shape checker, and discover that the coin has a slightly concave head and <a class="def" href="https://julienharbulot.com/convexity.html">convex</a> tail, making the head landing position slightly more stable than the tail landing. They do the math, and find that the probability is 4/7 for head and 3/7 for tail; that means that Alice, who bets head, and Bob, who bets tail, should lay down money in the ratio of 4 to 3, and the winner takes the whole amount.</p>
 <p>But wait: is the material the coin is made of homogeneous? They use their density analyzer and discover that the perimeter is slightly denser than the center, making the bias worse. They do the math, and find the new probabilities to be 5/7 for head and 2/7 for tail. Unlike most gamblers, they know that only the ratio of amounts they put down, not the amounts, is determined by the probability calculation; the actual amounts are determined by factors that have nothing to do with coin flipping.</p>
 <p>But wait: is the coin-flipping machine constructed perfectly? They measure the weight of the coin, the angle of flip, the strength of the spring, the distance to the floor, and several other factors. They determine that the machine has a strong bias toward an even number of rotations. They do the math, and find that if the coin is placed tail-up to start with, the bias of the machine exactly compensates the bias of the coin, and the probabilities are 1/2 and 1/2 .</p>
 <p>But wait: should they consider the wind velocity? the direction and strength of the magnetic field?</p>
@@ -462,7 +483,7 @@ predict what will happen. Sometimes gaining knowledge reduces one’s ability to
 <p>Suppose someone tells us that red occupies either 1/4 or 1/2 of the perimeter; perhaps they forget which of those two fractions it is, or they are unwilling to tell us which it is. With this new information, we are certainly not now going to contribute equal amounts to the pot. The fair bet that we can now make with each other corresponds to assigning the probability 3/8 that the spin will end on red, and 5/8 on blue. A bet demands, or perhaps defines, a single probability distribution.</p>
 <p>My examples have been about betting money. If we consider non-monetary bets too, probability becomes a guide for action in all of life’s situations, so it is no small matter to get it right. <em>In life, we cannot refuse to bet, and a bet is a statement of probability.</em></p>
 <h2 id="read-next">Read next</h2>
-<p>Read the follow up article: <a href="probability-information.html">Probability = Information</a></p>
+<p>Read the follow up article: <a href="https://julienharbulot.com/probability-information.html">Probability = Information</a></p>
 <h2 id="reference">Reference</h2>
 <p>This article is an excerpt from the 44-pages article “<em>a Probability Perspective</em>” published by <em>Eric C.R. Hehner</em>. You can find the full article <a href="http://www.cs.utoronto.ca/~hehner/proper.pdf">here</a>. In this article Hehner give the above perpective on Bayesian probabilities and Information theory, then discuss modeling real world events using a new probabilistic formalism based on programmation, that he calls the programmer’s perspective. His formalism allows to solve classical paradox in an easy and non-ambiguous way.</p>
 <p>I found the cover picture on this <a href="https://www.mlsociety.com/tech-events-calendar/mathematics-debate-bayesians-vs-frequentists/">webpage</a> announcing an event on the topic at Berkeley.</p>
@@ -470,47 +491,34 @@ predict what will happen. Sometimes gaining knowledge reduces one’s ability to
     </article>
     </div><!-- row -->
     
-    <div class="row mt-1">
-      <article class="col-lg-8 mx-auto recommendations">
-        <p class='title'>Other articles you might like:</p>
-        <ul>
-          
-            <li class="en"><img class="flag-icon" src="//julienharbulot.com/images/languages/en.png"> <a href="//julienharbulot.com/ols-diagnostics.html">How to assess an OLS regression?</a></li>
-          
-            <li class="en"><img class="flag-icon" src="//julienharbulot.com/images/languages/en.png"> <a href="//julienharbulot.com/bernoulli-urn.html">Key ideas in probability and statistics illustrated on a simple problem</a></li>
-          
-            <li class="en"><img class="flag-icon" src="//julienharbulot.com/images/languages/en.png"> <a href="//julienharbulot.com/geometrical-approach-gaussian-parameter-estimation.html">The geometry of (normal) parameter estimation</a></li>
-          
-            <li class="en"><img class="flag-icon" src="//julienharbulot.com/images/languages/en.png"> <a href="//julienharbulot.com/gradient-descent.html">What is gradient descent (GD)?</a></li>
-          
-            <li class="en"><img class="flag-icon" src="//julienharbulot.com/images/languages/en.png"> <a href="//julienharbulot.com/design-matrix.html">What is the design matrix?</a></li>
-          
-        </ul>
-      </article>
-    </div>
+
     
+        
+            <div class="row mb=5 mt-5">
+  <article class="col-lg-8 mx-auto">
+    <div id="hyvor-talk-view"></div>
+    <script type="text/javascript">
+        var HYVOR_TALK_WEBSITE = 'hyvor_id';
+        var HYVOR_TALK_CONFIG = {
+            url: 'https://julienharbulot.com/probability-bayesian-perspective.html',
+            id: 'probability-bayesian-perspective.html'
+        };
+    </script>
+  </article>
+</div><!-- row -->
+<script async type="text/javascript" src="//talk.hyvor.com/web-api/embed"></script>
+        
     
-    <div class="row mb=5 mt-5">
-      <article class="col-lg-8 mx-auto">
-        <div id="hyvor-talk-view"></div>
-        <script type="text/javascript">
-            var HYVOR_TALK_WEBSITE = '625';
-            var HYVOR_TALK_CONFIG = {
-                url: 'probability-bayesian-perspective.html',
-                id: 'probability-bayesian-perspective.html'
-            };
-        </script>
-      </article>
-    </div><!-- row -->
-    
+
     <footer class="row">
         <div class="col-lg-8 mx-auto text-center">
           <p><small>
           
-            Last updated: 01/14/21 <br/>
+            Last updated: Mar 11, 2018 <br/>
           
           
-          Copyright &copy; 2021 Julien Harbulot
+            Copyright (c) Julien Harbulot
+          
           </small></p>
         </div>
     </footer>
@@ -534,31 +542,28 @@ predict what will happen. Sometimes gaining knowledge reduces one’s ability to
   </script>
 
 
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-    <script>
-        prev_onload_a = window.onload;
-        window.onload = function() {
-            if (prev_onload_a) {
-                prev_onload_a();
-            }
-            var navlinks = document.getElementsByClassName("nav-link");
-            var i;
-            for (i = 0; i < navlinks.length; i++) {
-                const target = new URL(navlinks[i].href)
-                if (location.pathname == target.pathname) {
-                    navlinks[i].classList.add('active')
+    
+        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+        <!-- navbar script -->
+        <script>
+            prev_onload_a = window.onload;
+            window.onload = function() {
+                if (prev_onload_a) {
+                    prev_onload_a();
+                }
+                var navlinks = document.getElementsByClassName("nav-link");
+                var i;
+                for (i = 0; i < navlinks.length; i++) {
+                    const target = new URL(navlinks[i].href)
+                    if (location.pathname == target.pathname) {
+                        navlinks[i].classList.add('active')
+                    }
                 }
             }
-        }
-    </script>    
-
+        </script>
     
-
-<script async type="text/javascript" src="//talk.hyvor.com/web-api/embed"></script>
-
-
     </body>
 </html>

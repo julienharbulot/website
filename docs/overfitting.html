@@ -1,65 +1,73 @@
 <!doctype html>
-<html lang="en">
+<html lang="Language.en">
     <head>
     
-
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Underfitting and overfitting illustrated</title>
 
     
-    <!-- Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-166292985-1"></script>
-    <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
+        
+            <!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=google_analytics_id"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
 
-    gtag('config', 'UA-166292985-1');
-    </script>
+gtag('config', 'google_analytics_id');
+</script>
+        
     
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" 
-          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
-          rel="stylesheet" crossorigin="anonymous">
+    
+    
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" crossorigin="anonymous">
     
     <link rel="stylesheet" href="/theme/pygment-github.css">
     <link rel="stylesheet" href="/theme/article.css"> 
 
-    <title>Underfitting and overfitting illustrated</title>
+
     
-    <!-- Favicon -->
-    <link rel="apple-touch-icon" sizes="120x120" href="/images/favicon/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon/favicon-16x16.png">
-    <link rel="manifest" href="/images/favicon/site.webmanifest">
-    <link rel="mask-icon" href="/images/favicon/safari-pinned-tab.svg" color="#5bbad5">
-    <link rel="shortcut icon" href="favicon.ico">
-    <meta name="msapplication-TileColor" content="#da532c">
-    <meta name="msapplication-config" content="/images/favicon/browserconfig.xml">
-    <meta name="theme-color" content="#ffffff">
+        <!-- Favicon -->
+
+<link rel="apple-touch-icon" sizes="120x120" href="/images/favicon/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon/favicon-16x16.png">
+<link rel="manifest" href="/images/favicon/site.webmanifest">
+<link rel="mask-icon" href="/images/favicon/safari-pinned-tab.svg" color="#5bbad5">
+<link rel="shortcut icon" href="favicon.ico">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="msapplication-config" content="/images/favicon/browserconfig.xml">
+<meta name="theme-color" content="#ffffff">
     
-<!-- Mathjax -->
+
+    
+        <!-- Mathjax -->
 <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS_SVG">
   MathJax.Hub.Config({
     tex2jax: {
-    	inlineMath: [ ['$','$'] ],
-    	processEscapes: true
+        inlineMath: [ ['$','$'] ],
+        processEscapes: true
     },
-	"HTML-CSS": {
-		fonts: ["TeX"] 
-	}
+    "HTML-CSS": {
+        fonts: ["TeX"]
+    }
   });
 </script>
-
+    
+    
     </head>
 
     <body>
     
     <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: rgb(78, 76, 103);">
-        <a class="navbar-brand" href="//julienharbulot.com/index.html"><img src="//julienharbulot.com/images/logo.svg" width="30" alt=""></a>
+        <a class="navbar-brand" href="https://julienharbulot.com/">
+            <img src="https://julienharbulot.com/images/logo.svg" width="30" alt="">
+        </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -67,24 +75,16 @@
             <ul class="navbar-nav mr-auto">
             
             <li class="nav-item">
-                    <a class="nav-link" href="//julienharbulot.com/technical-blog.html">Technical blog</a>
+                    <a class="nav-link" href="index.html?cats=technical-blog">Technical blog</a>
             </li>
             
             <li class="nav-item">
-                    <a class="nav-link" href="//julienharbulot.com/maths.html">Maths</a>
+                    <a class="nav-link" href="index.html?cats=maths">Maths</a>
             </li>
             
-            <li class="nav-item">
-                    <a class="nav-link" href="//julienharbulot.com/research.html">Research</a>
-            </li>
             
-            <li class="nav-item">
-                    <a class="nav-link" href="//julienharbulot.com/projects.html">Projects</a>
-            </li>
-            
-            <!--<li class="nav-item">
-                <a class="nav-link" href="//julienharbulot.com/about-me.html">About me</a>
-            </li>-->
+    
+        
             
 
 <li class="nav-item dropdown">
@@ -92,30 +92,69 @@
         Table of content
     </a>
     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-        <div class="toc"><ul>
-<li class="toc-entry-1">
-<a class='toc-href dropdown-item' href='#in-short' title='In short'>In short</a>
-</li>
-<div class="dropdown-divider"></div>
-<li class="toc-entry-1">
-<a class='toc-href dropdown-item' href='#the-signal-and-the-noise' title='The signal and the noise'>The signal and the noise</a>
-</li>
-<div class="dropdown-divider"></div>
-<li class="toc-entry-1">
-<a class='toc-href dropdown-item' href='#learning-the-signal' title='Learning the signal'>Learning the signal</a>
-</li>
-<div class="dropdown-divider"></div>
-<li class="toc-entry-1">
-<a class='toc-href dropdown-item' href='#high-variance' title='High variance'>High variance</a>
-</li>
-<div class="dropdown-divider"></div>
-<li class="toc-entry-1">
-<a class='toc-href dropdown-item' href='#the-bias-variance-tradeoff' title='The Bias-Variance Tradeoff'>The Bias-Variance Tradeoff</a>
-</li>
-</ul><div>
+        <div class="toc">
+            
+    
+    <ul>
+        
+            <li class="toc-entry-{depth}">
+            <a class='toc-href dropdown-item' href='#in-short' title='In short'>
+                In short
+            </a>
+            
+    
+
+            
+
+        
+            <li class="toc-entry-{depth}">
+            <a class='toc-href dropdown-item' href='#the-signal-and-the-noise' title='The signal and the noise'>
+                The signal and the noise
+            </a>
+            
+    
+
+            
+
+        
+            <li class="toc-entry-{depth}">
+            <a class='toc-href dropdown-item' href='#learning-the-signal' title='Learning the signal'>
+                Learning the signal
+            </a>
+            
+    
+
+            
+
+        
+            <li class="toc-entry-{depth}">
+            <a class='toc-href dropdown-item' href='#high-variance' title='High variance'>
+                High variance
+            </a>
+            
+    
+
+            
+
+        
+            <li class="toc-entry-{depth}">
+            <a class='toc-href dropdown-item' href='#the-bias-variance-tradeoff' title='The Bias-Variance Tradeoff'>
+                The Bias-Variance Tradeoff
+            </a>
+            
+    
+
+            
+
+        
+    </ul>
+    
+
+        </div>
     </div>
 </li>
-
+        
+    
 
             </ul>
         </div>
@@ -127,7 +166,7 @@
     <div class="row mt-5">
       <div class="col-lg-8 mx-auto"> 
         <h1 class="display-5">Underfitting and overfitting illustrated </h1>
-        <div class="text-right">06 Nov 2018</div>
+        <div class="text-right">Nov 06, 2018</div>
       </div>
     </div>
     <div class="row mt-5">
@@ -454,19 +493,19 @@
 <p>Underfitting happens when:</p>
 <ul>
 <li>The model is too rigid to learn the true relationship in the data.</li>
-<li>Both <a class="def" href="train-error-test-error.html">test error</a> and <a class="def" href="train-error-test-error.html">train error</a> are large.</li>
+<li>Both <a class="def" href="https://julienharbulot.com/train-error-test-error.html">test error</a> and <a class="def" href="https://julienharbulot.com/train-error-test-error.html">train error</a> are large.</li>
 <li>The error is dominated by the bias error.</li>
 </ul>
 <p>Overfitting happens when:</p>
 <ul>
 <li>The model is not rigid enough and mistakes noise for signal.</li>
-<li>The <a class="def" href="train-error-test-error.html">train error</a> is low but the <a class="def" href="train-error-test-error.html">test error</a> is large.</li>
+<li>The <a class="def" href="https://julienharbulot.com/train-error-test-error.html">train error</a> is low but the <a class="def" href="https://julienharbulot.com/train-error-test-error.html">test error</a> is large.</li>
 <li>The error is dominated by the variance error.</li>
 </ul>
-<p><img alt="Overfitting and underfitting regression line" src="images/overfitting/underfit-overfit-line.jpg"/></p>
+<p><img alt="Overfitting and underfitting regression line" src="https://julienharbulot.com/images/overfitting/underfit-overfit-line.jpg"/></p>
 <ul>
 <li>The left hand side graph shows the underfitting scenario. We can see that the model is so rigid that is doesn’t fit the general shape of the data. This is called the bias of the model.</li>
-<li>The graph in the middle displays a good fit. The model fits the general shape of the data but does not wiggle too much between data points. This is the good <a class="def" href="bias-variance-decomposition.html">bias-variance</a> equilibrium.</li>
+<li>The graph in the middle displays a good fit. The model fits the general shape of the data but does not wiggle too much between data points. This is the good <a class="def" href="https://julienharbulot.com/bias-variance-decomposition.html">bias-variance</a> equilibrium.</li>
 <li>The right hand side graph shows the overfitting scenario. The model wiggles too much. And the general shape of the data is obfuscated by this high variance.</li>
 </ul>
 <h2 id="the-signal-and-the-noise">The signal and the noise</h2>
@@ -486,14 +525,14 @@
 <p>The goal of machine-learning is to learn the signal function <script type="math/tex">\model</script> from the inputs generated by <script type="math/tex">\mathcal{X}</script> and the outputs generated by <script type="math/tex">\mathcal{Y}</script>. This task is made complex because of the unknown noise observations <script type="math/tex">\epsilon_n</script>.</p>
 <p>To do so, we suppose a model <script type="math/tex">\model_{\text{ML}}</script> for the function <script type="math/tex">\model</script> and minimize the error between the observed outputs <script type="math/tex">\ioutputval{\idataset}</script> and the predictions <script type="math/tex">\model_{\text{ML}}(\ninputvec{\idataset})</script>.</p>
 <p>While our end goal is to approximate <script type="math/tex">\model\paren{\inputvec}</script>, we can only do so by comparing our predictions with <script type="math/tex">\model\paren{\inputvec} + \epsilon</script>. Overfitting happens when our model “learns” the specifics of the noise realizations in the train dataset.</p>
-<p>To illustrate overfitting, we will use <a class="def" href="polynomial-regression.html">polynomial regression</a>. As the degree of the fitted polynomial increases, the model has more freedom to fit complex signals. But also more freedom to fit the unwanted noise.</p>
+<p>To illustrate overfitting, we will use <a class="def" href="https://julienharbulot.com/polynomial-regression.html">polynomial regression</a>. As the degree of the fitted polynomial increases, the model has more freedom to fit complex signals. But also more freedom to fit the unwanted noise.</p>
 <p>This is illustrated on the picture below, where:</p>
 <ul>
 <li>the red curve is the real signal <script type="math/tex">\model\paren{\mathcal{X}}</script>;</li>
 <li>the red points are observed values for this signal, polluted by the random noise <script type="math/tex">\epsilon</script>;</li>
-<li>the blue curve is the regression line learned by a <a class="def" href="polynomial-regression.html">polynomial regression</a>.</li>
+<li>the blue curve is the regression line learned by a <a class="def" href="https://julienharbulot.com/polynomial-regression.html">polynomial regression</a>.</li>
 </ul>
-<p><img alt="Polynomial fitting" src="images/overfitting/polynomial-fitting.jpg"/></p>
+<p><img alt="Polynomial fitting" src="https://julienharbulot.com/images/overfitting/polynomial-fitting.jpg"/></p>
 <h2 id="high-variance">High variance</h2>
 <p>To better visualize the implications of overfitting on the regression curve, we can generate multiple train datasets, each with the same signal curve (in red), but with different random values for the noise <script type="math/tex">\epsilon</script>. For instance:</p>
 <script type="math/tex; mode=display">\dataset_1 = \{(\ninputvec{\idataset}, \model\paren{\ninputvec{\idataset}} + \epsilon_{n, 1}) \mid \idataset \leq \ndataset\}</script>
@@ -501,8 +540,8 @@
 <script type="math/tex; mode=display">\dataset_2 = \{(\ninputvec{\idataset}, \model\paren{\ninputvec{\idataset}} + \epsilon_{n, 2}) \mid \idataset \leq \ndataset\}</script>
 <p>where <script type="math/tex">\epsilon_{n, 1}</script> and <script type="math/tex">\epsilon_{n, 2}</script> are different values for the noise, drawn from the same <script type="math/tex">\gaussian(0, 1)</script> distribution.</p>
 <p>Let’s generate a lot of train datasets like those.</p>
-<p>If we fit a <a class="def" href="polynomial-regression.html">polynomial regression</a> to each train dataset thus generated and we graph all the regression lines (in blue) on the same plot, we can visualize the high variance induced by overfitting. See picture below.</p>
-<p><img alt="Variance in polynomial fitting" src="images/overfitting/polynomial-fitting-variance.jpg"/></p>
+<p>If we fit a <a class="def" href="https://julienharbulot.com/polynomial-regression.html">polynomial regression</a> to each train dataset thus generated and we graph all the regression lines (in blue) on the same plot, we can visualize the high variance induced by overfitting. See picture below.</p>
+<p><img alt="Variance in polynomial fitting" src="https://julienharbulot.com/images/overfitting/polynomial-fitting-variance.jpg"/></p>
 <h2 id="the-bias-variance-tradeoff">The Bias-Variance Tradeoff</h2>
 <p>Since we used a gaussian noise with <script type="math/tex">0</script> mean, taking the mean of the regression curves should yield the signal. Indeed, as the number <script type="math/tex">\ndataset_s</script> of train sets used increases, the mean of the noise observations converges to <script type="math/tex">0</script>:</p>
 <script type="math/tex; mode=display">\frac{1}{\ndataset_s}\sum_{i = 1}^{\ndataset_s} \epsilon_{n, i} \stackrel{\ndataset_s \to \infty}{\to} 0</script>
@@ -513,52 +552,39 @@
 <li>We can see that for low degree polynomials, the blue curve does not fit the red curve. We say that they have high bias. But the gray shape has small width. We say they have low variance.</li>
 <li>On the other hand, for high degree polynomials, the blue curve perfectly match the red curve. We say they have low bias. But the gray shape has large width. We say they have high variance.</li>
 </ul>
-<p><img alt="Variance in polynomial fitting 2" src="images/overfitting/polynomial-regression-3.jpg"/></p>
+<p><img alt="Variance in polynomial fitting 2" src="https://julienharbulot.com/images/overfitting/polynomial-regression-3.jpg"/></p>
 </div>
     </article>
     </div><!-- row -->
     
-    <div class="row mt-1">
-      <article class="col-lg-8 mx-auto recommendations">
-        <p class='title'>Other articles you might like:</p>
-        <ul>
-          
-            <li class="en"><img class="flag-icon" src="//julienharbulot.com/images/languages/en.png"> <a href="//julienharbulot.com/what-is-statistic.html">What is a statistic and why do we care?</a></li>
-          
-            <li class="en"><img class="flag-icon" src="//julienharbulot.com/images/languages/en.png"> <a href="//julienharbulot.com/target-variable.html">What is a target value?</a></li>
-          
-            <li class="en"><img class="flag-icon" src="//julienharbulot.com/images/languages/en.png"> <a href="//julienharbulot.com/design-matrix.html">What is the design matrix?</a></li>
-          
-            <li class="en"><img class="flag-icon" src="//julienharbulot.com/images/languages/en.png"> <a href="//julienharbulot.com/stochastic-convergence.html">Primer on stochastic convergence</a></li>
-          
-            <li class="en"><img class="flag-icon" src="//julienharbulot.com/images/languages/en.png"> <a href="//julienharbulot.com/residuals.html">What is a residual?</a></li>
-          
-        </ul>
-      </article>
-    </div>
+
     
+        
+            <div class="row mb=5 mt-5">
+  <article class="col-lg-8 mx-auto">
+    <div id="hyvor-talk-view"></div>
+    <script type="text/javascript">
+        var HYVOR_TALK_WEBSITE = 'hyvor_id';
+        var HYVOR_TALK_CONFIG = {
+            url: 'https://julienharbulot.com/overfitting.html',
+            id: 'overfitting.html'
+        };
+    </script>
+  </article>
+</div><!-- row -->
+<script async type="text/javascript" src="//talk.hyvor.com/web-api/embed"></script>
+        
     
-    <div class="row mb=5 mt-5">
-      <article class="col-lg-8 mx-auto">
-        <div id="hyvor-talk-view"></div>
-        <script type="text/javascript">
-            var HYVOR_TALK_WEBSITE = '625';
-            var HYVOR_TALK_CONFIG = {
-                url: 'overfitting.html',
-                id: 'overfitting.html'
-            };
-        </script>
-      </article>
-    </div><!-- row -->
-    
+
     <footer class="row">
         <div class="col-lg-8 mx-auto text-center">
           <p><small>
           
-            Last updated: 01/14/21 <br/>
+            Last updated: Nov 06, 2018 <br/>
           
           
-          Copyright &copy; 2021 Julien Harbulot
+            Copyright (c) Julien Harbulot
+          
           </small></p>
         </div>
     </footer>
@@ -582,31 +608,28 @@
   </script>
 
 
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-    <script>
-        prev_onload_a = window.onload;
-        window.onload = function() {
-            if (prev_onload_a) {
-                prev_onload_a();
-            }
-            var navlinks = document.getElementsByClassName("nav-link");
-            var i;
-            for (i = 0; i < navlinks.length; i++) {
-                const target = new URL(navlinks[i].href)
-                if (location.pathname == target.pathname) {
-                    navlinks[i].classList.add('active')
+    
+        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+        <!-- navbar script -->
+        <script>
+            prev_onload_a = window.onload;
+            window.onload = function() {
+                if (prev_onload_a) {
+                    prev_onload_a();
+                }
+                var navlinks = document.getElementsByClassName("nav-link");
+                var i;
+                for (i = 0; i < navlinks.length; i++) {
+                    const target = new URL(navlinks[i].href)
+                    if (location.pathname == target.pathname) {
+                        navlinks[i].classList.add('active')
+                    }
                 }
             }
-        }
-    </script>    
-
+        </script>
     
-
-<script async type="text/javascript" src="//talk.hyvor.com/web-api/embed"></script>
-
-
     </body>
 </html>

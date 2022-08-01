@@ -1,65 +1,73 @@
 <!doctype html>
-<html lang="en">
+<html lang="Language.en">
     <head>
     
-
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>The change of basis matrix</title>
 
     
-    <!-- Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-166292985-1"></script>
-    <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
+        
+            <!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=google_analytics_id"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
 
-    gtag('config', 'UA-166292985-1');
-    </script>
+gtag('config', 'google_analytics_id');
+</script>
+        
     
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" 
-          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
-          rel="stylesheet" crossorigin="anonymous">
+    
+    
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" crossorigin="anonymous">
     
     <link rel="stylesheet" href="/theme/pygment-github.css">
     <link rel="stylesheet" href="/theme/article.css"> 
 
-    <title>The change of basis matrix</title>
+
     
-    <!-- Favicon -->
-    <link rel="apple-touch-icon" sizes="120x120" href="/images/favicon/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon/favicon-16x16.png">
-    <link rel="manifest" href="/images/favicon/site.webmanifest">
-    <link rel="mask-icon" href="/images/favicon/safari-pinned-tab.svg" color="#5bbad5">
-    <link rel="shortcut icon" href="favicon.ico">
-    <meta name="msapplication-TileColor" content="#da532c">
-    <meta name="msapplication-config" content="/images/favicon/browserconfig.xml">
-    <meta name="theme-color" content="#ffffff">
+        <!-- Favicon -->
+
+<link rel="apple-touch-icon" sizes="120x120" href="/images/favicon/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon/favicon-16x16.png">
+<link rel="manifest" href="/images/favicon/site.webmanifest">
+<link rel="mask-icon" href="/images/favicon/safari-pinned-tab.svg" color="#5bbad5">
+<link rel="shortcut icon" href="favicon.ico">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="msapplication-config" content="/images/favicon/browserconfig.xml">
+<meta name="theme-color" content="#ffffff">
     
-<!-- Mathjax -->
+
+    
+        <!-- Mathjax -->
 <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS_SVG">
   MathJax.Hub.Config({
     tex2jax: {
-    	inlineMath: [ ['$','$'] ],
-    	processEscapes: true
+        inlineMath: [ ['$','$'] ],
+        processEscapes: true
     },
-	"HTML-CSS": {
-		fonts: ["TeX"] 
-	}
+    "HTML-CSS": {
+        fonts: ["TeX"]
+    }
   });
 </script>
-
+    
+    
     </head>
 
     <body>
     
     <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: rgb(78, 76, 103);">
-        <a class="navbar-brand" href="//julienharbulot.com/index.html"><img src="//julienharbulot.com/images/logo.svg" width="30" alt=""></a>
+        <a class="navbar-brand" href="https://julienharbulot.com/">
+            <img src="https://julienharbulot.com/images/logo.svg" width="30" alt="">
+        </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -67,24 +75,16 @@
             <ul class="navbar-nav mr-auto">
             
             <li class="nav-item">
-                    <a class="nav-link" href="//julienharbulot.com/technical-blog.html">Technical blog</a>
+                    <a class="nav-link" href="index.html?cats=technical-blog">Technical blog</a>
             </li>
             
             <li class="nav-item">
-                    <a class="nav-link" href="//julienharbulot.com/maths.html">Maths</a>
+                    <a class="nav-link" href="index.html?cats=maths">Maths</a>
             </li>
             
-            <li class="nav-item">
-                    <a class="nav-link" href="//julienharbulot.com/research.html">Research</a>
-            </li>
             
-            <li class="nav-item">
-                    <a class="nav-link" href="//julienharbulot.com/projects.html">Projects</a>
-            </li>
-            
-            <!--<li class="nav-item">
-                <a class="nav-link" href="//julienharbulot.com/about-me.html">About me</a>
-            </li>-->
+    
+        
             
 
 <li class="nav-item dropdown">
@@ -92,28 +92,53 @@
         Table of content
     </a>
     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-        <div class="toc"><ul>
-<li class="toc-entry-1">
-<a class='toc-href dropdown-item' href='#change-of-basis' title='Change of basis'>Change of basis</a>
+        <div class="toc">
+            
+    
     <ul>
-<li class="toc-entry-2">
-    <a class='toc-href dropdown-item' href='#base-1-e_1-e_2' title='Base 1 (<script type="math/tex">e_1</script>, <script type="math/tex">e_2</script>)'>Base 1 (<script type="math/tex">e_1</script>, <script type="math/tex">e_2</script>)</a>
-    </li>
-<li class="toc-entry-2">
-    <a class='toc-href dropdown-item' href='#base-2-f_1-f_2' title='Base 2 (<script type="math/tex">f_1</script>, <script type="math/tex">f_2</script>)'>Base 2 (<script type="math/tex">f_1</script>, <script type="math/tex">f_2</script>)</a>
-    </li>
-<li class="toc-entry-2">
-    <a class='toc-href dropdown-item' href='#the-change-of-basis-matrix' title='The change of basis matrix'>The change of basis matrix</a>
-    </li>
-<li class="toc-entry-2">
-    <a class='toc-href dropdown-item' href='#from-vector-notation-to-sum-notation' title='From vector notation to sum notation'>From vector notation to sum notation</a>
-    </li>
+        
+            <li class="toc-entry-{depth}">
+            <a class='toc-href dropdown-item' href='#change-of-basis' title='Change of basis'>
+                Change of basis
+            </a>
+            
+    
+    <ul>
+        
+            <li class="toc-entry-{depth}">
+            <a class='toc-href dropdown-item' href='#the-change-of-basis-matrix' title='The change of basis matrix'>
+                The change of basis matrix
+            </a>
+            
+    
+
+            
+
+        
+            <li class="toc-entry-{depth}">
+            <a class='toc-href dropdown-item' href='#from-vector-notation-to-sum-notation' title='From vector notation to sum notation'>
+                From vector notation to sum notation
+            </a>
+            
+    
+
+            
+
+        
     </ul>
-</li>
-</ul><div>
+    
+
+            
+
+        
+    </ul>
+    
+
+        </div>
     </div>
 </li>
-
+        
+    
 
             </ul>
         </div>
@@ -125,7 +150,7 @@
     <div class="row mt-5">
       <div class="col-lg-8 mx-auto"> 
         <h1 class="display-5">The change of basis matrix </h1>
-        <div class="text-right">10 Mar 2018</div>
+        <div class="text-right">Mar 10, 2018</div>
       </div>
     </div>
     <div class="row mt-5">
@@ -450,10 +475,10 @@
 <h2 id="change-of-basis">Change of basis</h2>
 <p>You can represent a vector <script type="math/tex">\color{blue}{\vec{v}}</script> by its coordinates in a basis. For instance, here are the coordinates for the vector <script type="math/tex">\vec{v}</script> in two different basis <script type="math/tex">(e) = (e_1, e_2)</script> and <script type="math/tex">(f) = (f_1, f_2)</script>:</p>
 <h4 id="base-1-e_1-e_2">Base 1 (<script type="math/tex">e_1</script>, <script type="math/tex">e_2</script>)</h4>
-<p><img alt="Base1" src="images/change-of-basis/base1.png"/> 
+<p><img alt="Base1" src="https://julienharbulot.com/images/change-of-basis/base1.png"/>
 \[\color{blue}{\vec{v}} = \begin{pmatrix}-1\\0\end{pmatrix}^e = -1 e_1 + 0 e_2 \]</p>
 <h4 id="base-2-f_1-f_2">Base 2 (<script type="math/tex">f_1</script>, <script type="math/tex">f_2</script>)</h4>
-<p><img alt="Base2" src="images/change-of-basis/base2.png"/> 
+<p><img alt="Base2" src="https://julienharbulot.com/images/change-of-basis/base2.png"/>
 \[\color{blue}{\vec{v}} = \begin{pmatrix}-0.5\\+0.5\end{pmatrix}^f = -0.5 f_1 + 0.5 f_2 \]</p>
 <h3 id="the-change-of-basis-matrix">The change of basis matrix</h3>
 <p>We can use a matrix to transform the coordinates of <script type="math/tex">\vec{v}</script> in the basis <script type="math/tex">(e)</script> into the coordinates in the basis <script type="math/tex">(f)</script>. This matrix is called the change of basis matrix.</p>
@@ -503,47 +528,34 @@ M_{f \leftarrow e} \cdot ( \color{chocolate}{c} \,  \vec{e_1}^e + \color{gray}{d
     </article>
     </div><!-- row -->
     
-    <div class="row mt-1">
-      <article class="col-lg-8 mx-auto recommendations">
-        <p class='title'>Other articles you might like:</p>
-        <ul>
-          
-            <li class="en"><img class="flag-icon" src="//julienharbulot.com/images/languages/en.png"> <a href="//julienharbulot.com/moore-penrose-inverse.html">The Moore-Penrose (pseudo-inverse) matrix</a></li>
-          
-            <li class="en"><img class="flag-icon" src="//julienharbulot.com/images/languages/en.png"> <a href="//julienharbulot.com/derivatives.html">Derivative, Gradient and Jacobian unified</a></li>
-          
-            <li class="en"><img class="flag-icon" src="//julienharbulot.com/images/languages/en.png"> <a href="//julienharbulot.com/generalized-linear-models.html">What is a generalized linear model?</a></li>
-          
-            <li class="en"><img class="flag-icon" src="//julienharbulot.com/images/languages/en.png"> <a href="//julienharbulot.com/orthogonal-projection.html">The geometry of the normal equations</a></li>
-          
-            <li class="en"><img class="flag-icon" src="//julienharbulot.com/images/languages/en.png"> <a href="//julienharbulot.com/design-matrix.html">What is the design matrix?</a></li>
-          
-        </ul>
-      </article>
-    </div>
+
     
+        
+            <div class="row mb=5 mt-5">
+  <article class="col-lg-8 mx-auto">
+    <div id="hyvor-talk-view"></div>
+    <script type="text/javascript">
+        var HYVOR_TALK_WEBSITE = 'hyvor_id';
+        var HYVOR_TALK_CONFIG = {
+            url: 'https://julienharbulot.com/change-of-basis.html',
+            id: 'change-of-basis.html'
+        };
+    </script>
+  </article>
+</div><!-- row -->
+<script async type="text/javascript" src="//talk.hyvor.com/web-api/embed"></script>
+        
     
-    <div class="row mb=5 mt-5">
-      <article class="col-lg-8 mx-auto">
-        <div id="hyvor-talk-view"></div>
-        <script type="text/javascript">
-            var HYVOR_TALK_WEBSITE = '625';
-            var HYVOR_TALK_CONFIG = {
-                url: 'change-of-basis.html',
-                id: 'change-of-basis.html'
-            };
-        </script>
-      </article>
-    </div><!-- row -->
-    
+
     <footer class="row">
         <div class="col-lg-8 mx-auto text-center">
           <p><small>
           
-            Last updated: 01/14/21 <br/>
+            Last updated: Mar 10, 2018 <br/>
           
           
-          Copyright &copy; 2021 Julien Harbulot
+            Copyright (c) Julien Harbulot
+          
           </small></p>
         </div>
     </footer>
@@ -567,31 +579,28 @@ M_{f \leftarrow e} \cdot ( \color{chocolate}{c} \,  \vec{e_1}^e + \color{gray}{d
   </script>
 
 
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-    <script>
-        prev_onload_a = window.onload;
-        window.onload = function() {
-            if (prev_onload_a) {
-                prev_onload_a();
-            }
-            var navlinks = document.getElementsByClassName("nav-link");
-            var i;
-            for (i = 0; i < navlinks.length; i++) {
-                const target = new URL(navlinks[i].href)
-                if (location.pathname == target.pathname) {
-                    navlinks[i].classList.add('active')
+    
+        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+        <!-- navbar script -->
+        <script>
+            prev_onload_a = window.onload;
+            window.onload = function() {
+                if (prev_onload_a) {
+                    prev_onload_a();
+                }
+                var navlinks = document.getElementsByClassName("nav-link");
+                var i;
+                for (i = 0; i < navlinks.length; i++) {
+                    const target = new URL(navlinks[i].href)
+                    if (location.pathname == target.pathname) {
+                        navlinks[i].classList.add('active')
+                    }
                 }
             }
-        }
-    </script>    
-
+        </script>
     
-
-<script async type="text/javascript" src="//talk.hyvor.com/web-api/embed"></script>
-
-
     </body>
 </html>

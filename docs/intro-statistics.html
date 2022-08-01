@@ -1,65 +1,73 @@
 <!doctype html>
-<html lang="en">
+<html lang="Language.en">
     <head>
     
-
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>A non-technical introduction to statistics</title>
 
     
-    <!-- Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-166292985-1"></script>
-    <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
+        
+            <!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=google_analytics_id"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
 
-    gtag('config', 'UA-166292985-1');
-    </script>
+gtag('config', 'google_analytics_id');
+</script>
+        
     
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" 
-          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
-          rel="stylesheet" crossorigin="anonymous">
+    
+    
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" crossorigin="anonymous">
     
     <link rel="stylesheet" href="/theme/pygment-github.css">
     <link rel="stylesheet" href="/theme/article.css"> 
 
-    <title>A non-technical introduction to statistics</title>
+
     
-    <!-- Favicon -->
-    <link rel="apple-touch-icon" sizes="120x120" href="/images/favicon/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon/favicon-16x16.png">
-    <link rel="manifest" href="/images/favicon/site.webmanifest">
-    <link rel="mask-icon" href="/images/favicon/safari-pinned-tab.svg" color="#5bbad5">
-    <link rel="shortcut icon" href="favicon.ico">
-    <meta name="msapplication-TileColor" content="#da532c">
-    <meta name="msapplication-config" content="/images/favicon/browserconfig.xml">
-    <meta name="theme-color" content="#ffffff">
+        <!-- Favicon -->
+
+<link rel="apple-touch-icon" sizes="120x120" href="/images/favicon/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon/favicon-16x16.png">
+<link rel="manifest" href="/images/favicon/site.webmanifest">
+<link rel="mask-icon" href="/images/favicon/safari-pinned-tab.svg" color="#5bbad5">
+<link rel="shortcut icon" href="favicon.ico">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="msapplication-config" content="/images/favicon/browserconfig.xml">
+<meta name="theme-color" content="#ffffff">
     
-<!-- Mathjax -->
+
+    
+        <!-- Mathjax -->
 <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS_SVG">
   MathJax.Hub.Config({
     tex2jax: {
-    	inlineMath: [ ['$','$'] ],
-    	processEscapes: true
+        inlineMath: [ ['$','$'] ],
+        processEscapes: true
     },
-	"HTML-CSS": {
-		fonts: ["TeX"] 
-	}
+    "HTML-CSS": {
+        fonts: ["TeX"]
+    }
   });
 </script>
-
+    
+    
     </head>
 
     <body>
     
     <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: rgb(78, 76, 103);">
-        <a class="navbar-brand" href="//julienharbulot.com/index.html"><img src="//julienharbulot.com/images/logo.svg" width="30" alt=""></a>
+        <a class="navbar-brand" href="https://julienharbulot.com/">
+            <img src="https://julienharbulot.com/images/logo.svg" width="30" alt="">
+        </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -67,24 +75,16 @@
             <ul class="navbar-nav mr-auto">
             
             <li class="nav-item">
-                    <a class="nav-link" href="//julienharbulot.com/technical-blog.html">Technical blog</a>
+                    <a class="nav-link" href="index.html?cats=technical-blog">Technical blog</a>
             </li>
             
             <li class="nav-item">
-                    <a class="nav-link" href="//julienharbulot.com/maths.html">Maths</a>
+                    <a class="nav-link" href="index.html?cats=maths">Maths</a>
             </li>
             
-            <li class="nav-item">
-                    <a class="nav-link" href="//julienharbulot.com/research.html">Research</a>
-            </li>
             
-            <li class="nav-item">
-                    <a class="nav-link" href="//julienharbulot.com/projects.html">Projects</a>
-            </li>
-            
-            <!--<li class="nav-item">
-                <a class="nav-link" href="//julienharbulot.com/about-me.html">About me</a>
-            </li>-->
+    
+        
             
 
 <li class="nav-item dropdown">
@@ -92,30 +92,77 @@
         Table of content
     </a>
     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-        <div class="toc"><ul>
-<li class="toc-entry-1">
-<a class='toc-href dropdown-item' href='#non-technical-overview' title='Non-technical overview'>Non-technical overview</a>
+        <div class="toc">
+            
+    
     <ul>
-<li class="toc-entry-2">
-    <a class='toc-href dropdown-item' href='#1-point-estimates' title='1. Point estimates'>1. Point estimates</a>
-    </li>
-<li class="toc-entry-2">
-    <a class='toc-href dropdown-item' href='#2-confidence-intervals' title='2. Confidence intervals'>2. Confidence intervals</a>
-        <ul>
-<li class="toc-entry-3">
-        <a class='toc-href dropdown-item' href='#what-is-a-confidence-interval' title='What is a confidence interval?'>What is a confidence interval?</a>
-        </li>
-<li class="toc-entry-3">
-        <a class='toc-href dropdown-item' href='#how-do-we-compute-confidence-intervals' title='How do we compute confidence intervals?'>How do we compute confidence intervals?</a>
-        </li>
-        </ul>
-    </li>
+        
+            <li class="toc-entry-{depth}">
+            <a class='toc-href dropdown-item' href='#non-technical-overview' title='Non-technical overview'>
+                Non-technical overview
+            </a>
+            
+    
+    <ul>
+        
+            <li class="toc-entry-{depth}">
+            <a class='toc-href dropdown-item' href='#1-point-estimates' title='1. Point estimates'>
+                1. Point estimates
+            </a>
+            
+    
+
+            
+
+        
+            <li class="toc-entry-{depth}">
+            <a class='toc-href dropdown-item' href='#2-confidence-intervals' title='2. Confidence intervals'>
+                2. Confidence intervals
+            </a>
+            
+    
+    <ul>
+        
+            <li class="toc-entry-{depth}">
+            <a class='toc-href dropdown-item' href='#what-is-a-confidence-interval' title='What is a confidence interval?'>
+                What is a confidence interval?
+            </a>
+            
+    
+
+            
+
+        
+            <li class="toc-entry-{depth}">
+            <a class='toc-href dropdown-item' href='#how-do-we-compute-confidence-intervals' title='How do we compute confidence intervals?'>
+                How do we compute confidence intervals?
+            </a>
+            
+    
+
+            
+
+        
     </ul>
-</li>
-</ul><div>
+    
+
+            
+
+        
+    </ul>
+    
+
+            
+
+        
+    </ul>
+    
+
+        </div>
     </div>
 </li>
-
+        
+    
 
             </ul>
         </div>
@@ -127,7 +174,7 @@
     <div class="row mt-5">
       <div class="col-lg-8 mx-auto"> 
         <h1 class="display-5">A non-technical introduction to statistics </h1>
-        <div class="text-right">05 Mar 2018</div>
+        <div class="text-right">Mar 05, 2018</div>
       </div>
     </div>
     <div class="row mt-5">
@@ -449,11 +496,10 @@
 <div class="typography">
 
 <p>This article explains in simple terms the purpose of statistical theory and gives an overview of how it is used.</p>
-<p><a class="def" href="what-is-statistic.html">Statistics</a> is a branch of mathematics composed of two aspects: descriptive <a class="def" href="what-is-statistic.html">statistics</a> and statistical inference.</p>
-<p>Descriptive <a class="def" href="what-is-statistic.html">statistic</a> can be assimilated to a language used to summarize data. For instance, <em>mean</em> and <em>average</em> are words from the descriptive <a class="def" href="what-is-statistic.html">statistics</a> lexicon.</p>
-<p>Statistical inference is the clever part of <a class="def" href="what-is-statistic.html">statistics</a>: when we are interested in some <a class="def" href="feature.html">feature</a> of a large population we usually can’t examine every member of the population, so we take a random sample and use this incomplete information to make reasonable guesses about the population. The whole purpose of the theory is to quantify what reasonable guesses are and under what circumstances they hold.</p>
+<p><a class="def" href="https://julienharbulot.com/what-is-statistic.html">Statistics</a> is a branch of mathematics composed of two aspects: descriptive <a class="def" href="https://julienharbulot.com/what-is-statistic.html">statistics</a> and statistical inference.</p>
+<p>Descriptive <a class="def" href="https://julienharbulot.com/what-is-statistic.html">statistic</a> can be assimilated to a language used to summarize data. For instance, <em>mean</em> and <em>average</em> are words from the descriptive <a class="def" href="https://julienharbulot.com/what-is-statistic.html">statistics</a> lexicon.</p>
+<p>Statistical inference is the clever part of <a class="def" href="https://julienharbulot.com/what-is-statistic.html">statistics</a>: when we are interested in some <a class="def" href="https://julienharbulot.com/feature.html">feature</a> of a large population we usually can’t examine every member of the population, so we take a random sample and use this incomplete information to make reasonable guesses about the population. The whole purpose of the theory is to quantify what reasonable guesses are and under what circumstances they hold.</p>
 <p>Statistical inference: <strong>sample data ⟹ probability model</strong></p>
-<p><a class="def" href="what-is-statistic.html">Statistics</a> are often confused with probability theory or machine learning. Check out my article on the topic: <a href="/{filename}difference-statistics-machine-learning-probability.mkd">Differences between statistics, probability and machine learning</a></p>
 <blockquote>
 <p>We may at once admit that any inference from the particular to the general must be attended with some degree of uncertainty, but this is not the same as to admit that such inference cannot be absolutely rigorous, for the nature and degree of the uncertainty may itself be capable of rigorous expression.
 – Ronald A. Fisher</p>
@@ -462,7 +508,7 @@
 <p>I will now illustrate how we can use statistical inference to gain knowledge about a population. I removed most technical developments from the exposition. Also, I deliberately used some statistical terms such as <em>sample</em> and <em>parameter</em> so that this example serves as a first introduction to the statistical lexicon. You should pay attention to the mathematical letters such as <script type="math/tex">\bar{X}</script>. There are few of them and they are often repeated in the text to ease their memorization. They come in handy for more involved explainations.</p>
 <p>To illustrate the process, suppose that you have a general population <em>P</em>. For instance, this population can be the heights of all US citizens, which is set of number. Suppose we want to gain knowledge about a <em>population parameter</em>. For instance, the <em>mean</em> of those heights.</p>
 <p>Since we can’t measure everyone in America, we will restrict ourselves to a <em>random sample</em>, which means we randomly choose a given number (note this number <script type="math/tex">n</script>) of people and we measure them. This gives us <script type="math/tex">n</script> numbers <script type="math/tex">X_1, ..., X_n</script> that we call the <em>sample</em>. As a shorthand, I will use the notation: <script type="math/tex">(X)_{1}^{n} = X_1, ..., X_n</script></p>
-<p><a class="def" href="what-is-statistic.html">Statistics</a> uses several approaches and tools to learn about the <em>population parameter</em> from our <em>sample</em> <script type="math/tex">(X)_{1}^{n}</script>. There are three approaches:</p>
+<p><a class="def" href="https://julienharbulot.com/what-is-statistic.html">Statistics</a> uses several approaches and tools to learn about the <em>population parameter</em> from our <em>sample</em> <script type="math/tex">(X)_{1}^{n}</script>. There are three approaches:</p>
 <ol>
 <li>point estimates;</li>
 <li>confidence intervals;</li>
@@ -475,18 +521,18 @@
 <h3 id="1-point-estimates">1. Point estimates</h3>
 <p>We can estimate the <em>parameter</em> by its statistical counterpart in the <em>sample</em>. Thus, for instance, we would estimate the <em>population mean</em> <script type="math/tex">\bar{P}</script> by the <em>sample mean</em> <script type="math/tex">\bar{X}</script>. We don’t know what the real <em>population mean</em> is because we can’t measure everyone, but we can compute the mean of our <em>sample</em> <script type="math/tex">(X)_{1}^{n}</script>.</p>
 <p>The question is: how are the <em>population mean</em> <script type="math/tex">\bar{P}</script> and the <em>sample mean</em> <script type="math/tex">\bar{X}</script> related? <em>A priori</em>, nothing tells us that they should be equal. Maybe our <em>sample mean</em> will be very different from the total <em>population mean</em>. If you have trouble visualising this, imagine that our <em>random sample</em> yields the heights of 100 US-citizens aged between 2 and 5 years old… Your <em>sample mean</em> is likely to be well under the <em>population mean</em>.</p>
-<p><img alt="Randomness" src="images/intro-statistics/randomness-comics.gif"/>
+<p><img alt="Randomness" src="https://julienharbulot.com/images/intro-statistics/randomness-comics.gif"/>
 <em>Comics by <a href="http://dilbert.com/strip/2001-10-25">dilbert</a></em></p>
 <p>Notice that if we took a number of different <em>samples</em>, each of size <script type="math/tex">n</script>, from the <em>population</em>, we would get a different <em>sample mean</em> <script type="math/tex">\bar{X}</script> each times. So, if we collect different samples and they usually give us different results, how can we make any inference about the <em>population</em>?</p>
-<p>The key insight is that even though the values of the <a class="def" href="what-is-statistic.html">statistic</a> are likely to differ from sample to sample, they will follow a pattern. This pattern is called the <strong>sampling distribution</strong>. In formal terms, the <em>sampling distribution</em> of a <a class="def" href="what-is-statistic.html">statistic</a> is the probability distribution for the set of possible values that can be assumed by the <a class="def" href="what-is-statistic.html">statistic</a>. If you don’t know what a distribution is, read my dedicated article: Introduction to data distributions (to be redacted).</p>
-<p>So, in order to know if our <em><a class="def" href="estimator.html">estimator</a></em> is a good, we focus our study on the distribution of the <em><a class="def" href="estimator.html">estimator</a></em> accross different sample. If we took many <em>samples</em>, would their <em>means</em> average out to the true <em>population mean</em> <script type="math/tex">\bar{P}</script> ? And if so, how close to the <em>population mean</em> <script type="math/tex">\bar{P}</script> will our <em>sample mean</em> <script type="math/tex">\bar{X}</script> typically be?</p>
-<p>In statistical terms, both questions are about the <em>sampling distribution</em> of our <em><a class="def" href="estimator.html">estimator</a></em> <script type="math/tex">\bar{X}</script>:</p>
+<p>The key insight is that even though the values of the <a class="def" href="https://julienharbulot.com/what-is-statistic.html">statistic</a> are likely to differ from sample to sample, they will follow a pattern. This pattern is called the <strong>sampling distribution</strong>. In formal terms, the <em>sampling distribution</em> of a <a class="def" href="https://julienharbulot.com/what-is-statistic.html">statistic</a> is the probability distribution for the set of possible values that can be assumed by the <a class="def" href="https://julienharbulot.com/what-is-statistic.html">statistic</a>. If you don’t know what a distribution is, read my dedicated article: Introduction to data distributions (to be redacted).</p>
+<p>So, in order to know if our <em><a class="def" href="https://julienharbulot.com/estimator.html">estimator</a></em> is a good, we focus our study on the distribution of the <em><a class="def" href="https://julienharbulot.com/estimator.html">estimator</a></em> accross different sample. If we took many <em>samples</em>, would their <em>means</em> average out to the true <em>population mean</em> <script type="math/tex">\bar{P}</script> ? And if so, how close to the <em>population mean</em> <script type="math/tex">\bar{P}</script> will our <em>sample mean</em> <script type="math/tex">\bar{X}</script> typically be?</p>
+<p>In statistical terms, both questions are about the <em>sampling distribution</em> of our <em><a class="def" href="https://julienharbulot.com/estimator.html">estimator</a></em> <script type="math/tex">\bar{X}</script>:</p>
 <ol>
 <li>Where is the <em>sampling distribution</em> of <script type="math/tex">\bar{X}</script> centered?</li>
 <li>How does the variability of <script type="math/tex">\bar{X}</script> across samples compare to the variability in the <em>population</em>?</li>
 </ol>
-<p>In the well studied case of <em>means</em>, statistical theory answers <em>yes</em> to the first question. The <em>sample means</em> average out to the <em>population mean</em> <script type="math/tex">\bar{P}</script>, or in other words: our <em>sampling distribution</em> is centered at the <em>population mean</em> <script type="math/tex">\bar{P}</script>. We say that our <em><a class="def" href="estimator.html">estimator</a></em> is <em>unbiased</em>.</p>
-<p>As a side note, remark that we could very well use an element from the sample as our <a class="def" href="estimator.html">estimator</a>, instead of the whole sample’s mean. In that case, we can show that this new <a class="def" href="estimator.html">estimator</a> is <em>unbiased</em> too. But it’s less interesting because the confidence interval that we can attach to it is less precise than that of the mean <a class="def" href="estimator.html">estimator</a>, because it fails to take additional information into account as the size of the sample grows. See below to learn about confidence intervals.</p>
+<p>In the well studied case of <em>means</em>, statistical theory answers <em>yes</em> to the first question. The <em>sample means</em> average out to the <em>population mean</em> <script type="math/tex">\bar{P}</script>, or in other words: our <em>sampling distribution</em> is centered at the <em>population mean</em> <script type="math/tex">\bar{P}</script>. We say that our <em><a class="def" href="https://julienharbulot.com/estimator.html">estimator</a></em> is <em>unbiased</em>.</p>
+<p>As a side note, remark that we could very well use an element from the sample as our <a class="def" href="https://julienharbulot.com/estimator.html">estimator</a>, instead of the whole sample’s mean. In that case, we can show that this new <a class="def" href="https://julienharbulot.com/estimator.html">estimator</a> is <em>unbiased</em> too. But it’s less interesting because the confidence interval that we can attach to it is less precise than that of the mean <a class="def" href="https://julienharbulot.com/estimator.html">estimator</a>, because it fails to take additional information into account as the size of the sample grows. See below to learn about confidence intervals.</p>
 <p>Regarding the second question, theory also tells us that the bigger our <em>sample size</em>, the closer to the <em>population mean</em> <script type="math/tex">\bar{P}</script> our <em>sample mean</em> <script type="math/tex">\bar{X}</script> will be. This makes sense, since as the <em>sample size</em> grows we incorporate more and more information from the <em>population</em>.</p>
 <p>So far, we know that we can estimate the <em>population mean</em> using our <em>sample mean</em>, and we know that the bigger the sample, the more precise our estimation will be. But how precise exactly?</p>
 <h3 id="2-confidence-intervals">2. Confidence intervals</h3>
@@ -508,47 +554,34 @@
     </article>
     </div><!-- row -->
     
-    <div class="row mt-1">
-      <article class="col-lg-8 mx-auto recommendations">
-        <p class='title'>Other articles you might like:</p>
-        <ul>
-          
-            <li class="en"><img class="flag-icon" src="//julienharbulot.com/images/languages/en.png"> <a href="//julienharbulot.com/bernoulli-urn.html">Key ideas in probability and statistics illustrated on a simple problem</a></li>
-          
-            <li class="en"><img class="flag-icon" src="//julienharbulot.com/images/languages/en.png"> <a href="//julienharbulot.com/what-is-statistic.html">What is a statistic and why do we care?</a></li>
-          
-            <li class="en"><img class="flag-icon" src="//julienharbulot.com/images/languages/en.png"> <a href="//julienharbulot.com/target-variable.html">What is a target value?</a></li>
-          
-            <li class="en"><img class="flag-icon" src="//julienharbulot.com/images/languages/en.png"> <a href="//julienharbulot.com/design-matrix.html">What is the design matrix?</a></li>
-          
-            <li class="en"><img class="flag-icon" src="//julienharbulot.com/images/languages/en.png"> <a href="//julienharbulot.com/stochastic-convergence.html">Primer on stochastic convergence</a></li>
-          
-        </ul>
-      </article>
-    </div>
+
     
+        
+            <div class="row mb=5 mt-5">
+  <article class="col-lg-8 mx-auto">
+    <div id="hyvor-talk-view"></div>
+    <script type="text/javascript">
+        var HYVOR_TALK_WEBSITE = 'hyvor_id';
+        var HYVOR_TALK_CONFIG = {
+            url: 'https://julienharbulot.com/intro-statistics.html',
+            id: 'intro-statistics.html'
+        };
+    </script>
+  </article>
+</div><!-- row -->
+<script async type="text/javascript" src="//talk.hyvor.com/web-api/embed"></script>
+        
     
-    <div class="row mb=5 mt-5">
-      <article class="col-lg-8 mx-auto">
-        <div id="hyvor-talk-view"></div>
-        <script type="text/javascript">
-            var HYVOR_TALK_WEBSITE = '625';
-            var HYVOR_TALK_CONFIG = {
-                url: 'intro-statistics.html',
-                id: 'intro-statistics.html'
-            };
-        </script>
-      </article>
-    </div><!-- row -->
-    
+
     <footer class="row">
         <div class="col-lg-8 mx-auto text-center">
           <p><small>
           
-            Last updated: 01/14/21 <br/>
+            Last updated: Mar 05, 2018 <br/>
           
           
-          Copyright &copy; 2021 Julien Harbulot
+            Copyright (c) Julien Harbulot
+          
           </small></p>
         </div>
     </footer>
@@ -572,31 +605,28 @@
   </script>
 
 
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-    <script>
-        prev_onload_a = window.onload;
-        window.onload = function() {
-            if (prev_onload_a) {
-                prev_onload_a();
-            }
-            var navlinks = document.getElementsByClassName("nav-link");
-            var i;
-            for (i = 0; i < navlinks.length; i++) {
-                const target = new URL(navlinks[i].href)
-                if (location.pathname == target.pathname) {
-                    navlinks[i].classList.add('active')
+    
+        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+        <!-- navbar script -->
+        <script>
+            prev_onload_a = window.onload;
+            window.onload = function() {
+                if (prev_onload_a) {
+                    prev_onload_a();
+                }
+                var navlinks = document.getElementsByClassName("nav-link");
+                var i;
+                for (i = 0; i < navlinks.length; i++) {
+                    const target = new URL(navlinks[i].href)
+                    if (location.pathname == target.pathname) {
+                        navlinks[i].classList.add('active')
+                    }
                 }
             }
-        }
-    </script>    
-
+        </script>
     
-
-<script async type="text/javascript" src="//talk.hyvor.com/web-api/embed"></script>
-
-
     </body>
 </html>

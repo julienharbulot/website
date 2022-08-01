@@ -1,65 +1,73 @@
 <!doctype html>
-<html lang="en">
+<html lang="Language.en">
     <head>
     
-
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Using WSL-2 as a dev environment</title>
 
     
-    <!-- Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-166292985-1"></script>
-    <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
+        
+            <!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=google_analytics_id"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
 
-    gtag('config', 'UA-166292985-1');
-    </script>
+gtag('config', 'google_analytics_id');
+</script>
+        
     
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" 
-          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
-          rel="stylesheet" crossorigin="anonymous">
+    
+    
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" crossorigin="anonymous">
     
     <link rel="stylesheet" href="/theme/pygment-github.css">
     <link rel="stylesheet" href="/theme/article.css"> 
 
-    <title>Using multiple WSL distributions as a dev environment</title>
+
     
-    <!-- Favicon -->
-    <link rel="apple-touch-icon" sizes="120x120" href="/images/favicon/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon/favicon-16x16.png">
-    <link rel="manifest" href="/images/favicon/site.webmanifest">
-    <link rel="mask-icon" href="/images/favicon/safari-pinned-tab.svg" color="#5bbad5">
-    <link rel="shortcut icon" href="favicon.ico">
-    <meta name="msapplication-TileColor" content="#da532c">
-    <meta name="msapplication-config" content="/images/favicon/browserconfig.xml">
-    <meta name="theme-color" content="#ffffff">
+        <!-- Favicon -->
+
+<link rel="apple-touch-icon" sizes="120x120" href="/images/favicon/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon/favicon-16x16.png">
+<link rel="manifest" href="/images/favicon/site.webmanifest">
+<link rel="mask-icon" href="/images/favicon/safari-pinned-tab.svg" color="#5bbad5">
+<link rel="shortcut icon" href="favicon.ico">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="msapplication-config" content="/images/favicon/browserconfig.xml">
+<meta name="theme-color" content="#ffffff">
     
-<!-- Mathjax -->
+
+    
+        <!-- Mathjax -->
 <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS_SVG">
   MathJax.Hub.Config({
     tex2jax: {
-    	inlineMath: [ ['$','$'] ],
-    	processEscapes: true
+        inlineMath: [ ['$','$'] ],
+        processEscapes: true
     },
-	"HTML-CSS": {
-		fonts: ["TeX"] 
-	}
+    "HTML-CSS": {
+        fonts: ["TeX"]
+    }
   });
 </script>
-
+    
+    
     </head>
 
     <body>
     
     <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: rgb(78, 76, 103);">
-        <a class="navbar-brand" href="//julienharbulot.com/index.html"><img src="//julienharbulot.com/images/logo.svg" width="30" alt=""></a>
+        <a class="navbar-brand" href="https://julienharbulot.com/">
+            <img src="https://julienharbulot.com/images/logo.svg" width="30" alt="">
+        </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -67,24 +75,16 @@
             <ul class="navbar-nav mr-auto">
             
             <li class="nav-item">
-                    <a class="nav-link" href="//julienharbulot.com/technical-blog.html">Technical blog</a>
+                    <a class="nav-link" href="index.html?cats=technical-blog">Technical blog</a>
             </li>
             
             <li class="nav-item">
-                    <a class="nav-link" href="//julienharbulot.com/maths.html">Maths</a>
+                    <a class="nav-link" href="index.html?cats=maths">Maths</a>
             </li>
             
-            <li class="nav-item">
-                    <a class="nav-link" href="//julienharbulot.com/research.html">Research</a>
-            </li>
             
-            <li class="nav-item">
-                    <a class="nav-link" href="//julienharbulot.com/projects.html">Projects</a>
-            </li>
-            
-            <!--<li class="nav-item">
-                <a class="nav-link" href="//julienharbulot.com/about-me.html">About me</a>
-            </li>-->
+    
+        
             
 
 <li class="nav-item dropdown">
@@ -92,60 +92,165 @@
         Table of content
     </a>
     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-        <div class="toc"><ul>
-<li class="toc-entry-1">
-<a class='toc-href dropdown-item' href='#introduction' title='Introduction'>Introduction</a>
+        <div class="toc">
+            
+    
     <ul>
-<li class="toc-entry-2">
-    <a class='toc-href dropdown-item' href='#the-operating-system-windows-10' title='The operating system: Windows 10'>The operating system: Windows 10</a>
-    </li>
-<li class="toc-entry-2">
-    <a class='toc-href dropdown-item' href='#the-trick-wsl-2' title='The trick: WSL-2'>The trick: WSL-2</a>
-    </li>
-    </ul>
-</li>
-<div class="dropdown-divider"></div>
-<li class="toc-entry-1">
-<a class='toc-href dropdown-item' href='#requirements' title='Requirements'>Requirements</a>
-</li>
-<div class="dropdown-divider"></div>
-<li class="toc-entry-1">
-<a class='toc-href dropdown-item' href='#setting-up-a-new-project' title='Setting up a new project'>Setting up a new project</a>
-</li>
-<div class="dropdown-divider"></div>
-<li class="toc-entry-1">
-<a class='toc-href dropdown-item' href='#additional-configuration' title='Additional configuration'>Additional configuration</a>
+        
+            <li class="toc-entry-{depth}">
+            <a class='toc-href dropdown-item' href='#introduction' title='Introduction'>
+                Introduction
+            </a>
+            
+    
     <ul>
-<li class="toc-entry-2">
-    <a class='toc-href dropdown-item' href='#shell-prompt' title='Shell prompt'>Shell prompt</a>
-    </li>
-<li class="toc-entry-2">
-    <a class='toc-href dropdown-item' href='#winhome-link' title='Winhome link'>Winhome link</a>
-    </li>
-<li class="toc-entry-2">
-    <a class='toc-href dropdown-item' href='#graphical-applications' title='Graphical applications'>Graphical applications</a>
-    </li>
-<li class="toc-entry-2">
-    <a class='toc-href dropdown-item' href='#custom-keyboard-layout' title='Custom keyboard layout'>Custom keyboard layout</a>
-    </li>
-<li class="toc-entry-2">
-    <a class='toc-href dropdown-item' href='#configure-ssh-keys' title='Configure ssh keys'>Configure ssh keys</a>
-    </li>
+        
+            <li class="toc-entry-{depth}">
+            <a class='toc-href dropdown-item' href='#the-operating-system-windows-10' title='The operating system: Windows 10'>
+                The operating system: Windows 10
+            </a>
+            
+    
+
+            
+
+        
+            <li class="toc-entry-{depth}">
+            <a class='toc-href dropdown-item' href='#the-trick-wsl-2' title='The trick: WSL-2'>
+                The trick: WSL-2
+            </a>
+            
+    
+
+            
+
+        
     </ul>
-</li>
-<div class="dropdown-divider"></div>
-<li class="toc-entry-1">
-<a class='toc-href dropdown-item' href='#tips' title='Tips'>Tips</a>
+    
+
+            
+            <div class="dropdown-divider"></div>
+            
+
+        
+            <li class="toc-entry-{depth}">
+            <a class='toc-href dropdown-item' href='#requirements' title='Requirements'>
+                Requirements
+            </a>
+            
+    
+
+            
+
+        
+            <li class="toc-entry-{depth}">
+            <a class='toc-href dropdown-item' href='#setting-up-a-new-project' title='Setting up a new project'>
+                Setting up a new project
+            </a>
+            
+    
+
+            
+
+        
+            <li class="toc-entry-{depth}">
+            <a class='toc-href dropdown-item' href='#additional-configuration' title='Additional configuration'>
+                Additional configuration
+            </a>
+            
+    
     <ul>
-<li class="toc-entry-2">
-    <a class='toc-href dropdown-item' href='#access-windows-clipboard' title='Access Windows clipboard'>Access Windows clipboard</a>
-    </li>
+        
+            <li class="toc-entry-{depth}">
+            <a class='toc-href dropdown-item' href='#shell-prompt' title='Shell prompt'>
+                Shell prompt
+            </a>
+            
+    
+
+            
+
+        
+            <li class="toc-entry-{depth}">
+            <a class='toc-href dropdown-item' href='#winhome-link' title='Winhome link'>
+                Winhome link
+            </a>
+            
+    
+
+            
+
+        
+            <li class="toc-entry-{depth}">
+            <a class='toc-href dropdown-item' href='#graphical-applications' title='Graphical applications'>
+                Graphical applications
+            </a>
+            
+    
+
+            
+
+        
+            <li class="toc-entry-{depth}">
+            <a class='toc-href dropdown-item' href='#custom-keyboard-layout' title='Custom keyboard layout'>
+                Custom keyboard layout
+            </a>
+            
+    
+
+            
+
+        
+            <li class="toc-entry-{depth}">
+            <a class='toc-href dropdown-item' href='#configure-ssh-keys' title='Configure ssh keys'>
+                Configure ssh keys
+            </a>
+            
+    
+
+            
+
+        
     </ul>
-</li>
-</ul><div>
+    
+
+            
+            <div class="dropdown-divider"></div>
+            
+
+        
+            <li class="toc-entry-{depth}">
+            <a class='toc-href dropdown-item' href='#tips' title='Tips'>
+                Tips
+            </a>
+            
+    
+    <ul>
+        
+            <li class="toc-entry-{depth}">
+            <a class='toc-href dropdown-item' href='#access-windows-clipboard' title='Access Windows clipboard'>
+                Access Windows clipboard
+            </a>
+            
+    
+
+            
+
+        
+    </ul>
+    
+
+            
+
+        
+    </ul>
+    
+
+        </div>
     </div>
 </li>
-
+        
+    
 
             </ul>
         </div>
@@ -156,8 +261,8 @@
     <div class="container">
     <div class="row mt-5">
       <div class="col-lg-8 mx-auto"> 
-        <h1 class="display-5">Using multiple WSL distributions as a dev environment </h1>
-        <div class="text-right">15 Jan 2021</div>
+        <h1 class="display-5">Using WSL-2 as a dev environment </h1>
+        <div class="text-right">Jan 15, 2021</div>
       </div>
     </div>
     <div class="row mt-5">
@@ -199,163 +304,135 @@
 <p>First, <a href="https://docs.microsoft.com/en-us/windows/wsl/install-win10">install WSL-2</a>. </p>
 <p>Then you need a clean distribution to import into WSL. Here's how to create one easily: Download your distribution of choice from the App Store (I chose <a href="https://ubuntu.com/tutorials/ubuntu-on-windows#4-install-ubuntu-for-windows-10">Ubuntu 20.04 LTS</a>). Open the newly installed distribution once, and immediately close it to register the distribution inside WSL. </p>
 <p>Open a new PowerShell terminal, list the distributions available using the following command and find the one you just installed:</p>
-<div class="hll-title"><span class="terminal">powershell </span> <div class="hll"><pre><span></span><span class="n">wsl</span> <span class="p">-</span><span class="n">-list</span>
-</pre></div>
+<div class="hll-title"><span class="terminal">powershell </span> <pre class="hll"><code class="language-powershell">wsl --list
+</code></pre>
  </div>
-
 <p>Then, export it to create an untouched copy of the distribution (In my case, it's called <code>Ubuntu</code>):</p>
-<div class="hll-title"><span class="terminal">powershell </span> <div class="hll"><pre><span></span><span class="n">mkdir</span> <span class="p">~\</span><span class="n">Documents</span><span class="p">\</span><span class="n">wsl-distributions</span>
-<span class="n">wsl</span> <span class="p">-</span><span class="n">-export</span> <span class="n">Ubuntu</span> <span class="p">~\</span><span class="n">Documents</span><span class="p">\</span><span class="n">wsl-distributions</span><span class="p">\</span><span class="n">ubuntu</span><span class="p">-</span><span class="n">20</span><span class="p">.</span><span class="n">04LTS</span><span class="p">.</span><span class="n">tar</span>
-</pre></div>
+<div class="hll-title"><span class="terminal">powershell </span> <pre class="hll"><code class="language-powershell">mkdir ~\Documents\wsl-distributions
+wsl --export Ubuntu ~\Documents\wsl-distributions\ubuntu-20.04LTS.tar
+</code></pre>
  </div>
-
 <p>Now, we're ready to create a new project.</p>
 <h2 id="setting-up-a-new-project">Setting up a new project</h2>
 <p>When working on a new project big enough to justify having its own environment, I create a new WSL distribution for the project. To do so, I'll simply import a copy of the pristine Ubuntu distribution created in the previous section:</p>
-<div class="hll-title"><span class="terminal">powershell </span> <div class="hll"><pre><span></span><span class="n">wsl</span> <span class="p">-</span><span class="n">-import</span> <span class="n">ProjectName</span> <span class="p">~\</span><span class="n">AppData</span><span class="p">\</span><span class="n">Local</span><span class="p">\</span><span class="n">Packages</span><span class="p">\</span><span class="n">WSL</span><span class="p">.</span><span class="n">ProjectName</span> <span class="p">~\</span><span class="n">Documents</span><span class="p">\</span><span class="n">wsl-distributions</span><span class="p">\</span><span class="n">ubuntu</span><span class="p">-</span><span class="n">20</span><span class="p">.</span><span class="n">04LTS</span><span class="p">.</span><span class="n">tar</span>
-</pre></div>
+<div class="hll-title"><span class="terminal">powershell </span> <pre class="hll"><code class="language-powershell">wsl --import ProjectName ~\AppData\Local\Packages\WSL.ProjectName ~\Documents\wsl-distributions\ubuntu-20.04LTS.tar
+</code></pre>
  </div>
-
 <p>To start the distribution, use this command:</p>
-<div class="hll-title"><span class="terminal">powershell </span> <div class="hll"><pre><span></span><span class="n">wsl</span> <span class="n">-d</span> <span class="n">ProjectName</span>
-</pre></div>
+<div class="hll-title"><span class="terminal">powershell </span> <pre class="hll"><code class="language-powershell">wsl -d ProjectName
+</code></pre>
  </div>
-
 <p>This will open a new root terminal inside the distribution. Let's create a non-root user and configure it as the default user for this distribution. To do so, run these command inside the root WSL terminal:</p>
-<div class="hll-title"><span class="terminal">bash </span> <div class="hll"><pre><span></span>useradd -s /bin/bash -d /home/user/ -m -G sudo user
+<div class="hll-title"><span class="terminal">bash </span> <pre class="hll"><code class="language-bash">useradd -s /bin/bash -d /home/user/ -m -G sudo user
 passwd user
-<span class="nb">printf</span> <span class="s2">&quot;[user]\ndefault=user\n&quot;</span> &gt;&gt; /etc/wsl.conf
-</pre></div>
+printf &quot;[user]\ndefault=user\n&quot; &gt;&gt; /etc/wsl.conf
+</code></pre>
  </div>
-
 <p>Then exit the terminal, and inside powershell, restart the distribution:</p>
-<div class="hll-title"><span class="terminal">powershell </span> <div class="hll"><pre><span></span><span class="n">wsl</span> <span class="p">-</span><span class="n">-terminate</span> <span class="n">ProjectName</span>
-</pre></div>
+<div class="hll-title"><span class="terminal">powershell </span> <pre class="hll"><code class="language-powershell">wsl --terminate ProjectName
+</code></pre>
  </div>
-
 <p>When reopening the distribution, you should be logged in as the newly created user. As we saw earlier, type this line into PowerShell to open the distribution:</p>
-<div class="hll-title"><span class="terminal">powershell </span> <div class="hll"><pre><span></span><span class="n">wsl</span> <span class="n">-d</span> <span class="n">ProjectName</span>
-</pre></div>
+<div class="hll-title"><span class="terminal">powershell </span> <pre class="hll"><code class="language-powershell">wsl -d ProjectName
+</code></pre>
  </div>
-
 <p>And that's it, you now have a new distribution that you can setup like any other.</p>
 <h2 id="additional-configuration">Additional configuration</h2>
 <h3 id="shell-prompt">Shell prompt</h3>
 <p>To avoid mixing up my terminals, I like to edit my shell's prompt to display my distribution's name. To do so, edit the <code>PS1</code> variable in your <code>.bashrc</code>:</p>
-<div class="hll-title"><span class="filename">~/.bashrc </span> <div class="hll"><pre><span></span><span class="k">if</span> <span class="o">[</span> <span class="s2">&quot;</span><span class="nv">$color_prompt</span><span class="s2">&quot;</span> <span class="o">=</span> yes <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
-    <span class="nv">PS1</span><span class="o">=</span><span class="s1">&#39;${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@$WSL_DISTRO_NAME\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ &#39;</span>
-<span class="k">else</span>
-    <span class="nv">PS1</span><span class="o">=</span><span class="s1">&#39;${debian_chroot:+($debian_chroot)}\u@$WSL_DISTRO_NAME:\w\$ &#39;</span>
-<span class="k">fi</span>
-<span class="nb">unset</span> color_prompt force_color_prompt
+<div class="hll-title"><span class="filename">~/.bashrc </span> <pre class="hll"><code class="language-bash">if [ &quot;$color_prompt&quot; = yes ]; then
+    PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@$WSL_DISTRO_NAME\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
+else
+    PS1='${debian_chroot:+($debian_chroot)}\u@$WSL_DISTRO_NAME:\w\$ '
+fi
+unset color_prompt force_color_prompt
 
-<span class="c1"># If this is an xterm set the title to user@disro-name:dir</span>
-<span class="k">case</span> <span class="s2">&quot;</span><span class="nv">$TERM</span><span class="s2">&quot;</span> in
-xterm*<span class="p">|</span>rxvt*<span class="o">)</span>
-    <span class="nv">PS1</span><span class="o">=</span><span class="s2">&quot;\[\e]0;</span><span class="si">${</span><span class="nv">debian_chroot</span><span class="p">:+(</span><span class="nv">$debian_chroot</span><span class="p">)</span><span class="si">}</span><span class="s2">\u@</span><span class="nv">$WSL_DISTRO_NAME</span><span class="s2">: \w\a\]</span><span class="nv">$PS1</span><span class="s2">&quot;</span>
-    <span class="p">;;</span>
-*<span class="o">)</span>
-    <span class="p">;;</span>
-<span class="k">esac</span>
-</pre></div>
+# If this is an xterm set the title to user@disro-name:dir
+case &quot;$TERM&quot; in
+xterm*|rxvt*)
+    PS1=&quot;\[\e]0;${debian_chroot:+($debian_chroot)}\u@$WSL_DISTRO_NAME: \w\a\]$PS1&quot;
+    ;;
+*)
+    ;;
+esac
+</code></pre>
  </div>
-
 <h3 id="winhome-link">Winhome link</h3>
 <p>To ease access to the files inside Windows (for instance, to copy downloads into WSL), I like to create a shortcut as follows (change <code>julien</code> by your windows username):</p>
-<div class="hll"><pre><span></span>ln -s /mnt/c/Users/julien ~/winhome
-</pre></div>
-
+<pre class="hll"><code class="language-bash">ln -s /mnt/c/Users/julien ~/winhome
+</code></pre>
 
 <h3 id="graphical-applications">Graphical applications</h3>
 <p>It is possible to run graphical applications inside WSL. To do so, you need to install an X-Server on windows and configure the WSL distribution to connect to this server. </p>
 <p>I use X410. Here's <a href="https://x410.dev/cookbook/wsl/using-x410-with-wsl2/">how to set it up for WSL-2</a>. Once the X-Server is ready, edit your WSL environment to connect to it:</p>
-<div class="hll-title"><span class="filename">~/.bashrc </span> <div class="hll"><pre><span></span><span class="nb">export</span> <span class="nv">DISPLAY</span><span class="o">=</span><span class="k">$(</span>cat /etc/resolv.conf <span class="p">|</span> grep nameserver <span class="p">|</span> awk <span class="s1">&#39;{print $2; exit;}&#39;</span><span class="k">)</span>:0.0
-</pre></div>
+<div class="hll-title"><span class="filename">~/.bashrc </span> <pre class="hll"><code class="language-bash">export DISPLAY=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2; exit;}'):0.0
+</code></pre>
  </div>
-
 <h3 id="custom-keyboard-layout">Custom keyboard layout</h3>
 <p>When running GUI apps through the X-Server, the keyboard layout needs to be installed in the distribution. Here's how I setup my <a href="https://colemak.com">Colemak layout</a>:</p>
-<div class="hll"><pre><span></span>sudo apt install x11-xkb-utils x11-xserver-utils
+<pre class="hll"><code>sudo apt install x11-xkb-utils x11-xserver-utils
 wget https://colemak.com/pub/unix/colemak-1.0.tar.g
 tar -xvf colemak-1.0.tar.g
 cd colemak-1.0/
 setxkbmap us; xmodmap xmodmap/xmodmap.colemak &amp;&amp; xset r 66
-</pre></div>
-
+</code></pre>
 
 <h3 id="configure-ssh-keys">Configure ssh keys</h3>
 <p>Generate a new SSH key:</p>
-<div class="hll"><pre><span></span>ssh-keygen -t ed25519 -C <span class="s2">&quot;</span><span class="nv">$USER</span><span class="s2">@</span><span class="nv">$WSL_DISTRO_NAME</span><span class="s2">&quot;</span>
-</pre></div>
-
+<pre class="hll"><code class="language-bash">ssh-keygen -t ed25519 -C &quot;$USER@$WSL_DISTRO_NAME&quot;
+</code></pre>
 
 <p>To copy the newly created public key to the clipboard, use this command:</p>
-<div class="hll"><pre><span></span>cat ~/.ssh/id_ed25519.pub <span class="p">|</span> clip.exe
-</pre></div>
-
+<pre class="hll"><code class="language-bash">cat ~/.ssh/id_ed25519.pub | clip.exe
+</code></pre>
 
 <p>Then, follow <a href="https://docs.github.com/en/github/authenticating-to-github/adding-a-new-ssh-key-to-your-github-account">these instructions</a> to add the newly created key to your GitHub account.</p>
 <p>Instead of the traditional <code>ssh-agent</code>, it is more convenient to use <code>keychain</code> inside WSL: (<a href="https://esc.sh/blog/ssh-agent-windows10-wsl2/">copied from this source</a>)</p>
-<div class="hll"><pre><span></span>sudo apt-get install keychain
-</pre></div>
-
+<pre class="hll"><code class="language-bash">sudo apt-get install keychain
+</code></pre>
 
 <p>Then, edit your <code>~/.bashrc</code> file to load the keys automatically:</p>
-<div class="hll-title"><span class="filename">~/.bashrc </span> <div class="hll"><pre><span></span><span class="c1"># For Loading the SSH key</span>
-/usr/bin/keychain --nogui <span class="nv">$HOME</span>/.ssh/id_ed25519
-<span class="nb">source</span> <span class="nv">$HOME</span>/.keychain/<span class="nv">$HOSTNAME</span>-sh
-</pre></div>
+<div class="hll-title"><span class="filename">~/.bashrc </span> <pre class="hll"><code class="language-bash"># For Loading the SSH key
+/usr/bin/keychain --nogui $HOME/.ssh/id_ed25519
+source $HOME/.keychain/$HOSTNAME-sh
+</code></pre>
  </div>
-
 <h2 id="tips">Tips</h2>
 <h3 id="access-windows-clipboard">Access Windows clipboard</h3>
 <p>To access Windows clipboard, use the <code>clip.exe</code> executable. For instance:</p>
-<div class="hll"><pre><span></span><span class="nb">echo</span> <span class="s2">&quot;test&quot;</span> <span class="p">|</span> clip.exe
-</pre></div>
+<pre class="hll"><code class="language-bash">echo &quot;test&quot; | clip.exe
+</code></pre>
     </article>
     </div><!-- row -->
     
-    <div class="row mt-1">
-      <article class="col-lg-8 mx-auto recommendations">
-        <p class='title'>Other articles you might like:</p>
-        <ul>
-          
-            <li class="en"><img class="flag-icon" src="//julienharbulot.com/images/languages/en.png"> <a href="//julienharbulot.com/wsl-git-sync.html">Synchronizing ssh keys between Windows and WSL</a></li>
-          
-            <li class="en"><img class="flag-icon" src="//julienharbulot.com/images/languages/en.png"> <a href="//julienharbulot.com/cron-windows.html">How to reliably schedule tasks in WSL</a></li>
-          
-            <li class="en"><img class="flag-icon" src="//julienharbulot.com/images/languages/en.png"> <a href="//julienharbulot.com/notification-server.html">HTTP server to display desktop notifications</a></li>
-          
-            <li class="en"><img class="flag-icon" src="//julienharbulot.com/images/languages/en.png"> <a href="//julienharbulot.com/github-scripts.html">Simple bash scripts to leverage GitHub's REST API</a></li>
-          
-            <li class="en"><img class="flag-icon" src="//julienharbulot.com/images/languages/en.png"> <a href="//julienharbulot.com/ssh.html">SSH Essentials</a></li>
-          
-        </ul>
-      </article>
-    </div>
+
     
+        
+            <div class="row mb=5 mt-5">
+  <article class="col-lg-8 mx-auto">
+    <div id="hyvor-talk-view"></div>
+    <script type="text/javascript">
+        var HYVOR_TALK_WEBSITE = 'hyvor_id';
+        var HYVOR_TALK_CONFIG = {
+            url: 'https://julienharbulot.com/wsl-dev-environment-2020.html',
+            id: 'wsl-dev-environment-2020.html'
+        };
+    </script>
+  </article>
+</div><!-- row -->
+<script async type="text/javascript" src="//talk.hyvor.com/web-api/embed"></script>
+        
     
-    <div class="row mb=5 mt-5">
-      <article class="col-lg-8 mx-auto">
-        <div id="hyvor-talk-view"></div>
-        <script type="text/javascript">
-            var HYVOR_TALK_WEBSITE = '625';
-            var HYVOR_TALK_CONFIG = {
-                url: 'wsl-dev-environment-2020.html',
-                id: 'wsl-dev-environment-2020.html'
-            };
-        </script>
-      </article>
-    </div><!-- row -->
-    
+
     <footer class="row">
         <div class="col-lg-8 mx-auto text-center">
           <p><small>
           
-            Last updated: 10/27/21 <br/>
+            Last updated: Jan 15, 2021 <br/>
           
           
-          Copyright &copy; 2021 Julien Harbulot
+            Copyright (c) Julien Harbulot
+          
           </small></p>
         </div>
     </footer>
@@ -379,31 +456,28 @@ setxkbmap us; xmodmap xmodmap/xmodmap.colemak &amp;&amp; xset r 66
   </script>
 
 
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-    <script>
-        prev_onload_a = window.onload;
-        window.onload = function() {
-            if (prev_onload_a) {
-                prev_onload_a();
-            }
-            var navlinks = document.getElementsByClassName("nav-link");
-            var i;
-            for (i = 0; i < navlinks.length; i++) {
-                const target = new URL(navlinks[i].href)
-                if (location.pathname == target.pathname) {
-                    navlinks[i].classList.add('active')
+    
+        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+        <!-- navbar script -->
+        <script>
+            prev_onload_a = window.onload;
+            window.onload = function() {
+                if (prev_onload_a) {
+                    prev_onload_a();
+                }
+                var navlinks = document.getElementsByClassName("nav-link");
+                var i;
+                for (i = 0; i < navlinks.length; i++) {
+                    const target = new URL(navlinks[i].href)
+                    if (location.pathname == target.pathname) {
+                        navlinks[i].classList.add('active')
+                    }
                 }
             }
-        }
-    </script>    
-
+        </script>
     
-
-<script async type="text/javascript" src="//talk.hyvor.com/web-api/embed"></script>
-
-
     </body>
 </html>

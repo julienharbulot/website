@@ -1,65 +1,73 @@
 <!doctype html>
-<html lang="en">
+<html lang="Language.en">
     <head>
     
-
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>How to write a git commit message</title>
 
     
-    <!-- Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-166292985-1"></script>
-    <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
+        
+            <!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=google_analytics_id"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
 
-    gtag('config', 'UA-166292985-1');
-    </script>
+gtag('config', 'google_analytics_id');
+</script>
+        
     
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" 
-          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
-          rel="stylesheet" crossorigin="anonymous">
+    
+    
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" crossorigin="anonymous">
     
     <link rel="stylesheet" href="/theme/pygment-github.css">
     <link rel="stylesheet" href="/theme/article.css"> 
 
-    <title>How to write a git commit message</title>
+
     
-    <!-- Favicon -->
-    <link rel="apple-touch-icon" sizes="120x120" href="/images/favicon/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon/favicon-16x16.png">
-    <link rel="manifest" href="/images/favicon/site.webmanifest">
-    <link rel="mask-icon" href="/images/favicon/safari-pinned-tab.svg" color="#5bbad5">
-    <link rel="shortcut icon" href="favicon.ico">
-    <meta name="msapplication-TileColor" content="#da532c">
-    <meta name="msapplication-config" content="/images/favicon/browserconfig.xml">
-    <meta name="theme-color" content="#ffffff">
+        <!-- Favicon -->
+
+<link rel="apple-touch-icon" sizes="120x120" href="/images/favicon/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon/favicon-16x16.png">
+<link rel="manifest" href="/images/favicon/site.webmanifest">
+<link rel="mask-icon" href="/images/favicon/safari-pinned-tab.svg" color="#5bbad5">
+<link rel="shortcut icon" href="favicon.ico">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="msapplication-config" content="/images/favicon/browserconfig.xml">
+<meta name="theme-color" content="#ffffff">
     
-<!-- Mathjax -->
+
+    
+        <!-- Mathjax -->
 <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS_SVG">
   MathJax.Hub.Config({
     tex2jax: {
-    	inlineMath: [ ['$','$'] ],
-    	processEscapes: true
+        inlineMath: [ ['$','$'] ],
+        processEscapes: true
     },
-	"HTML-CSS": {
-		fonts: ["TeX"] 
-	}
+    "HTML-CSS": {
+        fonts: ["TeX"]
+    }
   });
 </script>
-
+    
+    
     </head>
 
     <body>
     
     <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: rgb(78, 76, 103);">
-        <a class="navbar-brand" href="//julienharbulot.com/index.html"><img src="//julienharbulot.com/images/logo.svg" width="30" alt=""></a>
+        <a class="navbar-brand" href="https://julienharbulot.com/">
+            <img src="https://julienharbulot.com/images/logo.svg" width="30" alt="">
+        </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -67,24 +75,16 @@
             <ul class="navbar-nav mr-auto">
             
             <li class="nav-item">
-                    <a class="nav-link" href="//julienharbulot.com/technical-blog.html">Technical blog</a>
+                    <a class="nav-link" href="index.html?cats=technical-blog">Technical blog</a>
             </li>
             
             <li class="nav-item">
-                    <a class="nav-link" href="//julienharbulot.com/maths.html">Maths</a>
+                    <a class="nav-link" href="index.html?cats=maths">Maths</a>
             </li>
             
-            <li class="nav-item">
-                    <a class="nav-link" href="//julienharbulot.com/research.html">Research</a>
-            </li>
             
-            <li class="nav-item">
-                    <a class="nav-link" href="//julienharbulot.com/projects.html">Projects</a>
-            </li>
-            
-            <!--<li class="nav-item">
-                <a class="nav-link" href="//julienharbulot.com/about-me.html">About me</a>
-            </li>-->
+    
+        
             
 
 <li class="nav-item dropdown">
@@ -92,53 +92,149 @@
         Table of content
     </a>
     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-        <div class="toc"><ul>
-<li class="toc-entry-1">
-<a class='toc-href dropdown-item' href='#introduction-why-good-commit-messages-matter' title='Introduction: Why good commit messages matter'>Introduction: Why good commit messages matter</a>
-</li>
-<div class="dropdown-divider"></div>
-<li class="toc-entry-1">
-<a class='toc-href dropdown-item' href='#the-seven-rules-of-a-great-git-commit-message' title='The seven rules of a great Git commit message'>The seven rules of a great Git commit message</a>
+        <div class="toc">
+            
+    
     <ul>
-<li class="toc-entry-2">
-    <a class='toc-href dropdown-item' href='#1-separate-subject-from-body-with-a-blank-line' title='1. Separate subject from body with a blank line'>1. Separate subject from body with a blank line</a>
-    </li>
-<li class="toc-entry-2">
-    <a class='toc-href dropdown-item' href='#2-limit-the-subject-line-to-50-characters' title='2. Limit the subject line to 50 characters'>2. Limit the subject line to 50 characters</a>
-    </li>
-<li class="toc-entry-2">
-    <a class='toc-href dropdown-item' href='#3-capitalize-the-subject-line' title='3. Capitalize the subject line'>3. Capitalize the subject line</a>
-    </li>
-<li class="toc-entry-2">
-    <a class='toc-href dropdown-item' href='#4-do-not-end-the-subject-line-with-a-period' title='4. Do not end the subject line with a period'>4. Do not end the subject line with a period</a>
-    </li>
-<li class="toc-entry-2">
-    <a class='toc-href dropdown-item' href='#5-use-the-imperative-mood-in-the-subject-line' title='5. Use the imperative mood in the subject line'>5. Use the imperative mood in the subject line</a>
-    </li>
-<li class="toc-entry-2">
-    <a class='toc-href dropdown-item' href='#6-wrap-the-body-at-72-characters' title='6. Wrap the body at 72 characters'>6. Wrap the body at 72 characters</a>
-    </li>
-<li class="toc-entry-2">
-    <a class='toc-href dropdown-item' href='#7-use-the-body-to-explain-what-and-why-vs-how' title='7. Use the body to explain what and why vs. how'>7. Use the body to explain what and why vs. how</a>
-    </li>
-    </ul>
-</li>
-<div class="dropdown-divider"></div>
-<li class="toc-entry-1">
-<a class='toc-href dropdown-item' href='#tips' title='Tips'>Tips</a>
+        
+            <li class="toc-entry-{depth}">
+            <a class='toc-href dropdown-item' href='#introduction-why-good-commit-messages-matter' title='Introduction: Why good commit messages matter'>
+                Introduction: Why good commit messages matter
+            </a>
+            
+    
+
+            
+
+        
+            <li class="toc-entry-{depth}">
+            <a class='toc-href dropdown-item' href='#the-seven-rules-of-a-great-git-commit-message' title='The seven rules of a great Git commit message'>
+                The seven rules of a great Git commit message
+            </a>
+            
+    
     <ul>
-<li class="toc-entry-2">
-    <a class='toc-href dropdown-item' href='#learn-to-love-the-command-line-leave-the-ide-behind' title='Learn to love the command line. Leave the IDE behind.'>Learn to love the command line. Leave the IDE behind.</a>
-    </li>
-<li class="toc-entry-2">
-    <a class='toc-href dropdown-item' href='#read-pro-git' title='Read Pro Git'>Read Pro Git</a>
-    </li>
+        
+            <li class="toc-entry-{depth}">
+            <a class='toc-href dropdown-item' href='#1-separate-subject-from-body-with-a-blank-line' title='1. Separate subject from body with a blank line'>
+                1. Separate subject from body with a blank line
+            </a>
+            
+    
+
+            
+
+        
+            <li class="toc-entry-{depth}">
+            <a class='toc-href dropdown-item' href='#2-limit-the-subject-line-to-50-characters' title='2. Limit the subject line to 50 characters'>
+                2. Limit the subject line to 50 characters
+            </a>
+            
+    
+
+            
+
+        
+            <li class="toc-entry-{depth}">
+            <a class='toc-href dropdown-item' href='#3-capitalize-the-subject-line' title='3. Capitalize the subject line'>
+                3. Capitalize the subject line
+            </a>
+            
+    
+
+            
+
+        
+            <li class="toc-entry-{depth}">
+            <a class='toc-href dropdown-item' href='#4-do-not-end-the-subject-line-with-a-period' title='4. Do not end the subject line with a period'>
+                4. Do not end the subject line with a period
+            </a>
+            
+    
+
+            
+
+        
+            <li class="toc-entry-{depth}">
+            <a class='toc-href dropdown-item' href='#5-use-the-imperative-mood-in-the-subject-line' title='5. Use the imperative mood in the subject line'>
+                5. Use the imperative mood in the subject line
+            </a>
+            
+    
+
+            
+
+        
+            <li class="toc-entry-{depth}">
+            <a class='toc-href dropdown-item' href='#6-wrap-the-body-at-72-characters' title='6. Wrap the body at 72 characters'>
+                6. Wrap the body at 72 characters
+            </a>
+            
+    
+
+            
+
+        
+            <li class="toc-entry-{depth}">
+            <a class='toc-href dropdown-item' href='#7-use-the-body-to-explain-what-and-why-vs-how' title='7. Use the body to explain what and why vs. how'>
+                7. Use the body to explain what and why vs. how
+            </a>
+            
+    
+
+            
+
+        
     </ul>
-</li>
-</ul><div>
+    
+
+            
+            <div class="dropdown-divider"></div>
+            
+
+        
+            <li class="toc-entry-{depth}">
+            <a class='toc-href dropdown-item' href='#tips' title='Tips'>
+                Tips
+            </a>
+            
+    
+    <ul>
+        
+            <li class="toc-entry-{depth}">
+            <a class='toc-href dropdown-item' href='#learn-to-love-the-command-line-leave-the-ide-behind' title='Learn to love the command line. Leave the IDE behind.'>
+                Learn to love the command line. Leave the IDE behind.
+            </a>
+            
+    
+
+            
+
+        
+            <li class="toc-entry-{depth}">
+            <a class='toc-href dropdown-item' href='#read-pro-git' title='Read Pro Git'>
+                Read Pro Git
+            </a>
+            
+    
+
+            
+
+        
+    </ul>
+    
+
+            
+
+        
+    </ul>
+    
+
+        </div>
     </div>
 </li>
-
+        
+    
 
             </ul>
         </div>
@@ -150,14 +246,14 @@
     <div class="row mt-5">
       <div class="col-lg-8 mx-auto"> 
         <h1 class="display-5">How to write a git commit message </h1>
-        <div class="text-right">18 Sep 2019</div>
+        <div class="text-right">Sep 18, 2019</div>
       </div>
     </div>
     <div class="row mt-5">
     <article class="col-lg-8 mx-auto">
     <p>This article was originally written by Chris Beam on <a href="https://chris.beams.io/posts/git-commit/">his blog</a>. It's really great.</p>
 <p><center>
-  <a href="https://xkcd.com/1296/"><img src="images/git-commit-message/git_commit_2x.png" width="439" height="250"/></a>
+  <a href="https://xkcd.com/1296/"><img src="https://julienharbulot.com/images/git-commit-message/git_commit_2x.png" width="439" height="250"/></a>
 </center></p>
 <h2 id="introduction-why-good-commit-messages-matter">Introduction: Why good commit messages matter</h2>
 <p>If you browse the log of any random Git repository, you will probably find its commit messages are more or less a mess. For example, take a look at <a href="https://github.com/spring-projects/spring-framework/commits/e5f4b49?author=cbeams">these gems</a> from my early days committing to Spring:</p>
@@ -262,7 +358,7 @@ and turns it back into a chess game.
 <pre><code>$ git log
 commit 42e769bdf4894310333942ffc5a15151222a87be
 Author: Kevin Flynn
-Date:   Fri Jan 01 00:00:00 1982 -0200
+created:   Fri Jan 01 00:00:00 1982 -0200
 
  Derezz the master control program
 
@@ -297,9 +393,9 @@ Walter Gibbs (1):
 <p><em>Tip: If you're having a hard time summarizing, you might be committing too many changes at once. Strive for <a href="https://www.freshconsulting.com/atomic-commits/">atomic commits</a> (a topic for a separate post).</em></p>
 </blockquote>
 <p>GitHub's UI is fully aware of these conventions. It will warn you if you go past the 50 character limit:</p>
-<p><img alt="gh1" src="images/git-commit-message/zyBU2l6.png" /></p>
+<p><img alt="gh1" src="https://julienharbulot.com/images/git-commit-message/zyBU2l6.png" /></p>
 <p>And will truncate any subject line longer than 72 characters with an ellipsis:</p>
-<p><img alt="gh2" src="images/git-commit-message/27n9O8y.png" /></p>
+<p><img alt="gh2" src="https://julienharbulot.com/images/git-commit-message/27n9O8y.png" /></p>
 <p>So shoot for 50 characters, but consider 72 the hard limit.</p>
 <h3 id="3-capitalize-the-subject-line">3. Capitalize the subject line</h3>
 <p>This is as simple as it sounds. Begin all subject lines with a capital letter.</p>
@@ -389,7 +485,7 @@ This reverts commit cc87791524aedd593cff5a74532befe7ab69ce9d.
 <p>This <a href="https://github.com/bitcoin/bitcoin/commit/eb0b56b19017ab5c16c745e6da39c53126924ed6">commit from Bitcoin Core</a> is a great example of explaining what changed and why:</p>
 <pre><code>commit eb0b56b19017ab5c16c745e6da39c53126924ed6
 Author: Pieter Wuille
-Date:   Fri Aug 1 22:57:55 2014 +0200
+created:   Fri Aug 1 22:57:55 2014 +0200
 
    Simplify serialize.h's exception handling
 
@@ -423,49 +519,34 @@ Date:   Fri Aug 1 22:57:55 2014 +0200
     </article>
     </div><!-- row -->
     
-    <div class="row mt-1">
-      <article class="col-lg-8 mx-auto recommendations">
-        <p class='title'>Other articles you might like:</p>
-        <ul>
-          
-            <li class="en"><img class="flag-icon" src="//julienharbulot.com/images/languages/en.png"> <a href="//julienharbulot.com/wsl-git-sync.html">Synchronizing ssh keys between Windows and WSL</a></li>
-          
-            <li class="en"><img class="flag-icon" src="//julienharbulot.com/images/languages/en.png"> <a href="//julienharbulot.com/github-scripts.html">Simple bash scripts to leverage GitHub's REST API</a></li>
-          
-            <li class="en"><img class="flag-icon" src="//julienharbulot.com/images/languages/en.png"> <a href="//julienharbulot.com/python-cli-interface.html">How to write a command-line interface</a></li>
-          
-            <li class="en"><img class="flag-icon" src="//julienharbulot.com/images/languages/en.png"> <a href="//julienharbulot.com/bash-completion-tutorial.html">Tutorial on bash completion scripts</a></li>
-          
-            <li class="en"><img class="flag-icon" src="//julienharbulot.com/images/languages/en.png"> <a href="//julienharbulot.com/python-cli-streams.html">How and when to use stdout and stderr?</a></li>
-          
-        </ul>
-      </article>
-    </div>
+
     
+        
+            <div class="row mb=5 mt-5">
+  <article class="col-lg-8 mx-auto">
+    <div id="hyvor-talk-view"></div>
+    <script type="text/javascript">
+        var HYVOR_TALK_WEBSITE = 'hyvor_id';
+        var HYVOR_TALK_CONFIG = {
+            url: 'https://julienharbulot.com/git-commit-message.html',
+            id: 'git-commit-message.html'
+        };
+    </script>
+  </article>
+</div><!-- row -->
+<script async type="text/javascript" src="//talk.hyvor.com/web-api/embed"></script>
+        
     
-    <div class="row mb=5 mt-5">
-      <article class="col-lg-8 mx-auto">
-        <div id="hyvor-talk-view"></div>
-        <script type="text/javascript">
-            var HYVOR_TALK_WEBSITE = '625';
-            var HYVOR_TALK_CONFIG = {
-                url: 'git-commit-message.html',
-                id: 'git-commit-message.html'
-            };
-        </script>
-      </article>
-    </div><!-- row -->
-    
+
     <footer class="row">
         <div class="col-lg-8 mx-auto text-center">
           <p><small>
           
-            Last updated: 10/27/21 <br/>
+            Last updated: Sep 18, 2019 <br/>
           
           
-            Content: Copyright &copy; Chris Beams <br/> Design: 
+            Copyright (c) Julien Harbulot
           
-          Copyright &copy; 2021 Julien Harbulot
           </small></p>
         </div>
     </footer>
@@ -489,31 +570,28 @@ Date:   Fri Aug 1 22:57:55 2014 +0200
   </script>
 
 
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-    <script>
-        prev_onload_a = window.onload;
-        window.onload = function() {
-            if (prev_onload_a) {
-                prev_onload_a();
-            }
-            var navlinks = document.getElementsByClassName("nav-link");
-            var i;
-            for (i = 0; i < navlinks.length; i++) {
-                const target = new URL(navlinks[i].href)
-                if (location.pathname == target.pathname) {
-                    navlinks[i].classList.add('active')
+    
+        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+        <!-- navbar script -->
+        <script>
+            prev_onload_a = window.onload;
+            window.onload = function() {
+                if (prev_onload_a) {
+                    prev_onload_a();
+                }
+                var navlinks = document.getElementsByClassName("nav-link");
+                var i;
+                for (i = 0; i < navlinks.length; i++) {
+                    const target = new URL(navlinks[i].href)
+                    if (location.pathname == target.pathname) {
+                        navlinks[i].classList.add('active')
+                    }
                 }
             }
-        }
-    </script>    
-
+        </script>
     
-
-<script async type="text/javascript" src="//talk.hyvor.com/web-api/embed"></script>
-
-
     </body>
 </html>

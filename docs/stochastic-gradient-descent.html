@@ -1,65 +1,73 @@
 <!doctype html>
-<html lang="en">
+<html lang="Language.en">
     <head>
     
-
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>What is stochastic gradient descent (SGD)?</title>
 
     
-    <!-- Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-166292985-1"></script>
-    <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
+        
+            <!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=google_analytics_id"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
 
-    gtag('config', 'UA-166292985-1');
-    </script>
+gtag('config', 'google_analytics_id');
+</script>
+        
     
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" 
-          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
-          rel="stylesheet" crossorigin="anonymous">
+    
+    
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" crossorigin="anonymous">
     
     <link rel="stylesheet" href="/theme/pygment-github.css">
     <link rel="stylesheet" href="/theme/article.css"> 
 
-    <title>What is stochastic gradient descent (SGD)?</title>
+
     
-    <!-- Favicon -->
-    <link rel="apple-touch-icon" sizes="120x120" href="/images/favicon/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon/favicon-16x16.png">
-    <link rel="manifest" href="/images/favicon/site.webmanifest">
-    <link rel="mask-icon" href="/images/favicon/safari-pinned-tab.svg" color="#5bbad5">
-    <link rel="shortcut icon" href="favicon.ico">
-    <meta name="msapplication-TileColor" content="#da532c">
-    <meta name="msapplication-config" content="/images/favicon/browserconfig.xml">
-    <meta name="theme-color" content="#ffffff">
+        <!-- Favicon -->
+
+<link rel="apple-touch-icon" sizes="120x120" href="/images/favicon/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon/favicon-16x16.png">
+<link rel="manifest" href="/images/favicon/site.webmanifest">
+<link rel="mask-icon" href="/images/favicon/safari-pinned-tab.svg" color="#5bbad5">
+<link rel="shortcut icon" href="favicon.ico">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="msapplication-config" content="/images/favicon/browserconfig.xml">
+<meta name="theme-color" content="#ffffff">
     
-<!-- Mathjax -->
+
+    
+        <!-- Mathjax -->
 <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS_SVG">
   MathJax.Hub.Config({
     tex2jax: {
-    	inlineMath: [ ['$','$'] ],
-    	processEscapes: true
+        inlineMath: [ ['$','$'] ],
+        processEscapes: true
     },
-	"HTML-CSS": {
-		fonts: ["TeX"] 
-	}
+    "HTML-CSS": {
+        fonts: ["TeX"]
+    }
   });
 </script>
-
+    
+    
     </head>
 
     <body>
     
     <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: rgb(78, 76, 103);">
-        <a class="navbar-brand" href="//julienharbulot.com/index.html"><img src="//julienharbulot.com/images/logo.svg" width="30" alt=""></a>
+        <a class="navbar-brand" href="https://julienharbulot.com/">
+            <img src="https://julienharbulot.com/images/logo.svg" width="30" alt="">
+        </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -67,24 +75,16 @@
             <ul class="navbar-nav mr-auto">
             
             <li class="nav-item">
-                    <a class="nav-link" href="//julienharbulot.com/technical-blog.html">Technical blog</a>
+                    <a class="nav-link" href="index.html?cats=technical-blog">Technical blog</a>
             </li>
             
             <li class="nav-item">
-                    <a class="nav-link" href="//julienharbulot.com/maths.html">Maths</a>
+                    <a class="nav-link" href="index.html?cats=maths">Maths</a>
             </li>
             
-            <li class="nav-item">
-                    <a class="nav-link" href="//julienharbulot.com/research.html">Research</a>
-            </li>
             
-            <li class="nav-item">
-                    <a class="nav-link" href="//julienharbulot.com/projects.html">Projects</a>
-            </li>
-            
-            <!--<li class="nav-item">
-                <a class="nav-link" href="//julienharbulot.com/about-me.html">About me</a>
-            </li>-->
+    
+        
             
 
 <li class="nav-item dropdown">
@@ -92,54 +92,139 @@
         Table of content
     </a>
     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-        <div class="toc"><ul>
-<li class="toc-entry-1">
-<a class='toc-href dropdown-item' href='#sum-functions' title='Sum functions'>Sum functions</a>
-</li>
-<div class="dropdown-divider"></div>
-<li class="toc-entry-1">
-<a class='toc-href dropdown-item' href='#the-gradient' title='The gradient'>The gradient</a>
-</li>
-<div class="dropdown-divider"></div>
-<li class="toc-entry-1">
-<a class='toc-href dropdown-item' href='#stochastic-gradient-descent-algorithm' title='Stochastic gradient descent algorithm'>Stochastic gradient descent algorithm</a>
-</li>
-<div class="dropdown-divider"></div>
-<li class="toc-entry-1">
-<a class='toc-href dropdown-item' href='#comparison-with-gradient-descent' title='Comparison with gradient descent'>Comparison with gradient descent</a>
-</li>
-<div class="dropdown-divider"></div>
-<li class="toc-entry-1">
-<a class='toc-href dropdown-item' href='#is-it-really-faster-than-gradient-descent' title='Is it really faster than gradient descent?'>Is it really faster than gradient descent?</a>
-</li>
-<div class="dropdown-divider"></div>
-<li class="toc-entry-1">
-<a class='toc-href dropdown-item' href='#why-it-works' title='Why it works'>Why it works</a>
+        <div class="toc">
+            
+    
     <ul>
-<li class="toc-entry-2">
-    <a class='toc-href dropdown-item' href='#computational-cost' title='Computational cost'>Computational cost</a>
-    </li>
-<li class="toc-entry-2">
-    <a class='toc-href dropdown-item' href='#correctness' title='Correctness'>Correctness</a>
-    </li>
-    </ul>
-</li>
-<div class="dropdown-divider"></div>
-<li class="toc-entry-1">
-<a class='toc-href dropdown-item' href='#mini-batch-sgd' title='Mini-batch SGD'>Mini-batch SGD</a>
+        
+            <li class="toc-entry-{depth}">
+            <a class='toc-href dropdown-item' href='#sum-functions' title='Sum functions'>
+                Sum functions
+            </a>
+            
+    
+
+            
+
+        
+            <li class="toc-entry-{depth}">
+            <a class='toc-href dropdown-item' href='#the-gradient' title='The gradient'>
+                The gradient
+            </a>
+            
+    
+
+            
+
+        
+            <li class="toc-entry-{depth}">
+            <a class='toc-href dropdown-item' href='#stochastic-gradient-descent-algorithm' title='Stochastic gradient descent algorithm'>
+                Stochastic gradient descent algorithm
+            </a>
+            
+    
+
+            
+
+        
+            <li class="toc-entry-{depth}">
+            <a class='toc-href dropdown-item' href='#comparison-with-gradient-descent' title='Comparison with gradient descent'>
+                Comparison with gradient descent
+            </a>
+            
+    
+
+            
+
+        
+            <li class="toc-entry-{depth}">
+            <a class='toc-href dropdown-item' href='#is-it-really-faster-than-gradient-descent' title='Is it really faster than gradient descent?'>
+                Is it really faster than gradient descent?
+            </a>
+            
+    
+
+            
+
+        
+            <li class="toc-entry-{depth}">
+            <a class='toc-href dropdown-item' href='#why-it-works' title='Why it works'>
+                Why it works
+            </a>
+            
+    
     <ul>
-<li class="toc-entry-2">
-    <a class='toc-href dropdown-item' href='#comparison-with-sgd' title='Comparison with SGD'>Comparison with SGD</a>
-    </li>
-<li class="toc-entry-2">
-    <a class='toc-href dropdown-item' href='#the-mini-batch-algorithm' title='The mini-batch algorithm'>The mini-batch algorithm</a>
-    </li>
+        
+            <li class="toc-entry-{depth}">
+            <a class='toc-href dropdown-item' href='#computational-cost' title='Computational cost'>
+                Computational cost
+            </a>
+            
+    
+
+            
+
+        
+            <li class="toc-entry-{depth}">
+            <a class='toc-href dropdown-item' href='#correctness' title='Correctness'>
+                Correctness
+            </a>
+            
+    
+
+            
+
+        
     </ul>
-</li>
-</ul><div>
+    
+
+            
+            <div class="dropdown-divider"></div>
+            
+
+        
+            <li class="toc-entry-{depth}">
+            <a class='toc-href dropdown-item' href='#mini-batch-sgd' title='Mini-batch SGD'>
+                Mini-batch SGD
+            </a>
+            
+    
+    <ul>
+        
+            <li class="toc-entry-{depth}">
+            <a class='toc-href dropdown-item' href='#comparison-with-sgd' title='Comparison with SGD'>
+                Comparison with SGD
+            </a>
+            
+    
+
+            
+
+        
+            <li class="toc-entry-{depth}">
+            <a class='toc-href dropdown-item' href='#the-mini-batch-algorithm' title='The mini-batch algorithm'>
+                The mini-batch algorithm
+            </a>
+            
+    
+
+            
+
+        
+    </ul>
+    
+
+            
+
+        
+    </ul>
+    
+
+        </div>
     </div>
 </li>
-
+        
+    
 
             </ul>
         </div>
@@ -151,7 +236,7 @@
     <div class="row mt-5">
       <div class="col-lg-8 mx-auto"> 
         <h1 class="display-5">What is stochastic gradient descent (SGD)? </h1>
-        <div class="text-right">16 Oct 2018</div>
+        <div class="text-right">Oct 16, 2018</div>
       </div>
     </div>
     <div class="row mt-5">
@@ -472,15 +557,15 @@
 </p>
 <div class="typography">
 
-<p>Stochastic gradient descent is an algorithm that tries to find the minimum of a function expressed as a sum of component functions. It does so by choosing a component function at random then following its <a class="def" href="derivatives.html">gradient</a>.</p>
+<p>Stochastic gradient descent is an algorithm that tries to find the minimum of a function expressed as a sum of component functions. It does so by choosing a component function at random then following its <a class="def" href="https://julienharbulot.com/derivatives.html">gradient</a>.</p>
 <h2 id="sum-functions">Sum functions</h2>
 <p>Suppose <script type="math/tex">f</script> is expressed as the mean of <script type="math/tex">N</script> component functions <script type="math/tex">f_n</script>:</p>
 <script type="math/tex; mode=display">f(x) = \frac{1}{N}\sum_{i = 1}^{N} f_n(x)</script>
 <h2 id="the-gradient">The gradient</h2>
-<p>The <a class="def" href="derivatives.html">gradient</a> <script type="math/tex">\nabla f(x)</script> of <script type="math/tex">f</script> at <script type="math/tex">x</script> is a vector directed along the steepest ascent at <script type="math/tex">x</script>.</p>
-<p style="max-width:350px;"><img alt="Gradient" src="images/stochastic-gradient-descent/gradient-vector.png"/></p>
-<p>We can try to find the minimum of <script type="math/tex">f</script> by taking iterative steps in the direction of <script type="math/tex">-\nabla f</script>. This is what the <a class="def" href="gradient-descent.html">gradient descent</a> algorithm do.</p>
-<p>Sometimes, computing the <a class="def" href="derivatives.html">gradient</a> of <script type="math/tex">f</script> is too computationally expensive. Stochastic gradient descent reduces the computational cost by using the <a class="def" href="derivatives.html">gradient</a> <script type="math/tex">\nabla f_n</script> of one component function instead.</p>
+<p>The <a class="def" href="https://julienharbulot.com/derivatives.html">gradient</a> <script type="math/tex">\nabla f(x)</script> of <script type="math/tex">f</script> at <script type="math/tex">x</script> is a vector directed along the steepest ascent at <script type="math/tex">x</script>.</p>
+<p style="max-width:350px;"><img alt="Gradient" src="https://julienharbulot.com/images/stochastic-gradient-descent/gradient-vector.png"/></p>
+<p>We can try to find the minimum of <script type="math/tex">f</script> by taking iterative steps in the direction of <script type="math/tex">-\nabla f</script>. This is what the <a class="def" href="https://julienharbulot.com/gradient-descent.html">gradient descent</a> algorithm do.</p>
+<p>Sometimes, computing the <a class="def" href="https://julienharbulot.com/derivatives.html">gradient</a> of <script type="math/tex">f</script> is too computationally expensive. Stochastic gradient descent reduces the computational cost by using the <a class="def" href="https://julienharbulot.com/derivatives.html">gradient</a> <script type="math/tex">\nabla f_n</script> of one component function instead.</p>
 <h2 id="stochastic-gradient-descent-algorithm">Stochastic gradient descent algorithm</h2>
 <p>The stochastic gradient descent algorithm aims at finding the minimum of <script type="math/tex">f = (1/N)\sum_{n=1}^{N}f_n</script> by taking successive steps directed along <script type="math/tex">- \nabla f_n</script>, where at each step <script type="math/tex">n</script> is chosen at random.</p>
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">stochastic_gradient_descent</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">x_0</span><span class="p">,</span> <span class="n">max_steps</span><span class="p">,</span> <span class="n">step_size</span><span class="p">):</span>
@@ -497,7 +582,7 @@
     <span class="k">return</span> <span class="n">x</span>
 </code></pre></div></div>
 <h2 id="comparison-with-gradient-descent">Comparison with gradient descent</h2>
-<p>The update rule for <a class="def" href="gradient-descent.html">gradient descent</a> at step t is:</p>
+<p>The update rule for <a class="def" href="https://julienharbulot.com/gradient-descent.html">gradient descent</a> at step t is:</p>
 <script type="math/tex; mode=display">x_{t+1} = x_{t} - \gamma\nabla f(x_{t})</script>
 <p>While the update rule for stochastic gradient descent is:</p>
 <table>
@@ -510,13 +595,13 @@
 </tbody>
 </table>
 <h2 id="is-it-really-faster-than-gradient-descent">Is it really faster than gradient descent?</h2>
-<p>For <script type="math/tex">I</script> iterations, and <script type="math/tex">N</script> training examples, <a class="def" href="gradient-descent.html">gradient descent</a> computes <script type="math/tex">I*N</script> gradients while stochastic gradient descent computes only <script type="math/tex">I</script> gradients. When <script type="math/tex">N >> I</script>, this yields a good optimization.</p>
+<p>For <script type="math/tex">I</script> iterations, and <script type="math/tex">N</script> training examples, <a class="def" href="https://julienharbulot.com/gradient-descent.html">gradient descent</a> computes <script type="math/tex">I*N</script> gradients while stochastic gradient descent computes only <script type="math/tex">I</script> gradients. When <script type="math/tex">N >> I</script>, this yields a good optimization.</p>
 <p>In practice SGD is worth a shot when we have a very large number of training examples. In machine learning, it often happens that we have hundreds of thousands, or millions of training examples (i.e. <script type="math/tex">N > 10^6</script>) and that SGD still converges after only a few hundreds of iterations (i.e. <script type="math/tex">% <![CDATA[
 I < 1000 %]]></script>).</p>
 <h2 id="why-it-works">Why it works</h2>
 <p>This algorithm works because <script type="math/tex">\nabla f_n(x)</script> is an unbiased estimate of <script type="math/tex">\nabla f(x)</script> that is much simpler to compute.</p>
 <h3 id="computational-cost">Computational cost</h3>
-<p>The <a class="def" href="derivatives.html">gradient</a> of a sum is the sum of the gradients, so:</p>
+<p>The <a class="def" href="https://julienharbulot.com/derivatives.html">gradient</a> of a sum is the sum of the gradients, so:</p>
 <script type="math/tex; mode=display">\nabla f = \sum_{n = 1}^{N} \nabla f_n</script>
 <p>Which explains why <script type="math/tex">\nabla f_n</script> is computationaly cheaper than <script type="math/tex">\nabla f</script>.</p>
 <h3 id="correctness">Correctness</h3>
@@ -569,47 +654,34 @@ I < 1000 %]]></script>).</p>
     </article>
     </div><!-- row -->
     
-    <div class="row mt-1">
-      <article class="col-lg-8 mx-auto recommendations">
-        <p class='title'>Other articles you might like:</p>
-        <ul>
-          
-            <li class="en"><img class="flag-icon" src="//julienharbulot.com/images/languages/en.png"> <a href="//julienharbulot.com/gradient-descent.html">What is gradient descent (GD)?</a></li>
-          
-            <li class="en"><img class="flag-icon" src="//julienharbulot.com/images/languages/en.png"> <a href="//julienharbulot.com/classification-vs-regression.html">Why there is more to classification than dicrete regression</a></li>
-          
-            <li class="en"><img class="flag-icon" src="//julienharbulot.com/images/languages/en.png"> <a href="//julienharbulot.com/p-value.html">Understanding p-values</a></li>
-          
-            <li class="en"><img class="flag-icon" src="//julienharbulot.com/images/languages/en.png"> <a href="//julienharbulot.com/ols-diagnostics.html">How to assess an OLS regression?</a></li>
-          
-            <li class="en"><img class="flag-icon" src="//julienharbulot.com/images/languages/en.png"> <a href="//julienharbulot.com/bayesian-inference-primer.html">Why bayesian inference is more powerful than logic</a></li>
-          
-        </ul>
-      </article>
-    </div>
+
     
+        
+            <div class="row mb=5 mt-5">
+  <article class="col-lg-8 mx-auto">
+    <div id="hyvor-talk-view"></div>
+    <script type="text/javascript">
+        var HYVOR_TALK_WEBSITE = 'hyvor_id';
+        var HYVOR_TALK_CONFIG = {
+            url: 'https://julienharbulot.com/stochastic-gradient-descent.html',
+            id: 'stochastic-gradient-descent.html'
+        };
+    </script>
+  </article>
+</div><!-- row -->
+<script async type="text/javascript" src="//talk.hyvor.com/web-api/embed"></script>
+        
     
-    <div class="row mb=5 mt-5">
-      <article class="col-lg-8 mx-auto">
-        <div id="hyvor-talk-view"></div>
-        <script type="text/javascript">
-            var HYVOR_TALK_WEBSITE = '625';
-            var HYVOR_TALK_CONFIG = {
-                url: 'stochastic-gradient-descent.html',
-                id: 'stochastic-gradient-descent.html'
-            };
-        </script>
-      </article>
-    </div><!-- row -->
-    
+
     <footer class="row">
         <div class="col-lg-8 mx-auto text-center">
           <p><small>
           
-            Last updated: 01/14/21 <br/>
+            Last updated: Oct 16, 2018 <br/>
           
           
-          Copyright &copy; 2021 Julien Harbulot
+            Copyright (c) Julien Harbulot
+          
           </small></p>
         </div>
     </footer>
@@ -633,31 +705,28 @@ I < 1000 %]]></script>).</p>
   </script>
 
 
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-    <script>
-        prev_onload_a = window.onload;
-        window.onload = function() {
-            if (prev_onload_a) {
-                prev_onload_a();
-            }
-            var navlinks = document.getElementsByClassName("nav-link");
-            var i;
-            for (i = 0; i < navlinks.length; i++) {
-                const target = new URL(navlinks[i].href)
-                if (location.pathname == target.pathname) {
-                    navlinks[i].classList.add('active')
+    
+        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+        <!-- navbar script -->
+        <script>
+            prev_onload_a = window.onload;
+            window.onload = function() {
+                if (prev_onload_a) {
+                    prev_onload_a();
+                }
+                var navlinks = document.getElementsByClassName("nav-link");
+                var i;
+                for (i = 0; i < navlinks.length; i++) {
+                    const target = new URL(navlinks[i].href)
+                    if (location.pathname == target.pathname) {
+                        navlinks[i].classList.add('active')
+                    }
                 }
             }
-        }
-    </script>    
-
+        </script>
     
-
-<script async type="text/javascript" src="//talk.hyvor.com/web-api/embed"></script>
-
-
     </body>
 </html>

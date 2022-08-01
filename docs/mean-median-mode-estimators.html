@@ -1,65 +1,73 @@
 <!doctype html>
-<html lang="fr">
+<html lang="Language.fr">
     <head>
     
-
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Moyenne, médiane, mode: une vue unifiée</title>
 
     
-    <!-- Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-166292985-1"></script>
-    <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
+        
+            <!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=google_analytics_id"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
 
-    gtag('config', 'UA-166292985-1');
-    </script>
+gtag('config', 'google_analytics_id');
+</script>
+        
     
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" 
-          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
-          rel="stylesheet" crossorigin="anonymous">
+    
+    
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" crossorigin="anonymous">
     
     <link rel="stylesheet" href="/theme/pygment-github.css">
     <link rel="stylesheet" href="/theme/article.css"> 
 
-    <title>Moyenne, médiane, mode: une vue unifiée</title>
+
     
-    <!-- Favicon -->
-    <link rel="apple-touch-icon" sizes="120x120" href="/images/favicon/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon/favicon-16x16.png">
-    <link rel="manifest" href="/images/favicon/site.webmanifest">
-    <link rel="mask-icon" href="/images/favicon/safari-pinned-tab.svg" color="#5bbad5">
-    <link rel="shortcut icon" href="favicon.ico">
-    <meta name="msapplication-TileColor" content="#da532c">
-    <meta name="msapplication-config" content="/images/favicon/browserconfig.xml">
-    <meta name="theme-color" content="#ffffff">
+        <!-- Favicon -->
+
+<link rel="apple-touch-icon" sizes="120x120" href="/images/favicon/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon/favicon-16x16.png">
+<link rel="manifest" href="/images/favicon/site.webmanifest">
+<link rel="mask-icon" href="/images/favicon/safari-pinned-tab.svg" color="#5bbad5">
+<link rel="shortcut icon" href="favicon.ico">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="msapplication-config" content="/images/favicon/browserconfig.xml">
+<meta name="theme-color" content="#ffffff">
     
-<!-- Mathjax -->
+
+    
+        <!-- Mathjax -->
 <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS_SVG">
   MathJax.Hub.Config({
     tex2jax: {
-    	inlineMath: [ ['$','$'] ],
-    	processEscapes: true
+        inlineMath: [ ['$','$'] ],
+        processEscapes: true
     },
-	"HTML-CSS": {
-		fonts: ["TeX"] 
-	}
+    "HTML-CSS": {
+        fonts: ["TeX"]
+    }
   });
 </script>
-
+    
+    
     </head>
 
     <body>
     
     <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: rgb(78, 76, 103);">
-        <a class="navbar-brand" href="//julienharbulot.com/index.html"><img src="//julienharbulot.com/images/logo.svg" width="30" alt=""></a>
+        <a class="navbar-brand" href="https://julienharbulot.com/">
+            <img src="https://julienharbulot.com/images/logo.svg" width="30" alt="">
+        </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -67,24 +75,16 @@
             <ul class="navbar-nav mr-auto">
             
             <li class="nav-item">
-                    <a class="nav-link" href="//julienharbulot.com/technical-blog.html">Technical blog</a>
+                    <a class="nav-link" href="index.html?cats=technical-blog">Technical blog</a>
             </li>
             
             <li class="nav-item">
-                    <a class="nav-link" href="//julienharbulot.com/maths.html">Maths</a>
+                    <a class="nav-link" href="index.html?cats=maths">Maths</a>
             </li>
             
-            <li class="nav-item">
-                    <a class="nav-link" href="//julienharbulot.com/research.html">Research</a>
-            </li>
             
-            <li class="nav-item">
-                    <a class="nav-link" href="//julienharbulot.com/projects.html">Projects</a>
-            </li>
-            
-            <!--<li class="nav-item">
-                <a class="nav-link" href="//julienharbulot.com/about-me.html">About me</a>
-            </li>-->
+    
+        
             
 
 <li class="nav-item dropdown">
@@ -92,26 +92,59 @@
         Table of content
     </a>
     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-        <div class="toc"><ul>
-<li class="toc-entry-1">
-<a class='toc-href dropdown-item' href='#exemple-dintroduction' title='Exemple d’introduction'>Exemple d’introduction</a>
-</li>
-<div class="dropdown-divider"></div>
-<li class="toc-entry-1">
-<a class='toc-href dropdown-item' href='#les-fonctions-de-cout' title='Les fonctions de coût'>Les fonctions de coût</a>
-</li>
-<div class="dropdown-divider"></div>
-<li class="toc-entry-1">
-<a class='toc-href dropdown-item' href='#une-interpretation-physique' title='Une interprétation physique'>Une interprétation physique</a>
-</li>
-<div class="dropdown-divider"></div>
-<li class="toc-entry-1">
-<a class='toc-href dropdown-item' href='#une-interpretation-geometrique' title='Une interprétation géométrique'>Une interprétation géométrique</a>
-</li>
-</ul><div>
+        <div class="toc">
+            
+    
+    <ul>
+        
+            <li class="toc-entry-{depth}">
+            <a class='toc-href dropdown-item' href='#exemple-dintroduction' title='Exemple d’introduction'>
+                Exemple d’introduction
+            </a>
+            
+    
+
+            
+
+        
+            <li class="toc-entry-{depth}">
+            <a class='toc-href dropdown-item' href='#les-fonctions-de-cout' title='Les fonctions de coût'>
+                Les fonctions de coût
+            </a>
+            
+    
+
+            
+
+        
+            <li class="toc-entry-{depth}">
+            <a class='toc-href dropdown-item' href='#une-interpretation-physique' title='Une interprétation physique'>
+                Une interprétation physique
+            </a>
+            
+    
+
+            
+
+        
+            <li class="toc-entry-{depth}">
+            <a class='toc-href dropdown-item' href='#une-interpretation-geometrique' title='Une interprétation géométrique'>
+                Une interprétation géométrique
+            </a>
+            
+    
+
+            
+
+        
+    </ul>
+    
+
+        </div>
     </div>
 </li>
-
+        
+    
 
             </ul>
         </div>
@@ -123,7 +156,7 @@
     <div class="row mt-5">
       <div class="col-lg-8 mx-auto"> 
         <h1 class="display-5">Moyenne, médiane, mode: une vue unifiée </h1>
-        <div class="text-right">12 Jul 2020</div>
+        <div class="text-right">Jul 12, 2020</div>
       </div>
     </div>
     <div class="row mt-5">
@@ -153,15 +186,15 @@
 </p>
 <p>Vous voyez la similarité entre ces trois fonctions ? À chaque fois c'est simplement l'exposant qui change ($2 \to 1 \to 0$). On les appelle des normes.</p>
 <p>Changer d'exposant revient à pénaliser les grandes erreurs différemment des petites erreurs. Par exemple, un terme quadratique $\lvert p_i - \mathfrak{e} \rvert^2$ pénalise beaucoup plus les grandes erreurs qu'un terme linéaire, et beaucoup moins les petites erreurs. Ce phénomène est illustré sur le graphe ci-dessous. On voit que pour les erreurs plus petites que $1$, la fonction orange ($x^2$) induit un coût moins grand que la fonction bleue ($x$). La tendance s'inverse à mesure que l'erreur grandit.</p>
-<p><img alt="Normes L2 et L1 illustrées" src="images/mean-median-mode/x2-vs-x1.svg" /></p>
+<p><img alt="Normes L2 et L1 illustrées" src="https://julienharbulot.com/images/mean-median-mode/x2-vs-x1.svg" /></p>
 <p>En étudiant ce graphe, on comprend pourquoi la moyenne est moins robuste que la médiane : les termes quadratiques induisent des perturbations plus grandes dans la fonction de coût que les termes linéaires. </p>
 <p>Par exemple, imaginons que l'on dispose des revenus annuels de 20 foyers dans un même quartier (en milliers d’euros) : 78.8k, 74.8k, 75.1k, 82.2k, 76.9k, 78.2k, 75.7k, 65.8k, 68.6k, 74.6k, 69.7k, 80.2k, 74.3k, 78.6k, 70.3k, 77.6k, 71.6k, 74.0k, 77.8k, 76.5k. La moyenne est de 75k. La médiane est aussi de 75k. Un nouvel arrivant arrive dans le quartier. Il gagne 500 mille euros par an. La médiane ne change pas et reste à 75k alors que la moyenne passe à 95k ! Le terme quadratique appliqué à 500k introduit un coût de : <script type="math/tex; mode=display">(500 – 75) ^ 2 = 180 625</script> alors que le terme linéaire introduit seulement un coût de : <script type="math/tex; mode=display">(500 – 75)^1 = 425</script>
 </p>
 <h2 id="une-interpretation-physique">Une interprétation physique</h2>
 <p>On peut visualiser le fait de minimiser la fonction de coût comme suit : les données sont réparties sur un graphe, l’axe des abscisses (en bas) représente le numéro du client et l’axes des ordonnées (à gauche) représente son poids. Sur l’image ci-dessous, je représente le poids de chaque client par un point bleu. Chercher un estimateur revient à chercher une droite horizontale (représentée en orange sur les images) qui peut bouger vers le haut ou vers le bas sans pivoter. La droite ne peut pas pivoter parce qu’elle indique une unique valeur sur l’axe des ordonnées : la valeur de notre estimateur. </p>
-<p><img alt="Illustration d'un estimateur" src="images/mean-median-mode/hautbas.svg" /></p>
+<p><img alt="Illustration d'un estimateur" src="https://julienharbulot.com/images/mean-median-mode/hautbas.svg" /></p>
 <p>En minimisant le coût, c’est comme si chaque point bleu essayait d’attirer à lui la droite orange. Chaque nouveau point ajoute une force supplémentaire qui fait bouger la droite vers lui. À la situation d’équilibre, quand la droite est stabilisée, on peut lire la valeur de notre estimateur (environ 75kg sur cet exemple)</p>
-<p><img alt="Illustration d'un estimateur" src="images/mean-median-mode/estimateur.svg" /></p>
+<p><img alt="Illustration d'un estimateur" src="https://julienharbulot.com/images/mean-median-mode/estimateur.svg" /></p>
 <p>Lorsque l'énergie potentielle induite par chaque point est proportionnelle au carré de la distance : <script type="math/tex; mode=display">\lvert p_i - \mathfrak{e} \rvert^2</script> alors la droite se stabilise à la moyenne. L’interprétation physique consiste à attacher un ressort entre chaque point et la tige.</p>
 <p>Lorsque l'énergie potentielle induite par chaque point est proportionnelle à la distance : <script type="math/tex; mode=display">\lvert p_i - \mathfrak{e} \rvert^1</script> alors la droite se stabilise à la médiane. On peut se représenter physiquement cette force comme suit :</p>
 <ul>
@@ -175,52 +208,39 @@
 <p>On peut aussi voir les fonctions de coût comme des normes dans un espace $n$-dimensionnel. Avec cette interprétation, on cherche à approximer un point  <script type="math/tex; mode=display">\vec{p} = (p_1, …, p_n)</script> par un point $\vec{\mathfrak{e}}$ dans un sous-espace unidimensionnel. 
 En utilisant le point qui minimise la norme $\mathcal{L}_2$, on trouve la solution des moindres carrés et donc que $\vec{\mathfrak{e}}$ est la projection orthogonale de $\vec{p}$ sur le sous-espace engendré par le vecteur $(1, …, 1)$.</p>
 <p>La norme  $\mathcal{L}_2$ est bien connue puisqu’elle mesure la distance entre deux points. La norme $\mathcal{L}_1$ mesure la distance entre deux points si l'on se déplace seulement de façons verticale ou horizontale. Voici une illustration :</p>
-<p><img alt="Normes L2 et L1 illustrées" src="images/mean-median-mode/l2-vs-l1.png" /></p>
+<p><img alt="Normes L2 et L1 illustrées" src="https://julienharbulot.com/images/mean-median-mode/l2-vs-l1.png" /></p>
 <p>La norme $\mathcal{L}_0$ quant à elle n'est pas une vraie norme au sens mathématique. Elle "mesure" toujours la même distance: $0$ si les points sont égaux, $1$ sinon.</p>
     </article>
     </div><!-- row -->
     
-    <div class="row mt-1">
-      <article class="col-lg-8 mx-auto recommendations">
-        <p class='title'>Autres articles sur ce site:</p>
-        <ul>
-          
-            <li class="en"><img class="flag-icon" src="//julienharbulot.com/images/languages/en.png"> <a href="//julienharbulot.com/linear-regression-explained.html">Linear regressions in simple terms</a></li>
-          
-            <li class="en"><img class="flag-icon" src="//julienharbulot.com/images/languages/en.png"> <a href="//julienharbulot.com/moore-penrose-inverse.html">The Moore-Penrose (pseudo-inverse) matrix</a></li>
-          
-            <li class="en"><img class="flag-icon" src="//julienharbulot.com/images/languages/en.png"> <a href="//julienharbulot.com/orthogonal-projection.html">The geometry of the normal equations</a></li>
-          
-            <li class="en"><img class="flag-icon" src="//julienharbulot.com/images/languages/en.png"> <a href="//julienharbulot.com/what-is-statistic.html">What is a statistic and why do we care?</a></li>
-          
-            <li class="en"><img class="flag-icon" src="//julienharbulot.com/images/languages/en.png"> <a href="//julienharbulot.com/derivatives.html">Derivative, Gradient and Jacobian unified</a></li>
-          
-        </ul>
-      </article>
-    </div>
+
     
+        
+            <div class="row mb=5 mt-5">
+  <article class="col-lg-8 mx-auto">
+    <div id="hyvor-talk-view"></div>
+    <script type="text/javascript">
+        var HYVOR_TALK_WEBSITE = 'hyvor_id';
+        var HYVOR_TALK_CONFIG = {
+            url: 'https://julienharbulot.com/mean-median-mode-estimators.html',
+            id: 'mean-median-mode-estimators.html'
+        };
+    </script>
+  </article>
+</div><!-- row -->
+<script async type="text/javascript" src="//talk.hyvor.com/web-api/embed"></script>
+        
     
-    <div class="row mb=5 mt-5">
-      <article class="col-lg-8 mx-auto">
-        <div id="hyvor-talk-view"></div>
-        <script type="text/javascript">
-            var HYVOR_TALK_WEBSITE = '625';
-            var HYVOR_TALK_CONFIG = {
-                url: 'mean-median-mode-estimators.html',
-                id: 'mean-median-mode-estimators.html'
-            };
-        </script>
-      </article>
-    </div><!-- row -->
-    
+
     <footer class="row">
         <div class="col-lg-8 mx-auto text-center">
           <p><small>
           
-            Last updated: 01/30/21 <br/>
+            Last updated: Jul 12, 2020 <br/>
           
           
-          Copyright &copy; 2021 Julien Harbulot
+            Copyright (c) Julien Harbulot
+          
           </small></p>
         </div>
     </footer>
@@ -244,31 +264,28 @@ En utilisant le point qui minimise la norme $\mathcal{L}_2$, on trouve la soluti
   </script>
 
 
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-    <script>
-        prev_onload_a = window.onload;
-        window.onload = function() {
-            if (prev_onload_a) {
-                prev_onload_a();
-            }
-            var navlinks = document.getElementsByClassName("nav-link");
-            var i;
-            for (i = 0; i < navlinks.length; i++) {
-                const target = new URL(navlinks[i].href)
-                if (location.pathname == target.pathname) {
-                    navlinks[i].classList.add('active')
+    
+        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+        <!-- navbar script -->
+        <script>
+            prev_onload_a = window.onload;
+            window.onload = function() {
+                if (prev_onload_a) {
+                    prev_onload_a();
+                }
+                var navlinks = document.getElementsByClassName("nav-link");
+                var i;
+                for (i = 0; i < navlinks.length; i++) {
+                    const target = new URL(navlinks[i].href)
+                    if (location.pathname == target.pathname) {
+                        navlinks[i].classList.add('active')
+                    }
                 }
             }
-        }
-    </script>    
-
+        </script>
     
-
-<script async type="text/javascript" src="//talk.hyvor.com/web-api/embed"></script>
-
-
     </body>
 </html>

@@ -1,1 +1,1 @@
-{"technical-blog": {"slug": "technical-blog", "name": "technical blog"}, "maths": {"slug": "maths", "name": "maths"}, "research": {"slug": "research", "name": "research"}, "projects": {"slug": "projects", "name": "projects"}}
+{"technical-blog": {"name": "Technical blog", "slug": "technical-blog"}, "maths": {"name": "Maths", "slug": "maths"}}

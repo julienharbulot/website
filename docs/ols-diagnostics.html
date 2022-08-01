@@ -1,65 +1,73 @@
 <!doctype html>
-<html lang="en">
+<html lang="Language.en">
     <head>
     
-
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>How to assess an OLS regression?</title>
 
     
-    <!-- Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-166292985-1"></script>
-    <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
+        
+            <!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=google_analytics_id"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
 
-    gtag('config', 'UA-166292985-1');
-    </script>
+gtag('config', 'google_analytics_id');
+</script>
+        
     
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" 
-          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
-          rel="stylesheet" crossorigin="anonymous">
+    
+    
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" crossorigin="anonymous">
     
     <link rel="stylesheet" href="/theme/pygment-github.css">
     <link rel="stylesheet" href="/theme/article.css"> 
 
-    <title>How to assess an OLS regression?</title>
+
     
-    <!-- Favicon -->
-    <link rel="apple-touch-icon" sizes="120x120" href="/images/favicon/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon/favicon-16x16.png">
-    <link rel="manifest" href="/images/favicon/site.webmanifest">
-    <link rel="mask-icon" href="/images/favicon/safari-pinned-tab.svg" color="#5bbad5">
-    <link rel="shortcut icon" href="favicon.ico">
-    <meta name="msapplication-TileColor" content="#da532c">
-    <meta name="msapplication-config" content="/images/favicon/browserconfig.xml">
-    <meta name="theme-color" content="#ffffff">
+        <!-- Favicon -->
+
+<link rel="apple-touch-icon" sizes="120x120" href="/images/favicon/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon/favicon-16x16.png">
+<link rel="manifest" href="/images/favicon/site.webmanifest">
+<link rel="mask-icon" href="/images/favicon/safari-pinned-tab.svg" color="#5bbad5">
+<link rel="shortcut icon" href="favicon.ico">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="msapplication-config" content="/images/favicon/browserconfig.xml">
+<meta name="theme-color" content="#ffffff">
     
-<!-- Mathjax -->
+
+    
+        <!-- Mathjax -->
 <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS_SVG">
   MathJax.Hub.Config({
     tex2jax: {
-    	inlineMath: [ ['$','$'] ],
-    	processEscapes: true
+        inlineMath: [ ['$','$'] ],
+        processEscapes: true
     },
-	"HTML-CSS": {
-		fonts: ["TeX"] 
-	}
+    "HTML-CSS": {
+        fonts: ["TeX"]
+    }
   });
 </script>
-
+    
+    
     </head>
 
     <body>
     
     <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: rgb(78, 76, 103);">
-        <a class="navbar-brand" href="//julienharbulot.com/index.html"><img src="//julienharbulot.com/images/logo.svg" width="30" alt=""></a>
+        <a class="navbar-brand" href="https://julienharbulot.com/">
+            <img src="https://julienharbulot.com/images/logo.svg" width="30" alt="">
+        </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -67,24 +75,16 @@
             <ul class="navbar-nav mr-auto">
             
             <li class="nav-item">
-                    <a class="nav-link" href="//julienharbulot.com/technical-blog.html">Technical blog</a>
+                    <a class="nav-link" href="index.html?cats=technical-blog">Technical blog</a>
             </li>
             
             <li class="nav-item">
-                    <a class="nav-link" href="//julienharbulot.com/maths.html">Maths</a>
+                    <a class="nav-link" href="index.html?cats=maths">Maths</a>
             </li>
             
-            <li class="nav-item">
-                    <a class="nav-link" href="//julienharbulot.com/research.html">Research</a>
-            </li>
             
-            <li class="nav-item">
-                    <a class="nav-link" href="//julienharbulot.com/projects.html">Projects</a>
-            </li>
-            
-            <!--<li class="nav-item">
-                <a class="nav-link" href="//julienharbulot.com/about-me.html">About me</a>
-            </li>-->
+    
+        
             
 
 <li class="nav-item dropdown">
@@ -92,32 +92,83 @@
         Table of content
     </a>
     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-        <div class="toc"><ul>
-<li class="toc-entry-1">
-<a class='toc-href dropdown-item' href='#machine-learning' title='Machine-learning'>Machine-learning</a>
-</li>
-<div class="dropdown-divider"></div>
-<li class="toc-entry-1">
-<a class='toc-href dropdown-item' href='#statistics' title='Statistics'>Statistics</a>
+        <div class="toc">
+            
+    
     <ul>
-<li class="toc-entry-2">
-    <a class='toc-href dropdown-item' href='#checking-for-linearity' title='Checking for linearity'>Checking for linearity</a>
-    </li>
-<li class="toc-entry-2">
-    <a class='toc-href dropdown-item' href='#checking-for-homoskedasticity' title='Checking for homoskedasticity'>Checking for homoskedasticity</a>
-    </li>
-<li class="toc-entry-2">
-    <a class='toc-href dropdown-item' href='#checking-for-normality' title='Checking for normality'>Checking for normality</a>
-    </li>
-<li class="toc-entry-2">
-    <a class='toc-href dropdown-item' href='#checking-for-influential-observations' title='Checking for influential observations'>Checking for influential observations</a>
-    </li>
+        
+            <li class="toc-entry-{depth}">
+            <a class='toc-href dropdown-item' href='#machine-learning' title='Machine-learning'>
+                Machine-learning
+            </a>
+            
+    
+
+            
+
+        
+            <li class="toc-entry-{depth}">
+            <a class='toc-href dropdown-item' href='#statistics' title='Statistics'>
+                Statistics
+            </a>
+            
+    
+    <ul>
+        
+            <li class="toc-entry-{depth}">
+            <a class='toc-href dropdown-item' href='#checking-for-linearity' title='Checking for linearity'>
+                Checking for linearity
+            </a>
+            
+    
+
+            
+
+        
+            <li class="toc-entry-{depth}">
+            <a class='toc-href dropdown-item' href='#checking-for-homoskedasticity' title='Checking for homoskedasticity'>
+                Checking for homoskedasticity
+            </a>
+            
+    
+
+            
+
+        
+            <li class="toc-entry-{depth}">
+            <a class='toc-href dropdown-item' href='#checking-for-normality' title='Checking for normality'>
+                Checking for normality
+            </a>
+            
+    
+
+            
+
+        
+            <li class="toc-entry-{depth}">
+            <a class='toc-href dropdown-item' href='#checking-for-influential-observations' title='Checking for influential observations'>
+                Checking for influential observations
+            </a>
+            
+    
+
+            
+
+        
     </ul>
-</li>
-</ul><div>
+    
+
+            
+
+        
+    </ul>
+    
+
+        </div>
     </div>
 </li>
-
+        
+    
 
             </ul>
         </div>
@@ -129,7 +180,7 @@
     <div class="row mt-5">
       <div class="col-lg-8 mx-auto"> 
         <h1 class="display-5">How to assess an OLS regression? </h1>
-        <div class="text-right">04 Nov 2018</div>
+        <div class="text-right">Nov 04, 2018</div>
       </div>
     </div>
     <div class="row mt-5">
@@ -450,14 +501,14 @@
 </p>
 <div class="typography">
 
-<p>We’ve just fitted OLS to our trainset. How to assess whether it was a good model to use? We will answer this question from the point of view of machine-learning and <a class="def" href="what-is-statistic.html">statistics</a>.</p>
-<p>Recall from our article about the difference between <a class="def" href="what-is-statistic.html">statistics</a> and machine-learning that 
+<p>We’ve just fitted OLS to our trainset. How to assess whether it was a good model to use? We will answer this question from the point of view of machine-learning and <a class="def" href="https://julienharbulot.com/what-is-statistic.html">statistics</a>.</p>
+<p>Recall from our article about the difference between <a class="def" href="https://julienharbulot.com/what-is-statistic.html">statistics</a> and machine-learning that
 those fields asses their models differently. Machine-learning relies on the large size
-of modern datasets while <a class="def" href="what-is-statistic.html">statistics</a> relies on theory.</p>
+of modern datasets while <a class="def" href="https://julienharbulot.com/what-is-statistic.html">statistics</a> relies on theory.</p>
 <p>So, how to we assess an OLS regression?</p>
 <h2 id="machine-learning">Machine-learning</h2>
 <p>In machine learning, we measure a model’s performance using the loss function. 
-The fit is assessed by the <a class="def" href="train-error-test-error.html">training error</a>:</p>
+The fit is assessed by the <a class="def" href="https://julienharbulot.com/train-error-test-error.html">training error</a>:</p>
 <script type="math/tex; mode=display">\lmse(\trainset, \vw_{\trainset})</script>
 <p>While the generalization error is assessed by computing the loss on the testset <script type="math/tex">\testset</script>:</p>
 <script type="math/tex; mode=display">% <![CDATA[
@@ -468,99 +519,86 @@ The fit is assessed by the <a class="def" href="train-error-test-error.html">tra
 <p>To be meaningful, these measures require enough data.</p>
 <p>As for preprocessing, rely on automated methods such as forward-selection or backward-elimination. But as we will see in the next section, the statistician’s approach provides usefull graohs that can guide and speed up this process.</p>
 <h2 id="statistics">Statistics</h2>
-<p>In <a class="def" href="what-is-statistic.html">statistics</a>, we rely on statistical theory to produce ways to check if our model is
+<p>In <a class="def" href="https://julienharbulot.com/what-is-statistic.html">statistics</a>, we rely on statistical theory to produce ways to check if our model is
 adapted to the data at hand.</p>
 <p>As discussed in our article about the theory underlying an OLS regression, the regression is asymptotically optimal when the output vector <script type="math/tex">\vy</script> is normally distributed and the center of its distribution is a linear function of the input vectors:</p>
 <script type="math/tex; mode=display">\expectation[\vy \mid \mx] = \mx\vw</script>
-<p>Here <script type="math/tex">\vy</script> is the output vector and <script type="math/tex">\mx</script> the <a class="def" href="design-matrix.html">design matrix</a>. <script type="math/tex">\vw</script> is a vector of parameters.</p>
+<p>Here <script type="math/tex">\vy</script> is the output vector and <script type="math/tex">\mx</script> the <a class="def" href="https://julienharbulot.com/design-matrix.html">design matrix</a>. <script type="math/tex">\vw</script> is a vector of parameters.</p>
 <p>We can rewrite this hypothesis using an error vector <script type="math/tex">\epsilon</script> whose components are normally distributed: <script type="math/tex">\epsilon_\si \iid \gaussian(0, \sigma^2)</script>:</p>
 <script type="math/tex; mode=display">\vy = \mx\vw + \epsilon</script>
 <p>The strategy is to find implications of these assumptions that we can check graphically.</p>
 <h3 id="checking-for-linearity">Checking for linearity</h3>
-<p>Under the assumption of linearity, the <a class="def" href="residuals.html">residual</a> vector should be in the kernel of the <a class="def" href="design-matrix.html">design matrix</a> <script type="math/tex">\mx</script>. Hence the two following plots:</p>
+<p>Under the assumption of linearity, the <a class="def" href="https://julienharbulot.com/residuals.html">residual</a> vector should be in the kernel of the <a class="def" href="https://julienharbulot.com/design-matrix.html">design matrix</a> <script type="math/tex">\mx</script>. Hence the two following plots:</p>
 <ul>
-<li>Plot standardised <a class="def" href="residuals.html">residual</a> <script type="math/tex">\vr</script> against each <a class="def" href="feature.html">feature</a> (column of <script type="math/tex">\mx</script>). No systematic pattern should appear in these plots. A systematic pattern would suggest that we need to add a transformation of the current <a class="def" href="feature.html">feature</a> as an additional column.</li>
+<li>Plot standardised <a class="def" href="https://julienharbulot.com/residuals.html">residual</a> <script type="math/tex">\vr</script> against each <a class="def" href="https://julienharbulot.com/feature.html">feature</a> (column of <script type="math/tex">\mx</script>). No systematic pattern should appear in these plots. A systematic pattern would suggest that we need to add a transformation of the current <a class="def" href="https://julienharbulot.com/feature.html">feature</a> as an additional column.</li>
 </ul>
 <p>In the plot below, no systematic pattern appears:</p>
-<p><img alt="Linearity check when ok" src="images/ols-diagnostics/diagnostics-lin-ok.png"/></p>
+<p><img alt="Linearity check when ok" src="https://julienharbulot.com/images/ols-diagnostics/diagnostics-lin-ok.png"/></p>
 <p>While on the plot below, we recognize a sinus pattern:</p>
-<p><img alt="Linearity check when ok" src="images/ols-diagnostics/diagnostics-lin-nok-1.png"/></p>
+<p><img alt="Linearity check when ok" src="https://julienharbulot.com/images/ols-diagnostics/diagnostics-lin-nok-1.png"/></p>
 <ul>
-<li>Plot standardised <a class="def" href="residuals.html">residual</a> <script type="math/tex">\vr</script> against each <a class="def" href="feature.html">feature</a> that we left out of the model. No systematic pattern should appear in these plots. A Systematic pattern suggests that we have left out a <a class="def" href="feature.html">feature</a> that should have been included.</li>
+<li>Plot standardised <a class="def" href="https://julienharbulot.com/residuals.html">residual</a> <script type="math/tex">\vr</script> against each <a class="def" href="https://julienharbulot.com/feature.html">feature</a> that we left out of the model. No systematic pattern should appear in these plots. A Systematic pattern suggests that we have left out a <a class="def" href="https://julienharbulot.com/feature.html">feature</a> that should have been included.</li>
 </ul>
-<p>This is what the plot of a <a class="def" href="feature.html">feature</a> that should have been included looks like:</p>
-<p><img alt="Linearity check when ok" src="images/ols-diagnostics/diagnostics-lin-nok-2.png"/></p>
+<p>This is what the plot of a <a class="def" href="https://julienharbulot.com/feature.html">feature</a> that should have been included looks like:</p>
+<p><img alt="Linearity check when ok" src="https://julienharbulot.com/images/ols-diagnostics/diagnostics-lin-nok-2.png"/></p>
 <h3 id="checking-for-homoskedasticity">Checking for homoskedasticity</h3>
 <ol class="items-as-paragraphs">
-<li>Plot the standardised <a class="def" href="residuals.html">residuals</a> <script type="math/tex">\sr_\si</script> against the estimates <script type="math/tex">\hat{\sy}_\si</script>. A random scatter should appear, with approximately constant spread of the values of <script type="math/tex">\sr_\si</script> for the different values of <script type="math/tex">\hat{\sy}_\si</script>. “Trumpet” of “bulging” effects indicate that the noise components <script type="math/tex">\epsilon_\si</script> are not i.i.d. (they have different variance).</li>
+<li>Plot the standardised <a class="def" href="https://julienharbulot.com/residuals.html">residuals</a> <script type="math/tex">\sr_\si</script> against the estimates <script type="math/tex">\hat{\sy}_\si</script>. A random scatter should appear, with approximately constant spread of the values of <script type="math/tex">\sr_\si</script> for the different values of <script type="math/tex">\hat{\sy}_\si</script>. “Trumpet” of “bulging” effects indicate that the noise components <script type="math/tex">\epsilon_\si</script> are not i.i.d. (they have different variance).</li>
 </ol>
 <p>This is what such plot should look like:</p>
-<p><img alt="Homoskedasticity ok" src="images/ols-diagnostics/diagnostics-variance-1.png"/></p>
+<p><img alt="Homoskedasticity ok" src="https://julienharbulot.com/images/ols-diagnostics/diagnostics-variance-1.png"/></p>
 <p>On the plot below, the noise components have different variance. Model assumptions not validated.</p>
-<p><img alt="Heteroskedasticity" src="images/ols-diagnostics/diagnostics-variance-2.png"/></p>
+<p><img alt="Heteroskedasticity" src="https://julienharbulot.com/images/ols-diagnostics/diagnostics-variance-2.png"/></p>
 <h3 id="checking-for-normality">Checking for normality</h3>
-<p>We can compare the distribution of the standardised <a class="def" href="residuals.html">residual</a> agains a normal distribution. This can be done by comparing theoretical quantiles with empirical ones.</p>
+<p>We can compare the distribution of the standardised <a class="def" href="https://julienharbulot.com/residuals.html">residual</a> agains a normal distribution. This can be done by comparing theoretical quantiles with empirical ones.</p>
 <p>Such a plot is named a Q-Q Plot. We should see a diagonal line with <script type="math/tex">45</script>-degrees angle. If the line significantly deviates from the <script type="math/tex">45</script>-degrees line, there is evidence against the normality assumption. This easily reveals outliers, skewness and heaky tails.</p>
-<p>Note: if we plot the empirical quantiles of the unstandardised <a class="def" href="residuals.html">residuals</a> against those of a <script type="math/tex">\gaussian(0, 1)</script>, then the line should have slope <script type="math/tex">stdev(\se)</script> and intercept zero.</p>
+<p>Note: if we plot the empirical quantiles of the unstandardised <a class="def" href="https://julienharbulot.com/residuals.html">residuals</a> against those of a <script type="math/tex">\gaussian(0, 1)</script>, then the line should have slope <script type="math/tex">stdev(\se)</script> and intercept zero.</p>
 <p>The lines won’t be perfect for small sample size, so don’t overinterpret the plot.</p>
 <p>This is how a normal Q-Q plot looks like for a small sample <script type="math/tex">\sn = 100</script>:</p>
-<p><img alt="Good Q-Q Plot" src="images/ols-diagnostics/qq-plot-1.png"/></p>
+<p><img alt="Good Q-Q Plot" src="https://julienharbulot.com/images/ols-diagnostics/qq-plot-1.png"/></p>
 <p>And here is a Q-Q plot that invalidates the normality hypothesis:</p>
-<p><img alt="Bad Q-Q Plot" src="images/ols-diagnostics/qq-plot-2.png"/></p>
+<p><img alt="Bad Q-Q Plot" src="https://julienharbulot.com/images/ols-diagnostics/qq-plot-2.png"/></p>
 <h3 id="checking-for-influential-observations">Checking for influential observations</h3>
-<p>How to know if a line in the <a class="def" href="design-matrix.html">design matrix</a> has a strong influence on the fitted model? Remove the line and re-fit. Then compare with original model.</p>
-<p>Let <script type="math/tex">\vy_{-\si}</script> the output vector where row <script type="math/tex">\si</script> is removed and <script type="math/tex">\mx_{-\si}</script> the <a class="def" href="design-matrix.html">design matrix</a> where the <script type="math/tex">\si</script>-th row is removed. Note <script type="math/tex">\vw_{-\si}</script> the estimated parameter vector in this new setup.</p>
+<p>How to know if a line in the <a class="def" href="https://julienharbulot.com/design-matrix.html">design matrix</a> has a strong influence on the fitted model? Remove the line and re-fit. Then compare with original model.</p>
+<p>Let <script type="math/tex">\vy_{-\si}</script> the output vector where row <script type="math/tex">\si</script> is removed and <script type="math/tex">\mx_{-\si}</script> the <a class="def" href="https://julienharbulot.com/design-matrix.html">design matrix</a> where the <script type="math/tex">\si</script>-th row is removed. Note <script type="math/tex">\vw_{-\si}</script> the estimated parameter vector in this new setup.</p>
 <p>The Cook distance measures the scaled distance between the original estimate <script type="math/tex">\hat{\vy}</script> and the estimate of the truncated model <script type="math/tex">\hat{\vy}_{-\si} = \mx_{-\si}\vw_{\si}</script>:</p>
 <script type="math/tex; mode=display">\sc_\si = \frac{1}{\sd\ss^2} \normtwo{\hat{\vy} - \hat{\vy}_{- \si}}^2</script>
 <p>As a rule of thumb, the rows (<script type="math/tex">\si</script>) for which the cook distance is above the following threshold should be investiguated:</p>
 <script type="math/tex; mode=display">\sc_\si > \frac{8}{\sn - 2 \sd}</script>
 <p>So let’s plot <script type="math/tex">\sc_\si</script> for each value of <script type="math/tex">\si</script> and compare with this threshold.</p>
-<p><img alt="Cook distance" src="images/ols-diagnostics/cookdistplot.png"/></p>
+<p><img alt="Cook distance" src="https://julienharbulot.com/images/ols-diagnostics/cookdistplot.png"/></p>
 </div>
     </article>
     </div><!-- row -->
     
-    <div class="row mt-1">
-      <article class="col-lg-8 mx-auto recommendations">
-        <p class='title'>Other articles you might like:</p>
-        <ul>
-          
-            <li class="en"><img class="flag-icon" src="//julienharbulot.com/images/languages/en.png"> <a href="//julienharbulot.com/linear-regression-probability.html">Linear regressions, the probabilistic viewpoint</a></li>
-          
-            <li class="en"><img class="flag-icon" src="//julienharbulot.com/images/languages/en.png"> <a href="//julienharbulot.com/orthogonal-projection.html">The geometry of the normal equations</a></li>
-          
-            <li class="en"><img class="flag-icon" src="//julienharbulot.com/images/languages/en.png"> <a href="//julienharbulot.com/propositional-logic-from-probability-calculus.html">Propositional logic derived as a special case of probability calculus</a></li>
-          
-            <li class="en"><img class="flag-icon" src="//julienharbulot.com/images/languages/en.png"> <a href="//julienharbulot.com/what-is-statistic.html">What is a statistic and why do we care?</a></li>
-          
-            <li class="en"><img class="flag-icon" src="//julienharbulot.com/images/languages/en.png"> <a href="//julienharbulot.com/quantifying-measurement-errors.html">A probability distribution to quantify measurement errors</a></li>
-          
-        </ul>
-      </article>
-    </div>
+
     
+        
+            <div class="row mb=5 mt-5">
+  <article class="col-lg-8 mx-auto">
+    <div id="hyvor-talk-view"></div>
+    <script type="text/javascript">
+        var HYVOR_TALK_WEBSITE = 'hyvor_id';
+        var HYVOR_TALK_CONFIG = {
+            url: 'https://julienharbulot.com/ols-diagnostics.html',
+            id: 'ols-diagnostics.html'
+        };
+    </script>
+  </article>
+</div><!-- row -->
+<script async type="text/javascript" src="//talk.hyvor.com/web-api/embed"></script>
+        
     
-    <div class="row mb=5 mt-5">
-      <article class="col-lg-8 mx-auto">
-        <div id="hyvor-talk-view"></div>
-        <script type="text/javascript">
-            var HYVOR_TALK_WEBSITE = '625';
-            var HYVOR_TALK_CONFIG = {
-                url: 'ols-diagnostics.html',
-                id: 'ols-diagnostics.html'
-            };
-        </script>
-      </article>
-    </div><!-- row -->
-    
+
     <footer class="row">
         <div class="col-lg-8 mx-auto text-center">
           <p><small>
           
-            Last updated: 01/14/21 <br/>
+            Last updated: Nov 04, 2018 <br/>
           
           
-          Copyright &copy; 2021 Julien Harbulot
+            Copyright (c) Julien Harbulot
+          
           </small></p>
         </div>
     </footer>
@@ -584,31 +622,28 @@ adapted to the data at hand.</p>
   </script>
 
 
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-    <script>
-        prev_onload_a = window.onload;
-        window.onload = function() {
-            if (prev_onload_a) {
-                prev_onload_a();
-            }
-            var navlinks = document.getElementsByClassName("nav-link");
-            var i;
-            for (i = 0; i < navlinks.length; i++) {
-                const target = new URL(navlinks[i].href)
-                if (location.pathname == target.pathname) {
-                    navlinks[i].classList.add('active')
+    
+        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+        <!-- navbar script -->
+        <script>
+            prev_onload_a = window.onload;
+            window.onload = function() {
+                if (prev_onload_a) {
+                    prev_onload_a();
+                }
+                var navlinks = document.getElementsByClassName("nav-link");
+                var i;
+                for (i = 0; i < navlinks.length; i++) {
+                    const target = new URL(navlinks[i].href)
+                    if (location.pathname == target.pathname) {
+                        navlinks[i].classList.add('active')
+                    }
                 }
             }
-        }
-    </script>    
-
+        </script>
     
-
-<script async type="text/javascript" src="//talk.hyvor.com/web-api/embed"></script>
-
-
     </body>
 </html>

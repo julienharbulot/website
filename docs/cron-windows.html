@@ -1,65 +1,73 @@
 <!doctype html>
-<html lang="en">
+<html lang="Language.en">
     <head>
     
-
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>How to reliably schedule tasks in WSL</title>
 
     
-    <!-- Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-166292985-1"></script>
-    <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
+        
+            <!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=google_analytics_id"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
 
-    gtag('config', 'UA-166292985-1');
-    </script>
+gtag('config', 'google_analytics_id');
+</script>
+        
     
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" 
-          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
-          rel="stylesheet" crossorigin="anonymous">
+    
+    
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" crossorigin="anonymous">
     
     <link rel="stylesheet" href="/theme/pygment-github.css">
     <link rel="stylesheet" href="/theme/article.css"> 
 
-    <title>How to reliably schedule tasks in WSL</title>
+
     
-    <!-- Favicon -->
-    <link rel="apple-touch-icon" sizes="120x120" href="/images/favicon/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon/favicon-16x16.png">
-    <link rel="manifest" href="/images/favicon/site.webmanifest">
-    <link rel="mask-icon" href="/images/favicon/safari-pinned-tab.svg" color="#5bbad5">
-    <link rel="shortcut icon" href="favicon.ico">
-    <meta name="msapplication-TileColor" content="#da532c">
-    <meta name="msapplication-config" content="/images/favicon/browserconfig.xml">
-    <meta name="theme-color" content="#ffffff">
+        <!-- Favicon -->
+
+<link rel="apple-touch-icon" sizes="120x120" href="/images/favicon/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon/favicon-16x16.png">
+<link rel="manifest" href="/images/favicon/site.webmanifest">
+<link rel="mask-icon" href="/images/favicon/safari-pinned-tab.svg" color="#5bbad5">
+<link rel="shortcut icon" href="favicon.ico">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="msapplication-config" content="/images/favicon/browserconfig.xml">
+<meta name="theme-color" content="#ffffff">
     
-<!-- Mathjax -->
+
+    
+        <!-- Mathjax -->
 <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS_SVG">
   MathJax.Hub.Config({
     tex2jax: {
-    	inlineMath: [ ['$','$'] ],
-    	processEscapes: true
+        inlineMath: [ ['$','$'] ],
+        processEscapes: true
     },
-	"HTML-CSS": {
-		fonts: ["TeX"] 
-	}
+    "HTML-CSS": {
+        fonts: ["TeX"]
+    }
   });
 </script>
-
+    
+    
     </head>
 
     <body>
     
     <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: rgb(78, 76, 103);">
-        <a class="navbar-brand" href="//julienharbulot.com/index.html"><img src="//julienharbulot.com/images/logo.svg" width="30" alt=""></a>
+        <a class="navbar-brand" href="https://julienharbulot.com/">
+            <img src="https://julienharbulot.com/images/logo.svg" width="30" alt="">
+        </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -67,24 +75,16 @@
             <ul class="navbar-nav mr-auto">
             
             <li class="nav-item">
-                    <a class="nav-link" href="//julienharbulot.com/technical-blog.html">Technical blog</a>
+                    <a class="nav-link" href="index.html?cats=technical-blog">Technical blog</a>
             </li>
             
             <li class="nav-item">
-                    <a class="nav-link" href="//julienharbulot.com/maths.html">Maths</a>
+                    <a class="nav-link" href="index.html?cats=maths">Maths</a>
             </li>
             
-            <li class="nav-item">
-                    <a class="nav-link" href="//julienharbulot.com/research.html">Research</a>
-            </li>
             
-            <li class="nav-item">
-                    <a class="nav-link" href="//julienharbulot.com/projects.html">Projects</a>
-            </li>
-            
-            <!--<li class="nav-item">
-                <a class="nav-link" href="//julienharbulot.com/about-me.html">About me</a>
-            </li>-->
+    
+        
             
 
 <li class="nav-item dropdown">
@@ -92,30 +92,73 @@
         Table of content
     </a>
     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-        <div class="toc"><ul>
-<li class="toc-entry-1">
-<a class='toc-href dropdown-item' href='#how-to-execute-a-wsl-script-at-login' title='How to execute a WSL script at login'>How to execute a WSL script at login</a>
-</li>
-<div class="dropdown-divider"></div>
-<li class="toc-entry-1">
-<a class='toc-href dropdown-item' href='#how-to-enable-cron-in-wsl' title='How to enable cron in WSL'>How to enable cron in WSL</a>
-</li>
-<div class="dropdown-divider"></div>
-<li class="toc-entry-1">
-<a class='toc-href dropdown-item' href='#how-to-schedule-tasks-using-cron' title='How to schedule tasks using cron'>How to schedule tasks using cron</a>
+        <div class="toc">
+            
+    
     <ul>
-<li class="toc-entry-2">
-    <a class='toc-href dropdown-item' href='#the-crontab' title='The crontab'>The crontab</a>
-    </li>
-<li class="toc-entry-2">
-    <a class='toc-href dropdown-item' href='#a-trick-to-handle-logging' title='A trick to handle logging'>A trick to handle logging</a>
-    </li>
+        
+            <li class="toc-entry-{depth}">
+            <a class='toc-href dropdown-item' href='#how-to-execute-a-wsl-script-at-login' title='How to execute a WSL script at login'>
+                How to execute a WSL script at login
+            </a>
+            
+    
+
+            
+
+        
+            <li class="toc-entry-{depth}">
+            <a class='toc-href dropdown-item' href='#how-to-enable-cron-in-wsl' title='How to enable cron in WSL'>
+                How to enable cron in WSL
+            </a>
+            
+    
+
+            
+
+        
+            <li class="toc-entry-{depth}">
+            <a class='toc-href dropdown-item' href='#how-to-schedule-tasks-using-cron' title='How to schedule tasks using cron'>
+                How to schedule tasks using cron
+            </a>
+            
+    
+    <ul>
+        
+            <li class="toc-entry-{depth}">
+            <a class='toc-href dropdown-item' href='#the-crontab' title='The crontab'>
+                The crontab
+            </a>
+            
+    
+
+            
+
+        
+            <li class="toc-entry-{depth}">
+            <a class='toc-href dropdown-item' href='#a-trick-to-handle-logging' title='A trick to handle logging'>
+                A trick to handle logging
+            </a>
+            
+    
+
+            
+
+        
     </ul>
-</li>
-</ul><div>
+    
+
+            
+
+        
+    </ul>
+    
+
+        </div>
     </div>
 </li>
-
+        
+    
 
             </ul>
         </div>
@@ -127,7 +170,7 @@
     <div class="row mt-5">
       <div class="col-lg-8 mx-auto"> 
         <h1 class="display-5">How to reliably schedule tasks in WSL </h1>
-        <div class="text-right">25 May 2020</div>
+        <div class="text-right">May 25, 2020</div>
       </div>
     </div>
     <div class="row mt-5">
@@ -136,35 +179,31 @@
 <h2 id="how-to-execute-a-wsl-script-at-login">How to execute a WSL script at login</h2>
 <p>To execute a script inside WSL when you log into your Windows session, it suffices to add a shortcut inside the startup folder.</p>
 <p>In my computer, the startup folder is located at (replace <code>&lt;user name&gt;</code> with you user name):</p>
-<div class="hll"><pre><span></span>C:\Users\&lt;user name&gt;\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup
-</pre></div>
-
+<pre class="hll"><code>C:\Users\&lt;user name&gt;\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup
+</code></pre>
 
 <p>You can also access it directly by opening the run app (type the windows key on your keyboard then type <code>run</code>) and then typing <code>shell:startup</code> inside the run prompt.</p>
 <p>In the startup directory, right click and choose <code>new &gt; Shortcut</code>. Then, it's just a matter of choosing the <code>wsl.exe</code> executable (located at <code>C:\Windows\System32\wsl.exe</code> on my computer) with the proper arguments.</p>
 <p>To run the script located at <code>~/startup-scripts/startup.sh</code> inside WSL filesystem, I entered this line in the prompt:</p>
-<div class="hll"><pre><span></span>C:\Windows\System32\wsl.exe /home/julien/startup-scripts/startup.sh
-</pre></div>
-
+<pre class="hll"><code>C:\Windows\System32\wsl.exe /home/julien/startup-scripts/startup.sh
+</code></pre>
 
 <p>Here's a screenshot for clarity.</p>
-<p><img src="images/cron-windows/shortcut-prompt.png" style="width:80%;" class="border rounded" /></p>
+<p><img src="https://julienharbulot.com/images/cron-windows/shortcut-prompt.png" style="width:80%;" class="border rounded" /></p>
 <p>Here's the content of my <code>startup.sh</code> script:</p>
-<div class="hll-title"><span class="filename">startup.sh </span> <div class="hll"><pre><span></span><span class="ch">#!/bin/bash</span>
-<span class="o">{</span>
-    <span class="nb">echo</span> <span class="s2">&quot;</span><span class="k">$(</span>date<span class="k">)</span><span class="s2">&quot;</span>
-    <span class="nb">eval</span> <span class="k">$(</span>ssh-agent -s<span class="k">)</span>
+<div class="hll-title"><span class="filename">startup.sh </span> <pre class="hll"><code class="language-bash">#!/bin/bash
+{
+    echo &quot;$(date)&quot;
+    eval $(ssh-agent -s)
     sudo /etc/init.d/cron start
-<span class="o">}</span> &gt; /home/julien/startup-scripts/last_startup.log <span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span>
-</pre></div>
+} &gt; /home/julien/startup-scripts/last_startup.log 2&gt;&amp;1
+</code></pre>
  </div>
-
 <p>The block within curly braces :</p>
-<div class="hll"><pre><span></span><span class="o">{</span>
+<pre class="hll"><code class="language-bash">{
     ...
-<span class="o">}</span> &gt; /home/julien/startup-scripts/last_startup.log <span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span>
-</pre></div>
-
+} &gt; /home/julien/startup-scripts/last_startup.log 2&gt;&amp;1
+</code></pre>
 
 <p>Allows to redirect both <code>stdout</code> and <code>stderr</code> of the commands within the curly braces to the file <code>/home/julien/startup-scripts/last_startup.log</code>.</p>
 <p>Inside this block :</p>
@@ -177,41 +216,34 @@
 <h2 id="how-to-enable-cron-in-wsl">How to enable cron in WSL</h2>
 <p><code>cron</code> is a time-based job scheduler. You can use it to run a program at a given time, such as every day or every minutes.</p>
 <p>If like me you use Ubuntu on Windows, you can install <code>cron</code> with:</p>
-<div class="hll"><pre><span></span>sudo apt install cron
-</pre></div>
-
+<pre class="hll"><code class="language-bash">sudo apt install cron
+</code></pre>
 
 <p>To be able to start <code>cron</code> in the startup script, we need to be able to use <code>sudo</code> without a password prompt. To this aim, edit the <code>/etc/sudoers</code> file using this command:</p>
-<div class="hll"><pre><span></span>sudo visudo
-</pre></div>
-
+<pre class="hll"><code class="language-bash">sudo visudo
+</code></pre>
 
 <p>and append this line:</p>
-<div class="hll-title"><span class="filename">/etc/sudoers </span> <div class="hll"><pre><span></span>%sudo ALL=NOPASSWD: /etc/init.d/cron start
-</pre></div>
+<div class="hll-title"><span class="filename">/etc/sudoers </span> <pre class="hll"><code>%sudo ALL=NOPASSWD: /etc/init.d/cron start
+</code></pre>
  </div>
-
 <h2 id="how-to-schedule-tasks-using-cron">How to schedule tasks using cron</h2>
 <h3 id="the-crontab">The crontab</h3>
 <p>Assuming <code>cron</code> is started, we can then schedule jobs by editing the file in which <code>cron</code> looks for tasks to run, the <em>crontab</em>. Run this command to edit it:</p>
-<div class="hll"><pre><span></span>crontab -e
-</pre></div>
-
+<pre class="hll"><code class="language-bash">crontab -e
+</code></pre>
 
 <p>The syntax to add a task in the crontab is as follows:</p>
-<div class="hll"><pre><span></span>minute hour day month weekday command
-</pre></div>
-
+<pre class="hll"><code class="language-crontab">minute hour day month weekday command
+</code></pre>
 
 <p>For instance, this line will run <code>script.sh</code> the 3rd of April (04.03) at 2h01 :</p>
-<div class="hll"><pre><span></span>1 2 3 4 * /path/to/script.sh
-</pre></div>
-
+<pre class="hll"><code>1 2 3 4 * /path/to/script.sh
+</code></pre>
 
 <p>While this line will run <code>script.sh</code> the 3rd of every month (*.03), at 2h01:</p>
-<div class="hll"><pre><span></span>1 2 3 * * /path/to/script.sh
-</pre></div>
-
+<pre class="hll"><code>1 2 3 * * /path/to/script.sh
+</code></pre>
 
 <p>Here is a non-exhaustive reference of values allowed for each field:</p>
 <table>
@@ -253,56 +285,42 @@
 <p>The website <a href="https://crontab.guru/">crontab.guru</a> is great for finding how to write a specific line.</p>
 <h3 id="a-trick-to-handle-logging">A trick to handle logging</h3>
 <p>Tasks scheduled by <code>cron</code> are responsible for their own logging, this means that there is no default location where you can see the output of a task run by <code>cron</code>. I like to tackle this issue by creating a file where I put the logs of every tasks. For instance, here's my current crontab:</p>
-<div class="hll-title"><span class="filename">crontab -e </span> <div class="hll"><pre><span></span>0 0 * * 0 echo &quot;Erasing logs $(date) &gt; /home/julien/cron.log 2&gt;&amp;1
+<div class="hll-title"><span class="filename">crontab -e </span> <pre class="hll"><code>0 0 * * 0 echo &quot;Erasing logs $(date) &gt; /home/julien/cron.log 2&gt;&amp;1
 0 * * * * /path/to/script.sh &gt;&gt; /home/julien/cron.log 2&gt;&amp;1
-</pre></div>
+</code></pre>
  </div>
-
 <p>The first line schedules a task every Monday at 0h0mn to erase the log file with the current date. The second line schedules <code>script.sh</code> every minutes. For both tasks, <code>stdout</code> and <code>stderr</code> are redirected to <code>/home/julien/cron.log</code>. Note the different redirection types: the first line uses <code>&gt;</code> which means <em>erase the file</em> while the second uses <code>&gt;&gt;</code> which means <em>append to the file</em>.</p>
     </article>
     </div><!-- row -->
     
-    <div class="row mt-1">
-      <article class="col-lg-8 mx-auto recommendations">
-        <p class='title'>Other articles you might like:</p>
-        <ul>
-          
-            <li class="en"><img class="flag-icon" src="//julienharbulot.com/images/languages/en.png"> <a href="//julienharbulot.com/wsl-dev-environment-2020.html">Using multiple WSL distributions as a dev environment</a></li>
-          
-            <li class="en"><img class="flag-icon" src="//julienharbulot.com/images/languages/en.png"> <a href="//julienharbulot.com/wsl-git-sync.html">Synchronizing ssh keys between Windows and WSL</a></li>
-          
-            <li class="en"><img class="flag-icon" src="//julienharbulot.com/images/languages/en.png"> <a href="//julienharbulot.com/python-cli-streams.html">How and when to use stdout and stderr?</a></li>
-          
-            <li class="en"><img class="flag-icon" src="//julienharbulot.com/images/languages/en.png"> <a href="//julienharbulot.com/bash-completion.html">Faster workflow with bash completion scripts</a></li>
-          
-            <li class="en"><img class="flag-icon" src="//julienharbulot.com/images/languages/en.png"> <a href="//julienharbulot.com/python-cli.html">Complete guide to writing command-line tools</a></li>
-          
-        </ul>
-      </article>
-    </div>
+
     
+        
+            <div class="row mb=5 mt-5">
+  <article class="col-lg-8 mx-auto">
+    <div id="hyvor-talk-view"></div>
+    <script type="text/javascript">
+        var HYVOR_TALK_WEBSITE = 'hyvor_id';
+        var HYVOR_TALK_CONFIG = {
+            url: 'https://julienharbulot.com/cron-windows.html',
+            id: 'cron-windows.html'
+        };
+    </script>
+  </article>
+</div><!-- row -->
+<script async type="text/javascript" src="//talk.hyvor.com/web-api/embed"></script>
+        
     
-    <div class="row mb=5 mt-5">
-      <article class="col-lg-8 mx-auto">
-        <div id="hyvor-talk-view"></div>
-        <script type="text/javascript">
-            var HYVOR_TALK_WEBSITE = '625';
-            var HYVOR_TALK_CONFIG = {
-                url: 'cron-windows.html',
-                id: 'cron-windows.html'
-            };
-        </script>
-      </article>
-    </div><!-- row -->
-    
+
     <footer class="row">
         <div class="col-lg-8 mx-auto text-center">
           <p><small>
           
-            Last updated: 10/27/21 <br/>
+            Last updated: May 25, 2020 <br/>
           
           
-          Copyright &copy; 2021 Julien Harbulot
+            Copyright (c) Julien Harbulot
+          
           </small></p>
         </div>
     </footer>
@@ -326,31 +344,28 @@
   </script>
 
 
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-    <script>
-        prev_onload_a = window.onload;
-        window.onload = function() {
-            if (prev_onload_a) {
-                prev_onload_a();
-            }
-            var navlinks = document.getElementsByClassName("nav-link");
-            var i;
-            for (i = 0; i < navlinks.length; i++) {
-                const target = new URL(navlinks[i].href)
-                if (location.pathname == target.pathname) {
-                    navlinks[i].classList.add('active')
+    
+        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+        <!-- navbar script -->
+        <script>
+            prev_onload_a = window.onload;
+            window.onload = function() {
+                if (prev_onload_a) {
+                    prev_onload_a();
+                }
+                var navlinks = document.getElementsByClassName("nav-link");
+                var i;
+                for (i = 0; i < navlinks.length; i++) {
+                    const target = new URL(navlinks[i].href)
+                    if (location.pathname == target.pathname) {
+                        navlinks[i].classList.add('active')
+                    }
                 }
             }
-        }
-    </script>    
-
+        </script>
     
-
-<script async type="text/javascript" src="//talk.hyvor.com/web-api/embed"></script>
-
-
     </body>
 </html>

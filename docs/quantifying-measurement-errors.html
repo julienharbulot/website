@@ -1,65 +1,73 @@
 <!doctype html>
-<html lang="en">
+<html lang="Language.en">
     <head>
     
-
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>A probability distribution to quantify measurement errors</title>
 
     
-    <!-- Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-166292985-1"></script>
-    <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
+        
+            <!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=google_analytics_id"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
 
-    gtag('config', 'UA-166292985-1');
-    </script>
+gtag('config', 'google_analytics_id');
+</script>
+        
     
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" 
-          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
-          rel="stylesheet" crossorigin="anonymous">
+    
+    
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" crossorigin="anonymous">
     
     <link rel="stylesheet" href="/theme/pygment-github.css">
     <link rel="stylesheet" href="/theme/article.css"> 
 
-    <title>A probability distribution to quantify measurement errors</title>
+
     
-    <!-- Favicon -->
-    <link rel="apple-touch-icon" sizes="120x120" href="/images/favicon/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon/favicon-16x16.png">
-    <link rel="manifest" href="/images/favicon/site.webmanifest">
-    <link rel="mask-icon" href="/images/favicon/safari-pinned-tab.svg" color="#5bbad5">
-    <link rel="shortcut icon" href="favicon.ico">
-    <meta name="msapplication-TileColor" content="#da532c">
-    <meta name="msapplication-config" content="/images/favicon/browserconfig.xml">
-    <meta name="theme-color" content="#ffffff">
+        <!-- Favicon -->
+
+<link rel="apple-touch-icon" sizes="120x120" href="/images/favicon/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon/favicon-16x16.png">
+<link rel="manifest" href="/images/favicon/site.webmanifest">
+<link rel="mask-icon" href="/images/favicon/safari-pinned-tab.svg" color="#5bbad5">
+<link rel="shortcut icon" href="favicon.ico">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="msapplication-config" content="/images/favicon/browserconfig.xml">
+<meta name="theme-color" content="#ffffff">
     
-<!-- Mathjax -->
+
+    
+        <!-- Mathjax -->
 <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS_SVG">
   MathJax.Hub.Config({
     tex2jax: {
-    	inlineMath: [ ['$','$'] ],
-    	processEscapes: true
+        inlineMath: [ ['$','$'] ],
+        processEscapes: true
     },
-	"HTML-CSS": {
-		fonts: ["TeX"] 
-	}
+    "HTML-CSS": {
+        fonts: ["TeX"]
+    }
   });
 </script>
-
+    
+    
     </head>
 
     <body>
     
     <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: rgb(78, 76, 103);">
-        <a class="navbar-brand" href="//julienharbulot.com/index.html"><img src="//julienharbulot.com/images/logo.svg" width="30" alt=""></a>
+        <a class="navbar-brand" href="https://julienharbulot.com/">
+            <img src="https://julienharbulot.com/images/logo.svg" width="30" alt="">
+        </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -67,24 +75,16 @@
             <ul class="navbar-nav mr-auto">
             
             <li class="nav-item">
-                    <a class="nav-link" href="//julienharbulot.com/technical-blog.html">Technical blog</a>
+                    <a class="nav-link" href="index.html?cats=technical-blog">Technical blog</a>
             </li>
             
             <li class="nav-item">
-                    <a class="nav-link" href="//julienharbulot.com/maths.html">Maths</a>
+                    <a class="nav-link" href="index.html?cats=maths">Maths</a>
             </li>
             
-            <li class="nav-item">
-                    <a class="nav-link" href="//julienharbulot.com/research.html">Research</a>
-            </li>
             
-            <li class="nav-item">
-                    <a class="nav-link" href="//julienharbulot.com/projects.html">Projects</a>
-            </li>
-            
-            <!--<li class="nav-item">
-                <a class="nav-link" href="//julienharbulot.com/about-me.html">About me</a>
-            </li>-->
+    
+        
             
 
 <li class="nav-item dropdown">
@@ -92,14 +92,29 @@
         Table of content
     </a>
     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-        <div class="toc"><ul>
-<li class="toc-entry-1">
-<a class='toc-href dropdown-item' href='#read-next' title='Read next'>Read next</a>
-</li>
-</ul><div>
+        <div class="toc">
+            
+    
+    <ul>
+        
+            <li class="toc-entry-{depth}">
+            <a class='toc-href dropdown-item' href='#read-next' title='Read next'>
+                Read next
+            </a>
+            
+    
+
+            
+
+        
+    </ul>
+    
+
+        </div>
     </div>
 </li>
-
+        
+    
 
             </ul>
         </div>
@@ -111,7 +126,7 @@
     <div class="row mt-5">
       <div class="col-lg-8 mx-auto"> 
         <h1 class="display-5">A probability distribution to quantify measurement errors </h1>
-        <div class="text-right">03 Apr 2018</div>
+        <div class="text-right">Apr 03, 2018</div>
       </div>
     </div>
     <div class="row mt-5">
@@ -431,130 +446,81 @@
 </script>
 </p>
 <p>In this article we will derive the normal distribution as the probability distribution that models measurement errors. We start with a dart game and follow Herschel’s derivation.</p>
-
 <p>Suppose we are playing a dart game as shown in the figure below. What is the probability that a dart lands at a given position on the boart?</p>
-
-<p><img alt="Dart game" src="images/quantifying-measurement-errors/dart_game_0.svg"/></p>
-
+<p><img alt="Dart game" src="https://julienharbulot.com/images/quantifying-measurement-errors/dart_game_0.svg"/></p>
 <p>We can think of this problem as measurement errors. The goal is to measure a quantity (here: the position of the bull’s eye), but there is noise in the measurement device (here: your aim is not perfect) so we can only obtain values “polluted” by some variable, random noise.</p>
-
-<p>The quality of the device (here: the quality of the player) can be measured by the spread of the <a class="def" href="target-variable.html">measured values</a>. For instance, the figure below illustrates the measurements made by two devices. The device on the left hand side has more precision (= the player is more skilled) than on the right hand side.</p>
-
-<p><img alt="Dart board" src="images/quantifying-measurement-errors/dart_board_3.svg"/></p>
-
+<p>The quality of the device (here: the quality of the player) can be measured by the spread of the <a class="def" href="https://julienharbulot.com/target-variable.html">measured values</a>. For instance, the figure below illustrates the measurements made by two devices. The device on the left hand side has more precision (= the player is more skilled) than on the right hand side.</p>
+<p><img alt="Dart board" src="https://julienharbulot.com/images/quantifying-measurement-errors/dart_board_3.svg"/></p>
 <p>Let’s note</p>
-
 <script type="math/tex; mode=display">p(x,y)\,\mathrm{d}x\,\mathrm{d}y</script>
-
 <p>the probability that the dart lands on an infinitesimal surface area <script type="math/tex">\,\mathrm{d}x\,\mathrm{d}y</script> located at <script type="math/tex">(x,y)</script>.</p>
-
 <p>We can express this probability in polar coordinates too:</p>
-
 <script type="math/tex; mode=display">q(r, \theta)r\,\mathrm{d}r\,\mathrm{sin}\theta = p(x,y)\,\mathrm{d}x\,\mathrm{d}y</script>
-
 <p>Whatever the quality of the measurement device (or the skills of the player), it is reasonable to expect that small errors are more frequent than big ones. So the probability should decrease when the distance to the center increases. This means <script type="math/tex">f</script> is a decreasing function of <script type="math/tex">r</script>.</p>
-
 <p>Also, there is no reason to expect that measurements will land more often on the left of the bull’s eye than on the right. More generally and taking the symmetry into account, every location on a circle centered on the bull’s eye should have the same probability to be hit. This mean that <script type="math/tex">f</script> does not depend on the rotation angle <script type="math/tex">\theta</script>:</p>
-
 <script type="math/tex; mode=display">q(r, \theta) = q(r)</script>
-
 <p>We can arbitrarily choose two orthogonal directions and fix a cartesian axis on the dart board. This is illustrated on the picture below.</p>
-
-<p><img alt="Dart board" src="images/quantifying-measurement-errors/dart_board_4.svg"/></p>
-
+<p><img alt="Dart board" src="https://julienharbulot.com/images/quantifying-measurement-errors/dart_board_4.svg"/></p>
 <p>If we further assume that knowing <script type="math/tex">x</script> doesn’t tell us anything about <script type="math/tex">y</script> and vis versa, then we have the following additional condition on the form of <script type="math/tex">p(x,y)</script>:</p>
-
 <script type="math/tex; mode=display">p(x,y)\,\mathrm{d}x\,\mathrm{d}y = f(x)\,\mathrm{d}x\cdot f(y)\,\mathrm{d}y</script>
-
 <p>Since <script type="math/tex">r = \sqrt{x^2 + y^2}</script> we get:</p>
-
 <script type="math/tex; mode=display">q(\sqrt{x^2 + y^2}) = f(x)\,f(y)</script>
-
 <p>Setting <script type="math/tex">y=0</script>, this becomes:</p>
-
 <script type="math/tex; mode=display">% <![CDATA[
 \begin{align*}
 q(\left|x\right|) &= f(x)\,f(0) \\
 \Rightarrow q(\sqrt{x^2 + y^2}) &= f(\sqrt{x^2 + y^2})\,f(0) \\
 \Rightarrow f(x)\,f(y) &= f(\sqrt{x^2 + y^2})\,f(0) \\
 \end{align*} %]]></script>
-
 <p>Solving this equation, we find that:</p>
-
 <script type="math/tex; mode=display">f(x) = \sqrt{\frac{\alpha}{\pi}}\,\mathrm{e}^{-\alpha x^2} \quad (\alpha > 0)</script>
-
 <p>with one undetermined parameter <script type="math/tex">\alpha> 0</script>. If we compute the variance <script type="math/tex">\sigma^2</script> of <script type="math/tex">f</script>, we find that <script type="math/tex">\sigma^2 = \frac{1}{2\alpha}</script>. So we can rewrite the formula for <script type="math/tex">f</script> using <script type="math/tex">\sigma^2</script>:</p>
-
 <script type="math/tex; mode=display">f(x) = \frac{1}{\sqrt{2\sigma^2\pi}}\,\mathrm{e}^{\frac{-x^2}{2\sigma^2}}</script>
-
-<p>This formula is the <em>gaussian distribution</em> or <em>normal distribution</em>, noted <script type="math/tex">\mathcal{N}(0, \sigma^2)</script>. As explained above, it is the probability distributions of errors when measuring a <a class="def" href="target-variable.html">target value</a> of value <script type="math/tex">0</script>. Here is a plot for two values of <script type="math/tex">\sigma^2</script>:</p>
-
-<p><img alt="Gaussian distribution" src="images/quantifying-measurement-errors/gaussian_distribution_1d.svg"/></p>
-
-<p>What if the <a class="def" href="target-variable.html">target value</a> <script type="math/tex">\mu</script> is not <script type="math/tex">0</script>? We can simply operate a change of axis and translate everything by <script type="math/tex">-\mu</script>. The translated random variable will thus represent a measurement <script type="math/tex">\epsilon</script> of <script type="math/tex">0</script> and can be expressed with the normal distribution:</p>
-
+<p>This formula is the <em>gaussian distribution</em> or <em>normal distribution</em>, noted <script type="math/tex">\mathcal{N}(0, \sigma^2)</script>. As explained above, it is the probability distributions of errors when measuring a <a class="def" href="https://julienharbulot.com/target-variable.html">target value</a> of value <script type="math/tex">0</script>. Here is a plot for two values of <script type="math/tex">\sigma^2</script>:</p>
+<p><img alt="Gaussian distribution" src="https://julienharbulot.com/images/quantifying-measurement-errors/gaussian_distribution_1d.svg"/></p>
+<p>What if the <a class="def" href="https://julienharbulot.com/target-variable.html">target value</a> <script type="math/tex">\mu</script> is not <script type="math/tex">0</script>? We can simply operate a change of axis and translate everything by <script type="math/tex">-\mu</script>. The translated random variable will thus represent a measurement <script type="math/tex">\epsilon</script> of <script type="math/tex">0</script> and can be expressed with the normal distribution:</p>
 <script type="math/tex; mode=display">Y - \mu = \epsilon \sim \mathcal{N}(0, \sigma^2)</script>
-
 <p>If we replace in the formula for <script type="math/tex">f</script> we find the general formula for the <em>normal distribution</em>:</p>
-
 <script type="math/tex; mode=display">Y \sim \mathcal{N}(\mu, \sigma^2) \iff f_Y(x) =  \frac{1}{\sqrt{2\sigma^2\pi}}\,\mathrm{e}^{\frac{-(x-\mu)^2}{2\sigma^2}}</script>
-
 <p>But what is the variance <script type="math/tex">\sigma^2</script>? It is a parameter that controls the quality of our measurement device. Recall this picture where on the left hand side the variance is much smaller than on the right hand side.</p>
-
-<p><img alt="Dart board" src="images/quantifying-measurement-errors/dart_board_3.svg"/></p>
-
+<p><img alt="Dart board" src="https://julienharbulot.com/images/quantifying-measurement-errors/dart_board_3.svg"/></p>
 <p>Here is a video summary of this derivation of the <em>normal distribution</em> (called the Herschel’s derivation):</p>
 
 <p><span class="videobox"><iframe width="640" height="390" src='https://www.youtube.com/embed/ebewBjZmZTw' frameborder='0' webkitAllowFullScreen mozallowfullscreen allowFullScreen> </iframe></span></p>
 <h2 id="read-next">Read next</h2>
-
-<p>The <em>normal distribution</em> can be seen as a random number generator that generates measurement of a <a class="def" href="target-variable.html">target value</a> <script type="math/tex">\mu</script> with embedded measurement error <script type="math/tex">\epsilon</script>.</p>
-
-<p>Given multiple measurements, can we retrieve the <a class="def" href="target-variable.html">target value</a> <script type="math/tex">\mu</script>? Check out my next article to answer this question <a href="geometrical-approach-gaussian-parameter-estimation.html">here</a></p>
+<p>The <em>normal distribution</em> can be seen as a random number generator that generates measurement of a <a class="def" href="https://julienharbulot.com/target-variable.html">target value</a> <script type="math/tex">\mu</script> with embedded measurement error <script type="math/tex">\epsilon</script>.</p>
+<p>Given multiple measurements, can we retrieve the <a class="def" href="https://julienharbulot.com/target-variable.html">target value</a> <script type="math/tex">\mu</script>? Check out my next article to answer this question <a href="https://julienharbulot.com/geometrical-approach-gaussian-parameter-estimation.html">here</a></p>
     </article>
     </div><!-- row -->
     
-    <div class="row mt-1">
-      <article class="col-lg-8 mx-auto recommendations">
-        <p class='title'>Other articles you might like:</p>
-        <ul>
-          
-            <li class="en"><img class="flag-icon" src="//julienharbulot.com/images/languages/en.png"> <a href="//julienharbulot.com/geometrical-approach-gaussian-parameter-estimation.html">The geometry of (normal) parameter estimation</a></li>
-          
-            <li class="en"><img class="flag-icon" src="//julienharbulot.com/images/languages/en.png"> <a href="//julienharbulot.com/propositional-logic-from-probability-calculus.html">Propositional logic derived as a special case of probability calculus</a></li>
-          
-            <li class="en"><img class="flag-icon" src="//julienharbulot.com/images/languages/en.png"> <a href="//julienharbulot.com/orthogonal-projection.html">The geometry of the normal equations</a></li>
-          
-            <li class="en"><img class="flag-icon" src="//julienharbulot.com/images/languages/en.png"> <a href="//julienharbulot.com/linear-regression-probability.html">Linear regressions, the probabilistic viewpoint</a></li>
-          
-            <li class="en"><img class="flag-icon" src="//julienharbulot.com/images/languages/en.png"> <a href="//julienharbulot.com/moore-penrose-inverse.html">The Moore-Penrose (pseudo-inverse) matrix</a></li>
-          
-        </ul>
-      </article>
-    </div>
+
     
+        
+            <div class="row mb=5 mt-5">
+  <article class="col-lg-8 mx-auto">
+    <div id="hyvor-talk-view"></div>
+    <script type="text/javascript">
+        var HYVOR_TALK_WEBSITE = 'hyvor_id';
+        var HYVOR_TALK_CONFIG = {
+            url: 'https://julienharbulot.com/quantifying-measurement-errors.html',
+            id: 'quantifying-measurement-errors.html'
+        };
+    </script>
+  </article>
+</div><!-- row -->
+<script async type="text/javascript" src="//talk.hyvor.com/web-api/embed"></script>
+        
     
-    <div class="row mb=5 mt-5">
-      <article class="col-lg-8 mx-auto">
-        <div id="hyvor-talk-view"></div>
-        <script type="text/javascript">
-            var HYVOR_TALK_WEBSITE = '625';
-            var HYVOR_TALK_CONFIG = {
-                url: 'quantifying-measurement-errors.html',
-                id: 'quantifying-measurement-errors.html'
-            };
-        </script>
-      </article>
-    </div><!-- row -->
-    
+
     <footer class="row">
         <div class="col-lg-8 mx-auto text-center">
           <p><small>
           
-            Last updated: 01/14/21 <br/>
+            Last updated: Apr 03, 2018 <br/>
           
           
-          Copyright &copy; 2021 Julien Harbulot
+            Copyright (c) Julien Harbulot
+          
           </small></p>
         </div>
     </footer>
@@ -578,31 +544,28 @@ q(\left|x\right|) &= f(x)\,f(0) \\
   </script>
 
 
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-    <script>
-        prev_onload_a = window.onload;
-        window.onload = function() {
-            if (prev_onload_a) {
-                prev_onload_a();
-            }
-            var navlinks = document.getElementsByClassName("nav-link");
-            var i;
-            for (i = 0; i < navlinks.length; i++) {
-                const target = new URL(navlinks[i].href)
-                if (location.pathname == target.pathname) {
-                    navlinks[i].classList.add('active')
+    
+        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+        <!-- navbar script -->
+        <script>
+            prev_onload_a = window.onload;
+            window.onload = function() {
+                if (prev_onload_a) {
+                    prev_onload_a();
+                }
+                var navlinks = document.getElementsByClassName("nav-link");
+                var i;
+                for (i = 0; i < navlinks.length; i++) {
+                    const target = new URL(navlinks[i].href)
+                    if (location.pathname == target.pathname) {
+                        navlinks[i].classList.add('active')
+                    }
                 }
             }
-        }
-    </script>    
-
+        </script>
     
-
-<script async type="text/javascript" src="//talk.hyvor.com/web-api/embed"></script>
-
-
     </body>
 </html>
